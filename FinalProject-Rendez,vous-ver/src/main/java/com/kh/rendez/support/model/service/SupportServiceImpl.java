@@ -44,9 +44,7 @@ public class SupportServiceImpl implements SupportService {
 	public ArrayList<Qna> selectSearch(int currentPage, String keyword) {
 		
 		int listCount = sDao.getSearchListCount(keyword);
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		System.out.println(pi);
 		
 		return sDao.selectSearch(pi, keyword);
 	}
@@ -70,11 +68,21 @@ public class SupportServiceImpl implements SupportService {
 	public int insertAnswer(Answer a) {
 		return sDao.insertAnswer(a);
 	}
+	
+	@Override
+	public int updateAnswerStatus(int qNo) {
+		System.out.println(qNo);
+		return sDao.updateAnswerStatus(qNo);
+	}
 
 	@Override
 	public ArrayList<Answer> selectAnswerList(int qNo) {
 		return sDao.selectAnswerList(qNo);
 	}
+
+	
+
+	
 
 	
 

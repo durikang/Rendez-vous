@@ -10,6 +10,7 @@
 		<result property="qWriter" column="Q_WRITER"/>
 		<result property="qContent" column="Q_CONTENT"/>
 		<result property="qDate" column="Q_DATE"/>
+		<result property="aStatus" column="A_STATUS"/>
 		<result property="qStatus" column="Q_STATUS"/>		
 	</resultMap>
 	<resultMap id="answerResultSet" type="Answer">
@@ -52,6 +53,7 @@
 		FROM QNA
 		WHERE Q_WRITER = #{writer}
 		AND Q_STATUS = 'Y'
+		ORDER BY Q_NO DESC
 	</select>
 	
 	<select id="selectOneQna" resultMap="qnaResultSet">
@@ -71,7 +73,7 @@
 	
 	<insert id="insertQna" parameterType="Qna">
 		INSERT INTO QNA
-		VALUES(SEQ_QNO.NEXTVAL, #{qTitle}, #{qWriter}, #{qContent}, SYSDATE, DEFAULT)
+		VALUES(SEQ_QNO.NEXTVAL, #{qTitle}, #{qWriter}, #{qContent}, SYSDATE, DEFAULT, DEFAULT)
 	</insert>
 	
 	<update id="deleteQna" parameterType="Qna">
@@ -92,6 +94,12 @@
 		INSERT INTO ANSWER
 		VALUES(SEQ_ANO.NEXTVAL, #{refQno}, #{aWriter}, #{aContent}, SYSDATE)
 	</insert>
+	
+	<update id="updateAnswerStatus" parameterType="Qna">
+		UPDATE QNA
+		SET A_STATUS = 'Y'
+		WHERE Q_NO = #{qNo}
+	</update>
 	
 	<select id="selectAnswerList" resultMap="answerResultSet" parameterType="_int">
 		SELECT *

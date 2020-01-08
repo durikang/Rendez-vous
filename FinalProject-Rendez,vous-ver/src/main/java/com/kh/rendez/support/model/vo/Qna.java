@@ -9,19 +9,21 @@ public class Qna {
 	private String qWriter;
 	private String qContent;
 	private Date qDate;
+	private String aStatus;
 	private String qStatus;
 	
 	public Qna() {
 		
 	}
 
-	public Qna(int qNo, String qTitle, String qWriter, String qContent, Date qDate, String qStatus) {
+	public Qna(int qNo, String qTitle, String qWriter, String qContent, Date qDate, String aStatus, String qStatus) {
 		super();
 		this.qNo = qNo;
 		this.qTitle = qTitle;
 		this.qWriter = qWriter;
 		this.qContent = qContent;
 		this.qDate = qDate;
+		this.aStatus = aStatus;
 		this.qStatus = qStatus;
 	}
 
@@ -65,6 +67,14 @@ public class Qna {
 		this.qDate = qDate;
 	}
 
+	public String getaStatus() {
+		return aStatus;
+	}
+
+	public void setaStatus(String aStatus) {
+		this.aStatus = aStatus;
+	}
+
 	public String getqStatus() {
 		return qStatus;
 	}
@@ -76,9 +86,10 @@ public class Qna {
 	@Override
 	public String toString() {
 		return "Qna [qNo=" + qNo + ", qTitle=" + qTitle + ", qWriter=" + qWriter + ", qContent=" + qContent + ", qDate="
-				+ qDate + ", qStatus=" + qStatus + "]";
+				+ qDate + ", aStatus=" + aStatus + ", qStatus=" + qStatus + "]";
 	}
 
+	
 	
 	
 	

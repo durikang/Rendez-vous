@@ -98,6 +98,13 @@
             text-decoration: none;
             cursor: pointer;
         }
+        
+        .header {
+			margin-top:5px;	
+  			position: relative;
+  			background: white;
+  			border: none;
+		}
 	
 	
 	
@@ -124,7 +131,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="wrap">
 <!--HEADER -->
 	<div class="hcont">
-		<h1>상단네비</h1>
+		<c:import url="../common/menubar.jsp"/>
 	</div>
 <!-- //HEADER -->
 

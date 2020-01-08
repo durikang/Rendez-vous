@@ -25,4 +25,6 @@ public interface SupportService {
 
 	ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
 
+	int updateAnswerStatus(int refQno);
+
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="paymentMapper">
+	
+	<resultMap type="tClass" id="tClassResultSet">
+	<result property="lNo" column="L_NO"/>
+	<result property="lTitle" column="L_TITLE"/>
+	<result property="price" column="PRICE"/>
+	<result property="cName" column="C_NAME"/>
+	<result property="totalReviewRation" column="TOTAL_REVIEW_RATING"/>
+	<result property="totalReviewNumber" column="L_REVIEW_COUNT"/>
+	<result property="lRegionSub" column="L_REGION_SUB"/>
+	<result property="lRegionDetail" column="L_REGION_DETAIL"/>
+	<result property="userNo" column="USER_NO"/>
+	<result property="userName" column="USER_NAME"/>
+	<result property="tNick" column="T_NICK"/>
+	<result property="uCName" column="U_C_NAME"/>
+	<result property="tUserNumber" column="T_USER_NUMBER"/>
+	<result property="lCateMain" column="L_CATE_MAIN"/>
+	<result property="lCateSub" column="L_CATE_SUB"/>
+	</resultMap>
+	
+	<resultMap type="LessonTime" id="LessonTimeResultSet">
+	<result property="lNo" column="L_NO"/>
+	<result property="lInning" column="L_INNING"/>
+	<result property="lDay" column="L_DAY"/>
+	<result property="lTime" column="L_TIME"/>
+	<result property="remain" column="REMAIN"/>
+	<result property="total" column="TOTAL"/>
+	</resultMap>
+	
+	<select id="classSearch" resultMap="tClassResultSet" parameterType="_int">
+	SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+	U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
+    ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB, L.L_REGION_DETAIL
+	FROM LESSON_INFO L
+	JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+	JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+	JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+	JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+	LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+	LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+    WHERE L.L_NO = #{lNo}
+	</select>
+	
+	<select id="selectLessonTime" parameterType="_int" resultMap="LessonTimeResultSet">
+	SELECT *
+	FROM LESSON_TIME
+	WHERE L_NO = #{lNo}
+	</select>
+	
+	<insert id="insertPayment" parameterType="Payment">
+	INSERT INTO PAYMENT VALUES(SEQ_PNO.nextval, '1', SYSDATE, #{pCost}, #{pType}, #{uNo}, #{lInning},#{lNo})
+	</insert>
+	
+	<select id="CheckRemain" parameterType="_int" resultType="_int">
+	SELECT SUM(REMAIN) FROM LESSON WHERE L_NO = #{lNo}
+	</select>
+	
+	<update id="LessonRemainDown" parameterType="LessonTime">
+	UPDATE LESSON 
+	SET REMAIN = (SELECT REMAIN FROM LESSON WHERE L_INNING = #{lInning} AND L_NO = #{lNo}) -1 
+	WHERE L_INNING = #{lInning} AND L_NO = #{lNo}
+	</update>
+	
+	<update id="LessionStatusUpdate" parameterType="_int">
+	UPDATE LESSON_INFO SET L_STATUS = 'N' WHERE L_NO = #{lNo}
+	</update>
+	
+	
+</mapper>

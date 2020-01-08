@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="managerMapper">
+
+
+
+<!-- 회원 resultMap  -->
+	 <resultMap id="AdminMemberResultSet" type="AdminMember">
+		<id property="uNo" column="USER_NO" />
+		<result property="uId" column="USER_ID" />
+		<result property="uPwd" column="USER_PWD" />
+		<result property="uName" column="USER_NAME" />
+		<result property="phone" column="PHONE" />
+		<result property="gender" column="GENDER" />
+		<result property="Age" column="AGE" />
+		<result property="addr" column="ADDRESS" />
+		<result property="userType" column="USER_TYPE" />
+		<result property="uStatus" column="U_STATUS" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		
+		<result property="count" column="count" />
+		
+	</resultMap>
+	
+
+	
+	<!-- 멤버와 유저 사진 조인 ResultSet  -->
+	<resultMap id="mAnduJoinResultSet" type="MemberJoinUserpropic">
+	
+		<id property="uNo" column="USER_NO" />
+		<result property="uId" column="USER_ID" />
+		<result property="uPwd" column="USER_PWD" />
+		<result property="uName" column="USER_NAME" />
+		<result property="phone" column="PHONE" />
+		<result property="uGender" column="GENDER" />
+		<result property="uAge" column="AGE" />
+		<result property="address" column="ADDRESS" />
+		<result property="uType" column="USER_TYPE" />
+		<result property="uStatus" column="U_STATUS" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+			
+		<result property="uOriginName" column="U_O_NAME" />
+		<result property="uChangeName" column="U_C_NAME" />
+		
+	</resultMap>
+	
+	<!-- 쿠폰 조회  -->
+	<resultMap id="couponResultSet" type="Coupon">
+		<id property="cNo" column="COUPON_NO" />
+		<result property="cName" column="COUPON_NAME" />
+		<result property="cCode" column="COUPON_CODE" />
+		<result property="disRate" column="DISCOUNT_RATE" />
+		<result property="startDate" column="DISCOUNT_RATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="status" column="STATUS" />
+		<result property="uNo" column="USER_NO" />
+	</resultMap>
+	
+		<!-- 멤버와 튜터 조인 ResultSet  -->
+	<resultMap id="mAndtuJoinResultSet" type="MemberJoinTutor">
+	
+		<id property="uNo" column="USER_NO" />
+		<result property="uType" column="USER_TYPE" />
+			
+		<!-- 튜터 정보 -->
+		<result property="tuNick" column="T_NICK" />
+		<result property="tuCareer" column="T_CAREER" />
+		<result property="tuInfo" column="T_INFO" />
+		<result property="tuSocial" column="TSOCIAL" />
+		<result property="tuStatus" column="TSTATUS" />
+		
+		<!-- 튜터 경력인증 -->
+		
+		<collection property="certi" javaType="java.util.ArrayList" resultMap="certificationResultSet"/>
+	
+	</resultMap>
+	
+	<!-- 결재 매핑  -->	
+	<resultMap type="AdminPay" id="AdminPayResultSet">
+		<id property="pNo" column="PM_NO"/>
+		<result property="pStatus" column="PAYMENT_STATUS"/>
+		<result property="pDate" column="PAYMENT_DATE"/>
+		<result property="pCost" column="PAYMENT_COST"/>
+		<result property="pType" column="PAYMENT_TYPE"/>
+		<result property="uNo" column="USER_NO"/>
+		<result property="lInning" column="L_INNING"/>
+		<result property="lNo" column="L_NO"/>
+
+		<result property="sum" column="PSUM"/>
+				
+	</resultMap>
+	<!-- 튜터 인증 매핑  -->
+	<resultMap type="Certification" id="certificationResultSet">
+		<id property="tuNo" column="C_NO"/>
+		<result property="tuTitle" column="USER_NO"/>
+		<result property="tuTitle" column="C_TITLE"/>
+		<result property="originName" column="O_FILE"/>
+		<result property="changeName" column="C_FILE"/>
+	</resultMap>
+
+
+	
+	
+	
+	
+
+		<!-- 회원 수와 쿠폰 갯수 조회  -->
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		<if test="value == 1">
+			from member
+			left join userpropic using(user_no)
+		</if>
+		<if test="value == 2">
+			from coupon
+		</if>
+		<if test="value ==3">
+			from member m
+			left join tutor using(user_no)
+			left join certification using(user_no)
+			where user_type='T'
+		</if>
+	</select>
+	<!-- 회원수를 검색하여 리턴하는 구문  -->
+	<select id="getListMemberSearchCount" resultType="_int">
+	<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+	
+		select count(*)
+		from member
+		left join userpropic using(user_no)
+		<where>
+			<choose>
+				<when test="searchCondition == 'mName'">
+					AND USER_NAME LIKE #{sv}
+				</when>
+				<when test="searchCondition == 'mType'">
+					AND USER_TYPE LIKE #{sv}
+				</when>
+				<otherwise>
+					AND (USER_NAME LIKE #{sv} OR USER_TYPE LIKE #{sv})
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	<!-- 전체 회원수(튜터 포함) 조회  -->
+	<select id="selectMemberList" resultMap="mAnduJoinResultSet">
+	
+		select *
+		from member
+		left join userpropic using(user_no)
+		
+	</select>
+	<select id="selectTutorList" resultMap="mAndtuJoinResultSet">
+		select *
+		from member m
+		left join tutor using(user_no)
+		left join certification using(user_no)
+		where user_type='T'
+	</select>
+	
+	<!-- 멤버 검색용 쿼리 (마이바티스 동적 쿼리 활용) -->
+	<select id="searchMemberList" parameterType="Search"
+		resultMap="mAnduJoinResultSet">
+		
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+
+		SELECT * FROM member
+		left join userpropic using(user_no)
+		<where>
+			<choose>
+				<when test="searchCondition == 'mName'">
+					AND USER_NAME LIKE #{sv}
+				</when>
+				<when test="searchCondition == 'mType'">
+					AND USER_TYPE LIKE #{sv}
+				</when>
+				<otherwise>
+					AND (USER_NAME LIKE #{sv} OR USER_TYPE LIKE #{sv})
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY USER_NO asc
+	</select>
+	
+	<!-- 쿠폰 생성하기  -->
+	<insert id="insertCoupon" parameterType="Coupon">
+		insert into Coupon values(COUPON_SEQ.nextval,#{cName},#{cCode},#{disRate},#{startDate},#{endDate},'R',#{uNo})
+	</insert>
+	
+	<!-- 회원 가입자 오늘 & 이번달 수 조회 -->
+	<select id="countMember" resultType="_int" parameterType="AdminMember">
+		select count(user_no) as count
+		from member
+		<choose>
+		<when test="value =1">
+		where to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') and u_status='Y'
+		</when>
+		<when test="value=2">
+		where extract(month from enroll_date) = extract(month from sysdate) and u_status='Y'
+		</when>
+		</choose>
+	</select>
+	<!-- 오늘 & 이번 달 수입  -->
+	<select id="sumPay" resultType="_int" parameterType="AdminPay">
+		select nvl(sum(payment_cost),0) as PSUM
+		from payment
+		<choose>
+		<when test="value = 1 ">
+		where to_date(payment_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') and payment_status='1'
+		</when>
+		<when test="value = 2 ">
+		where extract(month from payment_date) = extract(month from sysdate) and payment_status='1'
+		</when>
+		</choose>
+	</select>
+	
+	
+	
+	
+
+</mapper>

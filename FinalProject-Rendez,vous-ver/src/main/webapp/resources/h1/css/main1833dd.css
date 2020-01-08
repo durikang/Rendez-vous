@@ -1,0 +1,37 @@
+/* HEADER NEW*/
+.header_new {box-sizing:border-box;width:100%; height: 80px;}
+.header_new .hcont{width: 1200px;height:80px;margin:0 auto;}
+/*아랫줄로 수정
+.header_new .logo{padding-left:70px;float:left}
+*/
+.header_new .logo{/*원써니 수정 180726padding-left:110px;*/float:left}
+.header_new .search {width:450px;height:55px; margin-top: 6px;float:left;margin-left:30px;}
+.header_new .search #searchcss ::-webkit-input-placeholder{ }
+.header_new .search #searchcss:focus{outline:none; border-color: #2196F3;}
+.header_new .search .lcont {width: 420px; height: 40px; border:3px solid #ff005a; border-radius:40px;margin-top:10px;}
+.header_new .search .lcont .inputlmg {width: 40px; height: 40px;  float:left; margin-top:6px;margin-left:10px;}
+.header_new .search .lcont .inputlmg img{width:25px;height:25px;}
+.header_new .search .lcont input[type=text]{width: 280px; padding-top:3px;margin-top:0px;height:80%;border:none; font-size: 16px; color:#333333;font-weight:500;}
+/*원써니 수정 - 주간 인기 검색어 weekly_best*/
+.header_new .search .lcont .weekly_best{border-top:1px solid #ccc;margin-top:4px;display:block;border-left:1px solid #ccc;border-right:1px solid #ccc;border-bottom:3px solid #ff005a;position:absolute;z-index:1000;background-color:white;width:300px;margin-left:50px;}
+.header_new .search .lcont .weekly_best h3{padding:5px;font-size:16px;margin:0;letter-spacing:1px;margin-top:5px;}
+.header_new .search .lcont .weekly_best li {margin:7px;}
+.header_new .search .lcont .weekly_best li a{ font-size:16px;letter-spacing:1px;color:black;}
+.header_new .search .lcont .weekly_best li a:hover{ color:#999;}
+
+
+/* 아랫줄로 수정
+.header_new .rcont {width:470px; box-sizing:border-box;float:right;position:relative;}
+*/
+.header_new .rcont {/* 원써니 수정 180726 margin-right:60px;*/width:620px; box-sizing:border-box;float:right;position:relative;}
+.header_new .rcont li {font-weight:600;float:left ;font-size:16px; color:#333333;width:90px; height:30px; text-align:center;padding-right:10px;float:right;cursor:pointer;}
+.header_new .rcont li.vod{
+	width:118px;
+}
+.header_new .rcont li.vod a{
+	background:#640cd1;color:#fff;padding:5px 12px;border-radius:8px;letter-spacing:1px;margin-right:10px;font-weight:300;
+}
+.header_new .rcont li.vod a:hover{color:#fff;}
+.header_new .logo{
+	padding-left:0;
+}

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lessonInfoMapper">
+	<resultMap id="liResultSet" type="LessonInfo">
+		<id property="lNo" column="L_NO"/>
+		<result property="lTitle" column="L_TITLE"/>
+		<result property="lIntroduction" column="L_INTRODUCTION"/>
+		<result property="lTarget" column="L_TARGET"/>
+		<result property="lYtb" column="L_YTB"/>
+		<result property="lRegion" column="L_REGION"/>
+		<result property="lRegionSub" column="L_REGION_SUB"/>
+		<result property="lRegionDetail" column="L_REGION_DETAIL"/>
+		<result property="lCateMain" column="L_CATE_MAIN"/>
+		<result property="lCateSub" column="L_CATE_SUB"/>
+		<result property="lPrice" column="PRICE"/>
+		<result property="lStatus" column="L_STATUS"/>
+		<result property="uNo" column="USER_NO"/>
+	</resultMap>
+	
+	<!-- 레슨 인포 인서트 -->
+	<insert id="insertLessonInfo" parameterType="LessonInfo">
+		INSERT INTO LESSON_INFO VALUES(
+		SEQ_LNO.NEXTVAL,#{lTitle},#{lIntroduction},#{lTarget},#{lYtb},
+		#{lRegion},#{lRegionSub},#{lRegionDetail},#{lCateMain},#{lCateSub},#{lPrice},#{lStatus},#{uNo}
+		)
+	</insert>
+	
+	<!-- 레슨인포 인서트 후 사진을 넣기 위한 레슨인포 번호 리턴 -->
+	<select id="selectLNo" parameterType="_int" resultType="_int">
+		SELECT MAX(L_NO)
+		FROM LESSON_INFO
+		WHERE USER_NO = #{uno}
+	</select>
+	
+	<!-- 튜터 수업관리페이지로 갖고 갈 레슨인포 -->
+	<select id="selectLIList" parameterType="_int" resultMap="liResultSet">
+		SELECT *
+		FROM LESSON_INFO
+		WHERE USER_NO = #{UNO}
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 리스트로 뿌려줄 모든 레슨인포 -->
+	<select id="selectAllLIList" resultMap="liResultSet" >
+		SELECT *
+		FROM LESSON_INFO
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 디테일에 보여줄 하나의 레슨인포 -->
+	<select id="selectOneLI" parameterType="_int" resultMap="liResultSet">
+		SELECT *
+		FROM LESSON_INFO
+		WHERE L_NO =#{lNO}
+	</select>
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- ATTACHMENT -->
+	
+	<resultMap id="laResultSet" type="LessonAttachment" >
+		<id property="laNo" column="LA_NO"/>
+		<result property="oName" column="O_NAME"/>
+		<result property="cName" column="C_NAME"/>
+		<result property="laType" column="LA_TYPE"/>
+		<result property="laDate" column="LA_DAY"/>
+		<result property="lNo" column="L_NO"/>
+	</resultMap>
+	
+
+	
+	<insert id="insertAttachment" parameterType="LessonAttachment">
+		INSERT INTO LESSON_ATTACHMENT VALUES(
+		SEQ_LANO.NEXTVAL,#{oName},#{cName},#{laType},SYSDATE,#{lNo}
+		)
+	</insert>
+
+	<select id="selectLAList" resultMap="laResultSet">
+		SELECT A.*
+		FROM LESSON_ATTACHMENT A, LESSON_INFO I
+		WHERE A.L_NO = I.L_NO
+		AND I.L_NO IN (SELECT L_NO
+                      FROM LESSON_INFO
+                      WHERE USER_NO =#{UNO})
+	</select>
+	
+	
+	<select id="selectLAofLI" parameterType="_int" resultMap="laResultSet">
+		SELECT * 
+		FROM LESSON_ATTACHMENT
+		WHERE L_NO= #{lNo}
+	</select>
+
+
+
+
+
+	<!-- lessonTime -->
+	
+	<resultMap id="lResultSet" type="Lesson" >
+		<id property="lInning" column="L_INNING"/>
+		<id property="lNo" column="L_NO"/>
+		<result property="lDay" column="L_DAY"/>
+		<result property="sTime" column="START_TIME"/>
+		<result property="eTime" column="END_TIME"/>
+		<result property="price" column="PRICE"/>
+		<result property="total" column="TOTAL"/>
+		<result property="remain" column="REMAIN"/>
+	</resultMap>
+	
+
+
+	<insert id="insertLessonTime" parameterType="Lesson">
+		INSERT INTO LESSON VALUES((SELECT NVL(MAX(L_INNING),0) FROM LESSON WHERE L_NO=#{lNo})+1,#{lNo},
+		#{lDay},#{sTime},#{eTime},
+		#{price},#{total},#{total})
+	</insert>
+	
+	<select id="selectLList" parameterType="_int" resultMap="lResultSet">
+		SELECT L.*
+		FROM LESSON L, LESSON_INFO I
+		WHERE L.L_NO = I.L_NO
+		AND I.L_NO IN (SELECT L_NO
+                      FROM LESSON_INFO
+                      WHERE USER_NO =#{UNO})
+        ORDER BY 1 DESC              
+	</select>
+	
+	
+	<select id="selectTimeofLI" parameterType="_int" resultMap="lResultSet">
+		SELECT *
+		FROM LESSON
+		WHERE L_NO= #{lNo}
+	</select>
+	
+	
+
+
+
+
+
+
+
+</mapper>
+
+	

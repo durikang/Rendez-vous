@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="searchMapper">
+	
+	<resultMap type="tClass" id="tClassResultSet">
+	<result property="lNo" column="L_NO"/>
+	<result property="lTitle" column="L_TITLE"/>
+	<result property="price" column="PRICE"/>
+	<result property="cName" column="C_NAME"/>
+	<result property="totalReviewRation" column="TOTAL_REVIEW_RATING"/>
+	<result property="totalReviewNumber" column="L_REVIEW_COUNT"/>
+	<result property="lRegionSub" column="L_REGION_SUB"/>
+	<result property="lRegionDetail" column="L_REGION_DETAIL"/>
+	<result property="userNo" column="USER_NO"/>
+	<result property="userName" column="USER_NAME"/>
+	<result property="tNick" column="T_NICK"/>
+	<result property="uCName" column="U_C_NAME"/>
+	<result property="tUserNumber" column="T_USER_NUMBER"/>
+	<result property="lCateMain" column="L_CATE_MAIN"/>
+	<result property="lCateSub" column="L_CATE_SUB"/>
+	</resultMap>
+	
+	<resultMap type="DetailClass" id="DetailClassResultMap">
+	<result property="lNo" column="L_NO"/>
+	</resultMap>
+	
+	<resultMap type="classCount" id="classCountResultMap">
+	 <result property="location" column="location"/>
+	 <result property="count" column="COUNT"/>
+	 <result property="lType" column="lType"/>
+	</resultMap>
+	
+	
+
+	   <select id="selectSearch" parameterType="string" resultMap="tClassResultSet">
+   SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+   U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
+    ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
+   FROM LESSON_INFO L
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+   WHERE ((L.L_TITLE LIKE '%' || #{value} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{value} || '%'))
+   AND LA.LA_TYPE = 1
+   AND L.L_STATUS = 'Y'
+   ORDER BY L.L_NO DESC
+   </select>
+	
+	<select id="selectCateMainList" parameterType="string" resultMap="tClassResultSet">
+	SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+	U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
+    ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
+	FROM LESSON_INFO L
+	JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+	JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+	JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+	JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+	LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+	LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+	WHERE L_CATE_MAIN = #{main}
+	AND LA.LA_TYPE = 1
+	AND L.L_STATUS = 'Y'
+	ORDER BY L.L_NO DESC
+	</select>
+	
+	<select id="SearchCateSubList" parameterType="string" resultMap="tClassResultSet">
+	SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+	U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
+    ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
+	FROM LESSON_INFO L
+	JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+	JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+	JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+	JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+	LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+	LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+	WHERE L_CATE_SUB = #{sub}
+	AND LA.LA_TYPE = 1
+	AND L.L_STATUS = 'Y'
+	ORDER BY L.L_NO DESC
+	</select>
+	
+	<select id="getListCount" resultType="_int" parameterType="searchInfo">
+	SELECT count(*)
+	FROM LESSON_INFO L
+	<where>
+	 L.L_STATUS = 'Y'
+	<choose>
+		<when test="sType == 'Search'">
+		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		</when>
+		<when test="sType == 'Main'">
+		AND L.L_CATE_MAIN = #{cateMain}
+		</when>
+		<otherwise>
+		AND L.L_CATE_SUB = #{cateSub}
+		</otherwise>
+	</choose>
+	</where>
+	</select>
+	
+	<select id="getDetailListCount" resultType="_int" parameterType="searchInfo">
+	SELECT COUNT(DISTINCT L_NO)
+	FROM SEARCH_DETAIL
+	<where>
+		 L_STATUS = 'Y'
+		<if test="sDay != null">
+			 AND L_DAY IN 
+			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">
+            #{item}
+        	</foreach> 
+		</if>
+		<if test="sTime != null">
+			AND (L_TIME LIKE 
+			 <foreach collection="sTime" item="item"  open="" close="" separator="OR L_TIME LIKE">	 
+            '%' || #{item} || '%'      
+        	</foreach>)
+		</if>
+		<if test="tType != null">
+			AND TTYPE = #{tType}
+		</if>
+		<if test="regionMain != null">
+			AND L_REGION = #{regionMain}
+		</if>
+		<if test="regionSub != null">
+			AND L_REGION_SUB = #{regionSub}
+		</if>
+		<if test="sValue != null">
+			AND (L_TITLE LIKE '%' || #{sValue} || '%') OR (L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		</if>
+		<if test="cateMain != null">
+			AND L_CATE_MAIN = #{cateMain}
+		</if>
+		<if test="cateSub != null">
+			AND L_CATE_SUB = #{cateSub}
+		</if>
+	</where>
+	</select>
+	
+	<select id="getDetailList" resultMap="DetailClassResultMap" parameterType="searchInfo">
+	SELECT DISTINCT L_NO
+	FROM SEARCH_DETAIL
+	<where>
+	 L_STATUS = 'Y'
+		<if test="sDay != null">
+			 AND L_DAY IN 
+			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">
+            #{item}
+        	</foreach> 
+		</if>
+		<if test="sTime != null">
+			AND (L_TIME LIKE 
+			 <foreach collection="sTime" item="item"  open="" close="" separator="OR L_TIME LIKE">	 
+            '%' || #{item} || '%'      
+        	</foreach>)
+		</if>
+		<if test="tType != null">
+			AND TTYPE = #{tType}
+		</if>
+		<if test="regionMain != null">
+			AND L_REGION LIKE  '%' || #{regionMain} || '%'
+		</if>
+		<if test="regionSub != null">
+			AND L_REGION_SUB = #{regionSub}
+		</if>
+		<if test="sValue != null">
+			AND (L_TITLE LIKE '%' || #{sValue} || '%') OR (L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		</if>
+		<if test="cateMain != null">
+			AND L_CATE_MAIN = #{cateMain}
+		</if>
+		<if test="cateSub != null">
+			AND L_CATE_SUB = #{cateSub}
+		</if>
+	</where>
+	
+	</select>
+	
+	
+	<select id="selectDetailSearch" resultMap="tClassResultSet" parameterType="list">
+	SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+	U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
+    ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
+	FROM LESSON_INFO L
+	JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+	JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+	JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+	JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+	LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+	LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+	WHERE L.L_NO IN 
+	 <foreach collection="list" item="item"  open="(" close=")" separator=",">
+            #{item}
+        	</foreach> 
+        	AND  L.L_STATUS = 'Y' 
+        	AND LA.LA_TYPE = 1
+	ORDER BY L.L_NO DESC
+	</select>
+	
+	<select id="selectRegionMainCount" parameterType="searchInfo" resultMap="classCountResultMap">
+	SELECT L_REGION as location, COUNT(*) as count, 'RegionMain' as lType
+	FROM LESSON_INFO
+	WHERE L_NO IN ( SELECT L.L_NO
+   FROM LESSON_INFO L
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+  <where> 
+   AND LA.LA_TYPE = 1
+   AND L.L_STATUS = 'Y'
+   <choose>
+		<when test="sType == 'Search'">
+		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		</when>
+		<when test="sType == 'Main'">
+		AND L.L_CATE_MAIN = #{cateMain}
+		</when>
+		<otherwise>
+		AND L.L_CATE_SUB = #{cateSub}
+		</otherwise>
+	</choose>)
+   </where>
+	GROUP BY L_REGION
+	</select>
+	
+	<select id="selectRegionSubCount" parameterType="searchInfo" resultMap="classCountResultMap">
+	SELECT L_REGION_SUB as location, COUNT(*)as count, 'RegionSub' as lType
+	FROM LESSON_INFO
+	WHERE L_NO IN ( SELECT L.L_NO
+   FROM LESSON_INFO L
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+   <where> 
+   AND LA.LA_TYPE = 1
+   AND L.L_STATUS = 'Y'
+   <choose>
+		<when test="sType == 'Search'">
+		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		</when>
+		<when test="sType == 'Main'">
+		AND L.L_CATE_MAIN = #{cateMain}
+		</when>
+		<otherwise>
+		AND L.L_CATE_SUB = #{cateSub}
+		</otherwise>
+	</choose>)
+   </where>
+	GROUP BY L_REGION_SUB
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tutorMapper">
+
+	<resultMap id="tResultSet" type="Tutor">
+		<id property="uNo" column="USER_NO"/>
+		<result property="tNick" column="T_NICK"/>
+		<result property="tCareer" column="T_CAREER"/>
+		<result property="tInfo" column="T_INFO"/>
+		<result property="tSocial" column="TSOCIAL"/>
+		<result property="tStatus" column="TSTATUS"/>
+	</resultMap>
+	
+	
+	<insert id="insertTutor" parameterType="Tutor">
+	INSERT INTO TUTOR VALUES(#{uNo},#{tNick},#{tCareer},#{tInfo},#{tSocial},'R')
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 인증 -->
+	
+	<resultMap id="cResultSet" type="Certification2">
+		<id property="cNo" column="C_NO"/>
+		<result property="uNo" column="USER_NO"/>
+		<result property="cTitle" column="C_TITLE"/>
+		<result property="oFile" column="O_FILE"/>
+		<result property="cFile" column="C_FILE"/>
+	</resultMap>
+	
+	
+	<insert id="insertCertification" parameterType="Certification2">
+	INSERT INTO CERTIFICATION VALUES(SEQ_CNO.NEXTVAL,#{uNo},#{cTitle},#{oFile},#{cFile})
+	</insert>
+	
+
+
+	
+	
+</mapper>
+
+	

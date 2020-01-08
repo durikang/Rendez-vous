@@ -62,7 +62,8 @@
     .footer-menu-one ul li {
         display: inline-block;
         margin: 0px 20px;
-     	color:#fff;
+
+        color:#fff;
     }
     .footer-menu-one ul li a {
         font-family: arial;

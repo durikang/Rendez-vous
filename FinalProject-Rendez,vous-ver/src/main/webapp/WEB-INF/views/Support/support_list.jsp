@@ -193,17 +193,20 @@
 	    </div>
 	    <div class="content_area">
 	    	<div class="board_area">
-	    		<h1>문의 내역</h1>
+	    		<c:if test="${ !empty list }">
+	    		<h1>문의 내역</h1>	    		
 	    		<table id="boardTable">
 	    		<thead>
 		    		<tr>
 						<th width="15%">번호</th>
-						<th width="50%">제목</th>
+						<th width="40%">제목</th>
 						<th width="15%">작성자</th>
 						<th width="20%">작성일</th>
+						<th width="10%">답변 현황</th>
 					</tr>
 				</thead>
 				<tbody>
+					
 					<c:forEach var="q" items="${ list }">
 					<tr>
 						<td>${q.qNo}</td>
@@ -221,6 +224,14 @@
 						</td>
 						<td>${q.qWriter}</td>
 						<td>${q.qDate}</td>
+						<td>
+							<c:if test='${ q.aStatus == "N" }'>
+								X
+							</c:if>
+							<c:if test='${ q.aStatus == "Y" }'>
+								O
+							</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr align="center" height="20">
@@ -230,7 +241,7 @@
 							[이전] &nbsp;
 						</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="before" value="support_qna.do">
+							<c:url var="before" value="support_list.do">
 								<c:param name="page" value="${ pi.currentPage - 1 }"/>
 							</c:url>
 							<a href="${ before }">[이전]</a>
@@ -241,7 +252,7 @@
 								<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
 							</c:if>
 							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="pagination" value="support_qna.do">
+								<c:url var="pagination" value="support_list.do">
 									<c:param name="page" value="${ p }"/>
 								</c:url>
 								<a href="${ pagination }">[${ p }]</a>
@@ -252,13 +263,17 @@
 							[다음]
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage }">
-							<c:url var="after" value="support_qna.do">
+							<c:url var="after" value="support_list.do">
 								<c:param name="page" value="${ pi.currentPage + 1 }"/>
 							</c:url>
 							<a href="${ after }">[다음]</a>
 						</c:if>
 					</td>
 					</tr>
+					</c:if>
+					<c:if test="${ empty list }">
+						<h1>문의 내역이 없습니다.</h1>
+					</c:if>
 				</tbody>
 	    	</table>
 	    	</div>

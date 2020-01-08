@@ -14,6 +14,8 @@
 		<typeAlias type="com.kh.rendez.baesung.search.model.vo.DetailClass" alias="DetailClass"/>	
 		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.LessonTime" alias="LessonTime"/>
 		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.Payment"  alias="Payment"/>
+		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.Coupon"  alias="payCoupon"/>
+		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.InsertCouponInfo"  alias="InsertCouponInfo"/>
 		<!-- 유현식 별칭 -->
 		<typeAlias alias="LessonInfo" type="com.kh.rendez.lesson.model.vo.LessonInfo"/>
 		<typeAlias alias="LessonAttachment" type="com.kh.rendez.lesson.model.vo.LessonAttachment"/>

@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <style>
     body {
     margin: 0;
@@ -138,6 +137,11 @@ body {
     overflow: hidden;
     margin-top: 1%;
 }
+
+#payCouponArea:hover{
+	cursor: pointer;
+}
+
     </style>
 </head>
 <body>
@@ -155,48 +159,36 @@ body {
 			<input type="text" placeholder="프로모션 혹은 쿠폰 코드 입력" name="code" id="code"><button onclick="couponRegister()">쿠폰등록</button>
 		
 		</div>			
-		
-				<a onclick="couponUse(27366, '친구초대 쿠폰', 3000)">
+		<c:if test="${CouponList != null }">
+				<c:forEach items="${ CouponList}" var="CouponList">
+				 <a onclick="couponUse('${CouponList.couponNo }', '${CouponList.couponName } 쿠폰', '${CouponList.discountRate}')" id="payCouponArea"> 
+				
 				<div class="used able" >
 			<div class="date">2020-01-08</div>
 			<div class="md">
-				<div class="price">3,000</div><div class="name">친구초대 쿠폰</div><div class="due">사용가능</div>
+				<div class="price">${CouponList.discountRate}%할인</div><div class="name">${CouponList.couponName }</div><div class="due">사용가능</div>
 			</div>
 			<div class="due2">
-				유효기간 | </span>2020-02-07</span>
+				유효기간 | </span>${CouponList.endDate}</span>
 			</div>
 		</div>
+		
 		</a>
+			</c:forEach>
+		</c:if>
+		
 				<script>
 			function couponRegister()
 			{
 				if($('#code').val() == '' ){ alert('쿠폰 코드를 입력하세요');$('#code').focus();return false;}
 
-				$.ajax({
-					type: 'POST',
-					url: '/Talent/couponRegister.php',				
-					data: "code="+$('#code').val(),
-					processData: false,
-					success: function (response) {
-						if(response=="0000")
-						{
-							alert("쿠폰 등록이 완료되었습니다");
-							location.reload();
-						}
-						else
-						{
-							alert(response);
-						}
-					},
-					error: function(response) {
-						alert(response);
-					}
-				});
-				return false;
+				location.href = 'insertCoupon.do?code='+$('#code').val()
+					
 			}
 			function couponUse(val, name, price)
 			{
-				//opener.couponUse(val, name, price);
+				
+				opener.couponUse(val, name, price);
 				self.close();
 			}
 

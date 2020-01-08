@@ -81,11 +81,26 @@ public class SearchImpl implements SearchService{
 	@Override
 	public Collection<? extends classCount> selectRegionMain(searchInfo sInfo) {
 		
+		/*if(sInfo.getsType().equals("searchDetail")) {
+			ArrayList<DetailClass> dc = jsDao.getDetailList(sInfo);
+			// 디테일 검색에 대한 지역의 숫자 검색
+			return jsDao.selectRegionMainDetail(dc);
+		}
+		*/
+		
 		return jsDao.selectRegionMain(sInfo);
+
 	}
 
 	@Override
 	public Collection<? extends classCount> selectRegionSub(searchInfo sInfo) {
+		
+		/*if(sInfo.getsType().equals("searchDetail")) {
+			ArrayList<DetailClass> dc = jsDao.getDetailList(sInfo);
+			// 디테일 검색에 대한 지역의 숫자 검색
+			return jsDao.selectRegionSubDetail(dc);
+		}*/
+		
 		return jsDao.selectRegionSub(sInfo);
 	}
 

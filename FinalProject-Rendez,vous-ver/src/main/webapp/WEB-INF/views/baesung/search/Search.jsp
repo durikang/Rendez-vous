@@ -1290,6 +1290,8 @@ text-decoration: none;
 			<c:param name="tType" value="${sInfo.tType}"/>
 			<c:param name="day" value="${sInfo.day}"/>
 			<c:param name="time" value="${sInfo.time}"/>
+			<c:param name="cCList" value="${ cCList}"></c:param>
+			
 			</c:url>
 			
 			<a href="${blistBack}">
@@ -1470,25 +1472,43 @@ text-decoration: none;
 		
 		$("#MainIndex option").each(function(index,item){
 			
+			if($(item).val() == ''){
+				 $(item).text('지역ALL(0)');		 
+			 }else{
+				 $(item).text($(item).val()  + '(0)');
+			 }
+			
+			// 선택되었던 것 다시 선택해주기 
+			
+			if($(item).val() == '${sInfo.regionMain}'){
+				
+                $('#regionSubLayer'+$(item).val()).removeClass('off');
+                $('#regionSubLayer'+$(item).val()).addClass('on');
+             							
+                $(item).prop("selected", true);
+			}
+			
+
 			 //alert($(item).val());		
 			 <c:forEach items="${cCList}" var="cCList">
-	    	
+			
 			//alert('${cCList.location}');
 			if('${cCList.lType}' != 'RegionSub'){
 			
 			 if($(item).val() == '${ fn:substring(cCList.location,0,2)}'){
-				
-				 if($(item).val() == ''){
 					 
-					 $(item).text('지역ALL('+'${cCList.count}' + ')');
+				 if($(item).val() == ''){
+
+					 $(item).text('지역ALL('+'${cCList.count}' + ')');		 
 				 }else{
 					 $(item).text($(item).val()  + '('+'${cCList.count}' + ')');
-				 }		
-			}  	
+				 }		 
+			}
+
 			} 
-			 
-			 
+		
 	  		</c:forEach> 	
+	  		
 		})
 	
 		
@@ -1497,8 +1517,18 @@ text-decoration: none;
 			
 			 //alert($(item).val());
 			 
+			if($(item).val() == ''){
+				 
+			 }else{
+				 $(item).text($(item).val()  + '(0)');
+			 }	
+			 
+			if($(item).val() == '${sInfo.regionSub}'){
+				$(item).prop("selected", true);
+			}
+			 
 			 <c:forEach items="${cCList}" var="cCList">
-	    	
+			 
 			//alert('${cCList.location}');
 			if('${cCList.lType}' != 'RegionMain'){
 			 if($(item).val() == '${ cCList.location}'){
@@ -1509,11 +1539,58 @@ text-decoration: none;
 					 $(item).text($(item).val()  + '('+'${cCList.count}' + ')');
 				 }	
 	 	
-			}  	
+			}
+			 
 			}
 	  		</c:forEach> 	 
 		})
-
+		
+		var days = '${sInfo.day}';	
+		if(days != ''){
+		var daysArr = days.split(',');
+		
+		 $("#days").children().each(function(element2, index2){			
+					
+			 daysArr.forEach(function(element, index) {
+				 
+				   if($(index2).attr('day') == element ){	
+    	               
+					   $(index2).attr('class','on');
+	                  
+		             } });  });}
+		
+		var time = '${sInfo.time}';
+		if(time != ''){
+			var timeArr = time.split(',');
+			
+			 $("#times").children().each(function(element2, index2){			
+						
+				 timeArr.forEach(function(element, index) {
+					 
+					   if($(index2).attr('time') == element ){	
+	    	               
+						   $(index2).attr('class','on');
+		                  
+			             } });  });}
+		
+		var tType = '${sInfo.tType}';
+		if(tType != ''){
+			var tTypeArr = tType.split(',');
+			
+			 $("#tTypes").children().each(function(element2, index2){			
+						
+				 tTypeArr.forEach(function(element, index) {
+					 
+					   if($(index2).attr('ttype') == element ){	
+	    	               
+						   $(index2).attr('class','on');
+		                  
+			             } });  });}
+		
+		
+		
+		
+		 
    });
     
     </script>

@@ -59,7 +59,7 @@ public class SearchDao {
 		for(DetailClass d : dc) {
 			ar.add(d.getlNo());
 		}
-			System.out.println(ar.toString());
+			//System.out.println(ar.toString());
 		
 		return (ArrayList)sqlSession.selectList("searchMapper.selectDetailSearch", ar, rowBounds);
 	}
@@ -74,6 +74,25 @@ public class SearchDao {
 
 	public Collection<? extends classCount> selectRegionSub(searchInfo sInfo) {
 		return (ArrayList)sqlSession.selectList("searchMapper.selectRegionSubCount",sInfo);
+	}
+
+	public Collection<? extends classCount> selectRegionMainDetail(ArrayList<DetailClass> dc) {
+		
+		List ar =new ArrayList();
+		for(DetailClass d : dc) {
+			ar.add(d.getlNo());
+		}
+		return (ArrayList)sqlSession.selectList("searchMapper.selectRegionMainCountDeatil",ar);
+	}
+
+	public Collection<? extends classCount> selectRegionSubDetail(ArrayList<DetailClass> dc) {
+		
+		List ar =new ArrayList();
+		for(DetailClass d : dc) {
+			ar.add(d.getlNo());
+		}
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.selectRegionSubCountDeatil",ar);
 	}
 
 }

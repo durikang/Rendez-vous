@@ -33,6 +33,8 @@
 	</resultMap>
 	
 	
+	
+	
 
 	   <select id="selectSearch" parameterType="string" resultMap="tClassResultSet">
    SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
@@ -260,6 +262,44 @@
 	GROUP BY L_REGION_SUB
 	</select>
 	
+	<select id="selectRegionMainCountDeatil" parameterType="list" resultMap="classCountResultMap">
+	SELECT L_REGION as location, COUNT(*) as count, 'RegionMain' as lType
+	FROM LESSON_INFO
+	WHERE L_NO IN ( SELECT L.L_NO
+   FROM LESSON_INFO L
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+  WHERE L.L_NO IN 
+	 <foreach collection="list" item="item"  open="(" close=")" separator=",">
+            #{item}
+        	</foreach> 
+        	AND  L.L_STATUS = 'Y' 
+        	AND LA.LA_TYPE = 1)  
+	GROUP BY L_REGION
+	</select>
 	
+	<select id="selectRegionSubCountDeatil" parameterType="list" resultMap="classCountResultMap">
+	SELECT L_REGION_SUB as location, COUNT(*)as count, 'RegionSub' as lType
+	FROM LESSON_INFO
+	WHERE L_NO IN ( SELECT L.L_NO
+   FROM LESSON_INFO L
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+     WHERE L.L_NO IN 
+	 <foreach collection="list" item="item"  open="(" close=")" separator=",">
+            #{item}
+        	</foreach> 
+        	AND  L.L_STATUS = 'Y' 
+        	AND LA.LA_TYPE = 1)  
+	GROUP BY L_REGION_SUB
+	</select>
 	
 </mapper>

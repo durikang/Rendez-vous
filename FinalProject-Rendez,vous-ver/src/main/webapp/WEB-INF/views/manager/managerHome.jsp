@@ -195,7 +195,7 @@
 			</div>
 			<div class="col">
 				<!-- 신규 수업 Top 5  -->
-				<table class="table listArea">
+				<table class="table newLessonBoard">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">수업 번호</th>

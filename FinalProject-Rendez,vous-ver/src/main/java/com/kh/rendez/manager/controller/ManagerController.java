@@ -170,8 +170,6 @@ public class ManagerController {
 		// 페이징 처리를 위해 마이바티스 프로젝트에서 PageInfo, Pagination 복사
 		int currentPage = page != null ? page : 1;
 		
-		
-		
 		ArrayList<MemberJoinTutor> list = mnService.selectTutorList(currentPage);	
 		
 		

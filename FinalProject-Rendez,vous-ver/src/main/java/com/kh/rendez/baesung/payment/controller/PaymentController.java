@@ -50,7 +50,7 @@ public class PaymentController {
 		session.setAttribute("lInning", lInning);
 		session.setAttribute("lNo", lNo);
 		
-		mv.addObject("phone", "01011111111");
+		
 		mv.setViewName("baesung/payment/apply");
 			
 		return mv;

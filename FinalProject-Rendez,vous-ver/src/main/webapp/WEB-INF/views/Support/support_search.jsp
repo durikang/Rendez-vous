@@ -167,9 +167,10 @@
 		    		<thead>
 		    		<tr>
 						<th width="15%">번호</th>
-						<th width="50%">제목</th>
+						<th width="40%">제목</th>
 						<th width="15%">작성자</th>
 						<th width="20%">작성일</th>
+						<th width="10%">답변 현황</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -177,7 +178,7 @@
 					<tr>
 						<td>${q.qNo}</td>
 						<td>
-						<%-- <c:if test="${ !empty loginUser }">
+						<c:if test="${ !empty loginUser }">
 							<c:url var="qnaDetail" value="qnaDetail.do">
 								<c:param name="qNo" value="${ q.qNo }"/>
 								<c:param name="page" value="${ pi.currentPage }"/>
@@ -186,15 +187,18 @@
 						</c:if>
 						<c:if test="${ empty loginUser }">
 							${ q.qTitle }
-						</c:if> --%>
-							<c:url var="qnaDetail" value="qnaDetail.do">
-								<c:param name="qNo" value="${ q.qNo }"/>
-								<c:param name="page" value="${ pi.currentPage }"/>
-							</c:url>
-							<a href="${qnaDetail}">${ q.qTitle }</a>
+						</c:if>
 						</td>
 						<td>${q.qWriter}</td>
 						<td>${q.qDate}</td>
+						<td>
+							<c:if test='${ q.aStatus == "N" }'>
+								X
+							</c:if>
+							<c:if test='${ q.aStatus == "Y" }'>
+								O
+							</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr align="center" height="20">

@@ -18,6 +18,7 @@ import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
+import com.kh.rendez.member.model.vo.Member;
 
 @Controller
 public class LessonController {
@@ -98,7 +99,8 @@ public class LessonController {
 			) {
 		
 		/*----------------넘어온 정보를 다듬어 주자----------------*/
-		li.setuNo(99);    // 나중에 로그인 유저.넘버를 갖고오는걸로 변경하자 
+		int uno = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();
+		li.setuNo(uno);    // 로그인 유저
 		li.setlStatus("R");
 		
 		//입력한유튜브에서 필요한 유튜브 코드만 DB에 저장하자
@@ -175,9 +177,10 @@ public class LessonController {
 
 	// 수업 관리하는 페이지로 가기
 	@RequestMapping("lessonManage.do")
-	public ModelAndView lessonManage(ModelAndView mv,@RequestParam(name="lno" ,required=false) String lno) {
+	public ModelAndView lessonManage(ModelAndView mv,@RequestParam(name="lno" ,required=false) String lno
+			,HttpServletRequest request) {
 		
-		int uno = 99;
+		int uno = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();;
 		
 		ArrayList<LessonInfo> liList = lService.selectLIList(uno);
 		ArrayList<LessonAttachment> laList = lService.selectLAList(uno);

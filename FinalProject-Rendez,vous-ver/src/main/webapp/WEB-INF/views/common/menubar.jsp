@@ -36,7 +36,7 @@
     color:#c9c0b1;
 }
 .search-btn {
-    color: #c9c0b1;
+    color: #c9c0b1;;
     float: right;
     width: 40px;
     height: 40px;
@@ -47,6 +47,10 @@
     text-decoration: none;
     align-items: center;
     transition: 0.4s;
+}
+
+.search-btn i {
+	color:#c9c0b1;
 }
 .search-text {
     border: none;
@@ -111,15 +115,13 @@
 </style>
 <body class="menu_body">
     <header class="header">
-<img class="logo" src="resources/common/img/logo1.png" alt="logo">
+		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
             <input class="search-text" type="text" id="search" placeholder="Search">
             <a class="search-btn">
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
-        </div>
-        
-        
+        </div>        
          <a class="cta" href="hynnmenubar.do"><button class="button">튜터 등록</button></a>
         <nav>
             <ul class="nav_links">

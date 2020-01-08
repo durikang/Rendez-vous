@@ -292,7 +292,7 @@
 						<td colspan="4"><b id="aCount"></b></td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="answer">
 					
 				</tbody>
 			</table>

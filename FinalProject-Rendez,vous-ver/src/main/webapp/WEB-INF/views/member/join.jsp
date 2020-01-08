@@ -49,7 +49,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>* 이름</td>
+					<td>* 이름dasd</td>
 					<td><input type="text" name="user_name"></td>
 				</tr>
 				<tr>

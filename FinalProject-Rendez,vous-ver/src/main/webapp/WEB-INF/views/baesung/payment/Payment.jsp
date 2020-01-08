@@ -487,12 +487,12 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	    pg : 'inicis', // version 1.1.0부터 지원.
         	    pay_method : payMethod,
         	    merchant_uid : 'merchant_' + new Date().getTime(),
-        	    name : '주문명:결제테스트',
+        	    name : '${tClass.lTitle}',
         	    amount : ${tClass.price },
-        	    buyer_email : 'iamport@siot.do',
-        	    buyer_name : '구매자이름',
-        	    buyer_tel : '010-1234-5678',
-        	    buyer_addr : '서울특별시 강남구 삼성동',
+        	    buyer_email : 'whqotjd@naver.com',
+        	    buyer_name : '${loginUser.user_name}',
+        	    buyer_tel : '${loginUser.phone}',
+        	    buyer_addr : '${loginUser.address}',
         	    buyer_postcode : '123-456',
         	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
         	}, function(rsp) {

@@ -71,6 +71,73 @@ body {
     border: none;
 }
 
+.used.able {
+    background: blue;
+    border-radius: 10px;
+   
+}
+
+.used {
+    width: 100%;
+    background: blue;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    margin-top: 15px;
+    color: #fff;
+    padding: 2% 5%;
+}
+@media only screen and (min-width: 450px)
+.used .date, .used .md .due {
+    font-size: 14px;
+}
+.used .date {
+    font-size: 12px;
+}
+.used .md {
+    overflow: hidden;
+    margin-top: 1%;
+}
+@media only screen and (min-width: 450px)
+.used .md .price {
+    font-size: 25px;
+}
+.used .md .price {
+    font-size: 25px;
+    margin-top: 1%;
+    width: 25%;
+}
+.used .md div {
+    float: left;
+    display: inline-block;
+}
+@media only screen and (min-width: 450px)
+.used .md .name {
+    font-size: 15px;
+}
+.used .md .name {
+    font-size: 14px;
+    padding: 0 12%;
+    margin: 1% auto;
+    width: 30%;
+    text-align: center;
+}
+@media only screen and (min-width: 450px)
+.used .date, .used .md .due {
+    font-size: 14px;
+}
+.used .md .due {
+    font-size: 12px;
+    margin-top: 3%;
+    padding-left: 5%;
+}
+.used .due2 {
+    font-size: 12px;
+    text-align: center;
+    overflow: hidden;
+    margin-top: 1%;
+}
     </style>
 </head>
 <body>
@@ -80,7 +147,7 @@ body {
 			<a onclick="couponUse(0, '', 0)">해제</a>
 		</div>
 		쿠폰선택
-	</div>
+	</div><!--  -->
 	<div class="cont">
 		<div>쿠폰등록</div>
 		<div class="cpn">
@@ -88,6 +155,18 @@ body {
 			<input type="text" placeholder="프로모션 혹은 쿠폰 코드 입력" name="code" id="code"><button onclick="couponRegister()">쿠폰등록</button>
 		
 		</div>			
+		
+				<a onclick="couponUse(27366, '친구초대 쿠폰', 3000)">
+				<div class="used able" >
+			<div class="date">2020-01-08</div>
+			<div class="md">
+				<div class="price">3,000</div><div class="name">친구초대 쿠폰</div><div class="due">사용가능</div>
+			</div>
+			<div class="due2">
+				유효기간 | </span>2020-02-07</span>
+			</div>
+		</div>
+		</a>
 				<script>
 			function couponRegister()
 			{

@@ -10,6 +10,10 @@ public interface TutorService {
 
 	int insertCertification(Certification inCer);
 
+	Tutor selectTutorOfLI(int lNo);
+
+	String selectTutorName(int lNo);
+
 	
 
 }

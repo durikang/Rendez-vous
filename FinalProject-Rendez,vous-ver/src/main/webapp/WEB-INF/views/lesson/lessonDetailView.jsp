@@ -529,8 +529,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="class_detail" id="sumary" style="width: 840px">
 				<div class="class_name">
 					<div class="tutor_img"><a href="http://taling.me/Content/Uploads/Profile/aa73a9b108426fbddb18c590ffd278ea8117ef07.png" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('http://taling.me/Content/Uploads/Profile/s_aa73a9b108426fbddb18c590ffd278ea8117ef07.png');"></div></a></div>
-					<div class="name">선찬주</div>
-					<div class="nickname">가야금 튜터</div>
+					<div class="name">${ tName }</div>
+					<div class="nickname">${ tutor.tNick }</div>
 				</div>
 				<div class="class_title">
 					
@@ -566,13 +566,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<h1>튜터정보</h1>
 					<div class="cert">
 						<ul>
-							<li class="com">서울대학교  가야금</li>							
-							<li class="com">신분 인증 됨</li>										
+							<c:forEach var="tc" items="${tutorCer}">
+							<li class="com">${tc}</li>	
+							</c:forEach>									
 						</ul>
 					</div>
 					<div class="d_info04">
-						
-			
+						${ tutor.tInfo }
 					</div>					
 				</div>
 			</div>
@@ -981,181 +981,14 @@ function openAnswer(idx)
 }
 </script>
 
-	<!-- FOOTER -->
-	<div class="footer_cont">
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		
-	</div>
-	<!-- /FOOTER -->
+<c:import url="../common/footbar.jsp"/>
 
  
-       
-<div id="popup-login" class="popup popup-login" data-hide="popup-login">
-	<div class="popup-content">
-		<h1>탈잉에 오신 것을 환영해요!</h1>
-		<p>
-			<strong>탈잉</strong>은 서로 간 재능을 연결해<br>
-			모두의 경쟁력을 높이는 플랫폼 서비스입니다.
-		</p>
-		<button id="btn-popup-login-facebook" type="button" class="btn btn-facebook">
-			<img src="https://taling.me/Content/Images/btn-login-facebook.png">
-		</button>
-		<div>- 또는 -</div>
-		<form action="#" method="post" id="frm-login">
-			<input type="id" id="email" name="email" value="" class="form-control" placeholder="Email">
-			<input type="password" id="password" name="password" value="" class="form-control" placeholder="Password">			
-			<div class="chk-keep-login-container">
-				<input type="checkbox" name="keepLogin" id="chk-keep-login"> <label for="chk-keep-login">로그인 유지</label>
-			</div>
-			<input type="submit" value="이메일 아이디로 로그인" class="btn btn-submit">
-		</form>
-		<a href="https://taling.me/Account/FindPassword" class="btn-find-password">비밀번호를 잊으셨다면</a>
-		<hr>
-		<div class="box-promote">
-			탈잉 회원이 아니세요? <a href="#" data-hide="popup-login" data-show="popup-join">당장 가입</a>
-		</div>
-	</div>
-</div>
-<div id="popup-join" class="popup popup-join" data-hide="popup-join">
-	<div class="popup-content">
-		<h1>탈잉 회원가입</h1>
-		<p>
-			회원으로 가입하시면<br>
-			<strong>탈잉</strong>의 모든 서비스를 이용하실 수 있습니다
-		</p>
-		<button id="btn-popup-join-facebook" type="button" class="btn btn-facebook">
-			<img src="https://taling.me/Content/Images/btn-join-facebook.png">
-		</button>
-		<div style="line-height: 1">- 또는 -</div>
-		<form action="#" method="post" id="frm-join">
-			<input type="id" name="name" value="" class="form-control" placeholder="Name">
-			<input type="id" name="email" value="" class="form-control" placeholder="Email">
-			<input type="password" name="password" value="" class="form-control" placeholder="Password">
-			<input type="password" name="confirm" value="" class="form-control" placeholder="Confirm Password">
-			<div class="box-accept-terms">
-				비밀번호는 영문 숫자조합 8자리 이상<br>
-				<input id="chk-accept-terms" type="checkbox" name="accept" value="" class="checkbox-inline">
-				<label for="chk-accept-terms">
-					<a href="https://taling.me/Support/Rule" target="_blank">탈잉이용약관</a> 및
-					<a href="https://taling.me/Support/Rule" target="_blank">개인정보취급방침</a>에 동의합니다
-				</label>
-			</div>
-			<input type="submit" value="이메일 아이디로 가입" class="btn btn-submit">
-			
-		</form>
-		<hr>
-		<div class="box-promote">
-			이미 탈잉 회원이세요? <a href="#" data-hide="popup-join" data-show="popup-login">로그인</a>
-		</div>
-	</div>
-</div>
 
-
-
-
-<!-- Channel Plugin Scripts -->
-<script>
-var scrollTop=0;
-$('#custom-button-trigger').click(function(){
-	scrollTop= $(window).scrollTop();
-	$('#custom-button-1').click();
-});
- (function() {
-   var w = window;
-   if (w.ChannelIO) {
-     return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-   }
-   var d = window.document;
-   var ch = function() {
-     ch.c(arguments);
-   };
-   ch.q = [];
-   ch.c = function(args) {
-     ch.q.push(args);
-   };
-   w.ChannelIO = ch;
-   function l() {
-     if (w.ChannelIOInitialized) {
-       return;
-     }
-     w.ChannelIOInitialized = true;
-     var s = document.createElement('script');
-     s.type = 'text/javascript';
-     s.async = true;
-     s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-     s.charset = 'UTF-8';
-     var x = document.getElementsByTagName('script')[0];
-     x.parentNode.insertBefore(s, x);
-   }
-   if (document.readyState === 'complete') {
-     l();
-   } else if (window.attachEvent) {
-     window.attachEvent('onload', l);
-   } else {
-     window.addEventListener('DOMContentLoaded', l, false);
-     window.addEventListener('load', l, false);
-   }
- })();
-  ChannelIO('boot', {
-   "pluginKey": "8fc98895-06a5-402d-8740-1cb9261ebc91",
-	"customLauncherSelector": "#custom-button-1",
-    "hideDefaultLauncher": true,
-	   "userId": "", //fill with user id
-	   "profile": {
-		 "name": "", //fill with user name
-		 "mobileNumber": "", //fill with user phone number
-		 "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-		 "CUSTOM_VALUE_2": "VALUE_2"
-	   }
- });
-  ChannelIO('onHide', function() {
-	$(window).scrollTop(scrollTop);
-});
-</script>
-<!-- End Channel Plugin -->	
-	
-	<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('a51b01dc9ea662d0ef7ed2c6242a6946');
-    </script>
-    
-    <script>
-        function shareFacebook() {
-            FB.ui(
-            {
-                method: 'share',
-                href: 'https://taling.me/Talent/Detail/166'
-            }, function (response) { });
-        }
-
-		function shareKakaoTalk() {
-            Kakao.Link.sendTalkLink({
-                label: '탈잉에서 "[원데이] 외국인들 시선강탈! 가야금을 예고강사에게 전문적으로 배우세요! (예고 및 국악학원 출강)"을 확인해보세요 https://taling.me/Talent/Detail/166',
-                image: {
-                    src: 'https://s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/s_41d6f52384099fcb7eeeacbbf2727e37b3ecb4b3.jpg',
-                    width: 420,
-                    height: 250
-                },
-                webButton: {
-                    text: '잉여 탈출하러 가기',
-                    url: 'https://taling.me/Talent/Detail/166'
-                }
-            });
-        }
-
-   
-    </script>
-    
 
 
 
 <!-- Mirrored from taling.me/Talent/Detail/166 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Dec 2019 22:07:36 GMT -->
 
-<div id="ch-plugin"><div id="ch-plugin-script" style="display:none" class="ch-messenger-hidden"><iframe id="ch-plugin-script-iframe" style="position:relative!important;height:100%!important;width:100%!important;border:none!important;"></iframe></div><div id="ch-plugin-core"><style data-styled="" data-styled-version="4.3.2"></style><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-erNlkL bRmDYI sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><div hidden="" class="sc-kEmuub cCdpiZ sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-bxivhb ggxtKj"><div class="sc-ifAKCX ccgoiG"><div class="textLauncherContent sc-EHOje blkbwA"></div><div class="textLauncherIcon sc-bZQynM gSNwmf"><div hidden="" class="sc-htpNat sc-htoDjs jiXddj">0</div></div></div></div></div></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="fb_xdm_frame_https" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://staticxx.facebook.com/connect/xd_arbiter.php?version=44#channel=f1189abb19d0174&amp;origin=file%3A%2F%2F" style="border: none;"></iframe></div><div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style></body>
+</body>
 </html>

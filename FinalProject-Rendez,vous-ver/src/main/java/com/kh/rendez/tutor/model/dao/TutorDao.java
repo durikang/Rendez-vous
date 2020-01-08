@@ -21,6 +21,14 @@ public class TutorDao {
 		return sqlSession.insert("tutorMapper.insertCertification",inCer);
 	}
 
+	public Tutor selectTutorOfLI(int lNo) {
+		return sqlSession.selectOne("tutorMapper.selectTutorOfLI",lNo);
+	}
+
+	public String selectTutorName(int lNo) {
+		return sqlSession.selectOne("tutorMapper.selectTutorName", lNo);
+	}
+
 
 	
 	

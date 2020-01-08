@@ -23,6 +23,16 @@ public class TuTorServiceImpl implements TutorService {
 		return tDao.insertCertification(inCer);
 	}
 
+	@Override
+	public Tutor selectTutorOfLI(int lNo) {
+		return tDao.selectTutorOfLI(lNo);
+	}
+
+	@Override
+	public String selectTutorName(int lNo) {
+		return tDao.selectTutorName(lNo);
+	}
+
 
 	
 	

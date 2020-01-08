@@ -124,10 +124,8 @@
 
 </head>
 <body style="" cz-shortcut-listen="true">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTJJTC6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
+
 <div id="wrap">
 <!--HEADER -->
 	<div class="hcont">
@@ -136,7 +134,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- //HEADER -->
 
 	<!--container-->
-	<div class="container">
+	<div class="container" style="height: 1200px">
 
 		<!--MyTItleBox head-->
 		<div class="title-box">
@@ -148,15 +146,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</select>
 		</div>
 		
+		
+		<c:if test="${!empty msg }">
+		alert("수업을 추가하였습니다.");	
+		</c:if>
+		
 		<!-- 일정 인서트 후 해당 수업에 selected 되게끔 하는 처리  -->
 		<c:if test="${!empty slno }">
 		<script>
 			$(function(){
 				$("#sop${slno}").attr("selected",true);
+					
 			});
+			
 		</script>	
 		</c:if>
 		
+
 		
 		
 		
@@ -261,10 +267,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				$("#adprice").val(lprice);
 				
 			}
-			
-			
-		
-		
+	
 		
 		</script>
 		
@@ -321,7 +324,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
 		
 		
-		
+		<c:if test="${!empty msg }">
+		<script>
+			$(function(){
+			alert("수업을 추가하였습니다.");	
+			});
+		</c:if>
+		</script>	
 		
 		
 		
@@ -345,194 +354,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
  		<!-- FOOTER -->
-	<div class="footer_cont">
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		
-	</div>
-	<!-- /FOOTER -->
+
        
 
 
 
-<!-- Channel Plugin Scripts -->
-<script>
-var scrollTop=0;
-$('#custom-button-trigger').click(function(){
-	scrollTop= $(window).scrollTop();
-	$('#custom-button-1').click();
-});
- (function() {
-   var w = window;
-   if (w.ChannelIO) {
-     return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-   }
-   var d = window.document;
-   var ch = function() {
-     ch.c(arguments);
-   };
-   ch.q = [];
-   ch.c = function(args) {
-     ch.q.push(args);
-   };
-   w.ChannelIO = ch;
-   function l() {
-     if (w.ChannelIOInitialized) {
-       return;
-     }
-     w.ChannelIOInitialized = true;
-     var s = document.createElement('script');
-     s.type = 'text/javascript';
-     s.async = true;
-     s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-     s.charset = 'UTF-8';
-     var x = document.getElementsByTagName('script')[0];
-     x.parentNode.insertBefore(s, x);
-   }
-   if (document.readyState === 'complete') {
-     l();
-   } else if (window.attachEvent) {
-     window.attachEvent('onload', l);
-   } else {
-     window.addEventListener('DOMContentLoaded', l, false);
-     window.addEventListener('load', l, false);
-   }
- })();
-  ChannelIO('boot', {
-   "pluginKey": "8fc98895-06a5-402d-8740-1cb9261ebc91",
-	"customLauncherSelector": "#custom-button-1",
-    "hideDefaultLauncher": true,
-	   "userId": "znznwkdrns@naver.com", //fill with user id
-	   "profile": {
-		 "name": "유현식", //fill with user name
-		 "mobileNumber": "01073267776", //fill with user phone number
-		 "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-		 "CUSTOM_VALUE_2": "VALUE_2"
-	   }
- });
-  ChannelIO('onHide', function() {
-	$(window).scrollTop(scrollTop);
-});
-</script>
-<!-- End Channel Plugin -->	
-	<!--container-->
-	<script type="text/javascript"> 
 
 
-		//상태변화
-		function fnStatusChange(status, TalentId){
-			if(status =="CS01"){
-				location.href ="/tutor/regiInfo/"+TalentId;
-			}else if(status =="CS03"){
-				fnAjaxData(0, TalentId);
-			}else if(status =="CS05"){
-				location.href ="/My/ClassOpen/"+TalentId;
-			}
+</div>
 
-		}
-		
-		//심사요청
-		function ask(val, TalentId){
-			var mode = val;
-			switch (mode)
-			{
-			case 0:
-				if($('#pop-ask').css('display')!='none'){
-					$('#pop-ask').hide();
-				}else{
-					$('#talentId').val(TalentId);
-					$('#pop-ask').show();
-				}
-				break;
-			case 1:
-				var TalentId  = $('#talentId').val();
-				fnAjaxData(9, TalentId);
 
-				$('#pop-ask').hide();
-				break;
-			case 2:
-				$('#pop-ask').hide();
-				break;
-			}
-		}
-		
-		//수업 상태 변경
-		function fnAjaxData(status, TalentId){
-			var p = [];	
-			p.push('talentId='+TalentId);	
-			p.push('status='+status);
-			 
-		
-			var pars = p.join('&');
 
-			var Ajax = new Ajax2();
-			Ajax.init('/My/MyTutorClassProc.php', {
-				method: 'post'
-				, parameters: pars
-				, idTarget: ''
-				, oSelf: this
-				, onCreate: function(){}
-				, onComplete: function(oXHR)
-				{	
-					if(oXHR.responseText =='0000')
-					{
-						if(status == 0){
-							alert('심사 취소가 완료 되었습니다');
-						}else if(status == 2){
-							alert('운영 활성화 되었습니다');
-						}else if(status == 3){
-							alert('운영중지 되었습니다');
-						}else if(status == 9){
-							alert('심사 요청 되었습니다');
-						}
-						
-						location.reload();
-					} 
-					else
-					{
-						alert(oXHR.responseText); 
-					}
-				}
-			});	
 
-		}
-		
-		//selling , soldout
-		function changeSold(Idx,val) {		
-			$.post('/My/ChangeSold', { 
-				Idx: Idx, 
-				val: val 
-				})
-			.success(function (res) {							
-				if (res=='0000') {				
-					if(val ==1) {
-						alert('SOLDOUT 처리되었습니다. 다시 수업이 가능할 때 SELLING을 클릭하여주세요!');
-					} else {
-						alert('SELLING 처리되었습니다.');
-					}
-					location.reload();
-				} else {				
-					alert(res);
-				}
-			})
-			.fail(function (res) {			
-				alert(res.message);
-			});
-		}
 
-		function openTab(elm){
-			var elm = elm;
-			if($(elm).next('.tab').css('display')!='block'){
-				$(elm).next('.tab').show();
-			}else{
-				$(elm).next('.tab').hide();
-			}
-		}
-	</script>	
 
-</div></div><div id="ch-plugin"><div id="ch-plugin-script" style="display:none" class="ch-messenger-hidden"><iframe id="ch-plugin-script-iframe" style="position:relative!important;height:100%!important;width:100%!important;border:none!important;"></iframe></div><div id="ch-plugin-core"><style data-styled="" data-styled-version="4.3.2"></style><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-erNlkL bRmDYI sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><div hidden="" class="sc-kEmuub cCdpiZ sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-bxivhb ggxtKj"><div class="sc-ifAKCX ccgoiG"><div class="textLauncherContent sc-EHOje blkbwA"></div><div class="textLauncherIcon sc-bZQynM gSNwmf"><div hidden="" class="sc-htpNat sc-htoDjs jiXddj">0</div></div></div></div></div></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="fb_xdm_frame_https" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://staticxx.facebook.com/connect/xd_arbiter.php?version=44#channel=f252bad3d651b48&amp;origin=https%3A%2F%2Ftaling.me" style="border: none;"></iframe></div><div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style><style>.tb_button {padding:1px;cursor:pointer;border-right: 1px solid #8b8b8b;border-left: 1px solid #FFF;border-bottom: 1px solid #fff;}.tb_button.hover {borer:2px outset #def; background-color: #f8f8f8 !important;}.ws_toolbar {z-index:100000} .ws_toolbar .ws_tb_btn {cursor:pointer;border:1px solid #555;padding:3px}   .tb_highlight{background-color:yellow} .tb_hide {visibility:hidden} .ws_toolbar img {padding:2px;margin:0px}</style></body>
+
+
+
+
+</div>
+
+
+<!--  -->
+<c:import url="../common/footbar.jsp"/>
+
+
+
+</body>
 </html>

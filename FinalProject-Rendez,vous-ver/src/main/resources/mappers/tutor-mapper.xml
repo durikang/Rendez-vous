@@ -18,8 +18,22 @@
 	INSERT INTO TUTOR VALUES(#{uNo},#{tNick},#{tCareer},#{tInfo},#{tSocial},'R')
 	</insert>
 	
+	<select id="selectTutorOfLI" parameterType="_int" resultMap="tResultSet">
+		SELECT *
+		FROM TUTOR
+		WHERE USER_NO=(	SELECT USER_NO 
+						FROM LESSON_INFO
+						WHERE L_NO = #{lNo})
+	</select>
 	
 	
+	<select id="selectTutorName" parameterType="_int" resultType="String">
+		SELECT USER_NAME
+		FROM MEMBER
+		WHERE USER_NO=(	SELECT USER_NO 
+						FROM LESSON_INFO
+						WHERE L_NO = #{lNo})
+	</select>
 	
 	
 	

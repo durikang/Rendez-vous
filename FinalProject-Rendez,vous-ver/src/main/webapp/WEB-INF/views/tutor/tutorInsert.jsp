@@ -141,20 +141,6 @@
 			}
 		});
 	</script>
-	<script>
-		function mySub(){
-			if($('#mySub').css('display')!='block'){
-				$('#mySub').show();
-			}else{
-				$('#mySub').hide();
-			}
-		}
-
-		function couponPop()
-		{
-			popupWindow = window.open('/Talent/coupon.php', '_blank', 'height=800,width=550,scrollbars=no,status=no');
-		}
-	</script>
 
 </head>
 <body style="">
@@ -196,60 +182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<form action="tutorInsert.do" method="post" enctype="multipart/form-data">
 	<div id="page1" class="tab">
 	
-	<script>
-		$('#phoneCls').click(function() {
-			$('#dim').hide();
-			$('#phone_box').hide();
-		});	
-		
-		var panInterval;
 
-		$('#veriPhone').click(function() {		
-			var phone = $('#phone').val();
-			if (/\d\d\d\-?\d\d\d\d?\-?\d\d\d\d/.test(phone)) {
-				sendPhoneConfirm(phone);
-				
-			} else {
-				alert('올바른 전화번호를 입력하세요');
-				$('#Phone').focus();return false;
-			}
-			$('#dim').show();
-			$('#phone_box').show();
-			
-			clearInterval(panInterval);
-			var fiveMinutes = 60 * 5, display = document.querySelector('#time');
-			startTimer(fiveMinutes, display);
-		});	
-
-		function startTimer(duration, display) {		
-			var timer = duration, minutes, seconds;
-			panInterval = setInterval(function () {
-				minutes = parseInt(timer / 60, 10);
-				seconds = parseInt(timer % 60, 10);
-
-				minutes = minutes < 10 ? "0" + minutes : minutes;
-				seconds = seconds < 10 ? "0" + seconds : seconds;
-
-				display.textContent = minutes + ":" + seconds;
-
-				if (--timer < 0) {
-					clearInterval(panInterval);
-				}
-			}, 1000);
-		}
-
-		function confirm()
-		{
-			var phone = $('#phone').val();
-
-			var code = $('#code').val();
-			if (/\d\d\d\-?\d\d\d\d?\-?\d\d\d\d/.test(phone)) {
-				phoneConfirm4(code, phone);
-			} else {
-				alert('올바른 전화번호를 입력하세요');
-			}
-		}
-	</script>
 	<div class="box">
 		<div class="title">프로필사진<b class="pink">*</b></div>
 		<div class="cont">
@@ -277,11 +210,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<img class="upf_b button" src="<%= request.getContextPath() %>/resources/h1/Images/btn_pfimg.png">
 				<div class ="upf" id="picture-cover" id="ProfileThumbnailUrl" style="background-image:url('//taling.me/Content/Images/placeholders/profile-default.thumb.jpg')">
 					<input type="hidden" id="ProfileThumbnailUrl" value="//taling.me/Content/Images/placeholders/profile-default.thumb.jpg"/>
-					<input type="file" id="picture" name="picture" style="width:150px;height:130px;opacity:0;"/>
+					<input type="file" id="tutorPropic" name="tutorPropic" style="width:150px;height:130px;opacity:0;"/>
 				</div>				
 			</div>
 			<script>
-				$('#picture').change(function (e) {
+				$('#tutorPropic').change(function (e) {
 					var file = (e.target || window.event.srcElement).files[0];
 
 					var reader = new FileReader();
@@ -292,24 +225,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				});
 			</script>
 
-			<div class="sample1">
-				<div class="arw">
-					<img class="button" src="/tutor/Content/Images/icon_down.png" onclick="arwpaper(this)">
-					<img class="button" style="display:none"src="/tutor/Content/Images/icon_up.png" onclick="arwpaper(this)">
-				</div>
-				<span>예시 이미지 및 화면보기</span>
-				<div class="ex">
-					<img src="/tutor/Content/Images/img_example_01.png">
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="box">
 		<div class="title">별명<b class="pink">*</b></div>
 		<div class="cont">
-			<input type="text" class="basic nick" id="Description" name="Description" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요." value="">
+			<input type="text" class="basic nick" id="tNick" name="tNick" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요." value="">
 		</div>
 	</div>
+	
+		<div class="box">
+		<div class="title">튜터소개<b class="pink">*</b><br><br><span class="gray8">최소 50자<br> 공백포함 300자 이상 권장</span></div>
+		<div class="cont">
+			<div class="caution caution2">
+				<b class="pink">TIP</b><br>
+				<ul class="gray8">
+					<li>튜터님의 재능에 관한 경력 및 이력에 대해서 설명해주세요.</li>
+					<li>튜터님의 재능을 얻기 위해 겪었던 경험에 대해서 말씀해주세요.</li>
+				</ul><br>
+				<b class="pink">주의!</b><br>
+				<ul class="gray8">
+					일부 이모티콘은 인식이 되지 않아, 정성스럽게 작성해주신 내용이 날아갈 수 있습니다. 
+					<br>강조를 해야 할 내용이 있는 경우 되도록이면 일반 특수문자(★/◎/♡)를 사용해주세요
+				</ul>
+			</div>
+			<div class="inner1">
+				<textarea class="basic len980 hei190" placeholder="수강생은 튜터님에 대해 많은 관심을 가지고 있습니다. TIP을 참고하여 최대한 자세히 소개를 해주세요." id="tInfo" name="tInfo"></textarea>
+			</div>
+			<div class="inner1">
+				
+				
+						
+			
+				<div style="overflow:hidden;" id="tag_box">
+									</div>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	
 	<div class="box">
 		<div class="title">인증<b class="pink">*</b></div>
 		<div class="cont">
@@ -329,7 +285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<input type="hidden" name="deleteCert" id="deleteCert" value="">
 								<div class="certificate" style="position:relative;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요">
-					<div class="verify left10">이미지 업로드</div>					
+					<div class="verify left10">자격증 업로드</div>					
 					<input type="file" name="certImg" input-file="img-Cert0" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert0" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
@@ -349,133 +305,133 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<!--innerHTML로 엘리멘트를 생성해서 넣으면 change 이벤트를 받지 못해서 미리 여러개를 생성해놓고 show하는 방안으로 임시 처리함-->
 								<div class="certificate" id="cert1" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert1" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert1" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert2" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert2" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert2" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert3" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert3" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert3" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert4" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert4" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert4" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert5" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert5" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert5" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert6" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert6" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert6" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert7" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert7" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert7" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert8" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert8" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert8" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert9" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert9" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert9" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert10" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert10" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert10" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert11" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert11" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert11" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert12" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert12" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert12" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert13" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert13" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert13" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert14" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert14" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert14" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert15" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert15" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert15" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert16" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert16" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert16" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert17" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert17" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert17" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert18" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert18" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert18" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<div class="certificate" id="cert19" style="position:relative;display:none;">
 					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요" >
-					<div class="verify left10">이미지 업로드</div>
+					<div class="verify left10">자격증 업로드</div>
 					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
 					<input type="file" name="certImg" input-file="img-Cert19" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert19" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
@@ -483,7 +439,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				
 
 				<div class="plus button" onclick="add_certificate()">
-					 증명서 추가
+					 자격증 추가
 				</div>
 			</div>
 
@@ -520,9 +476,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<li>기재해주신 정보는 튜터님의 수업홍보를 위해 사용될 수 있습니다.</li>
 			</div>
 						<div class="inner1">
-				<input type="text" class="basic nick" name="instagram" placeholder="인스타그램" style="margin-bottom:10px"  ><br>
-				<input type="text" class="basic nick" name="blog" placeholder="블로그(네이버,브런치,티스토리등)" style="margin-bottom:10px" ><br>
-				<input type="text" class="basic nick" name="youtube" placeholder="유튜브" >
+				<input type="text" class="basic nick" name="tInstagram" placeholder="인스타그램" style="margin-bottom:10px"  ><br>
+				<input type="text" class="basic nick" name="tBlog" placeholder="블로그(네이버,브런치,티스토리등)" style="margin-bottom:10px" ><br>
+				<input type="text" class="basic nick" name="tYoutube" placeholder="유튜브" >
 			</div>	
 		</div>
 	</div>
@@ -547,111 +503,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 </div>
 
-<script>
-	function setMode(val)
-	{
-		Mode = val;
-		$('#frm-register-detail').submit();
-	}
 
-	var isUploading = false;
-	$('#frm-register-detail').submit(function (e) {
-        e.preventDefault();
-		
-		if($('#isAuth').val() == '0' ){ alert('번호 인증을 해주세요');$('#phone').focus();return false;}
-
-		if($('#picture').val() == '' ){ 
-			if($('#ProfileThumbnailUrl').val() == '//taling.me/Content/Images/placeholders/profile-default.thumb.jpg' ){ 
-				alert('프로필사진을 등록해주세요');$('#picture').focus();return false;
-			}
-		}
-
-		if($('#Description').val() == '' ){ alert('별명을 입력하세요');$('#Description').focus();return false;}
-		
-		
-		if($('#SchoolMajor').val() != '' ){			
-			if($('#SchoolMajorS').val() == '' ){
-				alert('학과를 입력하세요');$('#SchoolMajorS').focus();return false;
-			}
-			if($('#input-cover-image2').val() == '' ){ 			
-				alert('자격 증명 사진을 업로드 하세요');$('#input-cover-image2').focus();return false;						
-			}
-		}
-
-		if($('#SchoolMajor2').val() != '' ){			
-			if($('#SchoolMajor2S').val() == '' ){
-				alert('학과를 입력하세요');$('#SchoolMajor2S').focus();return false;
-			}
-			if($('#input-cover-image3').val() == '' ){ 			
-				alert('자격 증명 사진을 업로드 하세요');$('#input-cover-image3').focus();return false;						
-			}
-		}
-				
-		//if($('#IsPhone').val() == '0' ){ alert('휴대폰 번호를 인증해주세요');$('#Phone2').focus();return false;}
-
-		if(isUploading) {
-			alert('업로드 중입니다. 잠시만 기다려 주세요');
-			return false;
-		}
-		
-		//미리 생성해 놓은 값 중에서 값이 없는 건 disabled
-		$("input[type=text]").each(function() {
-			if($(this).val() == "") {				
-				$(this).attr("disabled",true);
-			}
-		});
-		$("input[type=file]").each(function() {
-			if($(this).val() == "") {				
-				$(this).attr("disabled",true);
-			}
-		});
-
-		var formData = new FormData(this);
-	
-		isUploading = true;
-		$.ajax({
-			type: 'POST',
-			url: '/tutor/regiInfo_proc.php',
-			contentType: false,
-			data: formData,
-			processData: false,
-			success: function (response) {
-				isUploading = false;
-
-				if(response == "error3")
-				{
-					alert("이미지 파일을 확인해주세요! jpg,jpeg,bmp,png 만 가능합니다.");
-					return;
-				}
-				else
-				{			   
-					if(response == '0000')
-					{
-						alert('등록이 완료되었습니다.');
-						if(Mode == 1)
-						{
-							location.href="/tutor/regiTitle/"+$('#Id').val();
-						}
-						else
-						{
-							location.href="/tutor/regiInfo/"+$('#Id').val();
-						}
-
-						
-					}
-					else
-					{
-						alert(response);
-					}
-				}
-			},
-			error: function(response) {
-				isUploading = false;
-			}
-		});
-		return false;
-	});
-</script>
 
 
 	<!-- FOOTER -->

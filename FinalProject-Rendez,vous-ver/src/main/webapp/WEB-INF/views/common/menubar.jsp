@@ -134,7 +134,7 @@
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
-					<a href="#">관리자 페이지</a>
+					<a href="managerHome.do">관리자 페이지</a>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser }">

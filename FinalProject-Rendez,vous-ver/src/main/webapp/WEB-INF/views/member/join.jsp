@@ -15,6 +15,11 @@
 		margin:auto;
 	}
 	
+	#wrapper {
+    	width:100%;
+    	height:87.5vh;
+    }
+	
 	 .guide {
 		display:none;
 		font-size:12px;
@@ -32,7 +37,7 @@
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
-
+	<div id=wrapper>
 	<h1 align="center">회원 가입</h1>
 	<br>
 	<br>
@@ -49,7 +54,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>* 이름dasd</td>
+					<td>* 이름</td>
 					<td><input type="text" name="user_name"></td>
 				</tr>
 				<tr>
@@ -111,7 +116,7 @@
 			<a href="home.do">시작페이지로 이동</a>
 		</div>
 	</div>
-	
+	</div>
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	<script> 
 		$(function() { 
@@ -163,6 +168,6 @@
 		}
 		
 	</script>
-	
+	<c:import url="../common/footbar.jsp"/>
 </body>
 </html>

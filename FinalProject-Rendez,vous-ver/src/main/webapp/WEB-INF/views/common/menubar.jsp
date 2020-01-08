@@ -111,6 +111,7 @@
 </style>
 <body class="menu_body">
     <header class="header">
+    <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
             <input class="search-text" type="text" id="search" placeholder="Search">

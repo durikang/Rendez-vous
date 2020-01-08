@@ -374,7 +374,7 @@ img {
                     신청해 주셔서 정말 감사합니다.
                     <br>
                     <br>
-                    제가 조배성님의 수업 신청서를 확인 할 때까지 잠시만 기다려주세요. 신청서 확인이 완료되면 조배성님께 직접 연락을 드립니다! 
+                    제가 ${loginUser.user_name}님의 수업 신청서를 확인 할 때까지 잠시만 기다려주세요. 신청서 확인이 완료되면 ${loginUser.user_name}님께 직접 연락을 드립니다! 
             </p></div>
             <div class="sh_box class_price">
                 <div class="appcont">

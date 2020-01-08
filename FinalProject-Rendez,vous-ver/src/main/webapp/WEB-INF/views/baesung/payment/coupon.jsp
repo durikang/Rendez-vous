@@ -147,7 +147,7 @@ body {
 			<a onclick="couponUse(0, '', 0)">해제</a>
 		</div>
 		쿠폰선택
-	</div>
+	</div><!--  -->
 	<div class="cont">
 		<div>쿠폰등록</div>
 		<div class="cpn">

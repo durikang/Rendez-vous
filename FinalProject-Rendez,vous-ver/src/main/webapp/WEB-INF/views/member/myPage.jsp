@@ -475,58 +475,7 @@
     </div>
     <!-- bloc-8 END -->
 
-    <!-- bloc-9 -->
-    <div class="bloc bgc-white-smoke l-bloc" id="bloc-9">
-        <div class="container bloc-sm">
-            <div class="row">
-                <div class="col-xs-4 col-xs-offset-4">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <a href="https://www.twitter.com/BootstrapOcean/" target="_blank"><span
-                                        class="fa fa-twitter icon-md"></span></a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <a href="https://www.facebook.com/BootstrapOcean/" target="_blank"><span
-                                        class="fa fa-facebook icon-md"></span></a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <a href="https://plus.google.com/b/116513433102470788789/116513433102470788789/posts"
-                                   target="_blank"><span class="fa fa-google-plus icon-md"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- bloc-9 END -->
-
-    <!-- Footer - bloc-10 -->
-    <div class="bloc l-bloc bgc-white" id="bloc-10">
-        <div class="container bloc-sm">
-            <div class="row">
-                <div class="col-sm-12 col-md-6 col-md-offset-3">
-                    <p class="text-center">
-                        Free Bootstrap theme by <a
-                            href="http://www.bootstrapocean.com/theme/boolancer">BootstrapOcean</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer - bloc-10 END -->
 </div>
-<!-- Main container END -->
-
+	<c:import url="../common/footbar.jsp"/>
 </body>
-
-<!-- Google Analytics -->
-
-<!-- Google Analytics END -->
-
 </html>

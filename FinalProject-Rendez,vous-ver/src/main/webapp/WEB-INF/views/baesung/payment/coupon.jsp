@@ -142,6 +142,18 @@ body {
 	cursor: pointer;
 }
 
+
+    .wrapper{
+        width: 100%;
+        height: 20%;
+        background: white;
+        margin-bottom: 5px;
+        border: 1px #dadada solid;
+       
+    }
+    
+    
+
     </style>
 </head>
 <body>
@@ -159,23 +171,36 @@ body {
 			<input type="text" placeholder="프로모션 혹은 쿠폰 코드 입력" name="code" id="code"><button onclick="couponRegister()">쿠폰등록</button>
 		
 		</div>			
+		
+		
 		<c:if test="${CouponList != null }">
 				<c:forEach items="${ CouponList}" var="CouponList">
 				 <a onclick="couponUse('${CouponList.couponNo }', '${CouponList.couponName } 쿠폰', '${CouponList.discountRate}')" id="payCouponArea"> 
 				
-				<div class="used able" >
-			<div class="date">2020-01-08</div>
-			<div class="md">
-				<div class="price">${CouponList.discountRate}%할인</div><div class="name">${CouponList.couponName }</div><div class="due">사용가능</div>
-			</div>
-			<div class="due2">
-				유효기간 | </span>${CouponList.endDate}</span>
-			</div>
-		</div>
-		
+			<div class="wrapper">
+			
+			<div id="left">
+            <p style="font-size: 80px; color: rgb(246, 92, 82); margin: 0px; margin-left: 15px; font-weight: bold; float: left;">${CouponList.discountRate}</p>
+            <p style="font-size: 60px; color: rgb(246, 92, 82); margin: 7px 0px 0px 0px; font-weight: bold; float: left;">%</p>
+            <p style="font-size: 20px; color: rgb(68, 68, 68); margin: 0px; margin-left: 15px; font-weight: bold; clear: both;">${CouponList.couponName }</p>    
+            <p style="font-size: 15px; color: rgb(143, 143, 143); margin: 8px 0px 20px 0px; margin-left: 15px; font-weight: bold;">만료일 : ${CouponList.endDate}일까지</p>
+            </div>
+            <div id="right">
+            
+            
+            </div>
+            
+         </div>
+         
+         
+         
 		</a>
+		<br>
 			</c:forEach>
 		</c:if>
+		
+		
+		
 		
 				<script>
 			function couponRegister()

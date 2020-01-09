@@ -90,7 +90,7 @@
     font-weight: bold;
     text-decoration:none;
 }
-.nav_links li,a {
+.nav_links li {
     font-weight: 500;
     font-size: 16px;
     color: black;
@@ -112,6 +112,9 @@
 .button:hover {
     background-color: #ddd8cf;
 }
+.search-btn:hover{
+	cursor: pointer;
+}
 </style>
 <body class="menu_body">
     <header class="header">
@@ -120,8 +123,8 @@
 <img class="logo" src="resources/common/img/logo1.png" alt="logo">
 
         <div class="search-box">
-            <input class="search-text" type="text" id="search" placeholder="Search">
-            <a class="search-btn">
+            <input class="search-text" type="text" id="search" placeholder="검색어를 입력하세요">
+            <a class="search-btn" style="font-size: 16px;">
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
         </div>        
@@ -131,20 +134,20 @@
                 <li>|</li>
 
                 <c:if test="${ empty sessionScope.loginUser }">
-                	<li><a href="loginPage.do">로그인</a></li>
+                	<li><a href="loginPage.do" style="font-size: 16px;">로그인</a></li>
                 </c:if>
 
                 <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
-					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
+					<li><a href="mypage.do" style="font-size: 16px;"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
-					<a href="managerHome.do">관리자 페이지</a>
+					<a href="managerHome.do" style="font-size: 16px;">관리자 페이지</a>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser }">
 					<li>|</li>
-                	<li><a href="logout.do">로그아웃</a></li>
+                	<li><a href="logout.do" style="font-size: 16px;">로그아웃</a></li>
 				</c:if>
             </ul>
         </nav>

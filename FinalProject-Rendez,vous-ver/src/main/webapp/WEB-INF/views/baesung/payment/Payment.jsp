@@ -686,7 +686,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 
 	function couponPop()
 	{
-		popupWindow = window.open('coupon.do', '_blank', 'height=800,width=550,scrollbars=no,status=no');
+		popupWindow = window.open('coupon.do', '_blank', 'height=800,width=450,scrollbars=no,status=no');
 	}
 
 	function cend()

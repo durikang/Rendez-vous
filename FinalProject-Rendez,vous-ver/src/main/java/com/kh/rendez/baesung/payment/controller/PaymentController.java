@@ -132,7 +132,13 @@ public class PaymentController {
 		return mv;
 	}
 	
-	
+	@RequestMapping("refund.do")
+	public ModelAndView refund(ModelAndView mv) {
+		
+		mv.setViewName("baesung/payment/Refund");
+		return mv;
+		
+	}
 	
 	
 	

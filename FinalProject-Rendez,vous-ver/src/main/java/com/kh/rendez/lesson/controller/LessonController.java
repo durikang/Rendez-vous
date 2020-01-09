@@ -101,7 +101,7 @@ public class LessonController {
 		/*----------------넘어온 정보를 다듬어 주자----------------*/
 		int uno = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();
 		li.setuNo(uno);    // 로그인 유저
-		li.setlStatus("R");
+		li.setlStatus("Y");
 		
 		//입력한유튜브에서 필요한 유튜브 코드만 DB에 저장하자
 		String url = li.getlYtb();

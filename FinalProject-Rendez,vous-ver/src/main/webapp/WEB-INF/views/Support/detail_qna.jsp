@@ -272,17 +272,17 @@
 						</c:if>			
 					</td>
 				</tr>				
+				<c:if test="${ loginUser.user_type == 'A' }">
 				<tr>
 					<td>답변</td>
 					<td colspan="2">
 						<textarea cols="100" rows="3" id="aContent" style="resize:none"></textarea>
 					</td>
 					<td>
-						<c:if test="${ loginUser.user_type == 'A' }">
 							<button id="aSubmit">등록하기</button>
-						</c:if>
 					</td>
 				</tr>
+				</c:if>
 			</tbody>
 	    	</table>
 	    	

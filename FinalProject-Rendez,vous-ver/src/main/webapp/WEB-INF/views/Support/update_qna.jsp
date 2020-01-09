@@ -26,6 +26,8 @@
 
 <!-- Custom styles for this template -->
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
 </head>
 <style>
     * {
@@ -110,11 +112,44 @@
 		width:100%;
 		margin:auto;
 		margin-top:5%;
+		border-collapse: collapse;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	}
 	
-	#boardTable td {
-		border:1px solid black;
+	#boardTable thead tr {
+		background-color: #c9c0b1;
+		color:white;
+		font-weight:bold;
+	}
+	
+	#boardTable thead tr td {
+		border-right:1px solid white;
+	}
+	
+	
+	#boardTable th, #boardTable td {
 		text-align:center;
+		padding: 12px 15px;
+	}
+	
+	#boardTable tbody tr {
+		border-bottom:1px solid #dddddd;
+	}
+	
+	#boardTable tbody tr td {
+		border-right:1px solid #dddddd;
+	}
+	
+	#boardTable tbody tr td button {
+		margin: 0 5%;
+	}
+	
+	#boardTable tbody tr:nth-of-type(even) {
+		background-color: #f3f3f3;
+	}
+	
+	#boardTable tbody tr:last-of-type {
+		border-bottom : 2px solid #c9c0b1;
 	}
 
 	#remoCon {
@@ -197,8 +232,27 @@
 							<td><input type="text" name="qWriter" size="80%" value="${q.qWriter}" readonly></td>
 						</tr>
 						<tr>
-							<td height="500">내용</td>
-							<td><textarea cols="150" rows="20" name="qContent">${ q.qContent }</textarea></td>
+							<td height="400">내용</td>
+							<td>
+								<textarea id="summernote" name="qContent">${ q.qContent }</textarea>
+							    <script>
+							      $(document).ready(function() {
+						    	  $('#summernote').summernote({
+						    	        placeholder: '내용을 입력해주세요',
+						    	        tabsize: 2,
+						    	        height: 300,
+						    	        toolbar: [
+						    	          ['style', ['style']],
+						    	          ['font', ['bold', 'underline']],
+						    	          ['color', ['color']],
+						    	          ['para', ['ul', 'paragraph']],
+						    	          ['table', ['table']],
+						    	          ['view', ['help']]
+						    	        ]
+						    	      });
+							    	});
+							    </script>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center">
@@ -240,5 +294,8 @@
   </script>
 
 	<c:import url="../common/footbar.jsp"/>	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 </body>
 </html>

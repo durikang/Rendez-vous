@@ -12,6 +12,7 @@
 		window.onload=function(){
 			location.href='home.do';
 		}
+		/* 수정  */
 	</script>
 	
 </body>

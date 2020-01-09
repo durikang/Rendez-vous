@@ -28,10 +28,7 @@
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
 
 
-<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet"> -->
-
+<script src="https://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
 </head>
 <style>
     * {
@@ -235,24 +232,10 @@
 						<tr>
 							<td height="400">내용</td>
 							<td>
-								<textarea id="summernote" name="qContent"></textarea>
-							    <script>
-							      $(document).ready(function() {
-						    	  $('#summernote').summernote({
-						    	        placeholder: '내용을 입력해주세요',
-						    	        tabsize: 2,
-						    	        height: 300,
-						    	        toolbar: [
-						    	          ['style', ['style']],
-						    	          ['font', ['bold', 'underline']],
-						    	          ['color', ['color']],
-						    	          ['para', ['ul', 'paragraph']],
-						    	          ['table', ['table']],
-						    	          ['view', ['help']]
-						    	        ]
-						    	      });
-							    	});
-							    </script>
+								<textarea name="qContent"></textarea>
+			   	                <script>
+			                        CKEDITOR.replace( 'qContent');
+				                </script>
 							</td>
 						</tr>
 						<tr>
@@ -296,8 +279,5 @@
 
 	<c:import url="../common/footbar.jsp"/>	
 	
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 </body>
 </html>

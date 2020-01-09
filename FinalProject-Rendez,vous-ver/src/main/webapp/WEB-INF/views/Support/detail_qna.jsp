@@ -272,7 +272,7 @@
 						</c:if>			
 					</td>
 				</tr>				
-				<c:if test="${ loginUser.user_type == 'A' }">
+					<c:if test="${ loginUser.user_type == 'A' }">
 				<tr>
 					<td>답변</td>
 					<td colspan="2">

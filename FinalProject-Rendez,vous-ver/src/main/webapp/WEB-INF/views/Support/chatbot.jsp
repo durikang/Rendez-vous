@@ -119,7 +119,7 @@ textarea {
             	send_message("튜터로 수업을 등록하는 " + 
             				 "<br>&nbsp; 방법은 어렵지 않아요!! <br>&nbsp; 수업 등록 시 안내되는 가이드 라인 <br>&nbsp; 따라 작성해주시면 됩니다." + 
             				"<br>&nbsp;<br>&nbsp; ※ Rendez,vous는 튜터 1인 1수업으로 운영됩니다." + 
-            				"<br>&nbsp;<br>&nbsp; * <a href='#' target='blank'>튜터 등록 하러 가기!!</a> *" + 
+            				"<br>&nbsp;<br>&nbsp; * <a href='tutorInsertPage.do' target='blank'>튜터 등록 하러 가기!!</a> *" + 
             				"<br>&nbsp;<br>&nbsp; 1. 처음으로")
             }
             

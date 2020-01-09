@@ -5,10 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 </head>
 <body>
 <c:import url="../common/menubar.jsp"/>
 
 	<h1 align="center">회원 정보 수정</h1>
+	
+	<div class="text-center">
+		<a href="deletePwCheck.do">회원탈퇴</a>
+		
+		<!-- "mdelete.do" -->
+    </div>
 </body>
 </html>

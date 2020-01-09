@@ -38,14 +38,15 @@
 	}
 	
     .search_area {
-        width: 80%;
-        height:900px;
+        width: 100%;
+        height:1414px;
         margin:auto;
-        <!-- height 크기 수정하기 -->
     }
 
     .search_title {
-        width: 100%;
+        width: 80%;
+        height:10%;
+        margin:auto;
         margin-top: 5%;
         padding-bottom: 2%;
         border-bottom: 5px solid black;
@@ -53,6 +54,7 @@
 
     .search_content {
         width: 100%;
+        height:85%;
         margin-top: 5%;
         text-align: center;
     }
@@ -62,38 +64,47 @@
     }
     
     .content_area {
-    	float:left;
-    	width:100%;
-    	height:65vh;
-    }
-    
-    .board_area {
-    	width:80%;
-    	margin:auto;
-    	text-align:center;
-    }
+		float: left;
+		width: 100%;
+		height:100%;
+	}
+	
+	.board_area {
+		width: 100%;
+		height:60%;
+		margin: auto;
+		text-align: center;
+	}
+	
+	.banner {
+		height:40%
+	}
+	
+	.board_area button {
+		margin-right: 10%;
+		margin-bottom: 2%;
+	}
+	
 	#boardTable {
-		width:100%;
-		margin:auto;
-		margin-top:5%;
+		width: 80%;
+		margin: auto;
 		border-collapse: collapse;
 		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	}
 	
 	#boardTable thead tr {
 		background-color: #c9c0b1;
-		color:white;
-		font-weight:bold;
+		color: white;
+		font-weight: bold;
 	}
 	
-	
 	#boardTable th, #boardTable td {
-		text-align:center;
-		padding: 10px 15px;
+		text-align: center;
+		padding: 8px 10px;
 	}
 	
 	#boardTable tbody tr {
-		border-bottom:1px solid #dddddd;
+		border-bottom: 1px solid #dddddd;
 	}
 	
 	#boardTable tbody tr:nth-of-type(even) {
@@ -101,29 +112,24 @@
 	}
 	
 	#boardTable tbody tr:last-of-type {
-		border-bottom : 2px solid #c9c0b1;
+		border-bottom: 2px solid #c9c0b1;
 	}
-    
-    #remoCon {
-
-	  position: fixed;
 	
-	  width: 60px;
-	
-	  height: 20px;
-	
-	  right: 50px;
-	
-	  bottom: 100px;
-	
-	  display: none;
-	
-	  }
+	#remoCon {
+		position: fixed;
+		width: 60px;
+		height: 20px;
+		right: 50px;
+		bottom: 100px;
+		display: none;
+	}
 	  
 	  #menu_btn {
 	  	width:120px;
 	  	height:50px;
 	  	background-color: #c9c0b1;
+	  	margin-top:2%;
+	  	margin-bottom:1%;
 	  }
 </style>
 <body>
@@ -167,9 +173,10 @@
 		    		<thead>
 		    		<tr>
 						<th width="15%">번호</th>
-						<th width="50%">제목</th>
+						<th width="40%">제목</th>
 						<th width="15%">작성자</th>
 						<th width="20%">작성일</th>
+						<th width="10%">답변 현황</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -177,7 +184,7 @@
 					<tr>
 						<td>${q.qNo}</td>
 						<td>
-						<%-- <c:if test="${ !empty loginUser }">
+						<c:if test="${ !empty loginUser }">
 							<c:url var="qnaDetail" value="qnaDetail.do">
 								<c:param name="qNo" value="${ q.qNo }"/>
 								<c:param name="page" value="${ pi.currentPage }"/>
@@ -186,15 +193,18 @@
 						</c:if>
 						<c:if test="${ empty loginUser }">
 							${ q.qTitle }
-						</c:if> --%>
-							<c:url var="qnaDetail" value="qnaDetail.do">
-								<c:param name="qNo" value="${ q.qNo }"/>
-								<c:param name="page" value="${ pi.currentPage }"/>
-							</c:url>
-							<a href="${qnaDetail}">${ q.qTitle }</a>
+						</c:if>
 						</td>
 						<td>${q.qWriter}</td>
 						<td>${q.qDate}</td>
+						<td>
+							<c:if test='${ q.aStatus == "N" }'>
+								X
+							</c:if>
+							<c:if test='${ q.aStatus == "Y" }'>
+								O
+							</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr align="center" height="20">
@@ -238,10 +248,25 @@
 					</tr>
 					</tbody>
 		    	</table>
+		    	</div>		    	
+		    	<div class="banner">
+			    	<button id="menu_btn" onclick="location.href='support_main.do'">메인으로</button>
+		    		<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="resources/homeImg/slide1.PNG" class="d-block w-100" style="height:35vh; margin:1% auto;">
+							</div>
+							<div class="carousel-item">
+								<img src="resources/homeImg/slide2.PNG" class="d-block w-100" style="height:35vh; margin:1% auto;">
+							</div>
+							<div class="carousel-item">
+								<img src="resources/homeImg/slide3.PNG" class="d-block w-100" style="height:35vh; margin:1% auto;">
+							</div>
+						</div>
+					</div>
 		    	</div>
 		    </div>
             </c:if>
-            <button id="menu_btn" onclick="location.href='support_main.do'">메인으로</button>
         </div>
     </div>
     <span id="remoCon">

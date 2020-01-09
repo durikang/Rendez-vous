@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <link rel="shortcut icon" type="image/png" href="resources/myPage/img/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     
    <!-- -------------수정 전-------------- -->
@@ -89,19 +88,19 @@
       text-align:center;
    }
    
-   #moonTable {
+   #mymoonTable {
       width:100%;
       margin:auto;
       margin-top:5%;
    }
    
-	#moonTable th {
+	#mymoonTable th {
 	  border-top:1px solid #c9c0b1;
       border-bottom:1px solid #c9c0b1;
       text-align:center;
    }
    
-   #moonTable td {
+   #mymoonTable td {
       border-bottom:1px solid #c9c0b1;
       text-align:center;
    }
@@ -131,16 +130,13 @@
                 <div class="collapse navbar-collapse navbar-1">
                     <ul class="site-navigation nav navbar-nav">
                         <li>
+                            <a onclick="scrollToTarget('#portfolio')">찜 목록</a>
+                        </li>
+                        <li>
                             <a onclick="scrollToTarget('#moon')">1:1 문의내역</a>
                         </li>
                         <li>
                             <a onclick="scrollToTarget('#review')">작성한 리뷰</a>
-                        </li>
-                        <li>
-                            <a onclick="scrollToTarget('#portfolio')">찜 목록</a>
-                        </li>
-                        <li>
-                            <a onclick="scrollToTarget('#statistics')">Statistics</a>
                         </li>
                         <li>
                             <a onclick="scrollToTarget('#contact')">쿠폰함</a>
@@ -157,9 +153,15 @@
         <div class="container bloc-lg">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="text-center"><img src="resources/myPage/img/user3.jpg" class="avatar" alt="User image"></div>
+                    <div class="text-center">
+                    	<c:out value="${ loginUser.photo }"></c:out>
+                    	<c:if test="${ !empty member.photo }">
+						<a href="${ contextPath }/resources/myPage/uploadImg/${ member.upphoto }" download>${ member.photo }</a>
+						</c:if>
+                    	<img src="resources/myPage/img/user3.jpg" class="avatar" alt="User image">
+                    </div>
                     <h1 class="mg-md text-center tc-black">
-                        <c:out value="${ loginUser.user_name }님 "/>마이페이지
+                        <c:out value="${ loginUser.user_name }"/>님 마이페이지
                     </h1>
 
                     <h2 class="text-center tc-white-smoke mg-md">
@@ -173,9 +175,9 @@
                         <span class="divider divider-half"></span>
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-lg wire-btn-white btn-wire btn-rd" onclick="detail_win()">회원 정보 수정</a>
-                    	<script>function detail_win() {
-                    		window.open('', '내정보', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
+                        <a class="btn btn-lg wire-btn-white btn-wire btn-rd" onclick="myInfo()">회원 정보 수정</a>
+                    	<script>function myInfo() {
+                    		window.open("myInfo.do", '내정보', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
                     	}</script>
                     </div>
                     
@@ -185,146 +187,7 @@
     </div>
     <!-- bloc-1 END -->
 
-    <!-- 문의 -->
-    <div class="bloc l-bloc bgc-white" id="moon">
-        <div class="container bloc-lg">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2 class="mg-md text-center">
-                        	1:1 문의내역 
-                    </h2>
-
-                    <div class="divider-h">
-                        <span class="divider divider-half"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="moon2">
-                <div class="moonlist">
-                    <table id="moonTable">
-			             <tr>
-			               <th width="10%">번호</th>
-			               <th width="50%">제목</th>
-			               <th width="15%">작성자</th>
-			               <th width="15%">작성일</th>
-			               <th width="10%">조회수</th>
-			            </tr>
-			            <tr>
-			               <td>1</td>
-			               <td>문의문의</td>
-			               <td>회원1</td>
-			               <td>2019-12-26</td>
-			               <td>1</td>
-			            </tr>
-			          </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 문의 END -->
-    <!-- review start -->
-    <div class="bloc l-bloc bgc-white" id="review">
-        <div class="container bloc-lg">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2 class="mg-md text-center">
-                        	작성한 리뷰 
-                    </h2>
-
-                    <div class="divider-h">
-                        <span class="divider divider-half"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="myReview">
-                <div class="myRevieww">
-                    <table id="myReviewTable">
-			             <tr>
-			               <th width="10%">번호</th>
-			               <th width="50%">제목</th>
-			               <th width="15%">작성자</th>
-			               <th width="15%">작성일</th>
-			               <th width="10%">조회수</th>
-			            </tr>
-			            <tr>
-			               <td>1</td>
-			               <td>리뷰리뷰</td>
-			               <td>회원1</td>
-			               <td>2019-12-26</td>
-			               <td>1</td>
-			            </tr>
-			          </table>
-                </div>
-            </div>
-        </div>
-    </div>
-	<!-- review end -->
-    <!-- Bloc Group -->
-    <div class='bloc-group'>
-
-        <!-- bloc-3 -->
-        <div class="bloc bgc-white bloc-tile-3 bg-people-woman-coffee-meeting d-bloc animated fadeIn" id="bloc-3">
-            <div class="container bloc-lg">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="empty-column"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- bloc-3 END -->
-
-        <!-- bloc-4 -->
-        <div class="bloc bloc-tile-3 bgc-sinopia d-bloc tc-white" id="bloc-4">
-            <div class="container bloc-lg">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h3 class="mg-md sm-shadow animated fadeInUp animDelay04 tc-white">
-                            Heading content
-                        </h3>
-
-                        <p class="mg-lg animated fadeInUp animDelay06">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-                            ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-                            consequat massa quis enim.
-                        </p>
-
-                        <div class="divider-h">
-                            <span class="divider"></span>
-                        </div>
-                        <h3 class="mg-md text-right animated fadeInDown animDelay08 tc-white">
-                            Heading content
-                        </h3>
-
-                        <p class="text-right animated fadeInDown animDelay1">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-                            ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-                            consequat massa quis enim.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- bloc-4 END -->
-
-        <!-- bloc-5 -->
-        <div class="bloc bgc-white bloc-tile-3 bg-people-coffee-notes-tea d-bloc animated fadeIn animDelay02"
-             id="bloc-5">
-            <div class="container bloc-lg">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="empty-column"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- bloc-5 END -->
-    </div>
-    <!-- Bloc Group END -->
-
-    <!-- portfolio -->
+	<!-- portfolio -->
     <div class="bloc l-bloc bgc-white" id="portfolio">
         <div class="container bloc-lg">
             <div class="row">
@@ -337,13 +200,16 @@
                         <span class="divider divider-half"></span>
                     </div>
                     <p class="text-center sub-heading">
-                        (회원 이름)님의 관심 강의 목록입니다.
+                        <c:out value="${ loginUser.user_name } "/>님의 관심 강의 목록입니다.
                     </p>
                 </div>
             </div>
             <div class="row voffset">
                 <div class="col-sm-3">
-                    <a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg"
+                    	<script>function wish() {
+                    		window.open("#", '찜목록', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
+                    	}</script>
+                    <a href="" data-lightbox="img/people-woman-coffee-meeting.jpg"
                        data-caption="Image description"><img src="resources/myPage/img/people-woman-coffee-meeting.jpg"
                                                              class="img-responsive animated zoomIn" alt="Portfolio"/></a>
                 </div>
@@ -387,85 +253,165 @@
     </div>
     <!-- portfolio END -->
 
-    <!-- statistics -->
-    <div class="bloc bgc-white-smoke l-bloc b-divider" id="statistics">
-        <div class="container bloc-md">
+    <!-- 문의 -->
+    <div class="bloc l-bloc bgc-white" id="moon">
+        <div class="container bloc-lg">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h3 class="mg-md tc-outer-space text-center ">
-                                1253
-                            </h3>
+                    <h2 class="mg-md text-center">
+                        	1:1 문의내역 
+                    </h2>
 
-                            <p class="text-center ">
-                                Projects
-                            </p>
-                        </div>
-                        <div class="col-sm-3">
-                            <h3 class="mg-md tc-outer-space text-center  animated bounceIn animDelay02">
-                                245
-                            </h3>
-
-                            <p class="text-center ">
-                                Clients
-                            </p>
-                        </div>
-                        <div class="col-sm-3">
-                            <h3 class="mg-md tc-outer-space text-center  animated bounceIn animDelay04">
-                                246
-                            </h3>
-
-                            <p class="text-center ">
-                                Cups of Coffee
-                            </p>
-                        </div>
-                        <div class="col-sm-3">
-                            <h3 class="mg-md tc-outer-space text-center  animated bounceIn animDelay06">
-                                124.536
-                            </h3>
-
-                            <p class="text-center ">
-                                Lines of Code
-                            </p>
-                        </div>
+                    <div class="divider-h">
+                        <span class="divider divider-half"></span>
                     </div>
+                </div>
+            </div>
+            <div class="moon2">
+                <div class="moonlist">
+                    <table id="mymoonTable">
+			             <tr>
+			               <th width="10%">번호</th>
+			               <th width="50%">제목</th>
+			               <th width="15%">작성자</th>
+			               <th width="15%">작성일</th>
+			               <th width="10%">답변현황</th>
+			            </tr>
+							<c:forEach var="q" items="${ list }">
+								<tr>
+									<td>${q.qNo}</td>
+									<td><c:if test="${ !empty loginUser }">
+											<c:url var="myQnaDetail" value="myQnaDetail.do">
+												<c:param name="qNo" value="${ q.qNo }" />
+												<c:param name="page" value="${ pi.currentPage }" />
+											</c:url>
+											<a href="${ myQnaDetail }">${ q.qTitle }</a>
+										</c:if> 
+										<c:if test="${ empty loginUser }">
+										${ q.qTitle }
+										</c:if>
+									</td>
+									<td>${q.qWriter}</td>
+									<td>${q.qDate}</td>
+									<td>
+									<c:if test='${ q.aStatus == "N" }'>
+										X
+									</c:if> 
+									<c:if test='${ q.aStatus == "Y" }'>
+										O
+									</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+							<tr align="center" height="20">
+								<td colspan="6">
+					<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
+									[이전] &nbsp;
+							   	   </c:if> 
+							   	   <c:if test="${ pi.currentPage > 1 }">
+										<c:url var="before" value="support_list.do">
+											<c:param name="page" value="${ pi.currentPage - 1 }" />
+										</c:url>
+										<a href="${ before }">[이전]</a>
+									</c:if> 
+					<!-- [페이지] --> <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+										<c:if test="${ p eq pi.currentPage }">
+											<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
+										</c:if>
+										<c:if test="${ p ne pi.currentPage }">
+											<c:url var="pagination" value="support_list.do">
+												<c:param name="page" value="${ p }" />
+											</c:url>
+											<a href="${ pagination }">[${ p }]</a>
+										</c:if>
+									</c:forEach> 
+					<!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
+											[다음]
+								   </c:if> 
+								   <c:if test="${ pi.currentPage < pi.maxPage }">
+										<c:url var="after" value="support_list.do">
+											<c:param name="page" value="${ pi.currentPage + 1 }" />
+										</c:url>
+										<a href="${ after }">[다음]</a>
+									</c:if>
+								</td>
+							</tr>
+							<c:if test="${ empty list }">
+								<h1>문의 내역이 없습니다.</h1>
+							</c:if>
+						</tbody>
+			          </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- statistics END -->
+    <!-- 문의 END -->
+    <!-- review start -->
+    <div class="bloc l-bloc bgc-white" id="review">
+        <div class="container bloc-lg">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="mg-md text-center">
+                        	작성한 리뷰 
+                    </h2>
 
-    <!-- bloc-8 -->
+                    <div class="divider-h">
+                        <span class="divider divider-half"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="myReview">
+                <div class="myRevieww">
+                    <table id="myReviewTable">
+			             <tr>
+			               <th width="10%">번호</th>
+			               <th width="50%">제목</th>
+			               <th width="15%">작성자</th>
+			               <th width="15%">작성일</th>
+			               <th width="10%">조회수</th>
+			            </tr>
+			            <tr>
+			               <td>1</td>
+			               <td>리뷰리뷰</td>
+			               <td>회원1</td>
+			               <td>2019-12-26</td>
+			               <td>1</td>
+			            </tr>
+			          </table>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- review end -->
+
+    <!-- Bloc Group END -->
+
+    
+
+  
+
+    <!-- bloc-8 쿠폰함 -->
     <div class="bloc bg-95cdfeef1 bgc-ferrari-red d-bloc b-parallax" id="contact">
         <div class="container bloc-lg">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-md-offset-3">
                     <form id="form-1" novalidate>
                         <h3 class="mg-md text-center">
-                            Get in Touch
+                            	쿠폰 등록
                         </h3>
 
                         <div class="form-group">
                             <label>
-                                Name
+                                Coupon-number
                             </label>
                             <input id="name" class="form-control" required/>
                         </div>
-                        <div class="form-group">
-                            <label>
-                                Email
-                            </label>
-                            <input id="email" class="form-control" type="email" required/>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Message
-                            </label><textarea id="message" class="form-control" rows="4" cols="50" required></textarea>
-                        </div>
                         <div class="text-center">
                             <button class="bloc-button btn btn-lg btn-wire" type="submit">
-                                Submit
+                                	등록하기
+                            </button>
+                            <button class="bloc-button btn btn-lg btn-wire" type="button">
+                                	보유 쿠폰 보기
                             </button>
                         </div>
                     </form>

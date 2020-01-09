@@ -1,10 +1,15 @@
 package com.kh.rendez.member.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.rendez.member.model.dao.MemberDao;
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.support.common.Pagination;
+import com.kh.rendez.support.model.vo.PageInfo;
+import com.kh.rendez.support.model.vo.Qna;
 
 
 @Service("mService")
@@ -18,24 +23,39 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int InsertMember(Member m) {
+	public int insertMember(Member m) {
 		return mDao.insertMember(m);
 	}
 
-	/*
+	
 	@Override
 	public int updateMember(Member m) {
 		return mDao.updateMember(m);
 	}
 
 	@Override
-	public int deleteMember(Member m) {
-		return mDao.deleteMember(m);
-	}*/
-
-	@Override
 	public int checkIdDup(String id) {
 		return mDao.checkIdDup(id);
 	}
+
+	@Override
+	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer) {
+		int listCount = mDao.getMyQnaListCount(currentPage, writer);
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		return mDao.selectMyQnaList(pi, writer);
+	}
+
+	@Override
+	public int deleteMember(Member m) {
+		return mDao.deleteMember(m);
+	}
+
+	@Override
+	public int passCheck(Member m) {
+		return mDao.passCheck(m);
+	}
+
 	
 }

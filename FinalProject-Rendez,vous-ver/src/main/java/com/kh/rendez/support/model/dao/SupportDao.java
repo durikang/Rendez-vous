@@ -37,7 +37,6 @@ public class SupportDao {
 	public ArrayList<Qna> selecMyQnaList(PageInfo pi, String writer) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		System.out.println(writer);
 		return (ArrayList)sqlSession.selectList("supportMapper.selectMyQnaList", writer, rowBounds);
 	}
 
@@ -66,8 +65,8 @@ public class SupportDao {
 	public ArrayList<Answer> selectAnswerList(int qNo) {
 		return (ArrayList)sqlSession.selectList("supportMapper.selectAnswerList", qNo);
 	}
-	public ArrayList<Qna> selectList(PageInfo pi, String writer) {
-		return null;
+	public int updateAnswerStatus(int qNo) {
+		return sqlSession.update("supportMapper.updateAnswerStatus", qNo);
 	}
 	
 	

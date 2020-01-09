@@ -1,25 +1,34 @@
 package com.kh.rendez.member.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.support.model.vo.Qna;
 
 public interface MemberService {
 	
-	// 1. 회원 로그인
+	// 로그인
 	public Member loginMember(Member m);
 	
-	// 2. 회원가입 서비스를 위한 메소드
-	public int InsertMember(Member m);
+	// 회원가입
+	public int insertMember(Member m);
 	
-	/*
-	// 3. 회원 정보 수정 서비스를 위한 메소드
+	// 회원 정보 수정
 	public int updateMember(Member m);
 	
-	// 4. 회원 탈퇴 서비스를 위한 메소드
-	public int deleteMember(Member m);
-	 */
-	
-	// 5. 회원 가입 시 아이디 중복 체크
+	// 회원 가입 시 아이디 중복 체크
 	public int checkIdDup(String id);
+	
+	// 회원 탈퇴
+	public int deleteMember(Member m);
+	
+	// 내가 쓴 문의내역 리스트
+	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
+	
+	//회원탈퇴 비밀번호 체크
+	public int passCheck(Member m);
+
+
 	
 	
 	

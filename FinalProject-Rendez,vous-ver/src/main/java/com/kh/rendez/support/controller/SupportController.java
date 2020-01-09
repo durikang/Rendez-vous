@@ -116,7 +116,7 @@ public class SupportController {
 	}
 	
 	@RequestMapping("qinsert.do")
-	public String insertQna(HttpServletRequest request, Qna q) {
+	public String insertQna(HttpServletRequest request, Qna q) {		
 		int result = 0;
 		if(!q.getqContent().isEmpty() && !q.getqTitle().isEmpty()) {
 			result = sService.insertQna(q);
@@ -188,13 +188,13 @@ public class SupportController {
 	
 	@RequestMapping("addAnswer.do")
 	@ResponseBody
-	public String addAnswer(Answer a, HttpSession session) {
+	public String addAnswer(Answer a, int refQno, HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		a.setaWriter(loginUser.getUser_name());
 		
 		int result = sService.insertAnswer(a);
-		
-		if(result > 0) {
+		int result1 = sService.updateAnswerStatus(refQno);
+		if(result > 0 && result1 > 0) {
 			return "success";
 		} else {
 			throw new SupportException("댓글 등록 실패!");

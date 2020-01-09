@@ -4,100 +4,108 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="supportMapper">
 
-	<resultMap id="qnaResultSet" type="Qna">
-		<id property="qNo" column="Q_NO"/>
-		<result property="qTitle" column="Q_TITLE"/>
-		<result property="qWriter" column="Q_WRITER"/>
-		<result property="qContent" column="Q_CONTENT"/>
-		<result property="qDate" column="Q_DATE"/>
-		<result property="qStatus" column="Q_STATUS"/>		
-	</resultMap>
-	<resultMap id="answerResultSet" type="Answer">
-		<id property="aNo" column="A_NO"/>
-		<result property="refQno" column="REF_QNO"/>
-		<result property="aWriter" column="A_WRITER"/>
-		<result property="aContent" column="A_CONTENT"/>
-		<result property="aDate" column="A_DATE"/>
-	</resultMap>
-	
-	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM QNA
-		WHERE Q_STATUS='Y'
-	</select>
-	
-	<select id="getSearchListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM QNA
-		WHERE Q_CONTENT LIKE '%'||#{keyword}||'%'
-		AND Q_STATUS = 'Y'
-	</select>
-	
-	<select id="getMyQnaListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM QNA
-		WHERE Q_WRITER = #{writer}
-		AND Q_STATUS = 'Y'
-	</select>
-	
-	<select id="selectList" resultMap="qnaResultSet">
-		SELECT *
-		FROM QNA
-		WHERE Q_STATUS='Y'
-		ORDER BY Q_NO DESC
-	</select>
-	
-	<select id="selectMyQnaList" resultMap="qnaResultSet">
-		SELECT *
-		FROM QNA
-		WHERE Q_WRITER = #{writer}
-		AND Q_STATUS = 'Y'
-	</select>
-	
-	<select id="selectOneQna" resultMap="qnaResultSet">
-		SELECT *
-		FROM QNA
-		WHERE Q_NO = #{qNo}
-		AND Q_STATUS='Y'
-	</select>
-	
-	<select id="selectSearch" resultMap="qnaResultSet">
-		SELECT *
-		FROM QNA
-		WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
-		AND Q_STATUS = 'Y'
-		ORDER BY Q_NO DESC
-	</select>
-	
-	<insert id="insertQna" parameterType="Qna">
-		INSERT INTO QNA
-		VALUES(SEQ_QNO.NEXTVAL, #{qTitle}, #{qWriter}, #{qContent}, SYSDATE, DEFAULT)
-	</insert>
-	
-	<update id="deleteQna" parameterType="Qna">
-		UPDATE QNA
-		SET Q_STATUS='N'
-		WHERE Q_NO = #{qNo}
-	</update>
-	
-	<update id="updateQna" parameterType="Qna" >
-		UPDATE QNA
-		SET Q_TITLE = #{qTitle},
-			Q_WRITER = #{qWriter},
-			Q_CONTENT = #{qContent}
-		WHERE Q_NO = #{qNo}
-	</update>
-	
-	<insert id="insertAnswer" parameterType="Answer">
-		INSERT INTO ANSWER
-		VALUES(SEQ_ANO.NEXTVAL, #{refQno}, #{aWriter}, #{aContent}, SYSDATE)
-	</insert>
-	
-	<select id="selectAnswerList" resultMap="answerResultSet" parameterType="_int">
-		SELECT *
-		FROM ANSWER
-		WHERE REF_QNO = #{refQno}
-		ORDER BY A_NO DESC
-	</select>
-	
+   <resultMap id="qnaResultSet" type="Qna">
+      <id property="qNo" column="Q_NO"/>
+      <result property="qTitle" column="Q_TITLE"/>
+      <result property="qWriter" column="Q_WRITER"/>
+      <result property="qContent" column="Q_CONTENT"/>
+      <result property="qDate" column="Q_DATE"/>
+      <result property="aStatus" column="A_STATUS"/>
+      <result property="qStatus" column="Q_STATUS"/>      
+   </resultMap>
+   <resultMap id="answerResultSet" type="Answer">
+      <id property="aNo" column="A_NO"/>
+      <result property="refQno" column="REF_QNO"/>
+      <result property="aWriter" column="A_WRITER"/>
+      <result property="aContent" column="A_CONTENT"/>
+      <result property="aDate" column="A_DATE"/>
+   </resultMap>
+   
+   <select id="getListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM QNA
+      WHERE Q_STATUS='Y'
+   </select>
+   
+   <select id="getSearchListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM QNA
+      WHERE Q_CONTENT LIKE '%'||#{keyword}||'%'
+      AND Q_STATUS = 'Y'
+   </select>
+   
+   <select id="getMyQnaListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM QNA
+      WHERE Q_WRITER = #{writer}
+      AND Q_STATUS = 'Y'
+   </select>
+   
+   <select id="selectList" resultMap="qnaResultSet">
+      SELECT *
+      FROM QNA
+      WHERE Q_STATUS='Y'
+      ORDER BY Q_NO DESC
+   </select>
+   
+   <select id="selectMyQnaList" resultMap="qnaResultSet">
+      SELECT *
+      FROM QNA
+      WHERE Q_WRITER = #{writer}
+      AND Q_STATUS = 'Y'
+      ORDER BY Q_NO DESC
+   </select>
+   
+   <select id="selectOneQna" resultMap="qnaResultSet">
+      SELECT *
+      FROM QNA
+      WHERE Q_NO = #{qNo}
+      AND Q_STATUS='Y'
+   </select>
+   
+   <select id="selectSearch" resultMap="qnaResultSet">
+      SELECT *
+      FROM QNA
+      WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
+      AND Q_STATUS = 'Y'
+      ORDER BY Q_NO DESC
+   </select>
+   
+   <insert id="insertQna" parameterType="Qna">
+      INSERT INTO QNA
+      VALUES(SEQ_QNO.NEXTVAL, #{qTitle}, #{qWriter}, #{qContent}, SYSDATE, DEFAULT, DEFAULT)
+   </insert>
+   
+   <update id="deleteQna" parameterType="Qna">
+      UPDATE QNA
+      SET Q_STATUS='N'
+      WHERE Q_NO = #{qNo}
+   </update>
+   
+   <update id="updateQna" parameterType="Qna" >
+      UPDATE QNA
+      SET Q_TITLE = #{qTitle},
+         Q_WRITER = #{qWriter},
+         Q_CONTENT = #{qContent}
+      WHERE Q_NO = #{qNo}
+   </update>
+   
+   <insert id="insertAnswer" parameterType="Answer">
+      INSERT INTO ANSWER
+      VALUES(SEQ_ANO.NEXTVAL, #{refQno}, #{aWriter}, #{aContent}, SYSDATE)
+   </insert>
+   
+   <update id="updateAnswerStatus" parameterType="Qna">
+      UPDATE QNA
+      SET A_STATUS = 'Y'
+      WHERE Q_NO = #{qNo}
+   </update>
+   
+   <select id="selectAnswerList" resultMap="answerResultSet" parameterType="_int">
+      SELECT *
+      FROM ANSWER
+      WHERE REF_QNO = #{refQno}
+      ORDER BY A_NO DESC
+   </select>
+   
 </mapper>

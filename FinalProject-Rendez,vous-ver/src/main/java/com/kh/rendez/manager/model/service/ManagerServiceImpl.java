@@ -1,12 +1,15 @@
 package com.kh.rendez.manager.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.rendez.manager.common.Pagination;
 import com.kh.rendez.manager.model.dao.ManagerDao;
+import com.kh.rendez.manager.model.vo.AdminLesson;
+import com.kh.rendez.manager.model.vo.AdminMember;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.MemberJoinUserpropic;
@@ -56,6 +59,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return mnDao.selectTutorList(pi);
 	}
+//	이달 & 오늘 회원 가입자 수 리턴
 	@Override
 	public int countMember(int i) {
 		return mnDao.countTodayMember(i);
@@ -63,6 +67,19 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public int sumPay(int i) {
 		return mnDao.sumPay(i);
+	}
+	@Override
+	public ArrayList<AdminMember> selectMemberList() {
+		return mnDao.selectTopMemberList();
+	}
+	@Override
+	public ArrayList<AdminLesson> selectRealTimeLessonList() {
+		// TODO Auto-generated method stub
+		return mnDao.selectRealTimeLessonList();
+	}
+	@Override
+	public int changeTutorStatus(List<Integer> uNo) {
+		return mnDao.changeTutorStatus(uNo);
 	}
 
 

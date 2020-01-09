@@ -102,22 +102,21 @@ public class PaymentController {
 	
 	@RequestMapping("payComplete.do")
 	public ModelAndView payComplete(ModelAndView mv,HttpServletRequest request,Payment pm, String payMethod,
-			Integer couponNo) {
+			Integer couponNo, Integer Price) {
 		
 		HttpSession session = request.getSession();
 		tClass tClass = (com.kh.rendez.baesung.search.model.vo.tClass) session.getAttribute("tClass");
 		Member m = (Member) session.getAttribute("loginUser");
 		
-		int pCost = tClass.getPrice();
 		String pType = payMethod;
 		int uNo = m.getUser_no();
 		int lInning = Integer.parseInt((String) session.getAttribute("lInning"));
 		int lNo = Integer.parseInt((String) session.getAttribute("lNo"));
 				
-		pm = new Payment(pCost,pType,uNo,lInning,lNo);
+		pm = new Payment(Price,pType,uNo,lInning,lNo);
 		
 		//System.out.println(pm);
-		System.out.println("쿠폰번호 넘어오는지 : "  + couponNo);
+		//System.out.println("쿠폰번호 넘어오는지 : "  + couponNo);
 		if(couponNo != 0) {
 			int result3 = jpService.updateCoupon(couponNo);
 		}
@@ -126,7 +125,7 @@ public class PaymentController {
 		int result1 = jpService.insertPayment(pm);
 		int result2 = jpService.updateLession(lNo,lInning);
 		
-		System.out.println("result1 : " + result1 + ", result2" + result2);
+		//System.out.println("result1 : " + result1 + ", result2" + result2);
 		
 		mv.setViewName("baesung/payment/Complement");
 		

@@ -546,8 +546,8 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	        msg += '결제 금액 : ' + rsp.paid_amount;
         	        msg += '카드 승인번호 : ' + rsp.apply_num;
         	        
-        	        alert(val);
-        	        location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val;
+        	        //alert(val);
+        	        location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val+'&Price='+Price;
         	    } else {
         	        var msg = '결제에 실패하였습니다.';
         	        msg += '에러내용 : ' + rsp.error_msg;

@@ -1,16 +1,19 @@
 package com.kh.rendez.tutor.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.member.model.vo.Member;
@@ -27,10 +30,18 @@ public class TutorController {
 	
 	
 	@RequestMapping("tutorInsertPage.do")
-	public String tuturInsertPage() {
+	public ModelAndView tuturInsertPage(ModelAndView mv, HttpServletRequest request) {
 		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
-		return "tutor/tutorInsert";
+		if(loginUser == null || loginUser.getUser_type().equals("T")) {
+			mv.setViewName("home");
+			return mv;
+		}
+		
+		mv.setViewName("tutor/tutorInsert");
+		
+		return mv;
 	}
 	
 	@RequestMapping("tutorInsert.do")
@@ -64,7 +75,6 @@ public class TutorController {
 		inTutor.settSocial(tInstagram+","+tBlog+","+tYoutube);
 		
 		int result1 = tService.insertTutor(inTutor);
-		
 		if(result1>0) {
 			for(int i =0;i<certImg.size();i++) {
 				
@@ -80,15 +90,38 @@ public class TutorController {
 	
 				int result2 = tService.insertCertification(inCer);	
 				}
-				
-				
 			}	
+			
+			int result3 = tService.updateMemberType(uno);
+	
+		}
+		
+		return "tutor/tutorInsert";
+	}
+	
+	
+	@RequestMapping("tutorCert.do")
+	public ModelAndView tutorCert(HttpServletRequest request,ModelAndView mv,
+			int uNo
+			) {
+		
+		System.out.println(uNo);
+		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		if(loginUser ==null || !loginUser.getUser_type().equals("A")) {
+			mv.setViewName("Home");
+			return mv;
 		}
 		
 		
-
 		
-		return "tutor/tutorInsert";
+		
+		ArrayList<Certification> tCertArr = tService.selectTCert(uNo);
+
+		mv.addObject("tCertArr",tCertArr);
+		mv.setViewName("tutor/tutorCert");
+		return mv;
 	}
 	
 	

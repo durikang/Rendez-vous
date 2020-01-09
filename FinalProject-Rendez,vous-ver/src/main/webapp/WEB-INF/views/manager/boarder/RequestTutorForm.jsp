@@ -41,6 +41,9 @@
    width: 100px;
    height: 100%;
 }
+.td-hidden{
+	display:none;
+}
 
 
 </style>
@@ -56,6 +59,26 @@ $(function(){
         }
     });
 });
+
+
+$(function() {
+
+	$(".listArea td").mouseenter(function() {
+		$(this).parent().css({
+			"background" : "skyblue",
+			"cursor" : "pointer"
+		});
+	}).mouseout(function() {
+		$(this).parent().css("background", "white");
+	}).click(function() {
+		var uNo = $(this).parent().children().eq(0).html();
+		
+		location.href="tutorCert.do?uNo="+uNo;
+		
+	});
+
+});
+
 
 
 </script>
@@ -88,6 +111,7 @@ $(function(){
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 							<tr>
+								<td class="td-hidden">${m.uNo}</td>
 								<th scope="row"><input type="checkbox" name="uNo" class="tutor" value="${ m.uNo }"> &nbsp;${m.uNo}</th>
 								<td>${ m.uId }</td>
 								<td>${ m.tuNick }</td>

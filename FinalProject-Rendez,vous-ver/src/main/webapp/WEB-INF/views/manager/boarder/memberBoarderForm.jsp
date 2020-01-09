@@ -82,7 +82,9 @@
 										튜터
 									</c:if>
 								</td>
-								<td class="td-hidden">${m.uChangeName }</td>
+								<td class="td-hidden">${ m.uChangeName }</td>
+								<td class="td-hidden">${ m.address }</td>
+								<td class="td-hidden">${ m.uType }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -106,7 +108,8 @@
 										회원명</option>
 									<option value="mType"
 										<c:if test="${ search.searchCondition == 'mType' }">selected</c:if>>
-										타입</option>
+										타입
+									</option>
 								</select>
 							</div>
 							<input type="search" placeholder="회원을 검색하세요" name="searchValue"
@@ -315,8 +318,16 @@
 				$(this).parent().css("background", "white");
 			}).click(function() {
 				$("#id").html($(this).parent().children().eq(1).html());
+				$("#area").html($(this).parent().children().eq(7).html());
 				$("#age").html($(this).parent().children().eq(4).html());
-				$("#type").html($(this).parent().children().eq(5).html());
+				
+				$("#type").html("");
+				if($(this).parent().children().eq(8).html() =="T"){
+					$("#type").html("튜터");
+				}else if($(this).parent().children().eq(8).html() =="N"){
+					$("#type").html("일반회원");	
+				}
+				
 				//alert($(this).parent().children().eq(6).html());
 				$("#pic").attr("src","resources/user/img/"+$(this).parent().children().eq(6).html());
 				

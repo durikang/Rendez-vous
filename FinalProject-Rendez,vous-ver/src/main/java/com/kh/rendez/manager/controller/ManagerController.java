@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,15 @@ public class ManagerController {
 	JavaMailSender mailSender;
 	
 	@RequestMapping("managerHome.do")
-	public String ManagerHome() {
+	public ModelAndView ManagerHome(HttpServletRequest request,ModelAndView mv) {
+
+		mv.setViewName("manager/managerHome");
+		if(request.getSession().getAttribute("loginUser") ==null) {
+			mv.addObject("msg","회원 전용입니다. 로그인 해주세요");
+			mv.setViewName("redirect:home.do");
+		}
+		return mv;
 		
-		return "manager/managerHome";
 	}
 	@RequestMapping("mn.do")
 	public ModelAndView memberList(ModelAndView mv,
@@ -68,9 +75,9 @@ public class ManagerController {
 		return mv;
 	}
 	@RequestMapping("mnsearch.do")
-	public String memberSearch(Search search, Model model,
+	public ModelAndView memberSearch(Search search, ModelAndView mv,
 			@RequestParam(value="page",required=false) Integer page) {
-		System.out.println(search.getSearchCondition());
+		//System.out.println(search.getSearchCondition());
 		int currentPage = page != null ? page : 1;
 		
 		if(search.getSearchValue().equals("일반회원")) {
@@ -79,23 +86,23 @@ public class ManagerController {
 			search.setSearchValue("t");
 		}
 		
-		System.out.println(search.getSearchValue());
+		//System.out.println(search.getSearchValue());
 		
 		ArrayList<MemberJoinUserpropic> searchList = mnService.searchMemberList(search,currentPage);
 		
-		System.out.println("searchList : "+searchList);
+		/*System.out.println("searchList : "+searchList);
 		System.out.println("pi : "+Pagination.getPageInfo());
-		System.out.println("search : "+search);
+		System.out.println("search : "+search);*/
 		
 		if(searchList !=null) {
-			model.addAttribute("list", searchList).
-			addAttribute("pi", Pagination.getPageInfo()).
-			addAttribute("search", search);
+			mv.addObject("list", searchList).
+			addObject("pi", Pagination.getPageInfo()).
+			addObject("search", search).setViewName("manager/boarder/memberBoarderForm");
 		}else {
-			model.addAttribute("msg","찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.");
+			mv.addObject("msg","찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.");
 		}
 		
-		return "manager/boarder/memberBoarderForm";
+		return mv;
 	}
 	
 	@RequestMapping("couSend.do")
@@ -171,7 +178,7 @@ public class ManagerController {
 		
 		ArrayList<MemberJoinTutor> list = mnService.selectTutorList(currentPage);	
 		
-		System.out.println(list);
+		/*System.out.println(list);*/
 		
 		if(list != null) {
 			mv.addObject("list", list);
@@ -227,8 +234,8 @@ public class ManagerController {
 	
 	@RequestMapping("changeTutor.do")
 	public ModelAndView changeTutor(ModelAndView mv,@RequestParam("uNo") List<Integer> uNo,@RequestParam("page") Integer page){
-		System.out.println(uNo);
-		System.out.println(page);
+		/*System.out.println(uNo);
+		System.out.println(page);*/
 		String msg = mnService.changeTutorStatus(uNo) !=0 ? "성공적으로 변경 하였습니다.":"실패 하였습니다.";
 		mv.addObject("mv",msg);
 		mv.addObject("page",page);

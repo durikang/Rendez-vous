@@ -114,6 +114,12 @@
 }
 </style>
 <body class="menu_body">
+	<c:if test="${ !empty msg}">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg"/>
+	</c:if>
     <header class="header">
 
     <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>

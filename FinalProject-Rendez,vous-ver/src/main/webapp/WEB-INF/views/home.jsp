@@ -1,744 +1,825 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
-    <script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
+<script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 </head>
 
 <script language="Javascript" type="text/javascript">
+	function setCookie(name, value, expirehours) {
+		var todayDate = new Date();
+		todayDate.setHours(todayDate.getHours() + expirehours);
+		document.cookie = name + "=" + escape(value) + "; path=/; expires="
+				+ todayDate.toGMTString() + ";"
+	}
 
-function setCookie( name, value, expirehours ) { 
- var todayDate = new Date(); 
- todayDate.setHours( todayDate.getHours() + expirehours ); 
- document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";" 
-} 
-
-function closeWin() { 
- if(document.getElementById("pop_today").checked){
-  setCookie( "ncookie", "done" , 24 ); 
- }
- document.getElementById('layer_pop').style.display = "none";
-}
-
+	function closeWin() {
+		if (document.getElementById("pop_today").checked) {
+			setCookie("ncookie", "done", 24);
+		}
+		document.getElementById('layer_pop').style.display = "none";
+	}
 </script>
 
 <style>
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 li, a, button {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: black;
-    text-decoration: none;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	color: black;
+	text-decoration: none;
 }
 
 .search-box {
-    margin: 0;
-    padding: 0;
-    background: rgb(194, 153, 92);
-    height: 60px;
-    border-radius: 40px;
-    padding: 10px;
+	margin: 0;
+	padding: 0;
+	background: rgb(194, 153, 92);
+	height: 60px;
+	border-radius: 40px;
+	padding: 10px;
 }
 
-.search-box:hover > .search-text {
-    width:300px;
-    padding: 0 6px;
-    font-weight: bold;
+.search-box:hover>.search-text {
+	width: 300px;
+	padding: 0 6px;
+	font-weight: bold;
 }
 
-.search-box:hover > .search-btn {
-    background-color: white;
+.search-box:hover>.search-btn {
+	background-color: white;
 }
 
 .search-btn {
-    color: rgb(194, 153, 92);
-    float: right;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.4s;
+	color: rgb(194, 153, 92);
+	float: right;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.4s;
 }
 
 .search-text {
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    padding: 0;
-    color: rgb(80,80,80);
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
-
+	border: none;
+	background: none;
+	outline: none;
+	float: left;
+	padding: 0;
+	color: rgb(80, 80, 80);
+	font-size: 16px;
+	transition: 0.4s;
+	line-height: 40px;
+	width: 0px;
 }
 
 header {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 10%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0 10%;
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    margin-right: auto;
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+	margin-right: auto;
 }
 
 .nav_links {
-    list-style: none;
+	list-style: none;
 }
 
 .nav_links li {
-    display: inline-block;
-    padding: 0px 20px;
+	display: inline-block;
+	padding: 0px 20px;
 }
 
 .nav_links li a {
-    transition: all 0.3s ease 0s;
-    color: black;
-    font-weight: bold;
+	transition: all 0.3s ease 0s;
+	color: black;
+	font-weight: bold;
 }
 
 .nav_links li a:hover {
-    color: #FFDEAD;
+	color: #FFDEAD;
 }
 
 button {
-    margin-left: 20px;
-    padding: 9px 25px;
-    background-color: rgb(194, 153, 92);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-    color: black;
-    font-weight: bold;
+	margin-left: 20px;
+	padding: 9px 25px;
+	background-color: rgb(194, 153, 92);
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+	color: black;
+	font-weight: bold;
 }
 
 button:hover {
-    background-color: rgb(245, 214, 167);
+	background-color: rgb(245, 214, 167);
 }
 
 /****************************************/
 
-/* reset */        
-#wrap {width: 1920px; margin: 0px auto;}
+/* reset */
+#wrap {
+	width: 1920px;
+	margin: 0px auto;
+}
 
 /* banner */
-#banner {position: relative; width: 1920px; margin: 0 auto; text-align: center;  height: 450px; }
-#banner img {width: 100%; display: block;}
-        
+#banner {
+	position: relative;
+	width: 1920px;
+	margin: 0 auto;
+	text-align: center;
+	height: 450px;
+}
+
+#banner img {
+	width: 100%;
+	display: block;
+}
+
 /* slider */
-.slideList {position: relative; width: 5760px; height: 450px;}
-.slideList .slideImg {float: left; width: 1920px; height: 450px;}
+.slideList {
+	position: relative;
+	width: 5760px;
+	height: 450px;
+}
+
+.slideList .slideImg {
+	float: left;
+	width: 1920px;
+	height: 450px;
+}
 
 /****************************************************/
-
-
-#wrap2{
-    width: 900px;
-    margin: 100px auto 0 auto;
+#wrap2 {
+	width: 900px;
+	margin: 100px auto 0 auto;
 }
 
-#tabs{
-  overflow: hidden;
-  width: 700px; /* 01.탭부분 전체의 넓이 입니다. */
-  margin: 0 auto;
-  margin-bottom:40px;
-  padding-left:38px; /* 02.탭 메뉴를 중앙정렬할때 왼쪽 패딩값으로 조절해 맞춥니다*/
-  list-style: none;
+#tabs {
+	overflow: hidden;
+	width: 700px; /* 01.탭부분 전체의 넓이 입니다. */
+	margin: 0 auto;
+	margin-bottom: 40px;
+	padding-left: 38px; /* 02.탭 메뉴를 중앙정렬할때 왼쪽 패딩값으로 조절해 맞춥니다*/
+	list-style: none;
 }
 
-#tabs li{
-  float: left;
-  margin: 0 10px 0 0; /* 03.탭메뉴 사이사이의 간격을 조정합니다 */
+#tabs li {
+	float: left;
+	margin: 0 10px 0 0; /* 03.탭메뉴 사이사이의 간격을 조정합니다 */
 }
-
 
 /*비활성화 탭(기본 탭모양) 설정*/
-#tabs a{ 
-  position: relative;
-  width:180px; 
-  height:50px; /* 04.탭메뉴 하나의 넓이와 높이 */
-  background: #CCC;
-  float: left;
-  text-decoration: none;
-  text-align:center;
-  font-size:14pt; /* 05.탭메뉴 폰트사이즈 */
-  line-height:50px; /* 06.텝메뉴 폰트를 세로중앙정렬 맞추기위해 -> 04.탭메뉴 높이와 같은 값을 입력해주세요 */
-  color: #444;
+#tabs a {
+	position: relative;
+	width: 180px;
+	height: 50px; /* 04.탭메뉴 하나의 넓이와 높이 */
+	background: #CCC;
+	float: left;
+	text-decoration: none;
+	text-align: center;
+	font-size: 14pt; /* 05.탭메뉴 폰트사이즈 */
+	line-height: 50px;
+	/* 06.텝메뉴 폰트를 세로중앙정렬 맞추기위해 -> 04.탭메뉴 높이와 같은 값을 입력해주세요 */
+	color: #444;
 }
 
-#tabs a::after{
-  z-index: 1;
-  background: #fff; 
+#tabs a::after {
+	z-index: 1;
+	background: #fff;
 }
 
 /*활성화탭(탭 클릭했을때 모양) 설정*/
-#tabs #current a,
-#tabs #current a::after{ 
-  background: darkorange; /* 07.탭메뉴 색상 설정 */
-  z-index: 3;
+#tabs #current a, #tabs #current a::after {
+	background: darkorange; /* 07.탭메뉴 색상 설정 */
+	/* z-index: 3; */
 }
 
 /* ------------------------------------------------- */
 
 /*컨텐츠 부분*/
-#content
-{
+#content {
 	/*width:750px;
 	height: 350px; /* 08.컨텐츠 넓이와 높이 */
-	/*padding:20px; /* 09.컨텐츠 안쪽 여백 설정 */ 
+	/*padding:20px; /* 09.컨텐츠 안쪽 여백 설정 */
 	position: relative;
-	z-index: 2;	
-    border-radius: 5px 5px 5px 5px;
+	/* z-index: 2; */
+	border-radius: 5px 5px 5px 5px;
 }
 
-#content h2, #content h3, #content p
-{
-    margin: 0 0 15px 0;
+#content h2, #content h3, #content p {
+	margin: 0 0 15px 0;
 }
 
 /* ------------------------------------------------- */
-
-#about
-{
-    color: #999;
+#about {
+	color: #999;
 }
 
-#about a
-{
-    color: #eee;
+#about a {
+	color: #eee;
 }
 
 #c1 {
-    width: 400px;
-    height: 460px;
-    margin: 10px;
-    float: left;
+	width: 400px;
+	height: 460px;
+	margin: 10px;
+	float: left;
 }
 
 #c2 {
-    width: 400px;
-    height: 220px;
-    margin: 10px;
+	width: 400px;
+	height: 220px;
+	margin: 10px;
 }
 
 #ic1 {
-    color: gray;
+	color: gray;
 }
 
 /*-----------------------------------------------*/
-
-.slidershow{
-  width: 500px;
-  height: 400px;
-  overflow: hidden;
-}
-.middle{
-  position: absolute;
-  top: 190%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-.navigation{
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-}
-.bar{
-  width: 50px;
-  height: 10px;
-  border: 2px solid #ccff00;
-  margin: 6px;
-  cursor: pointer;
-  transition: 0.4s;
-}
-.bar:hover{
-  background: #ccff00;
+.slidershow {
+	width: 500px;
+	height: 400px;
+	overflow: hidden;
 }
 
-input[name="r"]{
-    position: absolute;
-    visibility: hidden;
+.middle {
+	position: absolute;
+	top: 190%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
-.slides{
-  width: 500%;
-  height: 100%;
-  display: flex;
+.navigation {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
 }
 
-.slide{
-  width: 20%;
-  transition: 0.6s;
-}
-.slide img{
-  width: 100%;
-  height: 100%;
-}
-
-#r1:checked ~ .s1{
-  margin-left: 0;
-}
-#r2:checked ~ .s1{
-  margin-left: -20%;
-}
-#r3:checked ~ .s1{
-  margin-left: -40%;
-}
-#r4:checked ~ .s1{
-  margin-left: -60%;
-}
-#r5:checked ~ .s1{
-  margin-left: -80%;
+.bar {
+	width: 50px;
+	height: 10px;
+	border: 2px solid #ccff00;
+	margin: 6px;
+	cursor: pointer;
+	transition: 0.4s;
 }
 
-body{ 
-         text-align: center; 
-         display: block; 
-         margin: 0 auto; 
-         font-size: 16px; 
-         color: #999; 
-     } 
-     h1{ 
-         font-family: 'Oswald', sans-serif; 
-         font-size: 30px; 
-         color: #216182; 
-     } 
-     label { 
-         display: block; 
-         margin-top: 20px; 
-         letter-spacing: 2px; 
-     } 
-     form { 
-         margin: 0 auto; 
-         width: 459px; 
-     } 
-     input, textarea { 
-         width: 439px; 
-         height: 27px; 
-         background-color: #efefef; 
-         border-radius: 6px; 
-         border: 1px solid #dedede; 
-         padding: 10px; 
-         margin-top: 3px; 
-         font-size: 0.9em; 
-         color: #3a3a3a; 
-     } 
-         input:focus, textarea:focus{ 
-             border: 1px solid #97d6eb; 
-         } 
-     
-     textarea{ 
-         height: 60px; 
-         background-color: #efefef; 
-     } 
-     #submit{ 
-         width: 127px; 
-         height: 48px; 
-         text-align: center; 
-         border: none; 
-         margin-top: 20px; 
-         cursor: pointer; 
-     } 
-     #submit:hover{ 
-         color: #fff; 
-         background-color: #216282; 
-         opacity: 0.9; 
-     } 
-     #cancel { 
-         width: 127px; height: 48px; 
-         text-align: center; 
-         border: none; 
-         margin-top: 20px; 
-         cursor: pointer; 
-     } 
-     #cancel:hover{ 
-         color: #fff; 
-         background-color: #216282; 
-         opacity: 0.9; 
-     }
+.bar:hover {
+	background: #ccff00;
+}
 
-    .modal { 
-         position: fixed; 
-         left: 0; 
-         top: 0; 
-         width: 100%; 
-         height: 100%; 
-         background-color: rgba(0, 0, 0, 0.5); 
-         opacity: 0; 
-         visibility: hidden; 
-         transform: scale(1.1); 
-         transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
-     } 
-     .modal-content { 
-         position: absolute; 
-         top: 50%; 
-         left: 50%; 
-         transform: translate(-50%, -50%); 
-         background-color: white; 
-         padding: 1rem 1.5rem; 
-         width: 500px; 
-         height: 350px; 
-         border-radius: 0.5rem; 
-     } 
-     .close-button { 
-         float: right; 
-         width: 1.5rem; 
-         line-height: 1.5rem; 
-         text-align: center; 
-         cursor: pointer; 
-         border-radius: 0.25rem; 
-         background-color: lightgray; 
-     } 
-     .close-button:hover { 
-         background-color: darkgray; 
-     } 
-     .show-modal { 
-         opacity: 1; 
-         visibility: visible; 
-         transform: scale(1.0); 
-         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
-     } 
+input[name="r"] {
+	position: absolute;
+	visibility: hidden;
+}
+
+.slides {
+	width: 500%;
+	height: 100%;
+	display: flex;
+}
+
+.slide {
+	width: 20%;
+	transition: 0.6s;
+}
+
+.slide img {
+	width: 100%;
+	height: 100%;
+}
+
+#r1:checked ~ .s1 {
+	margin-left: 0;
+}
+
+#r2:checked ~ .s1 {
+	margin-left: -20%;
+}
+
+#r3:checked ~ .s1 {
+	margin-left: -40%;
+}
+
+#r4:checked ~ .s1 {
+	margin-left: -60%;
+}
+
+#r5:checked ~ .s1 {
+	margin-left: -80%;
+}
+
+body {
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	font-size: 16px;
+	color: #999;
+}
+
+h1 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
+	color: #216182;
+}
+
+label {
+	display: block;
+	margin-top: 20px;
+	letter-spacing: 2px;
+}
+
+form {
+	margin: 0 auto;
+	width: 459px;
+}
+
+.modal input, textarea {
+	width: 439px;
+	height: 60px;
+	background-color: #efefef;
+	border-radius: 6px;
+	border: 1px solid #dedede;
+	padding: 10px;
+	margin-top: 3px;
+	font-size: 0.9em;
+	color: #3a3a3a;
+}
+
+.modal input:focus, textarea:focus {
+	border: 1px solid #97d6eb;
+}
+
+#submit {
+	width: 127px;
+	height: 48px;
+	text-align: center;
+	border: none;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+#submit:hover {
+	color: #fff;
+	background-color: #216282;
+	opacity: 0.9;
+}
+
+#cancel {
+	width: 127px;
+	height: 48px;
+	text-align: center;
+	border: none;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+#cancel:hover {
+	color: #fff;
+	background-color: #216282;
+	opacity: 0.9;
+}
+
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(1.1);
+	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform
+		0.25s;
+}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 1rem 1.5rem;
+	width: 560px;
+	height: 350px;
+	border-radius: 0.5rem;
+}
+
+.close-button {
+	float: right;
+	width: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 0.25rem;
+	background-color: lightgray;
+}
+
+.close-button:hover {
+	background-color: darkgray;
+}
+
+.show-modal {
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1.0);
+	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
 </style>
 
 <body>
 
-<c:import url="common/menubar.jsp"/>
+	<c:import url="common/menubar.jsp" />
 
-    <div id="wrap">
-        <section id="banner">
-            <div class="slideList">
-                <div class="slideImg"><img src="resources/homeImg/slide1.PNG" alt="이미지 설명"></div>
-                <div class="slideImg"><img src="resources/homeImg/slide2.PNG" alt="이미지 설명"></div>
-                <div class="slideImg"><img src="resources/homeImg/slide3.PNG" alt="이미지 설명"></div>
-            </div>
-        </section>
-        <!-- //banner -->
-    </div>
+	<div id="wrap">
+		<section id="banner">
+			<div class="slideList">
+				<div class="slideImg">
+					<img src="resources/homeImg/slide1.PNG" alt="이미지 설명">
+				</div>
+				<div class="slideImg">
+					<img src="resources/homeImg/slide2.PNG" alt="이미지 설명">
+				</div>
+				<div class="slideImg">
+					<img src="resources/homeImg/slide3.PNG" alt="이미지 설명">
+				</div>
+			</div>
+		</section>
+		<!-- //banner -->
+	</div>
 
-    <!------------------------------------------------->
-    
-    <div id="wrap2">
-    <ul id="tabs">
-        <li><a href="#" title="tab1">추천 클래스</a></li>
-        <li><a href="#" title="tab2">뷰티 클래스</a></li>
-        <li><a href="#" title="tab3">라이프 스타일</a></li>   
-    </ul>
-    <br><br>
+	<!------------------------------------------------->
 
-    <div id="content">
+	<div id="wrap2">
+		<ul id="tabs">
+			<li><a href="#" title="tab1">추천 클래스</a></li>
+			<li><a href="#" title="tab2">뷰티 클래스</a></li>
+			<li><a href="#" title="tab3">라이프 스타일</a></li>
+		</ul>
+		<br>
+		<br>
 
-        <div id="tab1">
-            <h2>추천 수업</h2>
-            <div id="class" style="border:1px solid #ccff00;">
-                <div id="c1"> 
-                <img id="c1" src="resources/homeImg/slide1.PNG">
-                <p>&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                    서울    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                    &nbsp;15000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                </div>
-                <div>
-                <img id="c2" src="resources/homeImg/slide1.PNG">
-                <p>&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                    경기    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                    &nbsp;25000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                </div>
-                <div>
-                <img id="c2" src="resources/homeImg/slide1.PNG">
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   &nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                   경기    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                   &nbsp;35000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">더보기</a> <i class="fas fa-angle-double-right"></i>
-            </div>
-        </div>
-        
-        <div id="tab2">
-            <h2>추천 수업</h2>
-            <div id="class" style="border:1px solid #ccff00;">
-                    <div id="c1"> 
-                    <img id="c1" src="resources/homeImg/slide1.PNG">
-                    <p>&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                        서울    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                        &nbsp;15000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                    </div>
-                    <div>
-                    <img id="c2" src="resources/homeImg/slide1.PNG">
-                    <p>&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                        경기    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                        &nbsp;25000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                    </div>
-                    <div>
-                    <img id="c2" src="resources/homeImg/slide1.PNG">
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                       경기    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                       &nbsp;35000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                    </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="#">더보기</a> <i class="fas fa-angle-double-right"></i>
-                </div>
-        </div>
-        
-        <div id="tab3">
-            <h2>추천 수업</h2>
-            <div id="class" style="border:1px solid #ccff00;">
-                    <div id="c1"> 
-                    <img id="c1" src="resources/homeImg/slide1.PNG">
-                    <p>&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                        서울    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                        &nbsp;15000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                    </div>
-                    <div>
-                    <img id="c2" src="resources/homeImg/slide1.PNG">
-                    <p>&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                        경기    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                        &nbsp;25000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                    </div>
-                    <div>
-                    <img id="c2" src="resources/homeImg/slide1.PNG">
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       &nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> 
-                       경기    &nbsp;<i id="ic1" class="fas fa-ellipsis-v"></i>
-                       &nbsp;35000 <i id="ic1" class="fas fa-won-sign"></i></p>
-                    </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="#">더보기</a> <i class="fas fa-angle-double-right"></i>
-                </div>
-        </div>
-    </div>
-    </div>  
-    
-    <div class="slidershow middle">
+		<div id="content">
 
-            <div class="slides">
-              <input type="radio" name="r" id="r1" checked>
-              <input type="radio" name="r" id="r2">
-              <input type="radio" name="r" id="r3">
-              <input type="radio" name="r" id="r4">
-              <input type="radio" name="r" id="r5">
-              
-              <div class="slide s1">
-                <img src="resources/homeImg/slide1.PNG" alt="">
-              </div>
-              <div class="slide">
-                <img src="resources/homeImg/slide1.PNG" alt="">
-              </div>
-              <div class="slide">
-                <img src="resources/homeImg/slide1.PNG" alt="">
-              </div>
-              <div class="slide">
-                <img src="resources/homeImg/slide1.PNG" alt="">
-              </div>
-              <div class="slide">
-                <img src="resources/homeImg/slide1.PNG" alt="">
-              </div>
-            </div>
-      
-            <div class="navigation">
-              <label for="r1" class="bar"></label>
-              <label for="r2" class="bar"></label>
-              <label for="r3" class="bar"></label>
-              <label for="r4" class="bar"></label>
-              <label for="r5" class="bar"></label>
-            </div>
-          </div>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-        var slideCount = $(".slideImg").length;
-        var currentIndex = 0;
-        var slidePosition;
-        setInterval(function(){
-            if(currentIndex < slideCount - 1){
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            slidePosition = currentIndex * (-1920)+"px";
-            $(".slideList").animate({ left: slidePosition},400);
-        },3000);
-    </script>
+			<div id="tab1">
+				<h2>추천 수업</h2>
+				<div id="class">
+					<div id="c1">
+						<img id="c1" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 서울 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;15000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					<div>
+						<img id="c2" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;25000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					<div>
+						<img id="c2" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;35000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#">더보기</a> 
+					<i class="fas fa-angle-double-right"></i>
+				</div>
+			</div>
 
-    <!----------------------------------->
-    <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
-    
-<script>
-$(document).ready(function() {
-	$("#content #tab1").hide(); // Initially hide all content
-    $("#content #tab2").hide();
-    $("#content #tab3").hide();
-	$("#tabs li:first").attr("id","current"); // Activate first tab
-	$("#content div:first").fadeIn(); // Show first tab content
-    
-    $('#tabs a').click(function(e) {
-        e.preventDefault();        
-        $("#content #tab1").hide(); //Hide all content
-        $("#content #tab2").hide();
-        $("#content #tab3").hide();
-        $("#tabs li").attr("id",""); //Reset id's
-        $(this).parent().attr("id","current"); // Activate this
-        $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
-    });
-})();
-</script>
+			<div id="tab2">
+				<h2>추천 수업</h2>
+				<div id="class">
+					<div id="c1">
+						<img id="c1" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 서울 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;15000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					<div>
+						<img id="c2" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;25000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					<div>
+						<img id="c2" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;35000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#">더보기</a> 
+					<i class="fas fa-angle-double-right"></i>
+				</div>
+			</div>
 
-<!--팝업-->
-    <div class="layer_popup" style="position:absolute; width:500px; left:50%; margin-left:-920px; top:120px; z-index:1; border:1px solid #333333;" id="layer_pop">
-        <table width="500" border="0" cellpadding="0" cellspacing="0">
-         <tr>
-          <td><img src="resources/homeImg/pop.png" width="500" height="600" border="0" usemap="#m_pop" /></td>
-         </tr>
-         <tr>
-          <td align="center" height="30" bgcolor="#333333">
-            <table width="95%" border="0" cellpadding="0" cellspacing="0">
-               <tr>
-                <td align="left" class="pop"><input type="checkbox" name="pop_today" id="pop_today" /><font color="#FFFFFF">오늘 하루 이 창 열지 않음</font></td>
-                <td align="right" class="pop"><a href="javascript:closeWin();"><font color="white">닫기</font></a></td>
-               </tr>
-            </table>
-          </td>
-         </tr>
-        </table>
-    </div>
-    
-<script language="Javascript" type="text/javascript">
-     
-     cookiedata = document.cookie; 
+			<div id="tab3">
+				<h2>추천 수업</h2>
+				<div id="class">
+					<div id="c1">
+						<img id="c1" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 서울 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;15000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					<div>
+						<img id="c2" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;25000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					<div>
+						<img id="c2" src="resources/homeImg/slide1.PNG">
+						<p>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;
+							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i id="ic1" class="fas fa-ellipsis-v"></i> 
+							&nbsp;35000 
+							<i id="ic1" class="fas fa-won-sign"></i>
+						</p>
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#">더보기</a> 
+					<i class="fas fa-angle-double-right"></i>
+				</div>
+			</div>
+			</div>
+		</div>
 
-     // alert(cookiedata.indexOf("ncookie=done"));
-     if (cookiedata.indexOf("ncookie=done") < 0){ 
-      // alert("false");
-      document.getElementById('layer_pop').style.display = "inline";
-     } 
-     else {
-      // alert("true");
-      document.getElementById('layer_pop').style.display = "none";
-     }
-     
-</script>
+	<div class="slidershow middle">
 
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
+		<div class="slides">
+			<input type="radio" name="r" id="r1" checked> <input
+				type="radio" name="r" id="r2"> <input type="radio" name="r"
+				id="r3"> <input type="radio" name="r" id="r4"> <input
+				type="radio" name="r" id="r5">
 
-<!-- 버튼 --> 
-        <button class="trigger">이메일 보내기</button> 
-        
-        <!-- 팝업 될 레이어 --> 
-        <div class="modal"> 
-            <div class="modal-content"> 
-                <span class="close-button">&times;</span> 
-                <h1 class="title">메일 보내기</h1> 
-                <form action="auth.do" method="POST"> 
-                  <label for="email">Email</label> 
-                  <input type="email" name="e_mail" placeholder="Your email" required="required"> 
-                  <label></label> 
-                  <input type="button" id="cancel" value="취소"> 
-                  <input type="submit" id="submit" value="보내기"> 
-                </form> 
-            </div> 
-        </div>
-   
-       <script type="text/javascript"> 
-            var modal = document.querySelector(".modal"); 
-            var trigger = document.querySelector(".trigger"); 
-            var closeButton = document.querySelector(".close-button"); 
-            var cancelButton = document.querySelector("#cancel");
-   
-           //console.log(modal);
-   
-           function toggleModal() { 
-                modal.classList.toggle("show-modal"); 
-            }
-   
-           function windowOnClick(event) { 
-                if (event.target === modal) { 
-                    toggleModal(); 
-                } 
-            }
-   
-           trigger.addEventListener("click", toggleModal); 
-            closeButton.addEventListener("click", toggleModal); 
-            cancel.addEventListener("click", toggleModal); 
-            window.addEventListener("click", windowOnClick); 
-        </script>
+			<div class="slide s1">
+				<img src="resources/homeImg/slide1.PNG" alt="">
+			</div>
+			<div class="slide">
+				<img src="resources/homeImg/slide1.PNG" alt="">
+			</div>
+			<div class="slide">
+				<img src="resources/homeImg/slide1.PNG" alt="">
+			</div>
+			<div class="slide">
+				<img src="resources/homeImg/slide1.PNG" alt="">
+			</div>
+			<div class="slide">
+				<img src="resources/homeImg/slide1.PNG" alt="">
+			</div>
+		</div>
 
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br><br><br><br>
+		<div class="navigation">
+			<label for="r1" class="bar"></label> <label for="r2" class="bar"></label>
+			<label for="r3" class="bar"></label> <label for="r4" class="bar"></label>
+			<label for="r5" class="bar"></label>
+		</div>
+	</div>
 
-<c:import url="common/footbar.jsp"/>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+		var slideCount = $(".slideImg").length;
+		var currentIndex = 0;
+		var slidePosition;
+		setInterval(function() {
+			if (currentIndex < slideCount - 1) {
+				currentIndex++;
+			} else {
+				currentIndex = 0;
+			}
+			slidePosition = currentIndex * (-1920) + "px";
+			$(".slideList").animate({
+				left : slidePosition
+			}, 400);
+		}, 3000);
+	</script>
+
+	<!----------------------------------->
+	<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$("#content #tab1").hide(); // Initially hide all content
+			$("#content #tab2").hide();
+			$("#content #tab3").hide();
+			$("#tabs li:first").attr("id", "current"); // Activate first tab
+			$("#content div:first").fadeIn(); // Show first tab content
+
+			$('#tabs a').click(function(e) {
+				e.preventDefault();
+				$("#content #tab1").hide(); //Hide all content
+				$("#content #tab2").hide();
+				$("#content #tab3").hide();
+				$("#tabs li").attr("id", ""); //Reset id's
+				$(this).parent().attr("id", "current"); // Activate this
+				$('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+			});
+		})();
+	</script>
+
+	<!--팝업-->
+	<div class="layer_popup" style="position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; z-index: 1; border: 1px solid #333333;"
+		id="layer_pop">
+		<table width="500" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td><img src="resources/homeImg/pop.png" width="500"
+					height="600" border="0" usemap="#m_pop" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" height="30" bgcolor="#333333">
+					<table width="95%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td align="left" class="pop"><input type="checkbox" name="pop_today" id="pop_today"/>
+							<font color="#FFFFFF">오늘 하루 이 창 열지 않음</font>
+							</td>
+							<td align="right" class="pop"><a href="javascript:closeWin();">
+							<font color="white">닫기</font></a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<script language="Javascript" type="text/javascript">
+		cookiedata = document.cookie;
+
+		// alert(cookiedata.indexOf("ncookie=done"));
+		if (cookiedata.indexOf("ncookie=done") < 0) {
+			// alert("false");
+			document.getElementById('layer_pop').style.display = "inline";
+		} else {
+			// alert("true");
+			document.getElementById('layer_pop').style.display = "none";
+		}
+	</script>
+
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+
+	<!-- 버튼 -->
+	<button class="trigger">이메일 보내기</button>
+
+	<!-- 팝업 될 레이어 -->
+	<div class="modal">
+		<div class="modal-content">
+			<span class="close-button">&times;</span>
+			<h1 class="title">메일 보내기</h1>
+			<form action="auth.do" method="POST">
+				<label for="email">Email</label> 
+				<input type="email" name="e_mail" placeholder="Your email" required="required"> 
+				<label></label>
+				<input type="submit" id="submit" value="보내기">
+				<input type="button" id="cancel" value="취소"> 
+			</form>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var modal = document.querySelector(".modal");
+		var trigger = document.querySelector(".trigger");
+		var closeButton = document.querySelector(".close-button");
+		var cancelButton = document.querySelector("#cancel");
+
+		//console.log(modal);
+
+		function toggleModal() {
+			modal.classList.toggle("show-modal");
+		}
+
+		function windowOnClick(event) {
+			if (event.target === modal) {
+				toggleModal();
+			}
+		}
+
+		trigger.addEventListener("click", toggleModal);
+		closeButton.addEventListener("click", toggleModal);
+		cancel.addEventListener("click", toggleModal);
+		window.addEventListener("click", windowOnClick);
+	</script>
+
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+
+	<c:import url="common/footbar.jsp" />
 
 </body>
 </html>

@@ -165,6 +165,7 @@
 			alt="logo">
 			
 		<ul class="nav_links">
+			<li><a href="home.do">랑데뷰 홈으로</a></li>
 			<li><a href="#">홈페이지 관리</a></li>
 			<li><a href="mn.do">회원 / 튜터 관리</a></li>
 			<li><a href="mnRequest.do">튜터 신청 관리</a></li>

@@ -1,7 +1,10 @@
 package com.kh.rendez.manager.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.kh.rendez.manager.model.vo.AdminLesson;
+import com.kh.rendez.manager.model.vo.AdminMember;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.MemberJoinUserpropic;
@@ -20,5 +23,12 @@ public interface ManagerService {
 	public int countMember(int i);
 
 	public int sumPay(int i);
+
+	public ArrayList<AdminMember> selectMemberList();
+
+	public ArrayList<AdminLesson> selectRealTimeLessonList();
+
+	public int changeTutorStatus(List<Integer> uNo);
+
 	
 }

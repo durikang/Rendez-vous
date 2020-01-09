@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
@@ -271,6 +273,31 @@ public class LessonController {
 		return mv;
 	}
 	
+	
+	// 즐겨찾기 추가/삭제 ajax
+	@RequestMapping("fav.do")
+	@ResponseBody
+	public String fav(String flag,int uno, int lno) {
+		
+		if(flag.equals("insert")){
+			Wish userWish = new Wish();
+			userWish.setL_no(lno);
+			userWish.setUser_no(uno);
+			
+			int result = lService.insertUserFav(userWish);
+			
+			
+			
+		}else if(flag.equals("delete")){
+			Wish userWish = new Wish();
+			userWish.setL_no(lno);
+			userWish.setUser_no(uno);
+			int result = lService.deleteUserFav(userWish);	
+		}
+		
+		
+		return "asd";
+	}
 	
 	
 	

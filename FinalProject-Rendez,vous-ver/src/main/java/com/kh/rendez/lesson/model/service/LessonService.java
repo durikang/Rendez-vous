@@ -2,6 +2,7 @@ package com.kh.rendez.lesson.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
@@ -29,6 +30,10 @@ public interface LessonService {
 	ArrayList<Lesson> selectTimeofLI(int lNo);
 
 	ArrayList<LessonAttachment> selectLAofLI(int lNo);
+
+	int insertUserFav(Wish userWish);
+
+	int deleteUserFav(Wish userWish);
 
 	
 

@@ -149,7 +149,25 @@
 	</select>
 	
 	
+	<!-- favorite-->
+	<resultMap type="Wish" id="favResultset">
+		<result property="user_no" column="USER_NO"/>
+		<result property="l_no" column="L_NO"/>
+		<result property="w_no" column="W_NO"/>
+		<result property="w_date" column="W_DATE"/>
+	</resultMap>
 
+
+	<insert id="insertUserFav" parameterType="Wish">
+	INSERT INTO WISH VALUES( #{user_no},#{l_no},(SELECT NVL(MAX(W_NO),0) FROM WISH WHERE USER_NO= #{user_no})+1,SYSDATE)
+	</insert>
+	
+	<delete id="deleteUserFav" parameterType="Wish">
+	DELETE FROM WISH
+	WHERE USER_NO = #{user_no}
+	AND L_NO = #{l_no}
+	</delete>
+	
 
 
 

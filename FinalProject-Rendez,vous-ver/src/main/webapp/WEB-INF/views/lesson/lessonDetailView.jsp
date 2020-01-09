@@ -536,24 +536,97 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<div class="class_title">
 					
 					<!--찜하기 시작-->
-						<a class="bnt_wishlist" id><input type="checkbox">찜하기</a>
+						<a class="bnt_wishlist" id="won"><img src="${contextPath}/resources/h1/Images/icon_btn_wish_on.png"> 찜하기</a>
+						<a class="bnt_wishlist" id="woff"><img src="${contextPath}/resources/h1/Images/icon_btn_wish.png"> 찜하기</a>
 					<!--찜하기 끝-->
 					
 					
+					
+
+
+					
 					<script>
 						$(function(){
-							/* $(".won").hide(); */
+								
 							
-							$(".woff").click(function(){
-								alert("찜 목록에서 삭제하였습니다");
-/* 								$(".won").show();
-								$(".woff").hide(); */
+							$("#won").hide();
+												
+							
+							$("#won").click(function(){
+								
+								<c:if test="${empty loginUser }">
+								alert("로그인을 하셔야 합니다.");
+								return;
+								</c:if>
+								
+
+								
+								if($("#won").css("display")=='block' && $("#woff").css("display")=='none'){
+									
+									<c:if test="${!empty loginUser }">
+									var uno = ${loginUser.user_no};
+									</c:if>
+									
+									var lno = ${li.lNo};
+									
+									  $.ajax({
+								            url:"fav.do",
+								            data:{flag:'delete',uno:uno,lno:lno},
+											type:"post",
+								            success:function(data){
+					               
+								            },error:function(){
+								               console.log("ajax 통신 실패");
+								            }
+								            })
+														
+									
+									
+									alert("찜 목록에서 삭제하였습니다");							
+									$("#won").hide();
+									$("#woff").show();
+									$("#wbtn").removeAttr("checked","true");
+									
+								}
+								
+
 							});		
 							
-							$(".woff").click(function(){
-								alert("찜 목록에서 추가 하였습니다");
-/* 								$(".won").hide();
-								$(".woff").show(); */
+							$("#woff").click(function(){
+								
+								<c:if test="${empty loginUser }">
+								alert("로그인을 하셔야 합니다.");
+								return;
+								</c:if>
+								
+								
+								if($("#won").css("display")=='none' && $("#woff").css("display")=='block'){
+									
+									<c:if test="${!empty loginUser }">
+									var uno = ${loginUser.user_no};
+									</c:if>
+									
+									var lno = ${li.lNo};
+									
+									  $.ajax({
+								            url:"fav.do",
+								            data:{flag:'insert',uno:uno,lno:lno},
+											type:"post",
+								            success:function(data){
+					               
+								            },error:function(){
+								               console.log("ajax 통신 실패");
+								            }
+								            })
+									
+									
+									
+									alert("찜 목록에서 추가하였습니다");							
+									$("#won").show();
+									$("#woff").hide();
+									$("#wbtn").attr("checked","true");
+								}
+								
 							});	
 							
 							

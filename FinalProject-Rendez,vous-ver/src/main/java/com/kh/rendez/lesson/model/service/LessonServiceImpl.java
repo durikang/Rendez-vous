@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.lesson.model.dao.LessonDao;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
@@ -69,6 +70,16 @@ public class LessonServiceImpl implements LessonService {
 	@Override
 	public ArrayList<LessonAttachment> selectLAofLI(int lNo) {
 		return lDao.selectLAofLI(lNo);
+	}
+
+	@Override
+	public int insertUserFav(Wish userWish) {
+		return lDao.insertUserFav(userWish);
+	}
+
+	@Override
+	public int deleteUserFav(Wish userWish) {
+		return  lDao.deleteUserFav(userWish);
 	}
 
 	

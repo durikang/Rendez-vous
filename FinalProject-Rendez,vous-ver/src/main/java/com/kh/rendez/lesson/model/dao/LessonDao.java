@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
@@ -58,6 +59,14 @@ public class LessonDao {
 
 	public ArrayList<LessonAttachment> selectLAofLI(int lNo) {
 		return (ArrayList)sqlSession.selectList("lessonInfoMapper.selectLAofLI",lNo);
+	}
+
+	public int insertUserFav(Wish userWish) {
+		return sqlSession.insert("lessonInfoMapper.insertUserFav",userWish);
+	}
+
+	public int deleteUserFav(Wish userWish) {
+		return sqlSession.delete("lessonInfoMapper.deleteUserFav",userWish);
 	}
 
 }

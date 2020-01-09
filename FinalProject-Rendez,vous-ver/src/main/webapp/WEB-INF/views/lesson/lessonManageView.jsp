@@ -147,9 +147,7 @@
 		</div>
 		
 		
-		<c:if test="${!empty msg }">
-		alert("수업을 추가하였습니다.");	
-		</c:if>
+
 		
 		<!-- 일정 인서트 후 해당 수업에 selected 되게끔 하는 처리  -->
 		<c:if test="${!empty slno }">
@@ -270,7 +268,18 @@
 	
 		
 		</script>
+		<c:if test="${!empty msg }">
+		<script>
+			$(function(){
+				
+			setTimeout(function() {
+				alert("수업을 추가하였습니다.");	
+			}, 100);
+					
 		
+			});
+		</c:if>
+		</script>	
 		
 		
     
@@ -324,31 +333,8 @@
     </script>
 		
 		
-		<c:if test="${!empty msg }">
-		<script>
-			$(function(){
-			alert("수업을 추가하였습니다.");	
-			});
-		</c:if>
-		</script>	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
 
+		
 			
 			
 

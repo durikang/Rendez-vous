@@ -1,5 +1,7 @@
 package com.kh.rendez.tutor.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,11 @@ public class TutorDao {
 	public int insertCertification(Certification inCer) {
 		return sqlSession.insert("tutorMapper.insertCertification",inCer);
 	}
+	
+	public int updateMemberType(int uno) {
+		return sqlSession.update("tutorMapper.updateMemberType",uno);
+	}
+
 
 	public Tutor selectTutorOfLI(int lNo) {
 		return sqlSession.selectOne("tutorMapper.selectTutorOfLI",lNo);
@@ -28,6 +35,11 @@ public class TutorDao {
 	public String selectTutorName(int lNo) {
 		return sqlSession.selectOne("tutorMapper.selectTutorName", lNo);
 	}
+
+	public ArrayList<Certification> selectTCert(int uNo) {
+		return (ArrayList)sqlSession.selectList("tutorMapper.selectTCert",uNo);
+	}
+
 
 
 	

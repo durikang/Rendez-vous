@@ -18,6 +18,13 @@
 	INSERT INTO TUTOR VALUES(#{uNo},#{tNick},#{tCareer},#{tInfo},#{tSocial},'R')
 	</insert>
 	
+	<update id="updateMemberType" parameterType="_int">
+	UPDATE MEMBER
+	SET USER_TYPE = 'T'
+	WHERE USER_NO = #{uno}
+	</update>
+	
+	
 	<select id="selectTutorOfLI" parameterType="_int" resultMap="tResultSet">
 		SELECT *
 		FROM TUTOR
@@ -59,6 +66,12 @@
 	<insert id="insertCertification" parameterType="Certification2">
 	INSERT INTO CERTIFICATION VALUES(SEQ_CNO.NEXTVAL,#{uNo},#{cTitle},#{oFile},#{cFile})
 	</insert>
+	
+	<select id="selectTCert" parameterType="_int" resultMap="cResultSet">
+	SELECT * 
+	FROM CERTIFICATION
+	WHERE USER_NO = #{uNo}
+	</select>
 	
 
 

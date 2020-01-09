@@ -98,10 +98,18 @@ public class LessonController {
 	
 	// 수업 정보 인서트 하는 페이지로 가기
 	@RequestMapping("lessonInsert.do")
-	public String lessonInsertPage() {
+	public ModelAndView lessonInsertPage(HttpServletRequest request,ModelAndView mv) {
 		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
-		return "lesson/lessonInsertView";
+		if(loginUser == null || !loginUser.getUser_type().equals("T")) {
+			mv.setViewName("home");
+			return mv;
+		}
+			
+		mv.setViewName("lesson/lessonInsertView");
+		
+		return mv;
 	}
 	
 	@RequestMapping("lessonInsertOriginal.do")
@@ -198,7 +206,14 @@ public class LessonController {
 			@RequestParam(name="msg",required=false) String msg,
 			HttpServletRequest request) {
 		
-		int uno = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();;
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		if(loginUser == null || !loginUser.getUser_type().equals("T")) {
+			mv.setViewName("home");
+			return mv;
+		}
+		
+		int uno = loginUser.getUser_no();
 		
 		ArrayList<LessonInfo> liList = lService.selectLIList(uno);
 		ArrayList<LessonAttachment> laList = lService.selectLAList(uno);

@@ -149,6 +149,7 @@
   			position: relative;
   			background: white;
   			border: none;
+  			height: 100px;
 		}
 
 		
@@ -535,8 +536,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<div class="class_title">
 					
 					<!--찜하기 시작-->
-											<a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="bnt_wishlist"><img src="https://taling.me/Content/Images/class/icon_btn_wish.png"> 찜하기</a>					
-										<!--찜하기 끝-->
+						<a class="bnt_wishlist" id><input type="checkbox">찜하기</a>
+					<!--찜하기 끝-->
+					
+					
+					<script>
+						$(function(){
+							/* $(".won").hide(); */
+							
+							$(".woff").click(function(){
+								alert("찜 목록에서 삭제하였습니다");
+/* 								$(".won").show();
+								$(".woff").hide(); */
+							});		
+							
+							$(".woff").click(function(){
+								alert("찜 목록에서 추가 하였습니다");
+/* 								$(".won").hide();
+								$(".woff").show(); */
+							});	
+							
+							
+							
+							
+						});					
+					</script>
+					
+					
 					<div class="info">
 						<a class="starimg">
 							<div class="title">${li.lTitle }</div>

@@ -105,6 +105,11 @@ public class LessonServiceImpl implements LessonService {
 		return lDao.selectLessonReviewList(lNo);
 	}
 
+	@Override
+	public String selectTutorPic(int lNo) {
+		return lDao.selectTutorPic(lNo);
+	}
+
 
 
 	

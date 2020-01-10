@@ -46,6 +46,8 @@ public interface LessonService {
 
 	ArrayList<LessonReview> selectLessonReviewList(int lNo);
 
+	String selectTutorPic(int lNo);
+
 	
 
 

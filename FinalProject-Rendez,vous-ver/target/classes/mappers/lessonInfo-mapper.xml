@@ -214,6 +214,20 @@
 		ORDER BY 5 DESC
 	</select>
 	
+
+	
+	
+	
+	
+	<!-- 튜터사진을 유저프로픽에서 갖고옴 -->
+	<select id="selectTutorPic" parameterType="_int" resultType="String">
+	SELECT P.U_C_NAME
+	FROM USERPROPIC P,LESSON_INFO I
+	WHERE P.USER_NO = I.USER_NO
+	AND I.L_NO = #{lNo}
+	</select>
+	
+	
 	
 	
 	

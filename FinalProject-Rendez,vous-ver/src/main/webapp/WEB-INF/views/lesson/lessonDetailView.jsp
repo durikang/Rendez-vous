@@ -517,7 +517,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- 수업타이틀 -->
 			<div class="class_detail" id="sumary" style="width: 840px">
 				<div class="class_name">
-					<div class="tutor_img"><a href="http://taling.me/Content/Uploads/Profile/aa73a9b108426fbddb18c590ffd278ea8117ef07.png" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('http://taling.me/Content/Uploads/Profile/s_aa73a9b108426fbddb18c590ffd278ea8117ef07.png');"></div></a></div>
+					<div class="tutor_img"><a href="${ contextPath }/resources/user/img/${tPropic}" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/user/img/${tPropic}');"></div></a></div>
 					<div class="name">${ tName }</div>
 					<div class="nickname">${ tutor.tNick }</div>
 				</div>
@@ -543,7 +543,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							$("#won").click(function(){
 								
 								<c:if test="${empty loginUser }">
-								alert("로그인을 하셔야 합니다.");
+								alert("로그인이 필요합니다");
 								return;
 								</c:if>
 								
@@ -582,7 +582,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							$("#woff").click(function(){
 								
 								<c:if test="${empty loginUser }">
-								alert("로그인을 하셔야 합니다.");
+								alert("로그인이 필요합니다");
 								return;
 								</c:if>
 								
@@ -820,7 +820,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			function writeReview(){
 				
 				<c:if test="${empty loginUser }">
-				alert("로그인을 하셔야 합니다.");
+				alert("로그인이 필요합니다");
 				return;
 				</c:if>
 				

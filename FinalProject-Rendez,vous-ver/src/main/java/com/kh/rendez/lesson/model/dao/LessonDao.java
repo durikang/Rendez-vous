@@ -88,6 +88,10 @@ public class LessonDao {
 		return (ArrayList)sqlSession.selectList("lessonInfoMapper.selectLessonReviewList",lNo);
 	}
 
+	public String selectTutorPic(int lNo) {
+		return sqlSession.selectOne("lessonInfoMapper.selectTutorPic",lNo);
+	}
+
 	
 
 

@@ -80,7 +80,8 @@ public class LessonController {
 		Tutor tutor = tService.selectTutorOfLI(lNo);
 		String tName = tService.selectTutorName(lNo);
 		ArrayList<LessonReview> lRList = lService.selectLessonReviewList(lNo);
-		//li,tutor,tName 나중에 하나로해서 갖고오자
+		String tPropic = lService.selectTutorPic(lNo);
+		//li,tutor,tName,tPropic 나중에 하나로해서 갖고오자
 		
 		
 		//튜터 경력 처리
@@ -150,6 +151,7 @@ public class LessonController {
 		mv.addObject("laList",laList);
 		mv.addObject("lTime",lTime);
 		mv.addObject("tutor",tutor);
+		mv.addObject("tPropic",tPropic);
 		mv.addObject("tName",tName);
 		mv.addObject("tutorCer",tutorCer);
 		mv.addObject("lRList",lRList);

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Public+Sans|Sniglet&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
     body {
@@ -145,14 +146,67 @@ body {
 
     .wrapper{
         width: 100%;
-        height: 20%;
+        height: 180px;
         background: white;
         margin-bottom: 5px;
-        border: 1px #dadada solid;
+        
+      	box-sizing: border-box;
        
     }
     
+    #left{
+    	width: 75%;
+        height: 100%;
+    	
+    	margin: 0px;
+    	float: left;
+    	margin: 0px 0px 10px 0px;
+    	border: 1px #dadada solid;
+    	box-sizing: border-box;
+    	border-top-right-radius: 10px;
+    	border-bottom-right-radius: 10px;
+    }
     
+    #right{
+    	width: 25%;
+        height: 100%;
+        margin: 0px;
+       float: left;
+       background: rgb(246, 92, 82);
+       box-sizing: border-box;
+       border-top: 1px #dadada solid;
+       border-right: 1px #dadada solid;
+       border-bottom: 1px #dadada solid;
+       border-left: 1px #dadada dashed;
+       border-top-left-radius: 10px;
+       border-bottom-left-radius: 10px;
+       text-align: center;
+       
+    }
+    
+    #mark{
+    	font-size: 45px;
+    	color: white;
+    	font-weight: bold;
+    	width: 65%;
+    	box-sizing: border-box;
+    	  margin: 0px auto;
+    	  margin-top: 22px;
+    	  background: rgb(247, 146, 139);
+    	  border-radius: 50px;
+		font-family: 'Noto Sans', sans-serif;	
+    }
+
+	#wordCoupon{
+		color: rgb(255, 181, 176);
+		font-weight: bold;
+		margin-top: 35px;
+		margin-left: 0px;
+		-webkit-transform: rotate(270deg);
+                -ms-transform: rotate(270deg);
+
+
+	}
 
     </style>
 </head>
@@ -175,27 +229,24 @@ body {
 		
 		<c:if test="${CouponList != null }">
 				<c:forEach items="${ CouponList}" var="CouponList">
+				<div class="wrapper">
 				 <a onclick="couponUse('${CouponList.couponNo }', '${CouponList.couponName } 쿠폰', '${CouponList.discountRate}')" id="payCouponArea"> 
 				
-			<div class="wrapper">
+			
 			
 			<div id="left">
             <p style="font-size: 80px; color: rgb(246, 92, 82); margin: 0px; margin-left: 15px; font-weight: bold; float: left;">${CouponList.discountRate}</p>
             <p style="font-size: 60px; color: rgb(246, 92, 82); margin: 7px 0px 0px 0px; font-weight: bold; float: left;">%</p>
             <p style="font-size: 20px; color: rgb(68, 68, 68); margin: 0px; margin-left: 15px; font-weight: bold; clear: both;">${CouponList.couponName }</p>    
-            <p style="font-size: 15px; color: rgb(143, 143, 143); margin: 8px 0px 20px 0px; margin-left: 15px; font-weight: bold;">만료일 : ${CouponList.endDate}일까지</p>
+            <p style="font-size: 15px; color: rgb(143, 143, 143); margin: 8px 0px 0px 0px; margin-left: 15px; font-weight: bold;">만료일 : ${CouponList.endDate}일까지</p>
             </div>
             <div id="right">
-            
-            
+      			<div id="mark">R</div>
+            	<div id="wordCoupon">COUPON</div>
             </div>
             
-         </div>
-         
-         
-         
 		</a>
-		<br>
+		   </div>
 			</c:forEach>
 		</c:if>
 		

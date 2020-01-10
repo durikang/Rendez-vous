@@ -1035,6 +1035,7 @@ text-decoration: none;
 			
 
             <script>
+            
                 $('#searchList').click(function(){
                     var day = "";
                     var time = "";
@@ -1180,10 +1181,75 @@ text-decoration: none;
                 
             </script>
             
-            <div class="filter_head" style="margin-top: 216px;">
-                <div class="num_class">
+            <c:choose>
+            	<c:when test="${ sInfo.sType == 'Search' }">
+            		<c:set var="loc" value="search.do"/> 
+            	</c:when>
+            	<c:when test="${ sInfo.sType == 'cateMain' }">
+            		<c:set var="loc" value="cateMain.do"/> 
+            	</c:when>
+            	<c:when test="${ sInfo.sType == 'cateSub' }">
+            		<c:set var="loc" value="cateSub.do"/> 
+            	</c:when>
+            	<c:when test="${ sInfo.sType == 'searchDetail' }">
+            		<c:set var="loc" value="detailSearch.do"/> 
+            	</c:when>
+            </c:choose>
+            
+               <c:url value="${loc}" var="orderlistReview">
+			
+				<c:param name="sType" value="${sInfo.sType}"/>
+				<c:param name="sValue" value="${sInfo.sValue}"/>
+				<c:param name="cateMain" value="${sInfo.cateMain}"/>
+				<c:param name="cateSub" value="${sInfo.cateSub}"/>
+				<c:param name="regionMain" value="${sInfo.regionMain}"/>
+				<c:param name="regionSub" value="${sInfo.regionSub}"/>
+				<c:param name="sDay" value="${sInfo.sDay}"/>
+				<c:param name="sTime" value="${sInfo.sTime}"/>
+				<c:param name="tType" value="${sInfo.tType}"/>
+				<c:param name="day" value="${sInfo.day}"/>
+				<c:param name="time" value="${sInfo.time}"/>
+				<c:param name="cOrder" value="Review"/>
+                </c:url>
+                
+                <c:url value="${loc}" var="orderlistPrice">
+				<c:param name="sType" value="${sInfo.sType}"/>
+				<c:param name="sValue" value="${sInfo.sValue}"/>
+				<c:param name="cateMain" value="${sInfo.cateMain}"/>
+				<c:param name="cateSub" value="${sInfo.cateSub}"/>
+				<c:param name="regionMain" value="${sInfo.regionMain}"/>
+				<c:param name="regionSub" value="${sInfo.regionSub}"/>
+				<c:param name="sDay" value="${sInfo.sDay}"/>
+				<c:param name="sTime" value="${sInfo.sTime}"/>
+				<c:param name="tType" value="${sInfo.tType}"/>
+				<c:param name="day" value="${sInfo.day}"/>
+				<c:param name="time" value="${sInfo.time}"/>
+				<c:param name="cOrder" value="Price"/>
+                </c:url>
+                
+                <c:url value="${loc}" var="orderlistGrade">
+				<c:param name="sType" value="${sInfo.sType}"/>
+				<c:param name="sValue" value="${sInfo.sValue}"/>
+				<c:param name="cateMain" value="${sInfo.cateMain}"/>
+				<c:param name="cateSub" value="${sInfo.cateSub}"/>
+				<c:param name="regionMain" value="${sInfo.regionMain}"/>
+				<c:param name="regionSub" value="${sInfo.regionSub}"/>
+				<c:param name="sDay" value="${sInfo.sDay}"/>
+				<c:param name="sTime" value="${sInfo.sTime}"/>
+				<c:param name="tType" value="${sInfo.tType}"/>
+				<c:param name="day" value="${sInfo.day}"/>
+				<c:param name="time" value="${sInfo.time}"/>
+				<c:param name="cOrder" value="Grade"/>
+                </c:url>
+            
+            <div class="filter_head" style="margin-top: 216px; margin-bottom: 30px;">
+                <div class="num_class" style="float: left;">
                     ${ pi.listCount }개의 수업
-                </div>
+                     <div style="float: right; clear: both;">
+                     &nbsp; | <a href="${orderlistReview}" class="orderType" name="Review">리뷰 개수순</a> | <a href="${orderlistPrice}" class="orderType" name="Price">낮은 가격순</a> | <a href="${orderlistGrade}" class="orderType" name="Grade">평점 높은순</a>
+                    </div>
+                     </div>      
+ 
                 <!--select name="fluit" onchange="go(this.value)">				
                     <option value="5" >추천도순</option>
                     <option value="3" >낮은 가격순</option>
@@ -1254,20 +1320,7 @@ text-decoration: none;
             
         
             <!-- 4. 검색 옵션에 따라 어떤 매핑을 해야할지 정해주는 옵션 -->
-            <c:choose>
-            	<c:when test="${ sInfo.sType == 'Search' }">
-            		<c:set var="loc" value="search.do"/> 
-            	</c:when>
-            	<c:when test="${ sInfo.sType == 'cateMain' }">
-            		<c:set var="loc" value="cateMain.do"/> 
-            	</c:when>
-            	<c:when test="${ sInfo.sType == 'cateSub' }">
-            		<c:set var="loc" value="cateSub.do"/> 
-            	</c:when>
-            	<c:when test="${ sInfo.sType == 'searchDetail' }">
-            		<c:set var="loc" value="detailSearch.do"/> 
-            	</c:when>
-            </c:choose>
+            
                
 			  
             <div class="page">
@@ -1291,7 +1344,7 @@ text-decoration: none;
 			<c:param name="tType" value="${sInfo.tType}"/>
 			<c:param name="day" value="${sInfo.day}"/>
 			<c:param name="time" value="${sInfo.time}"/>
-			<c:param name="cCList" value="${ cCList}"></c:param>
+			<c:param name="cOrder" value="${sInfo.cOrder }"></c:param>
 			
 			</c:url>
 			
@@ -1326,6 +1379,7 @@ text-decoration: none;
 			<c:param name="tType" value="${sInfo.tType}"/>
 			<c:param name="day" value="${sInfo.day}"/>
 			<c:param name="time" value="${sInfo.time}"/>
+			<c:param name="cOrder" value="${sInfo.cOrder }"></c:param>
 			</c:url>
 			
 			<a href="${ blistCheck}">${p}</a>
@@ -1352,6 +1406,7 @@ text-decoration: none;
 			<c:param name="tType" value="${sInfo.tType}"/>
 			<c:param name="day" value="${sInfo.day}"/>
 			<c:param name="time" value="${sInfo.time}"/>
+			<c:param name="cOrder" value="${sInfo.cOrder }"></c:param>
 			</c:url>
 			
 			<a href="${blistEnd}">| &nbsp;다음&nbsp;&nbsp;
@@ -1588,10 +1643,24 @@ text-decoration: none;
 		                  
 			             } });  });}
 		
+		var orderType = '${sInfo.cOrder}';
+		//alert(orderType);
 		
+		  if(orderType != ''){
+			
+			 $(".orderType").each(function(element, index){			
+						
+				// alert($(index).attr('name'));
+
+					    if($(index).attr('name') == orderType ){	
+	    	               
+					    	$(index).css('color','red');
+						   
+		                  
+			             }   
+					   		 
+			 });}   
 		
-		
-		 
    });
     
     </script>

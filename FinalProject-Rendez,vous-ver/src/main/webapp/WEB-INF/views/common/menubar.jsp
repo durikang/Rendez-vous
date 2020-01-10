@@ -20,7 +20,7 @@
 .search-box {
     margin: 0;
     padding: 0;
-    background: #c9c0b1;
+    background:#c9c0b1;
     height: 60px;
     border-radius: 40px;
     padding: 10px;

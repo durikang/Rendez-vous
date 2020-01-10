@@ -29,7 +29,7 @@ public class SearchImpl implements SearchService{
 		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return jsDao.selectSearchList(sInfo.getsValue(),pi);
+		return jsDao.selectSearchList(sInfo,pi);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class SearchImpl implements SearchService{
 		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return jsDao.SearchCateMainList(sInfo.getCateMain(), pi);
+		return jsDao.SearchCateMainList(sInfo, pi);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class SearchImpl implements SearchService{
 		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return jsDao.SearchCateSubList(sInfo.getCateSub(), pi);
+		return jsDao.SearchCateSubList(sInfo, pi);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class SearchImpl implements SearchService{
 			return new ArrayList<tClass>();
 		}
 		
-		return jsDao.selectSearchDetailList(dc,pi);
+		return jsDao.selectSearchDetailList(sInfo,dc,pi);
 	}
 
 	@Override

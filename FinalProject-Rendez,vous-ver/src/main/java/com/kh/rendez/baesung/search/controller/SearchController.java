@@ -29,7 +29,7 @@ public class SearchController {
 		
 		int currentPage = page != null ? page : 1;
 		sInfo.setsType("Search");
-		
+			
 		ArrayList<tClass> sList = jsService.selectSearchList(sIf.nullInfonation(sInfo),currentPage);
 		
 		ArrayList<classCount> cCList = new ArrayList();
@@ -42,7 +42,6 @@ public class SearchController {
 				result += cc.getCount();}}
 
 		cCList.add(new classCount("",result,"All"));
-		//System.out.println(cCList);
 		
 		cCListination.setcCList(cCList);
 		

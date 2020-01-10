@@ -29,6 +29,7 @@
 	<result property="lTime" column="L_TIME"/>
 	<result property="remain" column="REMAIN"/>
 	<result property="total" column="TOTAL"/>
+	<result property="olDay" column="OL_DAY"/>
 	</resultMap>
 	
 	<resultMap type="payCoupon" id="payCouponResultMap">
@@ -59,7 +60,7 @@
 	<select id="selectLessonTime" parameterType="_int" resultMap="LessonTimeResultSet">
 	SELECT *
 	FROM LESSON_TIME
-	WHERE L_NO = #{lNo}
+	WHERE L_NO = #{lNo} AND OL_DAY >= SYSDATE
 	</select>
 	
 	<insert id="insertPayment" parameterType="Payment">
@@ -67,7 +68,7 @@
 	</insert>
 	
 	<select id="CheckRemain" parameterType="_int" resultType="_int">
-	SELECT SUM(REMAIN) FROM LESSON WHERE L_NO = #{lNo}
+	SELECT SUM(REMAIN) FROM LESSON WHERE L_NO = #{lNo} AND L_DAY >= SYSDATE
 	</select>
 	
 	<update id="LessonRemainDown" parameterType="LessonTime">

@@ -64,7 +64,7 @@ public class LessonController {
 	
 	//수업 상세 페이지
 	@RequestMapping("lessonDetail.do")
-	public ModelAndView lessonDetail(ModelAndView mv,@RequestParam int lNo) {
+	public ModelAndView lessonDetail(HttpServletRequest request,ModelAndView mv,@RequestParam int lNo) {
 		
 		
 		LessonInfo li = lService.selectOneLI(lNo);
@@ -72,6 +72,8 @@ public class LessonController {
 		ArrayList<Lesson> lTime = lService.selectTimeofLI(lNo);
 		Tutor tutor = tService.selectTutorOfLI(lNo);
 		String tName = tService.selectTutorName(lNo);
+		//li,tutor,tName 나중에 하나로해서 갖고오자
+		
 		
 		//튜터 경력 처리
 		String[] tutorCerArr = tutor.gettCareer().split(","); 
@@ -82,6 +84,29 @@ public class LessonController {
 				tutorCer.add(tutorCerArr[i]);
 			}
 		}
+		
+		// 튜터 즐겨찾기 체크 //로그인이되있으면
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		if(loginUser!=null) {
+			int uno = loginUser.getUser_no();
+			
+			// 찜하기 체크를 위한 처리
+			Wish checkWish = new Wish();
+			checkWish.setL_no(lNo);
+			checkWish.setUser_no(uno);
+			int result = lService.checkUserFav(checkWish);	
+			if(result>0) {
+				mv.addObject("favCheck",result);
+			}
+			
+			//리뷰상태를 위한 처리
+			//결제를 했는지 체크
+			//int payCheck = lService.checkPay()
+			
+			
+			
+		}
+		
 		
 		//튜터 사진은 나중에하자
 

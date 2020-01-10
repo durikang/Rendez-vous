@@ -314,20 +314,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</script>
 			
 
-<!-- 			<div class="price">	
-				
-							
-				<div class="hp1"><b>￦12,000원</b> / 시간</div>
-				<div class="tp1">￦36,000 / 총 1회 3시간</div>
-				
-			</div>
- -->
 			<!--바닥 박스 시작-->
-			<!--div class="btn_area">
 
-				
-				
-				<!--span class="btntxt_s">오늘 5명이 튜터에게 문의를 남겼습니다.</span-->
 			<!--/div-->
 			<!--바닥 박스 끝-->
 		</div>
@@ -585,7 +573,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 									alert("찜 목록에서 삭제하였습니다");							
 									$("#won").hide();
 									$("#woff").show();
-									$("#wbtn").removeAttr("checked","true");
 									
 								}
 								
@@ -624,14 +611,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 									alert("찜 목록에서 추가하였습니다");							
 									$("#won").show();
 									$("#woff").hide();
-									$("#wbtn").attr("checked","true");
 								}
 								
 							});	
 							
 							
-							
-							
+							<c:if test="${!empty favCheck }">
+							$("#won").show();
+							$("#woff").hide();
+							</c:if>						
 						});					
 					</script>
 					
@@ -772,14 +760,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="class_detail detail_sec_bor" id="review" style="width: 840px">
 				<div class="section01">
 					<h1>리뷰(6)</h1>
-					<a class="btn_st" id="btn-write-review">리뷰쓰기</a>
-				<!-- 						<div class="review_box">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-												5.0</div> -->
+					<a class="btn_st" id="wReview" onclick="writeReview();">리뷰쓰기</a>
 										<div class="review_box">		
 										<span class='star-rating'>
 											<span style ="width:50%; float: left;" ></span>
@@ -797,6 +778,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				</div>
 			</div>
 			<!-- /리뷰 -->
+			
+			<script>
+			function writeReview(){
+				
+				<c:if test="${empty loginUser }">
+				alert("로그인을 하셔야 합니다.");
+				return;
+				</c:if>
+				
+				
+				
+				
+				
+				
+			}
+			
+			
+			</script>
+			
+			
+			
+			
+			
+			
+			
+			
 
 			<!-- 문의 -->
 			<div class="class_detail detail_sec_bor" id="qna" style="width: 840px">

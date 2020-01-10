@@ -82,6 +82,11 @@ public class LessonServiceImpl implements LessonService {
 		return  lDao.deleteUserFav(userWish);
 	}
 
+	@Override
+	public int checkUserFav(Wish checkWish) {
+		return lDao.checkUserFav(checkWish);
+	}
+
 	
 	
 	

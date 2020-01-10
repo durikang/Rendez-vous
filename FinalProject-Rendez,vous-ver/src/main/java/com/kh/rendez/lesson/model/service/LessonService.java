@@ -35,6 +35,8 @@ public interface LessonService {
 
 	int deleteUserFav(Wish userWish);
 
+	int checkUserFav(Wish checkWish);
+
 	
 
 }

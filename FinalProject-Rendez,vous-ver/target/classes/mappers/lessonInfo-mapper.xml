@@ -168,6 +168,13 @@
 	AND L_NO = #{l_no}
 	</delete>
 	
+	<select id="checkUserFav" parameterType="Wish" resultType="_int">
+	SELECT COUNT(*)
+	FROM WISH
+	WHERE USER_NO = #{user_no}
+	AND L_NO= #{l_no}
+	</select>
+	
 
 
 

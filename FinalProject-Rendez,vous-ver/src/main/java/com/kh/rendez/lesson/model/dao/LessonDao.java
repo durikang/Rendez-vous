@@ -69,4 +69,8 @@ public class LessonDao {
 		return sqlSession.delete("lessonInfoMapper.deleteUserFav",userWish);
 	}
 
+	public int checkUserFav(Wish checkWish) {
+		return sqlSession.selectOne("lessonInfoMapper.checkUserFav", checkWish);
+	}
+
 }

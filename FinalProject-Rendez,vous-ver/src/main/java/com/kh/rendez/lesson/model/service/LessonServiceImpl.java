@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.rendez.Wish.model.vo.Wish;
+import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.lesson.model.dao.LessonDao;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
+import com.kh.rendez.lesson.model.vo.LessonReview;
+import com.kh.rendez.review.model.vo.Review;
 
 @Service("lService")
 public class LessonServiceImpl implements LessonService {
@@ -86,6 +89,23 @@ public class LessonServiceImpl implements LessonService {
 	public int checkUserFav(Wish checkWish) {
 		return lDao.checkUserFav(checkWish);
 	}
+
+	@Override
+	public int checkUserPay(Payment pay) {
+		return lDao.checkUserPay(pay);
+	}
+
+	@Override
+	public int checkUserReview(Review checkReview) {
+		return lDao.checkUserReview(checkReview);
+	}
+
+	@Override
+	public ArrayList<LessonReview> selectLessonReviewList(int lNo) {
+		return lDao.selectLessonReviewList(lNo);
+	}
+
+
 
 	
 	

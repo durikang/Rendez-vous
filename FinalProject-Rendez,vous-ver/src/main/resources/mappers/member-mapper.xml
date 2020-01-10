@@ -26,9 +26,15 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO
+		INSERT ALL
+		INTO
 		MEMBER 
 		VALUES (SEQ_MNO.NEXTVAL, #{user_id}, #{user_pwd}, #{user_name}, #{gender}, #{age}, #{phone}, #{address}, SYSDATE, SYSDATE, DEFAULT, DEFAULT)
+		INTO
+		USERPROPIC
+		VALUES(SEQ_MNO.CURRVAL,'default.jpg','default.jpg')
+		SELECT *
+		FROM dual
 	</insert>
 	
 	<select id="idCheck" parameterType="string" resultType="_int">

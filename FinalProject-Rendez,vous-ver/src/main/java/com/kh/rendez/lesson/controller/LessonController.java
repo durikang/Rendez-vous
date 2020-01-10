@@ -16,11 +16,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.rendez.Wish.model.vo.Wish;
+import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
+import com.kh.rendez.lesson.model.vo.LessonReview;
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.review.model.service.ReviewService;
+import com.kh.rendez.review.model.vo.Review;
 import com.kh.rendez.tutor.model.service.TutorService;
 import com.kh.rendez.tutor.model.vo.Tutor;
 
@@ -32,6 +36,9 @@ public class LessonController {
 	
 	@Autowired
 	private TutorService tService;
+	
+	@Autowired
+	private ReviewService rService;
 	
 	@RequestMapping("hynnmenubar.do")
 	public String goHynnmenubar() {
@@ -72,6 +79,7 @@ public class LessonController {
 		ArrayList<Lesson> lTime = lService.selectTimeofLI(lNo);
 		Tutor tutor = tService.selectTutorOfLI(lNo);
 		String tName = tService.selectTutorName(lNo);
+		ArrayList<LessonReview> lRList = lService.selectLessonReviewList(lNo);
 		//li,tutor,tName 나중에 하나로해서 갖고오자
 		
 		
@@ -85,27 +93,54 @@ public class LessonController {
 			}
 		}
 		
-		// 튜터 즐겨찾기 체크 //로그인이되있으면
+		//로그인이되있으면
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		if(loginUser!=null) {
-			int uno = loginUser.getUser_no();
+			int uNo = loginUser.getUser_no();
 			
 			// 찜하기 체크를 위한 처리
 			Wish checkWish = new Wish();
 			checkWish.setL_no(lNo);
-			checkWish.setUser_no(uno);
+			checkWish.setUser_no(uNo);
 			int result = lService.checkUserFav(checkWish);	
 			if(result>0) {
 				mv.addObject("favCheck",result);
 			}
 			
-			//리뷰상태를 위한 처리
-			//결제를 했는지 체크
-			//int payCheck = lService.checkPay()
+			/*-----리뷰상태를 위한 처리----*/
+			//결제(이용완료인 상태)를 몇번 했는지 체크
+			Payment pay = new Payment();
+			pay.setlNo(lNo);
+			pay.setuNo(uNo);
+			int payCheck = lService.checkUserPay(pay);
 			
-			
-			
+			//해당 수업에 리뷰를 남겼는데 체크
+			Review checkReview = new Review();
+			checkReview.setlNo(lNo);
+			checkReview.setuNo(uNo);
+			int reviewCheck = lService.checkUserReview(checkReview);
+			String uRStatus = "";
+			if(payCheck==0) {
+				uRStatus="unable";
+			}
+			if(payCheck>0 && reviewCheck==0) {
+				uRStatus="able";
+			}		
+			if(payCheck>0 && reviewCheck>0) {
+				uRStatus="reviewed";
+			}			
+			System.out.println(uRStatus);
+			mv.addObject("uRStatus",uRStatus);
 		}
+		
+		int sum=0;
+		for(LessonReview lr : lRList) {
+			sum+=lr.getrRating();
+		}
+		double lessonAvg = (double)sum/lRList.size();
+		
+		
+		
 		
 		
 		//튜터 사진은 나중에하자
@@ -117,6 +152,8 @@ public class LessonController {
 		mv.addObject("tutor",tutor);
 		mv.addObject("tName",tName);
 		mv.addObject("tutorCer",tutorCer);
+		mv.addObject("lRList",lRList);
+		mv.addObject("lessonAvg",lessonAvg);
 		
 		mv.setViewName("lesson/lessonDetailView");
 		

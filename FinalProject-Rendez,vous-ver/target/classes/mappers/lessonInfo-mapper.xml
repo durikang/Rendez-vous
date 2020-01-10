@@ -149,13 +149,6 @@
 	</select>
 	
 	
-	<!-- favorite-->
-	<resultMap type="Wish" id="favResultset">
-		<result property="user_no" column="USER_NO"/>
-		<result property="l_no" column="L_NO"/>
-		<result property="w_no" column="W_NO"/>
-		<result property="w_date" column="W_DATE"/>
-	</resultMap>
 
 
 	<insert id="insertUserFav" parameterType="Wish">
@@ -175,8 +168,55 @@
 	AND L_NO= #{l_no}
 	</select>
 	
+	
+	
+	
+	
+	
+	<!-- payment -->
+	
+	
+	<select id="checkUserPay" parameterType="Payment" resultType="_int">
+		SELECT COUNT(*)
+		FROM PAYMENT
+		WHERE USER_NO=#{uNo}
+		AND L_NO=#{lNo}
+		AND PAYMENT_STATUS =3
+	</select>
+	
+	
+	<!-- review -->
+	
+	<resultMap type="LessonReview" id="lrResultset">
+		<id property="lNo" column="L_NO"/>
+		<id property="uNo" column="USER_NO"/>
+		<result property="rContent" column="REVIEW_CONTENT"/>
+		<result property="rRating" column="REVIEW_RATING"/>
+		<result property="rDate" column="REVIEW_DATE"/>
+		<result property="uName" column="USER_NAME"/>
+		<result property="uCName" column="U_C_NAME"/>
+	</resultMap>
+	
 
-
+	<select id="checkUserReview" parameterType="Review" resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE USER_NO= #{uNo}
+		AND L_NO= #{lNo}
+	</select>
+	
+	<select id="selectLessonReviewList" parameterType="_int" resultMap="lrResultset">
+		SELECT R.*,M.USER_NAME,P.U_C_NAME
+		FROM REVIEW R,MEMBER M,USERPROPIC P
+		WHERE R.USER_NO = M.USER_NO
+		AND R.USER_NO = P.USER_NO
+		AND R.L_NO =#{lNo}
+		ORDER BY 5 DESC
+	</select>
+	
+	
+	
+	
 
 
 

@@ -759,27 +759,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- 리뷰 -->
 			<div class="class_detail detail_sec_bor" id="review" style="width: 840px">
 				<div class="section01">
-					<h1>리뷰(6)</h1>
+					<h1>리뷰(<c:out value="${fn:length(lRList) }" />)</h1>
 					<a class="btn_st" id="wReview" onclick="writeReview();">리뷰쓰기</a>
+					<a class="btn_st" id="uReview" onclick="updateReview();">리뷰수정</a>
 										<div class="review_box">		
 										<span class='star-rating'>
-											<span style ="width:50%; float: left;" ></span>
+											<span style ="width:${lessonAvg * 20}%; float: left;" ></span>
 										</span> 		
 										</div>
 	
 										<div class="review_list" id="bookmarkReview">
 						<ul>
 							<div id="innerReviewDiv">
-								
-							</div>
+																	
+									<c:forEach var="lr" items="${lRList }">
+									<li>
+										<dl>
+											<dt>
+												<p class="profile_img" style="background: #000; z-index: 0; width: 100%; background-size: cover; background-position: center; background-image: url(${contextPath}/resources/user/img/${lr.uCName });"></p>
+												<p class="name">${lr.uName }</p>
+											</dt>
+											<dd>
+												${lr.rContent }
+											</dd>
+											<dd class="date"><fmt:formatDate value="${lr.rDate }" pattern="yyyy-MM-dd HH:mm:ss"/></dd>
+										</dl>
+									</li>	
+									</c:forEach>
+									
+									
+								</div>
 						</ul>
 					</div>
 					<div class="paging" id="innerPageDiv"></div>
 				</div>
 			</div>
 			<!-- /리뷰 -->
+
+			
 			
 			<script>
+			
+			$(function(){
+				
+				$("#uReview").hide();
+				
+				<c:if test="${!empty uRStatus }">
+				uRStatus = '${uRStatus}';
+				</c:if>
+				
+				if(uRStatus=='reviewed'){
+					$("#wReview").hide();
+					$("#uReview").show();
+							
+				}
+			
+			});		
+			
+			
 			function writeReview(){
 				
 				<c:if test="${empty loginUser }">
@@ -787,11 +824,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				return;
 				</c:if>
 				
-				
-				
-				
-				
-				
+
+
+				if(uRStatus=='unable'){
+					alert('수강을 받으신 회원분만 리뷰를 남기실 수 있습니다.');
+				}else if(uRStatus=='able'){
+					alert('able');
+				}
 			}
 			
 			

@@ -23,7 +23,6 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "home.do", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView mv,@RequestParam(value="msg",required=false) String msg) {
-
 		
 		mv.addObject("msg",msg);
 		

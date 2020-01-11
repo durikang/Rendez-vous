@@ -58,6 +58,13 @@ $(function(){
             $(".tutor").prop("checked",false);       //일반사용자에 체크 해제
         }
     });
+    $(".tutor").change(function(){         //전문사용자 체크박스에 변화가 있을때
+        if($(".tutor").prop("checked")){   //전문사용자 체크박스와 유저 체크박스 둘다에 체크가 되면
+            $("#all").prop("checked",true);                               //id전체 체크박스에 체크
+        }else{                                                            //전문사용자 체크박스와 유저 체크박스 둘중 하나라도 체크 되어 있지 않으면  
+            $("#all").prop("checked",false);                              //id전체 체크박스에 체크해제
+        }
+    });
 });
 
 
@@ -81,19 +88,24 @@ $(function() {
 
 
 
+
+
+
 </script>
 
 </head>
 <body>
 	<c:import url="../mnCommon/menubar.jsp" />
 	<br>
-	<h1 align="center">튜터 신청 관리 페이지 입니다.</h1>
-		<div class="container">
+	<br>
+	<c:import url="../mnCommon/sidebar.jsp"/>
+	<div class="container">
+	<c:import url="../mnCommon/jumbotron.jsp"/>
 		<hr>
 		
 		<div class="row">
 			<div class="col">
-				<form action="changeTutor.do" method="get">
+				<form action="changeTutor.do" method="get" id="tutorForm" >
 					<label for="all">전체</label>
 					<input type="checkbox" id="all">
 				<table class="table listArea">
@@ -126,13 +138,10 @@ $(function() {
 								</td>
 								<td>
 									<c:if test="${ m.tuStatus eq 'R' }">
-										Ready
+										<i class="fas fa-times"></i>
 									</c:if>
 									<c:if test="${ m.tuStatus eq 'Y'}">
-										Permit
-									</c:if>									
-									<c:if test="${ m.tuStatus eq 'C'}">
-										Cancel
+										<i class="fas fa-check"></i>
 									</c:if>
 								</td>
 							</tr>
@@ -141,9 +150,22 @@ $(function() {
 				</table>
 				<hr>
 					<input type="hidden" value="${ pi.currentPage }" name="page">
-					<button type="submit" class="btn btn-info" >변경하기</button>
+					<input type="hidden" value="" name="cStr" class="cStr">
+					<button type="submit" class="btn btn-info" onclick="changeButton(this,'R')">허용하기</button>
+					<button type="submit" class="btn btn-info" onclick="changeButton(this,'Y')">비허용하기</button>
+				<script>
+					function changeButton(value,value2){
+						alert(value2);
+						$(".cStr").val(value2);
+									
+					}
+				
+				
+				</script>
+				
 				</form>
 				<hr>
+				
 
 
 				<br>
@@ -202,6 +224,8 @@ $(function() {
 			</div>
 		</div>
 	</div>
+	<br><br><br><br><br><br><br><br>
+	<c:import url="../../common/footbar.jsp"/>
 	
 </body>
 </html>

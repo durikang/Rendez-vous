@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -32,15 +31,32 @@
 .td-hidden{
 	display: none;
 }
+.ft-clear{
+	clear: both;
+}
+		
 
 </style>
+<script>
+
+	window.onload=function(){
+		/* 답변 안한것과 전체 답변 갯수 리턴  */
+		var NoCount=String(${qnaCountlist.get(0)});
+		var AllCount=String(${qnaCountlist.get(1)});	
+		
+		$("#allCount").html(AllCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 개");
+		$("#noCount").html(NoCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 개");
+		/*  */
+	}
+/* console.log(arr[3].replace(/\B(?=(\d{3})+(?!\d))/g, ",")); */
+
+</script>
 </head>
 <body>
 	<c:import url="../mnCommon/menubar.jsp" />
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	
-	<br>
-	<br>
+	<br><br>
 
 	
 	<c:import url="../mnCommon/sidebar.jsp"/>
@@ -49,43 +65,31 @@
 		<hr>
 		<div class="row">
 			<div class="col">
-				<table class="table listArea">
+				
+				<span class="count-area-left">(전체 문의 갯수 : <span id="allCount">0개</span> | 답변 안한 문의 : <span id="noCount">0개</span>)</span>
+				<span class="count-area-right">
+					<a id="all-qna" class="btn btn-info btn-sm">전체 문의</a> | <a id="sort-qna" class="btn btn-info btn-sm">답변 안한 문의</a> |
+					<a id="all-qna" class="btn btn-info btn-sm">날자 순</a>  				
+				</span>
+				<br>
+				<table class="table listArea ft-clear">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">회원 번호</th>
-							<th scope="col">회원 이메일</th>
-							<th scope="col">회원명</th>
-							<th scope="col">성별</th>
-							<th scope="col">나이</th>
-							<th scope="col">타입</th>
+							<th scope="col">문의 번호</th>
+							<th scope="col">제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">작성일</th>
+							<th scope="col">답변현황</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="m" items="${ list }">
+						<c:forEach var="q" items="${ qnaList }">
 							<tr>
-								<th scope="row">${m.uNo}</th>
-								<td>${ m.uId }</td>
-								<td>${ m.uName }</td>
-								<td>
-									<c:if test="${ m.uGender eq 'M'}">
-										남자
-									</c:if>
-									<c:if test="${ m.uGender eq 'W'}">
-										여자
-									</c:if>
-								</td>
-								<td>${ m.uAge }</td>
-								<td>
-									<c:if test="${ m.uType eq 'N' }">
-										일반회원
-									</c:if>
-									<c:if test="${ m.uType eq 'T'}">
-										튜터
-									</c:if>
-								</td>
-								<td class="td-hidden">${ m.uChangeName }</td>
-								<td class="td-hidden">${ m.address }</td>
-								<td class="td-hidden">${ m.uType }</td>
+								<th scope="row">${q.qNo }</th>
+								<td>${ q.qTitle }</td>
+								<td>${ q.qWriter }</td>
+								<td>${ q.qDate }</td>
+								<td>${ q.aStatus }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -95,21 +99,19 @@
 				<!-- 검색바   -->
 				
 				<div class="searchArea" align="center">
-					<form action="mnsearch.do" name="searchForm" method="get">
+					<form action="supSearch.do" name="searchForm" method="get">
 
 						<div class="input-group">
 							<div class="input-group-append">
 								<select id="searchCondition" name="searchCondition"
 									class="selectpicker">
-									<option value="all"
-										<c:if test="${ search.searchCondition == 'all' }">selected</c:if>>
-										전체</option>
-									<option value="mName"
-										<c:if test="${ search.searchCondition == 'mName' }">selected</c:if>>
-										회원명</option>
-									<option value="mType"
-										<c:if test="${ search.searchCondition == 'mType' }">selected</c:if>>
-										타입
+									<option value="qWriter"
+										<c:if test="${ search.searchCondition == 'qWriter' }">selected</c:if>>
+										회원명
+									</option>
+									<option value="qTitle"
+										<c:if test="${ search.searchCondition == 'qTitle' }">selected</c:if>>
+										문의 제목
 									</option>
 								</select>
 							</div>
@@ -137,7 +139,7 @@
 						
 						<c:if test="${ search eq null }">
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="mn.do">
+								<c:url var="before" value="manageHo.do">
 									<c:param name="page" value="${ pi.currentPage -1 }" />
 								</c:url>
 								<li class="page-item">

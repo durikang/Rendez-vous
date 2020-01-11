@@ -2,6 +2,7 @@ package com.kh.rendez.manager.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +32,7 @@ import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.MemberJoinUserpropic;
 import com.kh.rendez.manager.model.vo.Search;
+import com.kh.rendez.support.model.vo.Qna;
 
 
 @Controller
@@ -45,7 +46,7 @@ public class ManagerController {
 	@RequestMapping("managerHome.do")
 	public ModelAndView ManagerHome(HttpServletRequest request,ModelAndView mv) {
 
-		mv.setViewName("manager/managerHome");
+		mv.setViewName("manager/AdminHome");
 		if(request.getSession().getAttribute("loginUser") ==null) {
 			mv.addObject("msg","회원 전용입니다. 로그인 해주세요");
 			mv.setViewName("redirect:home.do");
@@ -53,6 +54,29 @@ public class ManagerController {
 		return mv;
 		
 	}
+//	홈페이지 관리
+	@RequestMapping("manageHo.do")
+	public ModelAndView HomeManageMent(ModelAndView mv,
+			@RequestParam(value="page", required=false) Integer page ) {
+		
+		int currentPage = page !=null ? page : 1;
+		
+		int qnaCount=mnService.selectQnaResponseCount(5);
+		int allQnaCount = mnService.selectQnaResponseCount(4);
+		List<Integer> qnaCountlist = new ArrayList<>();
+		
+		qnaCountlist.add(qnaCount);
+		qnaCountlist.add(allQnaCount);
+		
+		ArrayList<Qna> qnaList=mnService.selectQna(currentPage);
+		
+		mv.addObject("qnaCountlist",qnaCountlist);
+		mv.addObject("qnaList",qnaList);
+		mv.setViewName("manager/boarder/homeManagement");
+		
+		return mv;
+	}
+		
 	@RequestMapping("mn.do")
 	public ModelAndView memberList(ModelAndView mv,
 				@RequestParam(value="page", required=false) Integer page) {
@@ -74,6 +98,8 @@ public class ManagerController {
 		
 		return mv;
 	}
+	
+//	검색 영역 
 	@RequestMapping("mnsearch.do")
 	public ModelAndView memberSearch(Search search, ModelAndView mv,
 			@RequestParam(value="page",required=false) Integer page) {
@@ -86,7 +112,6 @@ public class ManagerController {
 			search.setSearchValue("t");
 		}
 		
-		//System.out.println(search.getSearchValue());
 		
 		ArrayList<MemberJoinUserpropic> searchList = mnService.searchMemberList(search,currentPage);
 		
@@ -104,7 +129,33 @@ public class ManagerController {
 		
 		return mv;
 	}
+	@RequestMapping("supSearch.do")
+	public ModelAndView supportSearch(Search search, ModelAndView mv,
+			@RequestParam(value="page",required=false) Integer page) {
+		//System.out.println(search.getSearchCondition());
+		int currentPage = page != null ? page : 1;
+		
+		//System.out.println(search.getSearchValue());
+		
+		ArrayList<Qna> searchList = mnService.searchQnaList(search,currentPage);
+		
+		/*System.out.println("searchList : "+searchList);
+		System.out.println("pi : "+Pagination.getPageInfo());
+		System.out.println("search : "+search);*/
+		
+		if(searchList !=null) {
+			mv.addObject("list", searchList).
+			addObject("pi", Pagination.getPageInfo()).
+			addObject("search", search).setViewName("manager/boarder/memberBoarderForm");
+		}else {
+			mv.addObject("msg","찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.");
+		}
+		
+		return mv;
+	}
 	
+	
+//	Gmail 용도 
 	@RequestMapping("couSend.do")
 	public ModelAndView couponSend(ModelAndView mv,Coupon coupon,
 			@RequestParam(value="uId")String uId) {
@@ -168,7 +219,7 @@ public class ManagerController {
 		}
         return success;
 	}
-	
+//	
 	@RequestMapping("mnRequest.do")
 	public ModelAndView RequestTutorView(ModelAndView mv,@RequestParam(value="page",required=false) Integer page) {
 		// 페이징 처리를 위해 마이바티스 프로젝트에서 PageInfo, Pagination 복사
@@ -231,19 +282,22 @@ public class ManagerController {
 		return gson.toJson(Lessonlist);
 		
 	}
-	
 	@RequestMapping("changeTutor.do")
-	public ModelAndView changeTutor(ModelAndView mv,@RequestParam("uNo") List<Integer> uNo,@RequestParam("page") Integer page){
-		/*System.out.println(uNo);
-		System.out.println(page);*/
-		String msg = mnService.changeTutorStatus(uNo) !=0 ? "성공적으로 변경 하였습니다.":"실패 하였습니다.";
-		mv.addObject("mv",msg);
+	public ModelAndView changeTutor(ModelAndView mv,@RequestParam("cStr") String cStr,@RequestParam("uNo") List<Integer> uNo,@RequestParam("page") Integer page){
+		
+		HashMap<String, Object> map= new HashMap<>();
+		
+		map.put("cStr", cStr);
+		map.put("uNo", uNo);
+		
+		String msg = mnService.changeTutorStatus(map) !=0 ? "성공적으로 변경 하였습니다.":"실패 하였습니다.";	
+		mv.addObject("msg",msg);
 		mv.addObject("page",page);
 		mv.setViewName("redirect:mnRequest.do");
 		
 		return mv;
-		
 	}
+
 	
 	
 	

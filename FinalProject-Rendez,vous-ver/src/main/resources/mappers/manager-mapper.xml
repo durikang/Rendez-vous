@@ -98,12 +98,17 @@
 		<result property="price" column="PRICE"/>
 		<result property="rating" column="RATING"/>
 	</resultMap>
+	
 
-
-	
-	
-	
-	
+	<resultMap id="QnaResultSet" type="Qna">
+		<id property="qNo" column="Q_NO"/>
+		<result property="qTitle" column="Q_TITLE"/>
+		<result property="qWriter" column="Q_WRITER"/>
+		<result property="qContent" column="Q_CONTENT"/>
+		<result property="qDate" column="Q_DATE"/>
+		<result property="aStatus" column="A_STATUS"/>
+		<result property="qStatus" column="Q_STATUS"/>		
+	</resultMap>
 
 		<!-- 회원 수와 쿠폰 갯수 조회  -->
 	<select id="getListCount" resultType="_int">
@@ -115,12 +120,20 @@
 		<if test="value == 2">
 			from coupon
 		</if>
-		<if test="value ==3">
+		<if test="value == 3">
 			from member m
 			left join tutor using(user_no)
 			left join certification using(user_no)
 			where user_type='T'
 		</if>
+		<if test="value == 4">
+			from qna
+		</if>
+		<if test="value == 5">
+			from qna
+			where a_status='N'
+		</if>
+		
 	</select>
 	<!-- 회원수를 검색하여 리턴하는 구문  -->
 	<select id="getListMemberSearchCount" resultType="_int">
@@ -232,15 +245,47 @@
 		select *
 		from lessonRating
 	</select>
-	<!-- 일반회원을 튜터 회원으로  -->
-	<update id="changeTutorStatus" parameterType="list">
-		update tutor
-		set tstatus='Y'
-		where user_no in
-		<foreach collection="list" item="uNo" open="(" close=")" separator=",">
-			#{uNo.value}
-		</foreach>
-	
-	</update>
 
+ 	<!-- 일반회원을 튜터 회원으로  튜터를 일반 회원으로-->
+	<update id="changeTutorStatus" parameterType="hashmap">
+		update tutor
+			<choose>	
+				<when test='cStr.equals("R")'>
+					set tstatus='Y'
+					where user_no in
+					<foreach collection="uNo" item="n" open="(" close=")" separator=",">
+						${n}
+					</foreach>
+				</when>
+			</choose>
+			<choose>	
+				<when test='cStr.equals("Y")'>
+					set tstatus='R'
+					where user_no in
+					<foreach collection="uNo" item="n" open="(" close=")" separator=",">
+						${n}
+					</foreach>
+				</when>
+			</choose>
+	</update>
+	
+	
+	
+	 
+	<select id="selectQnaList" resultMap="QnaResultSet" parameterType="Qna">
+		select *
+		from qna
+	</select>
+	<!--
+	<select id="searchQnaList" resultMap="QnaResultSet" parameterType="Qna2">
+		select count(*)
+		<if test="value == 1">
+		from qna
+		</if>
+		<if test="value == 2">
+		from qna
+		where a_status='N'
+		</if>
+	</select> -->
+	
 </mapper>

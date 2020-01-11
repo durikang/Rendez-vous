@@ -1,6 +1,7 @@
 package com.kh.rendez.manager.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -15,6 +16,7 @@ import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.MemberJoinUserpropic;
 import com.kh.rendez.manager.model.vo.PageInfo;
 import com.kh.rendez.manager.model.vo.Search;
+import com.kh.rendez.support.model.vo.Qna;
 
 @Repository("mnDao")
 public class ManagerDao {
@@ -25,6 +27,7 @@ public class ManagerDao {
 		
 		return sqlSession.selectOne("managerMapper.getListCount",n);
 	}
+	
 	public int getListMemberSearchCount(Search search) {
 		return sqlSession.selectOne("managerMapper.getListMemberSearchCount",search);
 	}
@@ -69,10 +72,36 @@ public class ManagerDao {
 	public ArrayList<AdminLesson> selectRealTimeLessonList() {
 		return (ArrayList)sqlSession.selectList("managerMapper.selectRealTimeLessonList");
 	}
-	public int changeTutorStatus(List<Integer> uNo) {
-		return sqlSession.update("managerMapper.changeTutorStatus",uNo);
+	public int changeTutorStatus(HashMap<String, Object> map) {
+		return sqlSession.update("managerMapper.changeTutorStatus",map);
+	}
+//	답변과 미답변 구분하여 리턴
+	public int selectQnaResponseCount(int i) {
+		return sqlSession.selectOne("managerMapper.getListCount",i) == null ? 0 : sqlSession.selectOne("managerMapper.getListCount",i);
+	}
+//	전체 qan 리턴
+	public ArrayList<Qna> selectQna(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.selectQnaList",null,rowBounds);
+	}
+	public ArrayList<Qna> searchQnaList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.searchQnaList",null,rowBounds);
+	}
+	
+	public int getQnaListCount(Search search) {
+
+		return sqlSession.selectOne("managerMapper.getQnaListCount",search);
 	}
 
-	
+	public int getListQnaCount(Search search) {
+		
+		return 0;
+	}
 	
 }

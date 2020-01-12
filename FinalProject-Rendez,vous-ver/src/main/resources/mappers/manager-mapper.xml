@@ -272,13 +272,9 @@
 	
 	
 	 
-	<select id="selectQnaList" resultMap="QnaResultSet" parameterType="Qna">
+	<select id="selectQnaList" resultMap="QnaResultSet" parameterType="_int">
+		
 		select *
-		from qna
-	</select>
-	<!--
-	<select id="searchQnaList" resultMap="QnaResultSet" parameterType="Qna2">
-		select count(*)
 		<if test="value == 1">
 		from qna
 		</if>
@@ -286,6 +282,39 @@
 		from qna
 		where a_status='N'
 		</if>
-	</select> -->
+		
+	</select>
+	
+	<select id="searchQnaCount" resultType="_int">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+		select count(*)
+		from qna
+		<where>
+			<choose>
+				<when test="searchCondition == 'qWriter'">
+					AND q_writer LIKE #{sv}
+				</when>
+				<when test="searchCondition == 'qTitle'">
+					AND q_title LIKE #{sv}
+				</when>
+			</choose>
+		</where>	
+	</select>
+	
+	<select id="searchQnaList" resultMap="QnaResultSet" parameterType="Search">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+		select *
+		from qna
+		<where>
+			<choose>
+				<when test="searchCondition == 'qWriter'">
+					AND q_writer LIKE #{sv}
+				</when>
+				<when test="searchCondition == 'qTitle'">
+					AND q_title LIKE #{sv}
+				</when>
+			</choose>
+		</where>	
+	</select>
 	
 </mapper>

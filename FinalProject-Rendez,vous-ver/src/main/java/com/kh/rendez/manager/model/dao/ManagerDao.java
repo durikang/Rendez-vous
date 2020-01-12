@@ -84,14 +84,14 @@ public class ManagerDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("managerMapper.selectQnaList",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("managerMapper.selectQnaList",1,rowBounds);
 	}
-	public ArrayList<Qna> searchQnaList(PageInfo pi) {
+	public ArrayList<Qna> searchQnaList(PageInfo pi,Search search) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		
-		return (ArrayList)sqlSession.selectList("managerMapper.searchQnaList",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("managerMapper.searchQnaList",search,rowBounds);
 	}
 	
 	public int getQnaListCount(Search search) {
@@ -101,7 +101,14 @@ public class ManagerDao {
 
 	public int getListQnaCount(Search search) {
 		
-		return 0;
+		return sqlSession.selectOne("managerMapper.searchQnaCount",search);
+	}
+
+	public ArrayList<Qna> selectNoQna(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.selectQnaList",2,rowBounds);
 	}
 	
 }

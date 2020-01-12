@@ -72,6 +72,7 @@ public class ManagerController {
 		
 		mv.addObject("qnaCountlist",qnaCountlist);
 		mv.addObject("qnaList",qnaList);
+		mv.addObject("pi",Pagination.getPageInfo());
 		mv.setViewName("manager/boarder/homeManagement");
 		
 		return mv;
@@ -132,21 +133,23 @@ public class ManagerController {
 	@RequestMapping("supSearch.do")
 	public ModelAndView supportSearch(Search search, ModelAndView mv,
 			@RequestParam(value="page",required=false) Integer page) {
-		//System.out.println(search.getSearchCondition());
 		int currentPage = page != null ? page : 1;
 		
-		//System.out.println(search.getSearchValue());
-		
+
+		System.out.println(search);
 		ArrayList<Qna> searchList = mnService.searchQnaList(search,currentPage);
+		int qnaCount=mnService.selectQnaResponseCount(5);
+		int allQnaCount = mnService.selectQnaResponseCount(4);
+		List<Integer> qnaCountlist = new ArrayList<>();
 		
-		/*System.out.println("searchList : "+searchList);
-		System.out.println("pi : "+Pagination.getPageInfo());
-		System.out.println("search : "+search);*/
+		qnaCountlist.add(qnaCount);
+		qnaCountlist.add(allQnaCount);
 		
 		if(searchList !=null) {
-			mv.addObject("list", searchList).
+			mv.addObject("qnaList", searchList).
+			addObject("qnaCountlist",qnaCountlist).
 			addObject("pi", Pagination.getPageInfo()).
-			addObject("search", search).setViewName("manager/boarder/memberBoarderForm");
+			addObject("search", search).setViewName("manager/boarder/homeManagement");
 		}else {
 			mv.addObject("msg","찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.");
 		}
@@ -283,7 +286,8 @@ public class ManagerController {
 		
 	}
 	@RequestMapping("changeTutor.do")
-	public ModelAndView changeTutor(ModelAndView mv,@RequestParam("cStr") String cStr,@RequestParam("uNo") List<Integer> uNo,@RequestParam("page") Integer page){
+	public ModelAndView changeTutor(ModelAndView mv,@RequestParam("cStr") String cStr,@RequestParam("uNo") List<Integer> uNo,
+			@RequestParam("page") Integer page){
 		
 		HashMap<String, Object> map= new HashMap<>();
 		
@@ -297,6 +301,39 @@ public class ManagerController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("rearrangement.do")
+	public ModelAndView rearrangement(ModelAndView mv,@RequestParam("type") String type, @RequestParam("page") Integer page) {
+		
+		int currentPage = page !=null ? page : 1;
+		int qnaCount=mnService.selectQnaResponseCount(5);
+		int allQnaCount = mnService.selectQnaResponseCount(4);
+		List<Integer> qnaCountlist = new ArrayList<>();
+		
+		qnaCountlist.add(qnaCount);
+		qnaCountlist.add(allQnaCount);
+		ArrayList<Qna> qnaList=new ArrayList<>();
+		if(type.equals("allQna")) {
+			qnaList = mnService.selectQna(currentPage);	
+		}
+		
+		if(type.equals("noQna")) {
+			
+			qnaList = mnService.selectQna(5,currentPage);	
+		}
+		
+		
+		mv.addObject("qnaCountlist",qnaCountlist);
+		mv.addObject("qnaList",qnaList);
+		
+		mv.addObject("pi",Pagination.getPageInfo());
+		mv.setViewName("manager/boarder/homeManagement");
+		
+		
+		
+		return mv;
+	}
+	
 
 	
 	

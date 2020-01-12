@@ -68,8 +68,18 @@
 				
 				<span class="count-area-left">(전체 문의 갯수 : <span id="allCount">0개</span> | 답변 안한 문의 : <span id="noCount">0개</span>)</span>
 				<span class="count-area-right">
-					<a id="all-qna" class="btn btn-info btn-sm">전체 문의</a> | <a id="sort-qna" class="btn btn-info btn-sm">답변 안한 문의</a> |
-					<a id="all-qna" class="btn btn-info btn-sm">날자 순</a>  				
+			
+					<c:url var="allQna" value="rearrangement.do">
+						<c:param name="page" value="${pi.currentPage }"/>
+						<c:param name="type" value="allQna" />
+					</c:url>
+					<c:url var="noQna" value="rearrangement.do">
+						<c:param name="page" value="${pi.currentPage }"/>
+						<c:param name="type" value="noQna" />
+					</c:url>
+				
+					<a id="all-qna" class="btn btn-info btn-sm" href="${ allQna }">전체 문의</a> | 
+					<a id="sort-qna" class="btn btn-info btn-sm" href="${ noQna }">답변 안한 문의</a>			
 				</span>
 				<br>
 				<table class="table listArea ft-clear">
@@ -127,6 +137,7 @@
 					</form>
 				</div>
 				<br>
+				
 				<!-- 페이징 처리  -->
 				<nav aria-label="...">
 					<ul class="pagination justify-content-center">
@@ -149,7 +160,7 @@
 						</c:if>
 						<c:if test="${ search ne null }">
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="mnsearch.do">
+								<c:url var="before" value="manageHo.do">
 									<c:param name="page" value="${ pi.currentPage -1 }" />
 									<c:param name="searchCondition" value="${ search.searchCondition }"/>
 									<c:param name="searchValue" value="${ search.searchValue }"/>
@@ -171,7 +182,7 @@
 										</li>
 									</c:when>
 									<c:otherwise>
-										<c:url var="pagination" value="mn.do">
+										<c:url var="pagination" value="manageHo.do">
 											<c:param name="page" value="${ p }" />
 										</c:url>
 										<li class="page-item">
@@ -252,53 +263,7 @@
 	</div>
 	
 	
-	<!-- 모달 영역  -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">×</button>
-					<br>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-6">
-							<img src="" class="img-thumbnail" alt="Cinque Terre"
-								width="304" height="236" id="pic"><br>
-						</div>
-						<div class="col-6">
-							아이디 : <span id="id"></span><br>
-							사는곳 : <span id="area"></span><br>
-							나이 : <span id="age"></span><br>
-							회원 타입 : <span id="type"></span><br>
-						</div>
-					</div>
-					<br>
-					<form action="couSend.do" method="get">
-						<input type="hidden" name="uNo" id="uNo"><br>						
-						<input type="hidden" name="uId" id="uId"><br>						
-						<input type="text" name="cName" id="cName" placeholder="쿠폰 이름"><br><br>
-						<!-- <input type="text" name="disRate" class="data_col9 w100p" onkeypress="return isNumberKey(event)" onkeyup="return delHangle(event)"><br> --> 
-					
-							<select name="disRate"class="selectpicker">
-						      <c:forEach var="i" begin="1" end="9">					         
-								  <option value="${10 * i }">${ i*10 }%할인</option>        
-						      </c:forEach>
-							</select><br><br>
-					    <p><input type="text" id="from" placeholder="시작일을 선택하세요" name="startDate"> ~ <input type="text" id="to" name="endDate" placeholder="종료일을 선택하세요."></p>
-						<button type="submit" class="btn btn-success" onclick="sendCoupon">쿠폰 보내기</button>
-					</form>
-				</div>
-				
-				
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 <!-- jquery CDN -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jquery UI CDN -->
@@ -320,27 +285,11 @@
 			}).mouseout(function() {
 				$(this).parent().css("background", "white");
 			}).click(function() {
-				$("#id").html($(this).parent().children().eq(1).html());
-				$("#area").html($(this).parent().children().eq(7).html());
-				$("#age").html($(this).parent().children().eq(4).html());
+
+				var qNo=$(this).parent().children().eq(0).html();
+				var page=${ pi.currentPage };
 				
-				$("#type").html("");
-				if($(this).parent().children().eq(8).html() =="T"){
-					$("#type").html("튜터");
-				}else if($(this).parent().children().eq(8).html() =="N"){
-					$("#type").html("일반회원");	
-				}
-				
-				//alert($(this).parent().children().eq(6).html());
-				$("#pic").attr("src","resources/user/img/"+$(this).parent().children().eq(6).html());
-				
-				$("#uNo").val($(this).parent().children().eq(0).html());
-				$("#uId").val($(this).parent().children().eq(1).html());
-								
-				/* 멤버 사진 경로 바뀔 경우가 있음  */
-				//$("#pic").attr("src","resources/managerResources/userPropic/"+$(this).parent().children().eq(6).html());
-				
-				$("#myModal").modal();
+				location.href="qnaDetail.do?qNo="+qNo+"&page="+page;
 				
 			});
 

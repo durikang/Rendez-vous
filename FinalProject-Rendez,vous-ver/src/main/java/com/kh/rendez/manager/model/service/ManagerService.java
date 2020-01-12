@@ -35,8 +35,11 @@ public interface ManagerService {
 	public int selectQnaResponseCount(int i);
 //	qna 리스트
 	public ArrayList<Qna> selectQna(int currentPage);
+//	조건에 맞는 리스트 리턴
+	public ArrayList<Qna> selectQna(int i, int currentPage);
 //	qna검색바
 	public ArrayList<Qna> searchQnaList(Search search, int currentPage);
+
 
 	
 }

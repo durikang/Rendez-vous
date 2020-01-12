@@ -104,7 +104,16 @@ public class ManagerServiceImpl implements ManagerService {
 		int listCount=mnDao.getListQnaCount(search);
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
 		
-		return mnDao.searchQnaList(pi);
+		return mnDao.searchQnaList(pi,search);
+	}
+	@Override
+	public ArrayList<Qna> selectQna(int i, int currentPage) {
+		
+		int listCount=mnDao.getListCount(i);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
+		
+		return mnDao.selectNoQna(pi);
 	}
 
 

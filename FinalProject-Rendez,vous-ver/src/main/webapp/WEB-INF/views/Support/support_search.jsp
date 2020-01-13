@@ -120,11 +120,17 @@
 	  display: none;
 	
 	  }
-	  
 	  #menu_btn {
+	  	margin-top:15%;
 	  	width:120px;
 	  	height:50px;
-	  	background-color: #c9c0b1;
+	  	border:1px solid #c9c0b1;
+	  }
+	  
+	  #qTitle:hover {
+		text-decoration:none;
+		font-weight:bold;
+		color: #c9c0b1; 
 	  }
 </style>
 <body>
@@ -184,7 +190,7 @@
 								<c:param name="qNo" value="${ q.qNo }"/>
 								<c:param name="page" value="${ pi.currentPage }"/>
 							</c:url>
-							<a href="${ qnaDetail }">${ q.qTitle }</a>
+							<a id="qTitle" href="${ qnaDetail }">${ q.qTitle }</a>
 						</c:if>
 						<c:if test="${ empty loginUser }">
 							${ q.qTitle }

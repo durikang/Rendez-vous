@@ -118,6 +118,14 @@
 	text-align: center;
 }
 
+.board_area h1 {
+	text-align:left;
+	margin-left: 8%;
+	padding-bottom:2%;
+	border-bottom : 1px solid black;
+	width:87%;
+}
+
 #boardTable {
 	width: 90%;
 	margin: auto;
@@ -156,6 +164,12 @@
 	right: 50px;
 	bottom: 100px;
 	display: none;
+}
+
+#qTitle:hover {
+	text-decoration:none;
+	font-weight:bold;
+	color: #c9c0b1; 
 }
 </style>
 <body>
@@ -246,7 +260,7 @@
 											<c:param name="qNo" value="${ q.qNo }" />
 											<c:param name="page" value="${ pi.currentPage }" />
 										</c:url>
-											<a href="${ myQnaDetail }">${ q.qTitle }</a>
+											<a id="qTitle" href="${ myQnaDetail }">${ q.qTitle }</a>
 										</c:if>
 										<c:if test="${ empty loginUser }">
 											${ q.qTitle }

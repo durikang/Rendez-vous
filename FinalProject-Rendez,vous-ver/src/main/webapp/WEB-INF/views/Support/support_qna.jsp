@@ -116,9 +116,12 @@
 	text-align: center;
 }
 
-.board_area button {
-	margin-right: 10%;
-	margin-bottom: 2%;
+.board_area h1 {
+	text-align:left;
+	margin-left: 8%;
+	padding-bottom:2%;
+	border-bottom : 1px solid black;
+	width:87%;
 }
 
 #boardTable {
@@ -162,10 +165,17 @@
 }
 
 .write_btn {
-	float: right;
-	margin-bottom: 1%;
+	float:right;
+	margin-right:6%;
+	margin-top: 1%;
 	width: 80px;
-	background: #c9c0b1;
+	border:1px solid #c9c0b1; 
+}
+
+#qTitle:hover {
+	text-decoration:none;
+	font-weight:bold;
+	color: #c9c0b1; 
 }
 </style>
 <body>
@@ -237,9 +247,6 @@
 			</div>
 			<div class="board_area">
 				<h1>Q & A</h1>
-				<c:if test="${ !empty loginUser }">
-					<button class="write_btn">문의 하기</button>
-				</c:if>
 				<table id="boardTable">
 					<thead>
 						<tr>
@@ -260,7 +267,7 @@
 											<c:param name="qNo" value="${ q.qNo }" />
 											<c:param name="page" value="${ pi.currentPage }" />
 										</c:url>
-										<a href="${ qnaDetail }">${ q.qTitle }</a>
+										<a id="qTitle" href="${ qnaDetail }">${ q.qTitle }</a>
 									</c:if> <c:if test="${ empty loginUser }">
 										${ q.qTitle }
 									</c:if>
@@ -309,11 +316,14 @@
 										<c:param name="page" value="${ pi.currentPage + 1 }" />
 									</c:url>
 									<a href="${ after }">[다음]</a>
-								</c:if>
+								</c:if>									
 							</td>
 						</tr>
 					</tbody>
-				</table>				
+				</table>
+				<c:if test="${ !empty loginUser }">
+					<button class="write_btn">문의 하기</button>
+				</c:if>				
 			</div>
 		</div>
 	</div>

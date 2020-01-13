@@ -27,8 +27,8 @@
 <!-- Custom styles for this template -->
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
 
-
-<script src="https://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
+<!-- ckeditor -->
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 </head>
 <style>
     * {
@@ -176,6 +176,16 @@
 	  	border-radius:10px;
 	  	background:#c9c0b1;
 	  }
+	  
+	  #cancel:hover {
+	  	text-decoration:none;
+	  	color:black;
+	  	font-weight:bold;
+	  }
+	  
+	  #submit:hover {
+	  	font-weight:bold;
+	  }
 </style>
 <body>
 	<c:import url="../common/menubar.jsp"/>
@@ -234,14 +244,32 @@
 							<td>
 								<textarea name="qContent"></textarea>
 			   	                <script>
-			                        CKEDITOR.replace( 'qContent');
+			                        $(document).ready(function(){
+			                        	CKEDITOR.replace( 'qContent', {
+			                        		filebrowserImageUploadUrl:'/image/upload',
+			                        		height:300
+			                        	});
+			                        	
+			                        	CKEDITOR.on('dialogDefinition', function(e){
+			                        		var dialogName = e.data.name;
+			                        		var dialogDefinition = e.data.definition;
+			                        		
+			                        		switch(dialogName) {
+			                        			case 'image' :
+			                        				//dialogDefinition.removeContents('info');
+			                        				dialogDefinition.removeContents('Link');
+			                        				dialogDefinition.removeContents('advanced');
+			                        				break;
+			                        		}
+			                        	});
+			                        });
 				                </script>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center">
-								<button type="submit">등록하기</button> &nbsp;
-								<button type="button"><a href="support_qna.do">목록으로</a></button>
+								<button type="submit" id="submit">등록하기</button> &nbsp;
+								<button type="button"><a id="cancel" href="support_qna.do">목록으로</a></button>
 							</td>
 						</tr>
 					</table>

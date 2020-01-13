@@ -197,27 +197,25 @@ button:hover {
 /*비활성화 탭(기본 탭모양) 설정*/
 #tabs a {
 	position: relative;
-	width: 180px;
-	height: 50px; /* 04.탭메뉴 하나의 넓이와 높이 */
-	background: #CCC;
+	width: 100px;
+	height: 100px; /* 04.탭메뉴 하나의 넓이와 높이 */
 	float: left;
-	text-decoration: none;
-	text-align: center;
-	font-size: 14pt; /* 05.탭메뉴 폰트사이즈 */
+	/* text-decoration: none;
+	text-align: center; */
 	line-height: 50px;
 	/* 06.텝메뉴 폰트를 세로중앙정렬 맞추기위해 -> 04.탭메뉴 높이와 같은 값을 입력해주세요 */
-	color: #444;
 }
 
 #tabs a::after {
-	z-index: 1;
-	background: #fff;
+	/* z-index: 1; */
+	/* background: #fff; */
 }
 
 /*활성화탭(탭 클릭했을때 모양) 설정*/
 #tabs #current a, #tabs #current a::after {
-	background: darkorange; /* 07.탭메뉴 색상 설정 */
+	 /* background: #ccc; */  /* 07.탭메뉴 색상 설정 */
 	/* z-index: 3; */
+	text-shadow: 5px 5px 5px #aaa;
 }
 
 /* ------------------------------------------------- */
@@ -229,7 +227,7 @@ button:hover {
 	/*padding:20px; /* 09.컨텐츠 안쪽 여백 설정 */
 	position: relative;
 	/* z-index: 2; */
-	border-radius: 5px 5px 5px 5px;
+	/* border-radius: 5px 5px 5px 5px; */
 }
 
 #content h2, #content h3, #content p {
@@ -394,20 +392,18 @@ form {
 	opacity: 0.9;
 }
 
-#cancel {
-	width: 127px;
-	height: 48px;
-	text-align: center;
-	border: none;
-	margin-top: 20px;
-	cursor: pointer;
-}
-
-#cancel:hover {
-	color: #fff;
-	background-color: #216282;
-	opacity: 0.9;
-}
+#cancel, #cancel2 { 
+         width: 127px; height: 48px; 
+         text-align: center; 
+         border: none; 
+         margin-top: 20px; 
+         cursor: pointer; 
+     } 
+#cancel:hover, #cancel2:hover{ 
+         color: #fff; 
+         background-color: #216282; 
+         opacity: 0.9; 
+     }
 
 .modal {
 	position: fixed;
@@ -422,8 +418,31 @@ form {
 	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform
 		0.25s;
 }
+.modal2{ 
+         position: fixed; 
+         left: 0; 
+         top: 0; 
+         width: 100%; 
+         height: 100%; 
+         background-color: rgba(0, 0, 0, 0.5); 
+         opacity: 0; 
+         visibility: hidden; 
+         transform: scale(1.1); 
+         transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+     } 
 
 .modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 1rem 1.5rem;
+	width: 560px;
+	height: 350px;
+	border-radius: 0.5rem;
+}
+.modal-content2 {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -444,10 +463,22 @@ form {
 	border-radius: 0.25rem;
 	background-color: lightgray;
 }
+.close-button2 {
+	float: right;
+	width: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 0.25rem;
+	background-color: lightgray;
+}
 
 .close-button:hover {
 	background-color: darkgray;
 }
+.close-button2:hover { 
+         background-color: darkgray; 
+     } 
 
 .show-modal {
 	opacity: 1;
@@ -455,6 +486,12 @@ form {
 	transform: scale(1.0);
 	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
+.show-modal2 {
+        opacity: 1; 
+        visibility: visible; 
+        transform: scale(1.0); 
+        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+     }
 </style>
 
 <body>
@@ -482,23 +519,23 @@ form {
 
 	<div id="wrap2">
 		<ul id="tabs">
-			<li><a href="#" title="tab1">추천 클래스</a></li>
-			<li><a href="#" title="tab2">뷰티 클래스</a></li>
-			<li><a href="#" title="tab3">라이프 스타일</a></li>
+			<li><a href="#" title="tab1"><i class="far fa-thumbs-up fa-2x"></i></a></li>
+			<li><a href="#" title="tab2"><i class="fas fa-music fa-2x"></i></a></li>
+			<li><a href="#" title="tab3"><i class="fas fa-language fa-2x"></i></a></li>
+			<li><a href="#" title="tab4"><i class="fas fa-play-circle fa-2x"></i></a></li>
 		</ul>
 		<br>
 		<br>
 
 		<div id="content">
-
 			<div id="tab1">
 				<h2>추천 수업</h2>
-				<div id="class">
 					<div id="c1">
 						<img id="c1" src="resources/homeImg/slide1.PNG">
 						<p>
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 서울 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							서울 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;15000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -508,7 +545,8 @@ form {
 						<img id="c2" src="resources/homeImg/slide1.PNG">
 						<p>
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							경기 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;25000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -523,7 +561,8 @@ form {
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							경기 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;35000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -538,19 +577,16 @@ form {
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#">더보기</a> 
-					<i class="fas fa-angle-double-right"></i>
-				</div>
 			</div>
 
 			<div id="tab2">
 				<h2>추천 수업</h2>
-				<div id="class">
 					<div id="c1">
 						<img id="c1" src="resources/homeImg/slide1.PNG">
 						<p>
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 서울 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							서울 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;15000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -560,7 +596,8 @@ form {
 						<img id="c2" src="resources/homeImg/slide1.PNG">
 						<p>
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							경기 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;25000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -575,7 +612,8 @@ form {
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							경기 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;35000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -590,19 +628,16 @@ form {
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#">더보기</a> 
-					<i class="fas fa-angle-double-right"></i>
-				</div>
 			</div>
 
 			<div id="tab3">
 				<h2>추천 수업</h2>
-				<div id="class">
 					<div id="c1">
 						<img id="c1" src="resources/homeImg/slide1.PNG">
 						<p>
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 서울 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							서울 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;15000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -612,7 +647,8 @@ form {
 						<img id="c2" src="resources/homeImg/slide1.PNG">
 						<p>
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							경기 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;25000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -627,7 +663,8 @@ form {
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 경기 &nbsp;
+							<i class="fas fa-map-marker-alt"></i> 
+							경기 &nbsp;
 							<i id="ic1" class="fas fa-ellipsis-v"></i> 
 							&nbsp;35000 
 							<i id="ic1" class="fas fa-won-sign"></i>
@@ -642,13 +679,33 @@ form {
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#">더보기</a> 
-					<i class="fas fa-angle-double-right"></i>
-				</div>
-			</div>
+			</div>	
 			</div>
 		</div>
+		
+		<!-- 버튼 -->
+		<button class="trigger2">카테고리</button> 
 
+		<!-- 팝업 될 레이어 --> 
+        <div class="modal2"> 
+            <div class="modal-content2"> 
+                <span class="close-button2">&times;</span> 
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#">디자인</a><br>
+                &nbsp;&nbsp;&nbsp;
+                <a href="#">실무역량</a><br>
+                <a href="#">뷰티</a><br>
+                <a href="#">영상</a><br>
+                <a href="#">외국어</a><br>
+                <a href="#">음악</a><br>
+                <a href="#">라이프스타일</a><br>
+                <a href="#">기타</a>
+                <br>
+                <input type="button" id="cancel2" value="취소"> 
+                  <input type="submit" id="submit" value="보내기"> 
+            </div> 
+        </div>
+						
 	<div class="slidershow middle">
 
 		<div class="slides">
@@ -675,8 +732,10 @@ form {
 		</div>
 
 		<div class="navigation">
-			<label for="r1" class="bar"></label> <label for="r2" class="bar"></label>
-			<label for="r3" class="bar"></label> <label for="r4" class="bar"></label>
+			<label for="r1" class="bar"></label> 
+			<label for="r2" class="bar"></label>
+			<label for="r3" class="bar"></label> 
+			<label for="r4" class="bar"></label>
 			<label for="r5" class="bar"></label>
 		</div>
 	</div>
@@ -724,7 +783,7 @@ form {
 	</script>
 
 	<!--팝업-->
-	<div class="layer_popup" style="position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; z-index: 1; border: 1px solid #333333;"
+	<div class="layer_popup" style="position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;"
 		id="layer_pop">
 		<table width="500" border="0" cellpadding="0" cellspacing="0">
 			<tr>
@@ -788,28 +847,39 @@ form {
 	</div>
 
 	<script type="text/javascript">
-		var modal = document.querySelector(".modal");
-		var trigger = document.querySelector(".trigger");
-		var closeButton = document.querySelector(".close-button");
-		var cancelButton = document.querySelector("#cancel");
+            var modal = document.querySelector(".modal");
+            var modal2 = document.querySelector(".modal2");
+            var trigger = document.querySelector(".trigger");
+            var trigger2 = document.querySelector(".trigger2");
+            var closeButton = document.querySelector(".close-button");
+            var closeButton2 = document.querySelector(".close-button2");
+            var cancelButton = document.querySelector("#cancel");
+            var cancelButton2 = document.querySelector("#cancel2");
+    
+            function toggleModal() {
+                modal.classList.toggle("show-modal");
+            }
 
-		//console.log(modal);
+            function toggleModal2() {
+                modal2.classList.toggle("show-modal2");
+            }
 
-		function toggleModal() {
-			modal.classList.toggle("show-modal");
-		}
-
-		function windowOnClick(event) {
-			if (event.target === modal) {
-				toggleModal();
-			}
-		}
-
-		trigger.addEventListener("click", toggleModal);
-		closeButton.addEventListener("click", toggleModal);
-		cancel.addEventListener("click", toggleModal);
-		window.addEventListener("click", windowOnClick);
-	</script>
+            function windowOnClick(event) {
+                if (event.target === modal) {
+                    toggleModal();
+                } else if (event.target === modal2) {
+                    toggleModal2();
+                }
+            }
+    
+            trigger.addEventListener("click", toggleModal);
+            trigger2.addEventListener("click", toggleModal2);
+            closeButton.addEventListener("click", toggleModal);
+            closeButton2.addEventListener("click", toggleModal2);
+            cancel.addEventListener("click", toggleModal);
+            cancel2.addEventListener("click", toggleModal2);
+            window.addEventListener("click", windowOnClick);
+        </script>
 
 	<br><br><br><br><br>
 	<br><br><br><br><br>

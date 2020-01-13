@@ -120,10 +120,10 @@
 
 .board_area h1 {
 	text-align:left;
-	margin-left: 8%;
+	margin-left: 5%;
 	padding-bottom:2%;
-	border-bottom : 1px solid black;
-	width:87%;
+	border-bottom : 2px solid black;
+	width:90%;
 }
 
 #boardTable {
@@ -207,13 +207,10 @@
 			<div class="sidebar">
 				<h2>문의 내역</h2>
 				<ul>
-					<li><a href="support_main.do"><i class="fas fa-home"
-							style="color: #c9c0b1;"></i>Home</a></li>
-					<li><a href="support_qna.do"><i
-							class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q
-							& A</a></li>
-					<li><a href="support_list.do"><i
-							class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>
+					<li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
 				</ul>
 			</div>
 		</div>

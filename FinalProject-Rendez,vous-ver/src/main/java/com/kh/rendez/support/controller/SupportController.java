@@ -222,4 +222,9 @@ public class SupportController {
 		return gson.toJson(aList);
 	}
 	
+	@RequestMapping("support_faq.do")
+	public String faqView() {
+		return "Support/support_faq";
+	}
+	
 }

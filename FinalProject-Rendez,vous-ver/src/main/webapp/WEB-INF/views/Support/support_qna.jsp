@@ -14,19 +14,14 @@
 
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap core CSS -->
 <!-- <link href="support/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/support/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/support/vendor/bootstrap/css/bootstrap.min.css">
 
 <!-- Custom fonts for this template -->
-<link href="resources/support/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="resources/support/vendor/simple-line-icons/css/simple-line-icons.css"
-	rel="stylesheet" type="text/css">
+<link href="resources/support/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link href="resources/support/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"	rel="stylesheet" type="text/css">
 
 
@@ -118,10 +113,10 @@
 
 .board_area h1 {
 	text-align:left;
-	margin-left: 8%;
+	margin-left: 5%;
 	padding-bottom:2%;
-	border-bottom : 1px solid black;
-	width:87%;
+	border-bottom : 2px solid black;
+	width:90%;
 }
 
 #boardTable {
@@ -213,11 +208,9 @@
 			<div class="sidebar">
 				<h2>q & a</h2>
 				<ul>
-					<li><a href="support_main.do"><i class="fas fa-home"
-							style="color: #c9c0b1;"></i>Home</a></li>
-					<li><a href="support_qna.do"><i
-							class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q
-							& A</a></li>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>					
 					<c:if test="${ !empty loginUser }">
 						<li><a href="support_list.do"><i
 								class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
@@ -268,11 +261,19 @@
 											<c:param name="page" value="${ pi.currentPage }" />
 										</c:url>
 										<a id="qTitle" href="${ qnaDetail }">${ q.qTitle }</a>
-									</c:if> <c:if test="${ empty loginUser }">
-										${ q.qTitle }
+									</c:if> 
+									<c:if test="${ empty loginUser }">
+										로그인 후 조회 가능
 									</c:if>
 								</td>
-								<td>${q.qWriter}</td>
+								<td>
+									<c:if test="${ !empty loginUser }">
+										${q.qWriter}							
+									</c:if>
+									<c:if test="${ empty loginUser }">
+										-
+									</c:if>
+								</td>
 								<td>${q.qDate}</td>
 								<td><c:if test='${ q.aStatus == "N" }'>
 											X

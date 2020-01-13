@@ -45,7 +45,7 @@
    LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
    LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
 WHERE ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%'))
-   AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
  	<choose>
@@ -77,7 +77,7 @@ WHERE ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' |
    LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
    LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
 WHERE L_CATE_MAIN = #{cateMain}
-   AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
    <choose>
@@ -109,7 +109,7 @@ WHERE L_CATE_MAIN = #{cateMain}
    LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
    LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
 	WHERE L_CATE_SUB = #{cateSub}
-   AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
    <choose>
@@ -134,7 +134,7 @@ WHERE L_CATE_MAIN = #{cateMain}
 	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
 	 L.L_STATUS = 'Y'
-	 AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
 	<choose>
 		<when test="sType == 'Search'">
 		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
@@ -155,7 +155,7 @@ WHERE L_CATE_MAIN = #{cateMain}
 	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
 		 L.L_STATUS = 'Y'
-		 AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+		 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
 		<if test="sDay != null">
 			 AND L.L_DAY IN 
 			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">
@@ -195,7 +195,7 @@ WHERE L_CATE_MAIN = #{cateMain}
 	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
 		 L.L_STATUS = 'Y'
-		 AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+		 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
 		<if test="sDay != null">
 			 AND L.L_DAY IN 
 			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">
@@ -247,7 +247,7 @@ WHERE L_CATE_MAIN = #{cateMain}
 	 <foreach collection="ar" item="item"  open="(" close=")" separator=",">
             #{item}
         	</foreach> 
-        	 AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+        	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
         	AND  L.L_STATUS = 'Y' 
         	AND LA.LA_TYPE = 1
 	<choose>
@@ -281,7 +281,7 @@ WHERE L_CATE_MAIN = #{cateMain}
   <where> 
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
-   AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    <choose>
 		<when test="sType == 'Search'">
 		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
@@ -312,7 +312,7 @@ WHERE L_CATE_MAIN = #{cateMain}
    <where> 
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
-   AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    <choose>
 		<when test="sType == 'Search'">
 		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
@@ -346,7 +346,7 @@ WHERE L_CATE_MAIN = #{cateMain}
         	</foreach> 
         	AND  L.L_STATUS = 'Y' 
         	AND LA.LA_TYPE = 1
-        	 AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0)  
+        	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0)  
 	GROUP BY L_REGION
 	</select>
 	
@@ -368,7 +368,7 @@ WHERE L_CATE_MAIN = #{cateMain}
         	</foreach> 
         	AND  L.L_STATUS = 'Y' 
         	AND LA.LA_TYPE = 1
-        	 AND LS.L_DAY >= SYSDATE AND LS.REMAIN !=0)  
+        	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0)  
 	GROUP BY L_REGION_SUB
 	</select>
 	

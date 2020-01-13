@@ -16,6 +16,7 @@
 		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.Payment"  alias="Payment"/>
 		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.Coupon"  alias="payCoupon"/>
 		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.InsertCouponInfo"  alias="InsertCouponInfo"/>
+		<typeAlias type="com.kh.rendez.baesung.point.model.vo.Point"  alias="Point"/>
 		<!-- 유현식 별칭 -->
 		<typeAlias alias="LessonInfo" type="com.kh.rendez.lesson.model.vo.LessonInfo"/>
 		<typeAlias alias="LessonAttachment" type="com.kh.rendez.lesson.model.vo.LessonAttachment"/>
@@ -46,6 +47,7 @@
 		<!--  조배성 -검색 맵퍼입니다. -->
 		<mapper resource="mappers/baesung/search-mapper.xml"/>
 		<mapper resource="mappers/baesung/payment-mapper.xml"/>
+		<mapper resource="mappers/baesung/point-mapper.xml"/>
 		<!-- 유현식 매퍼입니다. -->
 		<mapper resource="mappers/lessonInfo-mapper.xml"/>
 		<mapper resource="mappers/tutor-mapper.xml"/>

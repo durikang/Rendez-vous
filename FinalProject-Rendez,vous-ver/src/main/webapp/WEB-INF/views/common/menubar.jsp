@@ -8,7 +8,7 @@
     <title>Document</title>
     <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
     <script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 </head>
 <style>
@@ -166,8 +166,6 @@
            
            location.href = "search.do?sValue=" + sValue;
         }
-    	
-    	
     </script>
 </body>
 </html>

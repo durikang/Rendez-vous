@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pointMapper">
+	<select id="checkUserPoint" resultType="_int">
+	SELECT COUNT(*)
+	FROM USER_POINT
+	WHERE USER_NO = #{uNo}
+	</select>
+	
+	<insert id="insertNewPoint" parameterType="_int">
+	INSERT INTO USER_POINT VALUES(#{uNo}, 0, SYSDATE, 'NEW');
+	</insert>
+	
+	<select id="selectPoint" parameterType="_int" resultType="_int">
+	SELECT POINT
+	FROM USER_POINT
+	WHERE USER_NO = #{uNo}
+	</select>
+</mapper>

@@ -196,7 +196,7 @@
 </div>
 <div id="point_right" style="display: inline-block; position: absolute; top: left:609px; top: 380px;
 color: white; font-size: 40px;">
-<div>현재 나의 포인트 ${point}</div>
+<div>현재 나의 포인트 ${point}p <br> <a onclick="couponPop()" href="#">나의 쿠폰 : ${CouponList.size()}개</a></div>
 <div id="result_id3"></div>
 <div id="result_id"></div>
 
@@ -208,10 +208,19 @@ color: white; font-size: 40px;">
 <script>
 window.onload = function(){
 	
-	var pArr = ["10p","20p","20%","30p","20%","50p","100p","20%"];
+	var pArr = ["10","20","coupon","30","coupon","50","100","coupon"];
 
 	$('#n_start').click(function(){
+		
+		//alert('${repetition}');
+		if('${repetition}' == 'true'){
+			alert("오늘은 이미 참여하였습니다.");
+			return;
+		}
+		
 		rotation();
+		
+		
 	});
 
 	function rotation(){
@@ -245,8 +254,10 @@ window.onload = function(){
 
 		if(part == 8){
 			$('#result_id3').html("<p>당첨내역:" + pArr[0] + "</p>");
+			insertPointOrCoupon(pArr[0]);
 		}else{
 			$('#result_id3').html("<p>당첨내역:" + pArr[part] + "</p>");
+			insertPointOrCoupon(pArr[part]);
 		}
 
 		
@@ -255,7 +266,20 @@ window.onload = function(){
 	function randomize($min, $max){
 		return Math.floor(Math.random() * ($max - $min + 1)) + $min;
 	}
+	
+	function insertPointOrCoupon(val){
+		
+		location.href = "inserPointOrCoupon.do?value="+val;
+	}
+	
+	
+	
 };
+
+function couponPop()
+{
+	popupWindow = window.open('coupon.do', '_blank', 'height=800,width=450,scrollbars=no,status=no');
+}
 </script>
 </body>
 </html>

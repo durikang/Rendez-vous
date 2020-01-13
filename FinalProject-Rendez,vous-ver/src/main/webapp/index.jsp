@@ -10,7 +10,7 @@
 	
 	<script>
 		window.onload=function(){
-			location.href='pointView.do';
+			location.href='home.do';
 		}
 		/* 수정  */
 	</script>

@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.rendez.manager.model.vo.Userpropic;
 import com.kh.rendez.member.controller.MemberController;
 import com.kh.rendez.member.model.service.MemberService;
 import com.kh.rendez.member.model.vo.Member;
@@ -30,6 +32,7 @@ import com.kh.rendez.support.common.Pagination;
 import com.kh.rendez.support.exception.SupportException;
 import com.kh.rendez.support.model.service.SupportService;
 import com.kh.rendez.support.model.vo.Qna;
+import com.sun.glass.ui.Window;
 import com.kh.rendez.member.model.exception.MemberException;
 
 @SessionAttributes("loginUser")
@@ -41,43 +44,24 @@ public class MemberController {
 
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-
+	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public String memberLogin(Member m, Model model, HttpSession session, HttpServletRequest request) {
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-		
-		m.setUser_id(id);
-		m.setUser_pwd(pwd);
-		
-		Member loginUser = mService.loginMember(m);
-		/*System.out.println(loginUser);*/
-		if(loginUser != null) {
-			session.setAttribute("loginUser", loginUser);
-			return "home";
-		} else {
-			model.addAttribute("msg", "로그인 실패");
-			return "common/errorPage";
-		}
-	}
-
-	/*// 내가 쓴 문의내역 리스트
-	@RequestMapping("support_list.do")
-	public ModelAndView myQnaList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page, HttpSession session) {
-		int currentPage = page != null ? page : 1;
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		String writer = loginUser.getUser_name();
-		ArrayList<Qna> list = sService.selectMyQnaList(currentPage, writer);
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.addObject("pi", Pagination.getPageInfo());
-			mv.setViewName("Support/support_list");
-		} else {
-			throw new SupportException("문의 내역 조회 실패!");
-		}
-		
-		return mv;
-	}*/
+	   public String memberLogin(Member m, Model model, HttpSession session, HttpServletRequest request) {
+	      String id = request.getParameter("id");
+	      String pwd = request.getParameter("pwd");
+	      
+	      m.setUser_id(id);
+	      m.setUser_pwd(pwd);
+	      
+	      Member loginUser = mService.loginMember(m);
+	      if(loginUser != null) {
+	         session.setAttribute("loginUser", loginUser);
+	         return "home";
+	      } else {
+	         model.addAttribute("msg", "로그인 실패");
+	         return "common/errorPage";
+	      }
+	   }
 	
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {		
@@ -118,11 +102,6 @@ public class MemberController {
 		return "member/join";
 	}
 	
-	@RequestMapping("deletePwCheck.do")
-	public String deletePwCheckView() {
-		return "member/deletePwCheck";
-	}
-	
 	@RequestMapping("dupid.do")
 	public ModelAndView idDuplicateCheck(String user_id, ModelAndView mv) {
 		
@@ -137,22 +116,22 @@ public class MemberController {
 	}
 	
 	@RequestMapping("minsert.do")
-	public String memberInsert(HttpServletRequest request, Member m,
+	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
 								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
 								@RequestParam("address2") String address2, 
-								/*@RequestParam(value="uploadFile", required=false) MultipartFile file,*/ Model model) {
+								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
 		
-/*		if(!file.getPhoto).equals("")) {
-			String upphoto = saveFile(file, request);
+		/*if(!file.getuOriginName().equals("")) {
+			String uChangeName = saveFile(file, request);
 			
 			
 			
-			if(upphoto != null) {
-				m.setPhoto(file.getPhoto());
-				m.setUpphoto(upphoto);
+			if(uChangeName != null) {
+				m.setuOriginName(file.getuOriginName());
+				m.setuChangeName(uChangeName);
 			}			
-		}	*/	
+		}*/		
 		
 		m.setAddress(post + "," + address1 + ", " + address2);
 		
@@ -213,21 +192,22 @@ public class MemberController {
 		}
 		
 		@RequestMapping("mdelete.do")
-		public String memberDelete(Member m, HttpSession session) {
+		public String memberDelete(Member m, Model model) {
 			
 			int result = mService.deleteMember(m);
 			
 			if(result > 0) {
-				session.setAttribute("msg", "회원 탈퇴가 완료되었습니다.");
+				model.addAttribute("msg", "msg");
+				
 			} else {
 				throw new MemberException("회원 탈퇴 실패");
 			}
 			
-			return "redirect:logout.do";
+			return "member/myInfo";
 		}
 		
 		
-		//패스워드 체크
+		/*//패스워드 체크
 		@RequestMapping(value="passCheck.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String passCheck(Member member) {
@@ -235,5 +215,5 @@ public class MemberController {
 			int result = mService.passCheck(member);
 			return Integer.toString(result);
 		}
-		
+		*/
 }

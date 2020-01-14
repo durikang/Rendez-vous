@@ -27,7 +27,6 @@ body {
         position: absolute;
         color: lightgray;
     }
-
     #loginbox h1 {
         font-size: 40px;
         border-bottom: 1px solid lightgray;
@@ -35,7 +34,6 @@ body {
         padding: 13px 0;
         text-align: center;
     }
-
     #logintext {
         width:100%;
         overflow: hidden;
@@ -43,13 +41,11 @@ body {
         padding: 8px 0;
         margin: 8px 0;
     }
-
     #logintext i {
         width: 26px;
         float: left;
         text-align: center;
     }
-
     #logintext input {
         border: none;
         outline: none;
@@ -60,7 +56,6 @@ body {
         float: left;
         margin: 0 10px;
     }
-
     #btn, #btnLogin {
         width:45%;
         float: left;

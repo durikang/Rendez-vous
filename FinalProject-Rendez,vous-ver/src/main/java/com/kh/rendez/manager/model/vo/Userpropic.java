@@ -7,7 +7,6 @@ public class Userpropic {
 	private String uChangeName;
 	public Userpropic() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Userpropic(int uNo, String uOriginName, String uChangeName) {
 		super();

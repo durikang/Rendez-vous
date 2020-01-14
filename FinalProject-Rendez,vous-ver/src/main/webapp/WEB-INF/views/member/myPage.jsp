@@ -112,6 +112,12 @@
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
+   <!-- <script>
+   <c:if test="${ !empty msg }">
+      alert('${msg}');
+      <c:remove var="msg"/>
+   </c:if>
+   </script> -->
 <!-- Main container -->
 <div class="page-container">
 
@@ -154,11 +160,16 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="text-center">
-                    	<c:out value="${ loginUser.photo }"></c:out>
-                    	<c:if test="${ !empty member.photo }">
-						<a href="${ contextPath }/resources/myPage/uploadImg/${ member.upphoto }" download>${ member.photo }</a>
+                    	<%-- <c:if test="${ !empty userpropic.uOriginName }">
+						<a href="${ contextPath }/resources/user/img/default.jpg"/>
 						</c:if>
-                    	<img src="resources/myPage/img/user3.jpg" class="avatar" alt="User image">
+						
+						<c:out value="${ loginUser.uOriginName }"></c:out>
+                    	<c:if test="${ !empty userpropic.uChangeName }">
+						<a href="${ contextPath }/resources/user/img/default.jpg${ userpropic.uChangeName }" download>${ userpropic.uOriginName }</a>
+						</c:if> --%>
+						
+                    	<img src="resources/user/img/default.jpg" class="avatar" alt="User image">
                     </div>
                     <h1 class="mg-md text-center tc-black">
                         <c:out value="${ loginUser.user_name }"/>님 마이페이지
@@ -179,8 +190,11 @@
                     	<script>function myInfo() {
                     		window.open("myInfo.do", '내정보', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
                     	}</script>
-                    </div>
-                    
+                    	<tr>
+					<td colspan="2" align="center">
+							</td>	
+						</tr>
+                    </div>                    
                 </div>
             </div>
         </div>

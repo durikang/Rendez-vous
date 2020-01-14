@@ -2,6 +2,8 @@ package com.kh.rendez.member.model.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,11 +53,5 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(Member m) {
 		return mDao.deleteMember(m);
 	}
-
-	@Override
-	public int passCheck(Member m) {
-		return mDao.passCheck(m);
-	}
-
 	
 }

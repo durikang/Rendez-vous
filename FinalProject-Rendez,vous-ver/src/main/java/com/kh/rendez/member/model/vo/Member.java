@@ -11,8 +11,6 @@ public class Member {
 	private int age;
 	private String phone;
 	private String address;
-	private String photo;
-	private String upphoto;
 	private Date enroll_date;
 	private Date update_date;
 	private String user_type;
@@ -23,8 +21,7 @@ public class Member {
 	}
 
 	public Member(int user_no, String user_id, String user_pwd, String user_name, String gender, int age, String phone,
-			String address, String photo, String upphoto, Date enroll_date, Date update_date, String user_type,
-			String uStatus) {
+			String address, Date enroll_date, Date update_date, String user_type, String uStatus) {
 		super();
 		this.user_no = user_no;
 		this.user_id = user_id;
@@ -34,8 +31,6 @@ public class Member {
 		this.age = age;
 		this.phone = phone;
 		this.address = address;
-		this.photo = photo;
-		this.upphoto = upphoto;
 		this.enroll_date = enroll_date;
 		this.update_date = update_date;
 		this.user_type = user_type;
@@ -106,22 +101,6 @@ public class Member {
 		this.address = address;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public String getUpphoto() {
-		return upphoto;
-	}
-
-	public void setUpphoto(String upphoto) {
-		this.upphoto = upphoto;
-	}
-
 	public Date getEnroll_date() {
 		return enroll_date;
 	}
@@ -158,9 +137,10 @@ public class Member {
 	public String toString() {
 		return "Member [user_no=" + user_no + ", user_id=" + user_id + ", user_pwd=" + user_pwd + ", user_name="
 				+ user_name + ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address
-				+ ", photo=" + photo + ", upphoto=" + upphoto + ", enroll_date=" + enroll_date + ", update_date="
-				+ update_date + ", user_type=" + user_type + ", uStatus=" + uStatus + "]";
+				+ ", enroll_date=" + enroll_date + ", update_date=" + update_date + ", user_type=" + user_type
+				+ ", uStatus=" + uStatus + "]";
 	}
 
+	
 	
 }

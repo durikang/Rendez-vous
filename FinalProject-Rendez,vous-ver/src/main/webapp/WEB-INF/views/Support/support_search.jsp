@@ -39,7 +39,7 @@
 	
     .search_area {
         width: 80%;
-        height:1200px;
+        height:1050px;
         margin:auto;
         <!-- height 크기 수정하기 -->
     }
@@ -120,11 +120,14 @@
 	  display: none;
 	
 	  }
+	  
 	  #menu_btn {
-	  	margin-top:15%;
 	  	width:120px;
 	  	height:50px;
+	  	margin-left:47%;
+	  	margin-bottom:5%;
 	  	border:1px solid #c9c0b1;
+	  	background-color:white;
 	  }
 	  
 	  #qTitle:hover {
@@ -185,18 +188,25 @@
 					<tr>
 						<td>${q.qNo}</td>
 						<td>
-						<c:if test="${ !empty loginUser }">
-							<c:url var="qnaDetail" value="qnaDetail.do">
-								<c:param name="qNo" value="${ q.qNo }"/>
-								<c:param name="page" value="${ pi.currentPage }"/>
-							</c:url>
-							<a id="qTitle" href="${ qnaDetail }">${ q.qTitle }</a>
-						</c:if>
-						<c:if test="${ empty loginUser }">
-							${ q.qTitle }
-						</c:if>
+							<c:if test="${ !empty loginUser }">
+								<c:url var="qnaDetail" value="qnaDetail.do">
+									<c:param name="qNo" value="${ q.qNo }" />
+									<c:param name="page" value="${ pi.currentPage }" />
+								</c:url>
+								<a id="qTitle" href="${ qnaDetail }">${ q.qTitle }</a>
+							</c:if> 
+							<c:if test="${ empty loginUser }">
+								로그인 후 조회 가능
+							</c:if>
 						</td>
-						<td>${q.qWriter}</td>
+						<td>
+							<c:if test="${ !empty loginUser }">
+								${q.qWriter}							
+							</c:if>
+							<c:if test="${ empty loginUser }">
+								-
+							</c:if>
+						</td>
 						<td>${q.qDate}</td>
 						<td>
 							<c:if test='${ q.aStatus == "N" }'>
@@ -229,10 +239,10 @@
 							<c:if test="${ p ne pi.currentPage }">
 								<c:url var="pagination" value="support_search.do">
 									<c:param name="keyword" value="${ keyword }"/>
-									<c:param name="page" value="${ p }"/>
+									<c:param name="page" value="${ p }" />
 								</c:url>
 								<a href="${ pagination }">[${ p }]</a>
-						 	</c:if>
+							</c:if>
 						</c:forEach>
 						<!-- [다음] -->
 						<c:if test="${ pi.currentPage >= pi.maxPage }">
@@ -252,9 +262,9 @@
 		    	</div>
 		    </div>
             </c:if>
-            <button id="menu_btn" onclick="location.href='support_main.do'">메인으로</button>
         </div>
     </div>
+    <button id="menu_btn" onclick="location.href='support_main.do'">메인으로</button>
     <span id="remoCon">
 		<a href="#" onClick="window.open('chatbot.do', '', 'width=500,height=700, left=1400, top=250')">
 		<img src="resources/support/img/KakaoTalk.png" style="width:80px; height:80px;">

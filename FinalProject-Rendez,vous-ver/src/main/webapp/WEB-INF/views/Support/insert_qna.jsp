@@ -216,15 +216,16 @@
 	</header>
     <div class="board_box">
 	    <div class="wrapper">
-	        <div class="sidebar">
-	            <h2>q & a</h2>
-	            <ul>
-	                <li><a href="support_main.do"><i class="fas fa-home" style="color:#c9c0b1;"></i>Home</a></li>
-	                <li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color:#c9c0b1;"></i>Q & A</a></li>
-	                <li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color:#c9c0b1;"></i>문의 내역</a></li>
-	            </ul>
-	        </div>
-	    </div>
+			<div class="sidebar">
+				<h2>q & a</h2>
+				<ul>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>
+					<li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
+				</ul>
+			</div>
+		</div>
 	    <div class="content_area">
 	    	<div class="board_area">
 	    		<h1>Q & A 등록</h1>

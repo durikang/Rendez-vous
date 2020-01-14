@@ -45,7 +45,6 @@ public class SupportServiceImpl implements SupportService {
 		
 		int listCount = sDao.getSearchListCount(keyword);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
 		return sDao.selectSearch(pi, keyword);
 	}
 

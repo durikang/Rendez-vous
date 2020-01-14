@@ -20,7 +20,7 @@
 	</select>
 	
 	<insert id="insertCoupon" parameterType="_int">
-	INSERT INTO COUPON VALUES(SEQ_CNO.nextval, '룰렛20%쿠폰', (SELECT DBMS_RANDOM.STRING('X', 8) STR FROM DUAL), 20, SYSDATE, SYSDATE+7, 'R', #{uNo})
+	INSERT INTO COUPON VALUES(coupon_seq.nextval, '룰렛20%쿠폰', (SELECT DBMS_RANDOM.STRING('X', 8) STR FROM DUAL), 20, SYSDATE, SYSDATE+7, 'R', #{uNo})
 	</insert>
 
 	<update id="updatePoint" parameterType="hashmap">

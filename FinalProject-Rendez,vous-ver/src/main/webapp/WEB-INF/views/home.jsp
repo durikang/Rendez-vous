@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <title>Document</title>
 
+
 <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
 <script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </head>
 
@@ -175,64 +175,63 @@ button:hover {
 }
 
 /****************************************************/
-#wrap2 {
+/* #wrap2 {
 	width: 900px;
 	margin: 100px auto 0 auto;
 }
 
 #tabs {
 	overflow: hidden;
-	width: 700px; /* 01.탭부분 전체의 넓이 입니다. */
+	width: 700px; 
 	margin: 0 auto;
 	margin-bottom: 40px;
-	padding-left: 38px; /* 02.탭 메뉴를 중앙정렬할때 왼쪽 패딩값으로 조절해 맞춥니다*/
+	padding-left: 38px;
 	list-style: none;
 }
 
 #tabs li {
 	float: left;
-	margin: 0 10px 0 0; /* 03.탭메뉴 사이사이의 간격을 조정합니다 */
-}
+	margin: 0 10px 0 0;
+} */
 
 /*비활성화 탭(기본 탭모양) 설정*/
-#tabs a {
+/* #tabs a {
 	position: relative;
 	width: 100px;
-	height: 100px; /* 04.탭메뉴 하나의 넓이와 높이 */
+	height: 100px;
 	float: left;
-	/* text-decoration: none;
-	text-align: center; */
+	text-decoration: none;
+	text-align: center;
 	line-height: 50px;
-	/* 06.텝메뉴 폰트를 세로중앙정렬 맞추기위해 -> 04.탭메뉴 높이와 같은 값을 입력해주세요 */
-}
+} */
 
-#tabs a::after {
-	/* z-index: 1; */
-	/* background: #fff; */
-}
+/* #tabs a::after {
+	z-index: 1;
+	background: #fff;
+} */
 
 /*활성화탭(탭 클릭했을때 모양) 설정*/
-#tabs #current a, #tabs #current a::after {
-	 /* background: #ccc; */  /* 07.탭메뉴 색상 설정 */
-	/* z-index: 3; */
+/* #tabs #current a, #tabs #current a::after {
+	 background: #ccc;
+	z-index: 3;
 	text-shadow: 5px 5px 5px #aaa;
-}
+} */
 
 /* ------------------------------------------------- */
 
 /*컨텐츠 부분*/
-#content {
-	/*width:750px;
-	height: 350px; /* 08.컨텐츠 넓이와 높이 */
-	/*padding:20px; /* 09.컨텐츠 안쪽 여백 설정 */
+/* #content {
+	width:750px;
+	height: 350px;
+	padding:20px; 
 	position: relative;
-	/* z-index: 2; */
-	/* border-radius: 5px 5px 5px 5px; */
+	z-index: 2;
+	border-radius: 5px 5px 5px 5px;
 }
 
 #content h2, #content h3, #content p {
 	margin: 0 0 15px 0;
-}
+} */
 
 /* ------------------------------------------------- */
 #about {
@@ -243,18 +242,24 @@ button:hover {
 	color: #eee;
 }
 
-#c1 {
+#wrapper {
+	width:900px;
+	height:600px;
+}
+
+/* #c1 {
 	width: 400px;
 	height: 460px;
-	margin: 10px;
+	margin: 25px 15px;
 	float: left;
 }
 
 #c2 {
 	width: 400px;
 	height: 220px;
-	margin: 10px;
-}
+	margin: 25px 15px;
+	float: left;
+} */
 
 #ic1 {
 	color: gray;
@@ -415,8 +420,8 @@ form {
 	opacity: 0;
 	visibility: hidden;
 	transform: scale(1.1);
-	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform
-		0.25s;
+	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform	0.25s;
+	z-index:1;
 }
 .modal2{ 
          position: fixed; 
@@ -429,6 +434,7 @@ form {
          visibility: hidden; 
          transform: scale(1.1); 
          transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+         z-index:1;
      } 
 
 .modal-content {
@@ -492,6 +498,35 @@ form {
         transform: scale(1.0); 
         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
      }
+     
+div ul {
+	text-align:center;
+	vertical-align:top;
+}
+/**************************************/
+.swiper-area {
+	width:80%;
+	margin:auto;
+	margin-top:12%;
+	margin-bottom:5%;
+}
+
+.swiper-container {
+   height:420px;   
+}
+.swiper-slide {
+   text-align:center;
+   display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+   align-items:center; /* 위아래 기준 중앙정렬 */
+   justify-content:center; /* 좌우 기준 중앙정렬 */
+}
+.swiper-slide img {
+   max-width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+   border-radius:20px;
+   /* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
+}
+
+
 </style>
 
 <body>
@@ -517,172 +552,59 @@ form {
 
 	<!------------------------------------------------->
 
-	<div id="wrap2">
-		<ul id="tabs">
+		<!-- <ul id="tabs">
 			<li><a href="#" title="tab1"><i class="far fa-thumbs-up fa-2x"></i></a></li>
 			<li><a href="#" title="tab2"><i class="fas fa-music fa-2x"></i></a></li>
 			<li><a href="#" title="tab3"><i class="fas fa-language fa-2x"></i></a></li>
 			<li><a href="#" title="tab4"><i class="fas fa-play-circle fa-2x"></i></a></li>
-		</ul>
-		<br>
-		<br>
+		</ul> -->
 
-		<div id="content">
-			<div id="tab1">
-				<h2>추천 수업</h2>
-					<div id="c1">
-						<img id="c1" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							서울 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;15000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					<div>
-						<img id="c2" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							경기 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;25000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					<div>
-						<img id="c2" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							경기 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;35000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>
+<div style="text-align:center; margin:0 0 100px 0; background:#555; line-height:80px;"></div>
 
-			<div id="tab2">
-				<h2>추천 수업</h2>
-					<div id="c1">
-						<img id="c1" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							서울 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;15000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					<div>
-						<img id="c2" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							경기 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;25000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					<div>
-						<img id="c2" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							경기 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;35000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>
+<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-			<div id="tab3">
-				<h2>추천 수업</h2>
-					<div id="c1">
-						<img id="c1" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							서울 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;15000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					<div>
-						<img id="c2" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							경기 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;25000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					<div>
-						<img id="c2" src="resources/homeImg/slide1.PNG">
-						<p>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;
-							<i class="fas fa-map-marker-alt"></i> 
-							경기 &nbsp;
-							<i id="ic1" class="fas fa-ellipsis-v"></i> 
-							&nbsp;35000 
-							<i id="ic1" class="fas fa-won-sign"></i>
-						</p>
-					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- 클래스명은 변경하면 안 됨 -->
+
+<div class="swiper-area">
+	<div class="swiper-container">
+		<h2>추천 수업</h2>
+	   <div class="swiper-wrapper">
+	      <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0237.jpg"></div>
+	      <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0696.jpg"></div>
+	      <div class="swiper-slide"><img src="https://biketago.com/img/p/0334.jpg"></div>
+	      <div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0187.jpg"></div>
+	      <div class="swiper-slide"><img src="http://mabinogi.filamt.com/img/p2/0384.jpg"></div>
+	      <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0696.jpg"></div>
+	   </div>
+	
+	</div>	
+</div>
+
+<script>
+
+new Swiper('.swiper-container', {
+
+   slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+   spaceBetween : 30, // 슬라이드간 간격
+   slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+   // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+   // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+   loopFillGroupWithBlank : true,
+
+   loop : true, // 무한 반복
+   autoplay: true,
+   autoplaySpeed: 2000,
+
+});
+
+</script>
+
 			</div>	
-			</div>
-		</div>
-		
+	
+	
 		<!-- 버튼 -->
 		<button class="trigger2">카테고리</button> 
 
@@ -690,19 +612,17 @@ form {
         <div class="modal2"> 
             <div class="modal-content2"> 
                 <span class="close-button2">&times;</span> 
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                <br><br>
                 <a href="#">디자인</a><br>
-                &nbsp;&nbsp;&nbsp;
                 <a href="#">실무역량</a><br>
                 <a href="#">뷰티</a><br>
                 <a href="#">영상</a><br>
                 <a href="#">외국어</a><br>
                 <a href="#">음악</a><br>
                 <a href="#">라이프스타일</a><br>
-                <a href="#">기타</a>
+                <a href="#">기타</a><br>
                 <br>
                 <input type="button" id="cancel2" value="취소"> 
-                  <input type="submit" id="submit" value="보내기"> 
             </div> 
         </div>
 						
@@ -715,19 +635,19 @@ form {
 				type="radio" name="r" id="r5">
 
 			<div class="slide s1">
-				<img src="resources/homeImg/slide1.PNG" alt="">
+				<img src="resources/homeImg/광고.jpg" alt="">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/slide1.PNG" alt="">
+				<img src="resources/homeImg/광고2.jpg" alt="">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/slide1.PNG" alt="">
+				<img src="resources/homeImg/광고3.jpg" alt="">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/slide1.PNG" alt="">
+				<img src="resources/homeImg/광고4.png" alt="">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/slide1.PNG" alt="">
+				<img src="resources/homeImg/광고5.jpg" alt="">
 			</div>
 		</div>
 
@@ -740,8 +660,6 @@ form {
 		</div>
 	</div>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script>
 		var slideCount = $(".slideImg").length;
 		var currentIndex = 0;
@@ -760,8 +678,7 @@ form {
 	</script>
 
 	<!----------------------------------->
-	<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
-
+	
 	<script>
 		$(document).ready(function() {
 			$("#content #tab1").hide(); // Initially hide all content
@@ -779,11 +696,11 @@ form {
 				$(this).parent().attr("id", "current"); // Activate this
 				$('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
 			});
-		})();
+		});
 	</script>
 
 	<!--팝업-->
-	<div class="layer_popup" style="position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;"
+	<div class="layer_popup" style="z-index:1; position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;"
 		id="layer_pop">
 		<table width="500" border="0" cellpadding="0" cellspacing="0">
 			<tr>
@@ -829,7 +746,7 @@ form {
 	<br><br><br><br><br>
 
 	<!-- 버튼 -->
-	<button class="trigger">이메일 보내기</button>
+	<button class="trigger">이벤트 받아보기</button>
 
 	<!-- 팝업 될 레이어 -->
 	<div class="modal">
@@ -889,7 +806,6 @@ form {
 	<br><br><br><br><br>
 	<br><br><br><br><br>
 
-	<c:import url="common/footbar.jsp" />
-
+	<c:import url="common/footbar.jsp" /> 
 </body>
 </html>

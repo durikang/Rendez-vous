@@ -5,8 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
     <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
 </head>
 <style>

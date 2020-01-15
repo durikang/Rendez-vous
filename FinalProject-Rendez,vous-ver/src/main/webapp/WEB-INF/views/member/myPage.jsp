@@ -290,56 +290,12 @@
             </div>
             
             <div class="row voffset">
-        <!-- 모달 -->
-        
-        <!-- 버튼 --> 
-        <button class="trigger">이메일 보내기</button> 
-        <!-- 팝업 될 레이어 --> 
-        <div class="modal"> 
-            <div class="modal-content"> 
-                <span class="close-button">&times;</span> 
-                <h1 class="title">메일 보내기</h1> 
-                <form action="auth.do" method="POST"> 
-                  <label for="email">Email</label> 
-                  <input type="email" name="e_mail" placeholder="Your email" required="required"> 
-                  <label></label> 
-                  <input type="button" id="cancel" value="취소"> 
-                  <input type="submit" id="submit" value="보내기"> 
-                </form> 
-            </div> 
-        </div>
-   
-       <script type="text/javascript"> 
-            var modal = document.querySelector(".modal"); 
-            var trigger = document.querySelector(".trigger"); 
-            var closeButton = document.querySelector(".close-button"); 
-            var cancelButton = document.querySelector("#cancel");
-   
-           //console.log(modal);
-   
-           function toggleModal() { 
-                modal.classList.toggle("show-modal"); 
-            }
-   
-           function windowOnClick(event) { 
-                if (event.target === modal) { 
-                    toggleModal(); 
-                } 
-            }
-   
-           trigger.addEventListener("click", toggleModal); 
-            closeButton.addEventListener("click", toggleModal); 
-            cancel.addEventListener("click", toggleModal); 
-            window.addEventListener("click", windowOnClick); 
-        </script>
-         <!-- 여기까지 모달 코드 -->   	
                 <div class="col-sm-3">
                     	<!-- <script>function wish() {
                     		window.open("#", '찜목록', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
                     	}</script> -->
-                    <a data-lightbox="img/people-woman-coffee-meeting.jpg"
-                       data-caption="Image description"><img src="resources/myPage/img/people-woman-coffee-meeting.jpg"
-                                                             class="img-responsive animated zoomIn" alt="Portfolio"/></a>
+                    <a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg" data-caption="Image description"><img 
+                    		src="resources/myPage/img/people-woman-coffee-meeting.jpg" class="img-responsive animated zoomIn" alt="Portfolio"/></a>
                 </div>
                 
                 <div class="col-sm-3">

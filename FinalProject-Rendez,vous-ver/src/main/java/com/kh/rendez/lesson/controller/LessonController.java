@@ -276,7 +276,7 @@ public class LessonController {
 						la.setcName(reFileName);
 						la.setLaType(2);
 						la.setlNo(lno);
-						
+						/**/
 						int result3 = lService.insertAttachment(la);
 						num++;
 					}

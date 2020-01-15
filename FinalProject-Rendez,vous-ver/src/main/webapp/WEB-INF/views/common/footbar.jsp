@@ -52,7 +52,8 @@
         width: 100%;
         height: auto;
         margin: auto;
-        margin-top: 25px;
+        margin-top: 2%;
+        margin-left: 2%;
     }
     .footer-menu-one ul {
         margin: 0px;
@@ -77,43 +78,14 @@
     .footer-menu-one ul li a:hover {
         color: #c9c0b1;
     }
-
-    .footer-menu-two {
-        width: 100%;
-        height: auto;
-        margin: auto;
-        margin-top: 15px;
-    }
-    .footer-menu-two ul {
-        margin: 0px;
-        padding: 0px;
-        text-align: center;
-    }
-    .footer-menu-two ul li {
-        display: inline-block;
-        margin: 0px 20px;
-        color:#fff;
-    }
-    .footer-menu-two ul li a {
-        font-family: arial;
-        font-size: 16px;
-        font-weight: 600;
-        color: #fff;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-decoration:none;
-    }
-
-    .footer-menu-two ul li a:hover {
-        color: #c9c0b1;
-    }
-
+    
     .footer-bottom {
         width: 100%;
         height: auto;
         margin: auto;
         background: #272727;
-        padding: 5px;
+        padding-top: 1%;
+        padding-bottom: 2%;
     }
     .footer-bottom p {
         font-family: arial;
@@ -128,35 +100,23 @@
     <div class="footer-main-div">
         <div class="footer-social-icons">
             <ul>
-                <li><a href="#" target="blank"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#" target="blank"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#" target="blank"><i class="fab fa-google"></i></a></li>
-                <li><a href="#" target="blank"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="http://facebook.com" target="blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com" target="blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="http://google.com" target="blank"><i class="fab fa-google"></i></a></li>
+                <li><a href="http://youtube.com" target="blank"><i class="fab fa-youtube"></i></a></li>
             </ul>
         </div>
         <div class="footer-menu-one">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="home.do">Home</a></li>
                 <li>|</li>
-                <li><a href="#">About us</a></li>
+                <li><a href="mypage.do">My Page</a></li>
                 <li>|</li>
                 <li><a href="support_main.do">Services</a></li>
                 <li>|</li>
                 <li><a href="#">Products</a></li>
                 <li>|</li>
                 <li><a href="#">Contact us</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-menu-two">
-            <ul>
-                <li><a href="#">Blog</a></li>
-                <li>|</li>
-                <li><a href="#">News</a></li>
-                <li>|</li>
-                <li><a href="#">Gallery</a></li>
-                <li>|</li>
-                <li><a href="#">Media</a></li>
             </ul>
         </div>
     </div>

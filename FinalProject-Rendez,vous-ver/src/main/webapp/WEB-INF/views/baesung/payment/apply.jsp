@@ -273,6 +273,15 @@ a {
     cursor: pointer;
 }
     
+.center4{
+    	cursor: pointer;
+    	text-decoration: underline;
+}
+.center4:hover{
+    	cursor: pointer;
+    	text-decoration: underline;
+}
+    
     </style>
 </head>
 <body>
@@ -314,12 +323,12 @@ a {
                 <div class="appcont" style="margin-top:80px;">				
                     <div class="call">
                         <div class="center">튜터님께 연락 받으실 휴대전화 번호</div>
-                        <div class="center2">${phone }</div>
+                        <div class="center2">${loginUser.phone }</div>
                         <!--div class="center3">번호수정></div-->
                     </div>	
                     <br>
                     <div class="call bottom" style="height:157px;">
-                        <div class="center4"><a href="/Support/Refund" target="_blank">랑데뷰 결제 금액 환불 요건 [환불약관 보러가기]</a></div>
+                        <div class="center4" onclick="couponPop()">랑데뷰 결제 금액 환불 요건 [환불약관 보러가기]</div>
                         <div class="center5" style="padding-left:230px;">
                             ㆍ원데이는 전체 수업료 결제로만 진행됩니다.<br>
                             ㆍ원데이 수업 진행 24시간 전에 환불 요청하는 경우 결제금액이 100% 환불됩니다.<br>
@@ -329,9 +338,38 @@ a {
                 </div>
             </div>
         </div>
-        <a class="btn-next" href="payment.do"><div class="next button" id="testNext">다음</div></a>
-        
-    
+        <div class="next button" id="testNext" onclick="gopay()">다음</div>
+           	
     </div>
+    
+    <script type="text/javascript">
+    
+   	agree = false;	   
+    function couponPop()
+	{
+		popupWindow = window.open('refund.do', '_blank', 'height=800,width=1200,scrollbars=no,status=no');
+	}
+    
+    function Pagree(){
+    	
+    	agree = true;
+    }   
+    function gopay(){
+    	
+    	if(!agree){
+    		alert("환불규정을 읽고 동의해주세요");
+    		return;
+    	}
+    	
+    	location.href = 'payment.do';
+    }
+    
+    
+    </script>
+    
+    
+    
+    
+    
 </body>
 </html>

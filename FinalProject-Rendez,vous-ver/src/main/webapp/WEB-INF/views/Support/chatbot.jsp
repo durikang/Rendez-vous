@@ -12,7 +12,7 @@
 body {
     font-family: arial, sans-serif;
     margin: 0;
-    background-color: #c9c0b1;
+    background-color: whitesmoke;
 }
 #header {
     width: 100%;
@@ -26,7 +26,7 @@ body {
     padding: 10px;
     width: 80%;
     margin: auto;
-    color: #c9c0b1;
+    color: white;
 } 
 
 #container {
@@ -34,7 +34,7 @@ body {
     height: 500px;
     margin: 0px auto;
     margin-top: 20px;
-    background-color: whitesmoke;
+    background-color:white;
     border: 1px solid #333;
     overflow: scroll;
     font-size: 16px;
@@ -49,7 +49,7 @@ textarea {
     resize: none;
     width: 80%;
     font-size: 16px;
-    background-color:whitesmoke;
+    background-color:white;
 }
 
 #send {

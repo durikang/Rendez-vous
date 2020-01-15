@@ -36,7 +36,7 @@
     color:#c9c0b1;
 }
 .search-btn {
-    color: #c9c0b1;
+    color: #c9c0b1;;
     float: right;
     width: 40px;
     height: 40px;
@@ -47,6 +47,10 @@
     text-decoration: none;
     align-items: center;
     transition: 0.4s;
+}
+
+.search-btn i {
+	color:#c9c0b1;
 }
 .search-text {
     border: none;
@@ -86,8 +90,13 @@
     font-weight: bold;
     text-decoration:none;
 }
-.nav_links li,a {
+.nav_links li{
     font-weight: 500;
+    font-size: 16px;
+    color: black;
+}
+menu_body a {
+	font-weight: 500;
     font-size: 16px;
     color: black;
 }
@@ -108,18 +117,20 @@
 .button:hover {
     background-color: #ddd8cf;
 }
+.search-box:hover{
+	cursor: pointer;
+}
+
 </style>
 <body class="menu_body">
     <header class="header">
-<img class="logo" src="resources/common/img/logo1.png" alt="logo">
+		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
             <input class="search-text" type="text" id="search" placeholder="Search">
             <a class="search-btn">
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
-        </div>
-        
-        
+        </div>        
          <a class="cta" href="hynnmenubar.do"><button class="button">튜터 등록</button></a>
         <nav>
             <ul class="nav_links">
@@ -129,16 +140,11 @@
                 	<li><a href="loginPage.do">로그인</a></li>
                 </c:if>
 
-                <c:if test="${ !empty sessionScope.loginUser }">
+                <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
 					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
 				</c:if>
 				
-				<%-- <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
-					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
-				</c:if> --%>
-				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
-					<li>|</li>
 					<a href="managerHome.do">관리자 페이지</a>
 				</c:if>
 				

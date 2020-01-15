@@ -38,8 +38,10 @@
 	}
 	
     .search_area {
-        width: 100%;
-        height:1414px;
+
+        width: 80%;
+        height:1050px;
+
         margin:auto;
     }
 
@@ -64,27 +66,19 @@
     }
     
     .content_area {
-		float: left;
-		width: 100%;
-		height:100%;
-	}
-	
-	.board_area {
-		width: 100%;
-		height:60%;
-		margin: auto;
-		text-align: center;
-	}
-	
-	.banner {
-		height:40%
-	}
-	
-	.board_area button {
-		margin-right: 10%;
-		margin-bottom: 2%;
-	}
-	
+
+    	float:left;
+    	width:100%;
+    	height:65vh;
+    }
+    
+    .board_area {
+    	width:80%;
+    	height:80%;
+    	margin:auto;
+    	text-align:center;
+    }
+
 	#boardTable {
 		width: 80%;
 		margin: auto;
@@ -127,9 +121,18 @@
 	  #menu_btn {
 	  	width:120px;
 	  	height:50px;
-	  	background-color: #c9c0b1;
-	  	margin-top:2%;
-	  	margin-bottom:1%;
+
+	  	margin-left:47%;
+	  	margin-bottom:5%;
+	  	border:1px solid #c9c0b1;
+	  	background-color:white;
+	  }
+	  
+	  #qTitle:hover {
+		text-decoration:none;
+		font-weight:bold;
+		color: #c9c0b1; 
+
 	  }
 </style>
 <body>
@@ -184,18 +187,25 @@
 					<tr>
 						<td>${q.qNo}</td>
 						<td>
-						<c:if test="${ !empty loginUser }">
-							<c:url var="qnaDetail" value="qnaDetail.do">
-								<c:param name="qNo" value="${ q.qNo }"/>
-								<c:param name="page" value="${ pi.currentPage }"/>
-							</c:url>
-							<a href="${ qnaDetail }">${ q.qTitle }</a>
-						</c:if>
-						<c:if test="${ empty loginUser }">
-							${ q.qTitle }
-						</c:if>
+							<c:if test="${ !empty loginUser }">
+								<c:url var="qnaDetail" value="qnaDetail.do">
+									<c:param name="qNo" value="${ q.qNo }" />
+									<c:param name="page" value="${ pi.currentPage }" />
+								</c:url>
+								<a id="qTitle" href="${ qnaDetail }">${ q.qTitle }</a>
+							</c:if> 
+							<c:if test="${ empty loginUser }">
+								로그인 후 조회 가능
+							</c:if>
 						</td>
-						<td>${q.qWriter}</td>
+						<td>
+							<c:if test="${ !empty loginUser }">
+								${q.qWriter}							
+							</c:if>
+							<c:if test="${ empty loginUser }">
+								-
+							</c:if>
+						</td>
 						<td>${q.qDate}</td>
 						<td>
 							<c:if test='${ q.aStatus == "N" }'>
@@ -228,10 +238,10 @@
 							<c:if test="${ p ne pi.currentPage }">
 								<c:url var="pagination" value="support_search.do">
 									<c:param name="keyword" value="${ keyword }"/>
-									<c:param name="page" value="${ p }"/>
+									<c:param name="page" value="${ p }" />
 								</c:url>
 								<a href="${ pagination }">[${ p }]</a>
-						 	</c:if>
+							</c:if>
 						</c:forEach>
 						<!-- [다음] -->
 						<c:if test="${ pi.currentPage >= pi.maxPage }">
@@ -269,6 +279,7 @@
             </c:if>
         </div>
     </div>
+    <button id="menu_btn" onclick="location.href='support_main.do'">메인으로</button>
     <span id="remoCon">
 		<a href="#" onClick="window.open('chatbot.do', '', 'width=500,height=700, left=1400, top=250')">
 		<img src="resources/support/img/KakaoTalk.png" style="width:80px; height:80px;">

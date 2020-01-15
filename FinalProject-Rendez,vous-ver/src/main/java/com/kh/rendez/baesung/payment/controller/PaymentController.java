@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.rendez.baesung.payment.model.service.PaymentService;
+import com.kh.rendez.baesung.payment.model.vo.Coupon;
+import com.kh.rendez.baesung.payment.model.vo.InsertCouponInfo;
 import com.kh.rendez.baesung.payment.model.vo.LessonTime;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.baesung.search.model.vo.tClass;
+import com.kh.rendez.member.model.vo.Member;
 
 @Controller
 public class PaymentController {
@@ -50,7 +53,7 @@ public class PaymentController {
 		session.setAttribute("lInning", lInning);
 		session.setAttribute("lNo", lNo);
 		
-		mv.addObject("phone", "01011111111");
+		
 		mv.setViewName("baesung/payment/apply");
 			
 		return mv;
@@ -64,39 +67,78 @@ public class PaymentController {
 	}
 	
 	@RequestMapping("coupon.do")
-	public ModelAndView coupon(ModelAndView mv) {
+	public ModelAndView coupon(ModelAndView mv,HttpServletRequest request) {
 		
+		HttpSession session = request.getSession();
+		Member m = (Member) session.getAttribute("loginUser");
+		
+		ArrayList<Coupon> CouponList = jpService.selectCouponList(m.getUser_no());
+		
+		System.out.println(CouponList);
+		mv.addObject("CouponList", CouponList);
 		mv.setViewName("baesung/payment/coupon");
 		return mv;
 	}
 	
+	@RequestMapping("insertCoupon.do")
+	public ModelAndView insertCoupon(ModelAndView mv, HttpServletRequest request,String code) {
+		
+		HttpSession session = request.getSession();
+		Member m = (Member) session.getAttribute("loginUser");
+		
+		int result = jpService.insertCoupon(new InsertCouponInfo(code, m.getUser_no()));
+		ArrayList<Coupon> CouponList = null;
+		if(result > 0) {
+			CouponList = new ArrayList<Coupon>();
+			 CouponList = jpService.selectCouponList(m.getUser_no());
+		}
+		
+		mv.addObject("CouponList", CouponList);
+		mv.setViewName("baesung/payment/coupon");
+		
+		return mv;
+	}
+	
+	
 	@RequestMapping("payComplete.do")
-	public ModelAndView payComplete(ModelAndView mv,HttpServletRequest request,Payment pm, String payMethod) {
+	public ModelAndView payComplete(ModelAndView mv,HttpServletRequest request,Payment pm, String payMethod,
+			Integer couponNo, Integer Price) {
 		
 		HttpSession session = request.getSession();
 		tClass tClass = (com.kh.rendez.baesung.search.model.vo.tClass) session.getAttribute("tClass");
+		Member m = (Member) session.getAttribute("loginUser");
 		
-		int pCost = tClass.getPrice();
 		String pType = payMethod;
-		int uNo = 1;
+		int uNo = m.getUser_no();
 		int lInning = Integer.parseInt((String) session.getAttribute("lInning"));
 		int lNo = Integer.parseInt((String) session.getAttribute("lNo"));
 				
-		pm = new Payment(pCost,pType,uNo,lInning,lNo);
+		pm = new Payment(Price,pType,uNo,lInning,lNo);
 		
 		//System.out.println(pm);
+		//System.out.println("쿠폰번호 넘어오는지 : "  + couponNo);
+		if(couponNo != 0) {
+			int result3 = jpService.updateCoupon(couponNo);
+		}
+		
 		
 		int result1 = jpService.insertPayment(pm);
 		int result2 = jpService.updateLession(lNo,lInning);
 		
-		System.out.println("result1 : " + result1 + ", result2" + result2);
+		//System.out.println("result1 : " + result1 + ", result2" + result2);
 		
 		mv.setViewName("baesung/payment/Complement");
 		
 		return mv;
 	}
 	
-	
+	@RequestMapping("refund.do")
+	public ModelAndView refund(ModelAndView mv) {
+		
+		mv.setViewName("baesung/payment/Refund");
+		return mv;
+		
+	}
 	
 	
 	

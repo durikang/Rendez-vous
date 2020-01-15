@@ -11,6 +11,8 @@ public class Coupon {
 	private Date endDate;
 	private String status;
 	private int uNo;
+	
+	
 	public Coupon() {
 		super();
 	}

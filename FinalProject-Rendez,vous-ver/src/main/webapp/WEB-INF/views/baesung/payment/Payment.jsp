@@ -141,7 +141,7 @@ div {
 }
 
 .tutor_cont .title_box .steps .on {
-    color: #ff005a;
+    color: rgb(184,145,105);
 }
 .tutor_cont .title_box .steps li {
     margin: 0 15px;
@@ -240,7 +240,7 @@ img {
     font-size: 20px;
     margin-top: 12px;
     padding-left: 40px;
-    color: #ff005b;
+    color: rgb(184,145,105);
 }
 
 a {
@@ -328,8 +328,8 @@ input[type=checkbox], input[type=radio] {
     line-height: 25px;
 }
 .appcont .level .on {
-    background: #ff005a;
-    border: 1px solid #ff005a;
+    background: rgb(184,145,105);
+    border: 1px solid rgb(184,145,105);
     color: #fff;
 }
 .appcont .level .levelbox {
@@ -358,15 +358,15 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
     font-family: 'Noto Sans','CJK KR','ë³¸ê³ ë”•' !important;
 }
 .appcont .level .on {
-    background: #ff005a;
-    border: 1px solid #ff005a;
+    background: rgb(184,145,105);
+    border: 1px solid rgb(184,145,105);
     color: #fff;
 }
 #testNext:hover{
     background:rgb(92, 92, 92);
     cursor: pointer;
 }
-#point::placeholder{
+#Paypoint::placeholder{
 	text-align: right;
 	
 }
@@ -375,7 +375,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 </head>
 <body>
     <c:import url="../../common/menubar.jsp"/>
-    
+    <div style="border-top: 1px solid #c9c9c9;"></div>
     <div class="tutor_cont">
         <div class="title_box">
             <h3>수업신청</h3>
@@ -413,7 +413,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
                             쿠폰					
                             </div>
                             <div class="right2">					
-                                <a onclick="couponPop();" style="color: #ff005b;"><span id="couponArea2" style="font-size:16px;font-weight:500;">쿠폰없음 </span>&gt;</a>
+                                <a onclick="couponPop();" style="color: rgb(184,145,105);"><span id="couponArea2" style="font-size:16px;font-weight:500;">쿠폰없음 </span>&gt;</a>
                             </div>
                         </div>
                         <div class="level3">
@@ -421,7 +421,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
                             	포인트
                             </div>
                             <div class="right2">
-<input type="text" id="Paypoint" style="width: 140px; height: 30px; border: 1px solid #d8d8d8;" placeholder="${point}p" ><button id="point_button" onclick="pointCal(this)" style="background: #ff005b;margin-left: 10px;width: 50px;height: 30px; border: 1px solid #d8d8d8; color: white;border-radius: 10px;">사용</button>                            </div>
+<input type="text" id="Paypoint" style="width: 120px; height: 30px; border: 1px solid #d8d8d8;" placeholder="${point}p" ><button id="point_button" onclick="pointCal(this)" style="background: rgb(184,145,105);margin-left: 10px;width: 50px;height: 30px; border: 1px solid #d8d8d8; color: white;border-radius: 10px;">사용</button>                            </div>
                         </div>
                         <div class="level2 top">					
                             <div class="center2">수업료는 탈잉에서 보관하다가 첫 수업 후 튜터님께 전달 해 드려요.</div>									
@@ -435,7 +435,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
                         	<div class="left" style="    float: left;width: 100px;font-weight: 500;font-size: 16px;margin-top: 20px;line-height: 20px;">
                         	결제금액 
                         	</div>
-                        	<div class="right2" style="float: left;width: 500px;font-weight: 600;font-size: 35px;margin-top: 12px;padding-left: 40px;color: #ff005b;">
+                        	<div class="right2" style="float: left;width: 500px;font-weight: 600;font-size: 35px;margin-top: 12px;padding-left: 40px;color: rgb(184,145,105);">
                                 <span id="payArea2"><fmt:formatNumber value="${tClass.price }" pattern="#,###" /></span>원 <font color="#666" style="font-size:12px;" id="priceInfo"></font>
                             </div>
                         	<!-- <div class="right" style="float: left;width: 500px;font-weight: 400;font-size: 16px;margin-top: 20px;padding-left: 10px;">
@@ -467,6 +467,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
     CouponOnOff = "off";
     PointOnOff = "off";
     usePoint = 0;
+    val = 0;
     
 	function pointCal(value){
 		usePoint = $("#Paypoint").val();
@@ -499,13 +500,13 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 			
 			
 			Price = Number(Price) + Number(usePoint);
-			alert(Price);
+			//alert(Price);
 			strtotalPrice = formatMoney(Price.toString());	
 			$('#payArea2').text(strtotalPrice);
 			PointOnOff = "off";
 			
 			$(value).text("사용");
-			$(value).css("background", "#ff005b");
+			$(value).css("background", "rgb(184,145,105)");
 			$("#Paypoint").attr("disabled",false);
 			$("#Paypoint").val("");	
 			usePoint = 0;
@@ -520,7 +521,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
     function couponUse(val1, name, price)//code, name, discountRate
 	{
 		
-		val = 0;
+		
 		val = val1;
 		if(val==0) // 쿠폰 해제 
 		{
@@ -616,13 +617,13 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	}, function(rsp) {
         	    if ( rsp.success ) {
         	        var msg = '결제가 완료되었습니다.';
-        	        /* msg += '고유ID : ' + rsp.imp_uid;
+        	         /* msg += '고유ID : ' + rsp.imp_uid;
         	        msg += '상점 거래ID : ' + rsp.merchant_uid;
         	        msg += '결제 금액 : ' + rsp.paid_amount;
-        	        msg += '카드 승인번호 : ' + rsp.apply_num; */
+        	        msg += '카드 승인번호 : ' + rsp.apply_num;  */
         	        
         	        //alert(val);
-        	        alert(msg);
+        	         alert(msg);
         	        location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val+'&Price='+Price+'&usePoint='+usePoint;
         	    } else {
         	        var msg = '결제에 실패하였습니다.';

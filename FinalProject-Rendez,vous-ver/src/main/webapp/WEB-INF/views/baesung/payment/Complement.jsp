@@ -139,7 +139,7 @@ div {
 }
 
 .tutor_cont .title_box .steps .on {
-    color: #ff005a;
+    color: rgb(184,145,105);
 }
 .tutor_cont .title_box .steps li {
     margin: 0 15px;
@@ -252,7 +252,7 @@ img {
     font-size: 20px;
     margin-top: 10px;
     text-align: center;
-    color: #ff005b;
+    color: rgb(184,145,105);
 }
 .appcont .payend .center4 {
     width: 100%;
@@ -352,7 +352,7 @@ img {
 </head>
 <body>
     <c:import url="../../common/menubar.jsp"/>
-
+	<div style="border-top: 1px solid #c9c9c9;"></div>
     <div class="tutor_cont">
         <div class="title_box">
             <h3>수업신청</h3>
@@ -380,7 +380,7 @@ img {
                 <div class="appcont">
                     <div class="payend height4" style="margin-top: 119px;">
                         <div class="center3">
-                            <img src="resources/baesung/images/complete.jpg">
+                            <img src="resources/baesung/images/complete.jpg?after">
                         </div>				
                     </div>
                     <div class="payend">

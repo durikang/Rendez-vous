@@ -137,7 +137,7 @@ div {
     box-sizing: border-box;
 }
 .tutor_cont .title_box .steps .on {
-    color: #ff005a;
+    color: rgb(184,145,105);
 }
 .tutor_cont .title_box .steps li {
     margin: 0 15px;
@@ -232,7 +232,7 @@ img {
     letter-spacing: -0.4px;
 }
 .triangle-border span {
-    color: #ff005a;
+    color: rgb(184,145,105);
 }
 .tutor_cont .sh_box {
     width: 770px;
@@ -362,12 +362,12 @@ label {
 }
 
 .tutor_cont .next.on {
-    background: #ff005a;
+    background: rgb(196,163,130);
     /* margin: 0 auto; */
 }
 
 .tutor_cont .next.on:hover {
-    background: rgb(211,51,107);
+    background: rgb(184,145,105);
     
 }
 
@@ -376,7 +376,7 @@ label {
     font-size: 15px;
 }
 .class_price .regions .region .option.select .top label {
-    background:#ff005a;
+    background:rgb(184,145,105);
 }
 
 .class_price .regions .region .option.on img.up {
@@ -422,6 +422,7 @@ label {
 <body>
     <c:import url="../../common/menubar.jsp"/>
 
+<div style="border-top: 1px solid #c9c9c9;"></div>
     <div class="tutor_cont">
         <div class="title_box">
             <h3>수업신청</h3>

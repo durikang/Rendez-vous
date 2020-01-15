@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-    
+     <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,14 +123,93 @@
 
 #image{
   margin:50px 50px;z-index:10;
+  border: 15px solid rgb(53,99,218);
+  border-radius: 400px;
+  
 }
-#n_id{position:absolute;left:657px;z-index:20;}
-#n_start{position: absolute;left:609px; top: 380px; width: 150px; height: 150px;}
+#n_id{position:absolute;left:674.5px;z-index:20;box-sizing: border-box;}
+#n_start{position: absolute;left:625.5px; top: 400px; width: 150px; height: 150px;box-sizing: border-box;}
 .roulette_wrap{
 	background-image: url(resources/baesung/images/bg_event_main.png);
 	width: 60%;
 	margin: 50px auto;
+	
+	border-style: solid;
+    border-image: linear-gradient(to right, #3886FF 0%, rgb(53,99,218) 100%);
+  border-image-slice: 1;
+  border-image-width: 20px;
+   box-sizing: border-box;
 }
+
+#checkcheck{
+	 position: absolute;
+	 top: -150px;
+	 left: 20px;
+	 box-sizing: border-box;
+}
+#point_area{
+	border-style: solid;
+    border-image: linear-gradient(to right, #3886FF 0%, rgb(53,99,218) 100%);
+  border-image-slice: 1;
+  border-image-width: 5px;
+  
+	width: 330px;
+	height: 250px;
+	position: absolute;
+	 top: -70px;
+	 left: 40px;
+	 text-align: center;
+	 box-sizing: border-box;
+}
+
+#point_title{
+	background: linear-gradient(#3886FF, rgb(53,99,218));
+	width: 100%;
+	height: 25%;
+	box-sizing: border-box;
+}
+
+#point_point{
+	background: white;
+	width: 100%;
+	height: 75%;
+	color: rgb(69,126,233);
+	padding-top: 45px;
+	box-sizing: border-box;
+	font-size: 55px;
+}
+
+#coupon_area{
+border-style: solid;
+    border-image: linear-gradient(to right, #3886FF 0%, rgb(53,99,218) 100%);
+  border-image-slice: 1;
+  border-image-width: 5px;
+  
+  width: 330px;
+	height: 70px;
+	position: absolute;
+	 top: 200px;
+	 left: 40px;
+	 text-align: center;
+	 box-sizing: border-box;
+}
+
+#coupon_title{
+	float: left;
+	height: 100%;
+	width: 30%;
+	background: linear-gradient(#3886FF, rgb(53,99,218));
+	color: white;
+}
+
+#coupon_count{
+	float: left;
+	height: 100%;
+	width: 70%;
+	background: white;
+	
+}
+
 </style>
 
 </head>
@@ -188,6 +267,8 @@
     </script>
     
  <!--  -->
+ 	<div style="border-top: 1px solid rgb(218,220,224);"></div>
+ 
 	<div class="roulette_wrap">
 <div id="point_left" style="display: inline-block;">
 <img src="resources/baesung/images/소망룰렛.png"id="image">
@@ -196,9 +277,24 @@
 </div>
 <div id="point_right" style="display: inline-block; position: absolute; top: left:609px; top: 380px;
 color: white; font-size: 40px;">
-<div>현재 나의 포인트 ${point}p <br> 나의 쿠폰 : <a onclick="couponPop()" href="#">${CouponList.size()}개</a></div> 
-<div id="result_id3"></div>
-<div id="result_id"></div>
+<img src="resources/baesung/images/매일매일 혜택 출석체크.png" id="checkcheck">
+
+<div id="point_area">
+<div id="point_title">
+나의 포인트 
+</div>
+<div id="point_point">
+<fmt:formatNumber value="${point}" pattern="#,###" />P
+</div>
+</div>
+
+<div id="coupon_area">
+<div id="coupon_title">쿠폰</div>
+<div id="coupon_count"><a onclick="couponPop()" href="#">${CouponList.size()}개</a></div>
+</div>
+
+<%-- <div>현재 나의 포인트 ${point}p <br> 나의 쿠폰 : <a onclick="couponPop()" href="#">${CouponList.size()}개</a></div>  --%>
+
 
 </div>
 </div>
@@ -268,6 +364,12 @@ window.onload = function(){
 	}
 	
 	function insertPointOrCoupon(val){
+		
+		if(val == "coupon"){
+			alert("쿠폰이 당첨되었습니다.");
+		}else{
+			alert(val + "포인트를 획득하였습니다.");
+		}
 		
 		location.href = "inserPointOrCoupon.do?value="+val;
 	}

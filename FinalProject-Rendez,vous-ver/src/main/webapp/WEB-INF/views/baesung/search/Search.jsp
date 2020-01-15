@@ -1283,7 +1283,7 @@ text-decoration: none;
                                                     <!--a class="heart2"></a-->
                         </div>
                         <div class="profile_box">
-                            <div class="profile" style="background-image: url('resources/lessonImg/${s.uCName}');">
+                            <div class="profile" style="background-image: url('resources/user/img/${s.uCName}');">
                             </div>
                             <div class="name">${ s.userName }</div>
                             <div class="nick">${ s.tNick }</div>

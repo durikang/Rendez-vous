@@ -442,7 +442,7 @@ label {
             ${tClass.lTitle }	</div>
         <div class="apply">
             <div class="pf_box">
-                <div class="pf" style="background-image:url(resources/baesung/images/${tClass.uCName})"></div>
+                <div class="pf" style="background-image:url(resources/user/img/${tClass.uCName})"></div>
                 <p class="triangle-border top gray" style="margin-top:50px">
                     수업에 오신걸 환영해요!<br>
                     <span>장소,수업일,시간</span>

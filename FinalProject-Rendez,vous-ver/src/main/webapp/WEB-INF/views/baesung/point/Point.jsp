@@ -187,7 +187,7 @@
         }
     </script>
     
- 
+ <!--  -->
 	<div class="roulette_wrap">
 <div id="point_left" style="display: inline-block;">
 <img src="resources/baesung/images/소망룰렛.png"id="image">

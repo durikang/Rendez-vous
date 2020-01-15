@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
 </head>
 <style>
     .footer-main-div {

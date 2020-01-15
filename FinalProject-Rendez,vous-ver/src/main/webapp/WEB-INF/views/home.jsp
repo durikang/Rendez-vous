@@ -571,6 +571,7 @@ div ul {
 <!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
 <!-- 클래스명 바꾸면 안됌 -->
 <div class="swiper-area">
 	<div class="swiper-container">
@@ -700,7 +701,7 @@ new Swiper('.swiper-container', {
 		});
 	</script>
 
-	<!--팝업-->
+	<!--팝업창-->
 	<div class="layer_popup" style="z-index:1; position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;"
 		id="layer_pop">
 		<table width="500" border="0" cellpadding="0" cellspacing="0">

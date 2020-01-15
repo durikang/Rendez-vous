@@ -26,7 +26,7 @@ public class PointController {
 	
 	@RequestMapping("pointView.do")
 	public ModelAndView pointView(ModelAndView mv, HttpServletRequest request) {
-		//
+		////
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("loginUser");
 		int point = pointService.selectPoint(m.getUser_no());

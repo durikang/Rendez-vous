@@ -196,7 +196,7 @@
 </div>
 <div id="point_right" style="display: inline-block; position: absolute; top: left:609px; top: 380px;
 color: white; font-size: 40px;">
-<div>현재 나의 포인트 ${point}p <br> 나의 쿠폰 : <a onclick="couponPop()" href="#">${CouponList.size()}개</a></div>
+<div>현재 나의 포인트 ${point}p <br> 나의 쿠폰 : <a onclick="couponPop()" href="#">${CouponList.size()}개</a></div> 
 <div id="result_id3"></div>
 <div id="result_id"></div>
 

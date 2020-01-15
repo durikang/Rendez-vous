@@ -126,7 +126,7 @@ header {
 button {
 	margin-left: 20px;
 	padding: 9px 25px;
-	background-color: rgb(194, 153, 92);
+	background-color: #c9c0b1;
 	border: none;
 	border-radius: 50px;
 	cursor: pointer;
@@ -512,7 +512,8 @@ div ul {
 }
 
 .swiper-container {
-   height:420px;   
+   height:420px; 
+   width:1200px;  
 }
 .swiper-slide {
    text-align:center;
@@ -524,6 +525,12 @@ div ul {
    max-width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
    border-radius:20px;
    /* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
+}
+
+.slidershow middle {
+	width:1000px;
+	height:1000px;
+	background: gray;
 }
 
 
@@ -571,14 +578,13 @@ div ul {
 	<div class="swiper-container">
 		<h2>추천 수업</h2>
 	   <div class="swiper-wrapper">
-	      <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0237.jpg"></div>
-	      <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0696.jpg"></div>
-	      <div class="swiper-slide"><img src="https://biketago.com/img/p/0334.jpg"></div>
-	      <div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0187.jpg"></div>
-	      <div class="swiper-slide"><img src="http://mabinogi.filamt.com/img/p2/0384.jpg"></div>
-	      <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0696.jpg"></div>
+	      <div class="swiper-slide"><img src="resources/homeImg/ex.PNG"></div>
+	      <div class="swiper-slide"><img src="resources/homeImg/ex2.PNG"></div>
+	      <div class="swiper-slide"><img src="resources/homeImg/ex3.PNG"></div>
+	      <div class="swiper-slide"><img src="resources/homeImg/ex.PNG"></div>
+	      <div class="swiper-slide"><img src="resources/homeImg/ex2.PNG"></div>
+	      <div class="swiper-slide"><img src="resources/homeImg/ex3.PNG"></div>
 	   </div>
-	
 	</div>	
 </div>
 
@@ -601,9 +607,6 @@ new Swiper('.swiper-container', {
 });
 
 </script>
-
-			</div>	
-	
 	
 		<!-- 버튼 -->
 		<button class="trigger2">카테고리</button> 
@@ -624,30 +627,30 @@ new Swiper('.swiper-container', {
                 <br>
                 <input type="button" id="cancel2" value="취소"> 
             </div> 
-        </div>
+        </div>    
 						
 	<div class="slidershow middle">
-
 		<div class="slides">
-			<input type="radio" name="r" id="r1" checked> <input
-				type="radio" name="r" id="r2"> <input type="radio" name="r"
-				id="r3"> <input type="radio" name="r" id="r4"> <input
-				type="radio" name="r" id="r5">
+			<input type="radio" name="r" id="r1" checked> 
+			<input type="radio" name="r" id="r2"> 
+			<input type="radio" name="r" id="r3"> 
+			<input type="radio" name="r" id="r4"> 
+			<input type="radio" name="r" id="r5">
 
 			<div class="slide s1">
-				<img src="resources/homeImg/광고.jpg" alt="">
+				<img src="resources/homeImg/광고.jpg">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/광고2.jpg" alt="">
+				<img src="resources/homeImg/광고2.jpg">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/광고3.jpg" alt="">
+				<img src="resources/homeImg/광고3.jpg">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/광고4.png" alt="">
+				<img src="resources/homeImg/광고4.png">
 			</div>
 			<div class="slide">
-				<img src="resources/homeImg/광고5.jpg" alt="">
+				<img src="resources/homeImg/광고5.jpg">
 			</div>
 		</div>
 
@@ -746,7 +749,7 @@ new Swiper('.swiper-container', {
 	<br><br><br><br><br>
 
 	<!-- 버튼 -->
-	<button class="trigger">이벤트 받아보기</button>
+	<button class="trigger">광고, 이벤트 받아보기</button>
 
 	<!-- 팝업 될 레이어 -->
 	<div class="modal">
@@ -798,10 +801,6 @@ new Swiper('.swiper-container', {
             window.addEventListener("click", windowOnClick);
         </script>
 
-	<br><br><br><br><br>
-	<br><br><br><br><br>
-	<br><br><br><br><br>
-	<br><br><br><br><br>
 	<br><br><br><br><br>
 	<br><br><br><br><br>
 	<br><br><br><br><br>

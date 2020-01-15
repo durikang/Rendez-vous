@@ -7,8 +7,6 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
 <meta charset="UTF-8">
 	<title></title>
 	<!-- <meta property="og:url" content="http://taling.me/Talent/Detail/166" /> -->
@@ -183,8 +181,6 @@
 			$('div','.weekly_best').removeClass("inner_area");	
 		}
 	});
-	
-	
 </script>
 
 
@@ -235,19 +231,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			
 			
 			
-			<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="#" id="back">뒤로가기</a>
-			<script>
 			
-			$(function(){
-				$("#back").click(function(){
-					history.back();
-				})
-				
-				
-			})
-			
-			
-			</script>
+
 	
 
 

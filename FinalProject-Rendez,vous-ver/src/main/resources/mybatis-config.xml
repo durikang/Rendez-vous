@@ -2,60 +2,63 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
-	<settings>
-		<setting name="jdbcTypeForNull" value="NULL"/>
-	</settings>
-	
-	<typeAliases>
-		<!-- 조배성 별칭  -->
-		<typeAlias type="com.kh.rendez.baesung.search.model.vo.tClass" alias="tClass"/>
-		<typeAlias type="com.kh.rendez.baesung.search.model.vo.searchInfo" alias="searchInfo"/>	
-		<typeAlias type="com.kh.rendez.baesung.search.model.vo.classCount" alias="classCount"/>	
-		<typeAlias type="com.kh.rendez.baesung.search.model.vo.DetailClass" alias="DetailClass"/>	
-		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.LessonTime" alias="LessonTime"/>
-		<typeAlias type="com.kh.rendez.baesung.payment.model.vo.Payment"  alias="Payment"/>
-		<!-- 유현식 별칭 -->
-		<typeAlias alias="LessonInfo" type="com.kh.rendez.lesson.model.vo.LessonInfo"/>
-		<typeAlias alias="LessonAttachment" type="com.kh.rendez.lesson.model.vo.LessonAttachment"/>
-		<typeAlias alias="Lesson" type="com.kh.rendez.lesson.model.vo.Lesson"/>
-		<typeAlias alias="Tutor" type="com.kh.rendez.tutor.model.vo.Tutor"/>
-		<typeAlias alias="Certification2" type="com.kh.rendez.tutor.model.vo.Certification"/>
-		
-		<!-- 두리 별칭  -->
-		<typeAlias type="com.kh.rendez.manager.model.vo.LessonJoin" alias="LessonJoin"/>
-		<typeAlias type="com.kh.rendez.manager.model.vo.Coupon" alias="Coupon"/>
-		<typeAlias type="com.kh.rendez.manager.model.vo.Search" alias="Search"/>
-		<typeAlias type="com.kh.rendez.manager.model.vo.MemberJoinTutor" alias="MemberJoinTutor"/>
-		<typeAlias type="com.kh.rendez.manager.model.vo.AdminMember" alias="AdminMember"/>
-		<typeAlias type="com.kh.rendez.manager.model.vo.AdminPay" alias="AdminPay"/>
-		<typeAlias type="com.kh.rendez.manager.model.vo.AdminLesson" alias="AdminLesson"/>
-		
-		<!-- 봄 -->
-	   <typeAlias type="com.kh.rendez.member.model.vo.Member" alias="Member"/>   
-	   <typeAlias type="com.kh.rendez.Wish.model.vo.Wish" alias="Wish"/>   
-		<!-- 준섭  -->
-		<typeAlias type="com.kh.rendez.support.model.vo.Qna" alias="Qna"/>
-		<typeAlias type="com.kh.rendez.support.model.vo.Answer" alias="Answer"/>
-	
-		
-	</typeAliases>
-	
-	<mappers>
-		<!--  조배성 -검색 맵퍼입니다. -->
-		<mapper resource="mappers/baesung/search-mapper.xml"/>
-		<mapper resource="mappers/baesung/payment-mapper.xml"/>
-		<!-- 유현식 매퍼입니다. -->
-		<mapper resource="mappers/lessonInfo-mapper.xml"/>
-		<mapper resource="mappers/tutor-mapper.xml"/>
-		<!-- 두리 매퍼  -->
-		<mapper resource="mappers/manager-mapper.xml"/>
-		<!-- 봄 매퍼  -->
-		   <mapper resource="mappers/member-mapper.xml"/>
-		<!-- 준섭  -->
-		<mapper resource="mappers/support-mapper.xml"/>
-		
+   <settings>
+      <setting name="jdbcTypeForNull" value="NULL"/>
+   </settings>
    
-	</mappers>
+   <typeAliases>
+      <!-- 조배성 별칭  -->
+      <typeAlias type="com.kh.rendez.baesung.search.model.vo.tClass" alias="tClass"/>
+      <typeAlias type="com.kh.rendez.baesung.search.model.vo.searchInfo" alias="searchInfo"/>   
+      <typeAlias type="com.kh.rendez.baesung.search.model.vo.classCount" alias="classCount"/>   
+      <typeAlias type="com.kh.rendez.baesung.search.model.vo.DetailClass" alias="DetailClass"/>   
+      <typeAlias type="com.kh.rendez.baesung.payment.model.vo.LessonTime" alias="LessonTime"/>
+      <typeAlias type="com.kh.rendez.baesung.payment.model.vo.Payment"  alias="Payment"/>
+      <!-- 유현식 별칭 -->
+      <typeAlias alias="LessonInfo" type="com.kh.rendez.lesson.model.vo.LessonInfo"/>
+      <typeAlias alias="LessonAttachment" type="com.kh.rendez.lesson.model.vo.LessonAttachment"/>
+      <typeAlias alias="Lesson" type="com.kh.rendez.lesson.model.vo.Lesson"/>
+      <typeAlias alias="Tutor" type="com.kh.rendez.tutor.model.vo.Tutor"/>
+      <typeAlias alias="Certification2" type="com.kh.rendez.tutor.model.vo.Certification"/>
+      <typeAlias alias="Review" type="com.kh.rendez.review.model.vo.Review"/>
+      <typeAlias alias="LessonReview" type="com.kh.rendez.lesson.model.vo.LessonReview"/>
+      
+      <!-- 두리 별칭  -->
+      <typeAlias type="com.kh.rendez.manager.model.vo.LessonJoin" alias="LessonJoin"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.MemberJoinUserpropic" alias="MemberJoinUserpropic"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.Coupon" alias="Coupon"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.Search" alias="Search"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.Certification" alias="Certification"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.MemberJoinTutor" alias="MemberJoinTutor"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.AdminMember" alias="AdminMember"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.AdminPay" alias="AdminPay"/>
+      
+      <!-- 봄 -->
+      <typeAlias type="com.kh.rendez.member.model.vo.Member" alias="Member"/>
+      <typeAlias type="com.kh.rendez.Wish.model.vo.Wish" alias="Wish"/>
+      <!-- 준섭  -->
+      <typeAlias type="com.kh.rendez.support.model.vo.Qna" alias="Qna"/>
+      <typeAlias type="com.kh.rendez.support.model.vo.Answer" alias="Answer"/>
+   
+      
+   </typeAliases>
+   
+   <mappers>
+      <!--  조배성 -검색 맵퍼입니다. -->
+      <mapper resource="mappers/baesung/search-mapper.xml"/>
+      <mapper resource="mappers/baesung/payment-mapper.xml"/>
+      <!-- 유현식 매퍼입니다. -->
+      <mapper resource="mappers/lessonInfo-mapper.xml"/>
+      <mapper resource="mappers/tutor-mapper.xml"/>
+      <!-- 두리 매퍼  -->
+      <mapper resource="mappers/manager-mapper.xml"/>
+      <!-- 봄 매퍼  -->
+         <mapper resource="mappers/member-mapper.xml"/>
+      <!-- 준섭  -->
+      <mapper resource="mappers/support-mapper.xml"/>
+      
+   
+   </mappers>
 
 
 </configuration>

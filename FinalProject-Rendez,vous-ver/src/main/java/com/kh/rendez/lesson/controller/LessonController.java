@@ -11,14 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.rendez.Wish.model.vo.Wish;
+import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
+import com.kh.rendez.lesson.model.vo.LessonReview;
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.review.model.service.ReviewService;
+import com.kh.rendez.review.model.vo.Review;
 import com.kh.rendez.tutor.model.service.TutorService;
 import com.kh.rendez.tutor.model.vo.Tutor;
 
@@ -31,11 +38,23 @@ public class LessonController {
 	@Autowired
 	private TutorService tService;
 	
+	@Autowired
+	private ReviewService rService;
+	
 	@RequestMapping("hynnmenubar.do")
 	public String goHynnmenubar() {
 		
 		return "common/hyunmenubar";
 	}
+	
+	@RequestMapping("tutorMain.do")
+	public ModelAndView tutorMainGo(ModelAndView mv) {
+		
+		mv.setViewName("lesson/tutorMainView");
+		
+		return mv;
+	}
+	
 	
 	@RequestMapping("test.do")
 	public String goTest() {
@@ -62,7 +81,9 @@ public class LessonController {
 	
 	//수업 상세 페이지
 	@RequestMapping("lessonDetail.do")
-	public ModelAndView lessonDetail(ModelAndView mv,@RequestParam int lNo) {
+	public ModelAndView lessonDetail(HttpServletRequest request,ModelAndView mv,int lNo,
+			@RequestParam(name="msg", required=false) String msg
+			) {
 		
 		
 		LessonInfo li = lService.selectOneLI(lNo);
@@ -70,6 +91,10 @@ public class LessonController {
 		ArrayList<Lesson> lTime = lService.selectTimeofLI(lNo);
 		Tutor tutor = tService.selectTutorOfLI(lNo);
 		String tName = tService.selectTutorName(lNo);
+		ArrayList<LessonReview> lRList = lService.selectLessonReviewList(lNo);
+		String tPropic = lService.selectTutorPic(lNo);
+		//li,tutor,tName,tPropic 나중에 하나로해서 갖고오자
+		
 		
 		//튜터 경력 처리
 		String[] tutorCerArr = tutor.gettCareer().split(","); 
@@ -81,15 +106,74 @@ public class LessonController {
 			}
 		}
 		
-		//튜터 사진은 나중에하자
+		//로그인이되있으면
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		if(loginUser!=null) {
+			int uNo = loginUser.getUser_no();
+			
+			// 찜하기 체크를 위한 처리
+			Wish checkWish = new Wish();
+			checkWish.setL_no(lNo);
+			checkWish.setUser_no(uNo);
+			int result = lService.checkUserFav(checkWish);	
+			if(result>0) {
+				mv.addObject("favCheck",result);
+			}
+			
+			/*-----리뷰상태를 위한 처리----*/
+			//결제(이용완료인 상태)를 몇번 했는지 체크
+			Payment pay = new Payment();
+			pay.setlNo(lNo);
+			pay.setuNo(uNo);
+			int payCheck = lService.checkUserPay(pay);
+			
+			//해당 수업에 리뷰를 남겼는데 체크
+			Review checkReview = new Review();
+			checkReview.setlNo(lNo);
+			checkReview.setuNo(uNo);
+			int reviewCheck = lService.checkUserReview(checkReview);
+			String uRStatus = "";
+			if(payCheck==0) {
+				uRStatus="unable";
+			}
+			if(payCheck>0 && reviewCheck==0) {
+				uRStatus="able";
+			}		
+			if(payCheck>0 && reviewCheck>0) {
+				uRStatus="reviewed";
+				Review selecter = new Review();
+				selecter.setlNo(lNo);
+				selecter.setuNo(uNo);
+				Review userReview = lService.selectUReview(selecter);
+				userReview.setrContent(userReview.getrContent().replace("<br>", "\n"));
+				mv.addObject("userReview",userReview);
+			}			
+			System.out.println(uRStatus);
+			mv.addObject("uRStatus",uRStatus);
+		}
+		
+		int sum=0;
+		for(LessonReview lr : lRList) {
+			sum+=lr.getrRating();
+		}
+		double lessonAvg = (double)sum/lRList.size();
+		
+		//리뷰 인서트를 성공한후 다시 가는 처리
+		if(msg !=null) {
+			mv.addObject("msg",msg);
+		}
+		
 
 			
 		mv.addObject("li",li);
 		mv.addObject("laList",laList);
 		mv.addObject("lTime",lTime);
 		mv.addObject("tutor",tutor);
+		mv.addObject("tPropic",tPropic);
 		mv.addObject("tName",tName);
 		mv.addObject("tutorCer",tutorCer);
+		mv.addObject("lRList",lRList);
+		mv.addObject("lessonAvg",lessonAvg);
 		
 		mv.setViewName("lesson/lessonDetailView");
 		
@@ -103,9 +187,19 @@ public class LessonController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		if(loginUser == null || !loginUser.getUser_type().equals("T")) {
+			mv.addObject("msg","잘못된 접근입니다");
 			mv.setViewName("home");
 			return mv;
 		}
+		
+		String tStatus = tService.selectTutorStatus(loginUser.getUser_no());
+		
+		if(!tStatus.equals("Y")) {
+			mv.addObject("msg","승인이 완료되지 않았거나  수업을 등록할 수 없는 상태입니다!.");
+			mv.setViewName("home");
+			return mv;
+		}
+		
 			
 		mv.setViewName("lesson/lessonInsertView");
 		
@@ -272,7 +366,82 @@ public class LessonController {
 	}
 	
 	
+	// 즐겨찾기 추가/삭제 ajax
+	@RequestMapping("fav.do")
+	@ResponseBody
+	public String fav(String flag,int uno, int lno) {
+		
+		if(flag.equals("insert")){
+			Wish userWish = new Wish();
+			userWish.setL_no(lno);
+			userWish.setUser_no(uno);
+			
+			int result = lService.insertUserFav(userWish);
+			
+			
+			
+		}else if(flag.equals("delete")){
+			Wish userWish = new Wish();
+			userWish.setL_no(lno);
+			userWish.setUser_no(uno);
+			int result = lService.deleteUserFav(userWish);	
+		}
+		
+		
+		return "asd";
+	}
 	
+	
+	
+	// 리뷰 인서트
+	@RequestMapping("insertReview.do")
+	public ModelAndView insertReview(ModelAndView mv,HttpServletRequest request,
+			Review inReview, RedirectAttributes rd
+			) {
+		int uNo = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();
+		inReview.setuNo(uNo);
+		inReview.setrContent(inReview.getrContent().replace("\n", "<br>"));
+		
+		int result = lService.insertReview(inReview);
+		
+		if(result>0) {
+			String msg = "리뷰를 성공적으로 등록하였습니다.";
+			rd.addFlashAttribute("msg", msg);
+			mv.setViewName("redirect:lessonDetail.do?lNo="+inReview.getlNo());
+		}else {
+			String msg = "리뷰 등록 실패";
+			rd.addFlashAttribute("msg", msg);
+			mv.setViewName("redirect:lessonDetail.do?lNo="+inReview.getlNo());
+		}
+		
+		
+		return mv;
+	}
+	
+	// 리뷰 수정
+	@RequestMapping("updateReview.do")
+	public ModelAndView updateReview(ModelAndView mv,HttpServletRequest request,
+			Review inReview, RedirectAttributes rd
+			) {
+		int uNo = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();
+		inReview.setuNo(uNo);
+		inReview.setrContent(inReview.getrContent().replace("\n", "<br>"));
+		
+		int result = lService.updateReview(inReview);
+		
+		if(result>0) {
+			String msg = "리뷰를 성공적으로 수정하였습니다.";
+			rd.addFlashAttribute("msg", msg);
+			mv.setViewName("redirect:lessonDetail.do?lNo="+inReview.getlNo());
+		}else {
+			String msg = "리뷰 수정 실패";
+			rd.addFlashAttribute("msg", msg);
+			mv.setViewName("redirect:lessonDetail.do?lNo="+inReview.getlNo());
+		}
+		
+		
+		return mv;
+	}
 	
 	
 	

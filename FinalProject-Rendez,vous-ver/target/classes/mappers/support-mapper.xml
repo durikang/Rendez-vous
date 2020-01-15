@@ -4,7 +4,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="supportMapper">
 
-
    <resultMap id="qnaResultSet" type="Qna">
       <id property="qNo" column="Q_NO"/>
       <result property="qTitle" column="Q_TITLE"/>

@@ -1,4 +1,4 @@
-package com.kh.rendez.lesson.controller;
+﻿package com.kh.rendez.lesson.controller;
 
 import java.io.File;
 import java.sql.Date;
@@ -19,12 +19,17 @@ import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.tutor.model.service.TutorService;
+import com.kh.rendez.tutor.model.vo.Tutor;
 
 @Controller
 public class LessonController {
 	
 	@Autowired
 	private LessonService lService;
+	
+	@Autowired
+	private TutorService tService;
 	
 	@RequestMapping("hynnmenubar.do")
 	public String goHynnmenubar() {
@@ -63,13 +68,29 @@ public class LessonController {
 		LessonInfo li = lService.selectOneLI(lNo);
 		ArrayList<LessonAttachment> laList = lService.selectLAofLI(lNo);
 		ArrayList<Lesson> lTime = lService.selectTimeofLI(lNo);
-		//Tutor t = tService.selectTutor() 나중에 튜터 정보는 나중에
+		Tutor tutor = tService.selectTutorOfLI(lNo);
+		String tName = tService.selectTutorName(lNo);
 		
+		//튜터 경력 처리
+		String[] tutorCerArr = tutor.gettCareer().split(","); 
+		ArrayList<String> tutorCer = new ArrayList<>();
+		
+		for(int i=0;i<tutorCerArr.length;i++) {
+			if(!tutorCerArr[i].equals("")) {
+				tutorCer.add(tutorCerArr[i]);
+			}
+		}
+		
+		//튜터 사진은 나중에하자
 
 			
 		mv.addObject("li",li);
 		mv.addObject("laList",laList);
 		mv.addObject("lTime",lTime);
+		mv.addObject("tutor",tutor);
+		mv.addObject("tName",tName);
+		mv.addObject("tutorCer",tutorCer);
+		
 		mv.setViewName("lesson/lessonDetailView");
 		
 		return mv;
@@ -77,10 +98,18 @@ public class LessonController {
 	
 	// 수업 정보 인서트 하는 페이지로 가기
 	@RequestMapping("lessonInsert.do")
-	public String lessonInsertPage() {
+	public ModelAndView lessonInsertPage(HttpServletRequest request,ModelAndView mv) {
 		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
-		return "lesson/lessonInsertView";
+		if(loginUser == null || !loginUser.getUser_type().equals("T")) {
+			mv.setViewName("home");
+			return mv;
+		}
+			
+		mv.setViewName("lesson/lessonInsertView");
+		
+		return mv;
 	}
 	
 	@RequestMapping("lessonInsertOriginal.do")
@@ -91,7 +120,8 @@ public class LessonController {
 	}
 	// 수업 정보 인서트
 	@RequestMapping("linsert.do")
-	public String lessonInsert(
+	public ModelAndView lessonInsert(
+			ModelAndView mv,
 			HttpServletRequest request,
 			LessonInfo li,
 			@RequestParam(name="covImg", required=false) MultipartFile covImg,
@@ -101,7 +131,7 @@ public class LessonController {
 		/*----------------넘어온 정보를 다듬어 주자----------------*/
 		int uno = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();
 		li.setuNo(uno);    // 로그인 유저
-		li.setlStatus("R");
+		li.setlStatus("Y");
 		
 		//입력한유튜브에서 필요한 유튜브 코드만 DB에 저장하자
 		String url = li.getlYtb();
@@ -117,13 +147,6 @@ public class LessonController {
 		//텍스트의 줄바꿈을 처리
 		li.setlIntroduction(li.getlIntroduction().replace("\n", "<br>"));
 		li.setlTarget(li.getlTarget().replace("\n", "<br>"));
-		
-		
-		
-		
-		
-		
-		
 		
 		/*----------------정보 다듬기 끝----------------*/
 			
@@ -168,19 +191,29 @@ public class LessonController {
 			num=0;
 		}
 		
+		String msg = "수업 추가에 성공하였습니다";
 		
+		mv.setViewName("redirect:lessonManage.do?msg="+msg);
 		
-		return "lesson/lessonInsertView";
+		return mv;
 	}
 	
 	
 
 	// 수업 관리하는 페이지로 가기
 	@RequestMapping("lessonManage.do")
-	public ModelAndView lessonManage(ModelAndView mv,@RequestParam(name="lno" ,required=false) String lno
-			,HttpServletRequest request) {
+	public ModelAndView lessonManage(ModelAndView mv,@RequestParam(name="lno" ,required=false) String lno,
+			@RequestParam(name="msg",required=false) String msg,
+			HttpServletRequest request) {
 		
-		int uno = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();;
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		if(loginUser == null || !loginUser.getUser_type().equals("T")) {
+			mv.setViewName("home");
+			return mv;
+		}
+		
+		int uno = loginUser.getUser_no();
 		
 		ArrayList<LessonInfo> liList = lService.selectLIList(uno);
 		ArrayList<LessonAttachment> laList = lService.selectLAList(uno);
@@ -188,6 +221,12 @@ public class LessonController {
 
 		if(lno != null) {
 			mv.addObject("slno",Integer.parseInt(lno));
+		}
+		
+		
+		if(msg!=null) {
+			mv.addObject("msg",msg);
+			System.out.println(msg);
 		}
 		
 		mv.addObject("liList",liList);

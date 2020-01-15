@@ -1,76 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
 <script src="https://kit.fontawesome.com/8af8965544.js"></script>
-<script
-	src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
 
-<link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+	
+
+
 </head>
 <style>
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-.search-box {
-	margin: 0;
-	padding: 0;
-	background: #c9c0b1;
-	height: 60px;
-	border-radius: 40px;
-	padding: 10px;
-}
-
-.search-box:hover>.search-text {
-	width: 300px;
-	padding: 0 6px 0 15px;
-	font-weight: bold;
-}
-
-.search-box:hover>.search-btn {
-	background-color: white;
-	text-decoration: none;
-	color: #c9c0b1;
-}
-
-.search-btn {
-	color: #c9c0b1;
-	float: right;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	background: black;
-	display: flex;
-	justify-content: center;
-	text-decoration: none;
-	align-items: center;
-	transition: 0.4s;
-}
-
-.search-text {
-	border: none;
-	background: none;
-	outline: none;
-	float: left;
-	padding: 0;
-	color: black;
-	font-size: 16px;
-	transition: 0.4s;
-	line-height: 40px;
-	width: 0px;
-}
-
 .header {
 	display: flex;
 	justify-content: flex-end;
@@ -128,13 +76,31 @@
 .button:hover {
 	background-color: #ddd8cf;
 }
-.search-box,.search-text{
-	
-	font-size: 10px;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
 }
 
+.container {
+	font-family: 'Do Hyeon', sans-serif;
+}
 
+.board_box {
+	width: 100%;
+	height: 100vh;
+}
 
+.wrapper {
+	float: left;
+	width: 15%;
+	height: 100vh;
+	display: flex;
+	position: relative;
+}
 </style>
 
 <body class="menu_body">
@@ -143,19 +109,21 @@
 		<script>
 			alert("${msg}");
 		</script>
-		<c:remove var="msg"/>
+		<c:remove var="msg" />
 	</c:if>
 
 	<c:set var="contextPath"
 		value="${ pageContext.servletContext.contextPath }"
 		scope="application" />
 	<header class="header">
-		
+
 		<nav>
 			<ul class="nav_links">
-				<li>관리자님 환영합니다</li>
+				<li><a href="home.do">랑데뷰 홈으로</a></li>
 				<li>|</li>
-				<li><a href="#">관리자 정보 수정</a></li>
+				<li>${loginUser.user_name }님환영합니다</li>
+				<li>|</li>
+				<li><a href="logout.do">로그아웃</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -163,9 +131,10 @@
 		<img class="logo"
 			src="${ contextPath }/resources/managerResources/Img/logo.png"
 			alt="logo">
-			
+
 		<ul class="nav_links">
-			<li><a href="#">홈페이지 관리</a></li>
+
+			<li><a href="manageHo.do">홈페이지 관리</a></li>
 			<li><a href="mn.do">회원 / 튜터 관리</a></li>
 			<li><a href="mnRequest.do">튜터 신청 관리</a></li>
 			<li><a href="#">통계</a></li>
@@ -173,9 +142,15 @@
 
 	</header>
 	<script>
-		$(".logo").on("click", function() {
-			location.href = 'managerHome.do';
+		var newWindow;
+		$(function(){
+			
+			$(".logo").on("click", function() {
+				location.href = 'managerHome.do';
+			});
+			
 		});
 	</script>
+
 </body>
 </html>

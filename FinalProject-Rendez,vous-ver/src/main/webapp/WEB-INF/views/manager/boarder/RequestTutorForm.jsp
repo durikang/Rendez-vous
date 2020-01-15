@@ -44,6 +44,22 @@
 
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+$(function(){
+    $("#all").change(function(){            //id전체 체크박스에 변화가 있을떄 
+        if($("#all").prop("checked")){      //id전체 체크박스에 체크가 되면
+            $(".tutor").prop("checked",true);         //일반사용자에 체크
+        }else{                              //전체 체크박스에 체크가 해제 되면
+            $(".tutor").prop("checked",false);       //일반사용자에 체크 해제
+        }
+    });
+});
+
+
+</script>
+
 </head>
 <body>
 	<c:import url="../mnCommon/menubar.jsp" />
@@ -54,24 +70,28 @@
 		
 		<div class="row">
 			<div class="col">
+				<form action="changeTutor.do" method="get">
+					<label for="all">전체</label>
+					<input type="checkbox" id="all">
 				<table class="table listArea">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">회원 번호</th>
+							<th scope="col">아이디</th>
 							<th scope="col">튜터 별명</th>
 							<th scope="col">튜터 경력</th>
-							<th scope="col">튜터 소개</th>
 							<th scope="col">소셜미디어</th>
 							<th scope="col">허용 여부</th>
 						</tr>
 					</thead>
+					
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 							<tr>
-								<th scope="row">${m.uNo}</th>
+								<th scope="row"><input type="checkbox" name="uNo" class="tutor" value="${ m.uNo }"> &nbsp;${m.uNo}</th>
+								<td>${ m.uId }</td>
 								<td>${ m.tuNick }</td>
 								<td class="text">${ m.tuCareer } </td>
-								<td class="text">${ m.tuInfo } </td>
 								<td>
 									<c:choose>
 									<c:when test="${m.tuSocial eq null }">없음</c:when>
@@ -95,6 +115,10 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<hr>
+					<input type="hidden" value="${ pi.currentPage }" name="page">
+					<button type="submit" class="btn btn-info" >변경하기</button>
+				</form>
 				<hr>
 
 

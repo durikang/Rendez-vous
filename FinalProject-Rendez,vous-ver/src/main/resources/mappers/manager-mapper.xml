@@ -19,8 +19,6 @@
 		<result property="enrollDate" column="ENROLL_DATE" />
 		<result property="updateDate" column="UPDATE_DATE" />
 		
-		<result property="count" column="count" />
-		
 	</resultMap>
 	
 
@@ -61,6 +59,7 @@
 	<resultMap id="mAndtuJoinResultSet" type="MemberJoinTutor">
 	
 		<id property="uNo" column="USER_NO" />
+		<result property="uId" column="USER_ID"/>
 		<result property="uType" column="USER_TYPE" />
 			
 		<!-- 튜터 정보 -->
@@ -72,11 +71,10 @@
 		
 		<!-- 튜터 경력인증 -->
 		
-		<collection property="certi" javaType="java.util.ArrayList" resultMap="certificationResultSet"/>
 	
 	</resultMap>
 	
-	<!-- 결재 매핑  -->	
+	<!-- 결제 매핑  -->	
 	<resultMap type="AdminPay" id="AdminPayResultSet">
 		<id property="pNo" column="PM_NO"/>
 		<result property="pStatus" column="PAYMENT_STATUS"/>
@@ -90,13 +88,15 @@
 		<result property="sum" column="PSUM"/>
 				
 	</resultMap>
-	<!-- 튜터 인증 매핑  -->
-	<resultMap type="Certification" id="certificationResultSet">
-		<id property="tuNo" column="C_NO"/>
-		<result property="tuTitle" column="USER_NO"/>
-		<result property="tuTitle" column="C_TITLE"/>
-		<result property="originName" column="O_FILE"/>
-		<result property="changeName" column="C_FILE"/>
+
+	
+	<resultMap type="AdminLesson" id="AdminLessonResultSet">
+		<id property="no" column="NO"/>
+		<result property="title" column="TITLE"/>
+		<result property="introduction" column="INTRODUCTION"/>
+		<result property="target" column="TARGET"/>
+		<result property="price" column="PRICE"/>
+		<result property="rating" column="RATING"/>
 	</resultMap>
 
 
@@ -151,11 +151,11 @@
 		left join userpropic using(user_no)
 		
 	</select>
+	<!-- 튜터 신청 멤버들만 셀렉  -->
 	<select id="selectTutorList" resultMap="mAndtuJoinResultSet">
 		select *
 		from member m
 		left join tutor using(user_no)
-		left join certification using(user_no)
 		where user_type='T'
 	</select>
 	
@@ -189,14 +189,15 @@
 	</insert>
 	
 	<!-- 회원 가입자 오늘 & 이번달 수 조회 -->
-	<select id="countMember" resultType="_int" parameterType="AdminMember">
+	<select id="countMember" resultType="_int">
+	
 		select count(user_no) as count
 		from member
 		<choose>
-		<when test="value =1">
+		<when test="value == 1">
 		where to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') and u_status='Y'
 		</when>
-		<when test="value=2">
+		<when test="value == 2">
 		where extract(month from enroll_date) = extract(month from sysdate) and u_status='Y'
 		</when>
 		</choose>
@@ -206,17 +207,39 @@
 		select nvl(sum(payment_cost),0) as PSUM
 		from payment
 		<choose>
-		<when test="value = 1 ">
+		<when test="value == 1 ">
 		where to_date(payment_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') and payment_status='1'
 		</when>
-		<when test="value = 2 ">
+		<when test="value == 2 ">
 		where extract(month from payment_date) = extract(month from sysdate) and payment_status='1'
 		</when>
 		</choose>
 	</select>
 	
+	<!-- 실시간 회원 리스트 조회  -->
+	<select id="selectTopMemberList" resultMap="AdminMemberResultSet">
+		SELECT *
+		FROM(SELECT *
+			FROM member
+			WHERE u_STATUS = 'Y' and user_type='N' and to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') 
+			ORDER BY enroll_date DESC)
+		WHERE ROWNUM <![CDATA[ <= ]]> 5  
+	</select>
 	
+	<!-- 실시간 수업 조회  -->
+	<select id="selectRealTimeLessonList" resultMap="AdminLessonResultSet">
+		select *
+		from lessonRating
+	</select>
+	<!-- 일반회원을 튜터 회원으로  -->
+	<update id="changeTutorStatus" parameterType="list">
+		update tutor
+		set tstatus='Y'
+		where user_no in
+		<foreach collection="list" item="uNo" open="(" close=")" separator=",">
+			#{uNo.value}
+		</foreach>
 	
-	
+	</update>
 
 </mapper>

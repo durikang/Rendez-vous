@@ -71,6 +71,9 @@
         padding: 15px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         border-top: 1px solid rgba(225, 225, 225, 0.05);
+        color: #474747;
+        display: block;
+        font-family: 'Do Hyeon', sans-serif;
     }
 
     .wrapper .sidebar ul li a {
@@ -195,7 +198,12 @@
 	            <ul>
 	                <li><a href="support_main.do"><i class="fas fa-home" style="color:#c9c0b1;"></i>Home</a></li>
 	                <li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color:#c9c0b1;"></i>Q & A</a></li>
-	                <li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color:#c9c0b1;"></i>문의 내역</a></li>
+	                <c:if test="${ !empty loginUser }">
+	                	<li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color:#c9c0b1;"></i>문의 내역</a></li>
+	                </c:if>
+	                <c:if test="${ empty loginUser }">
+	                	<li><i class="fas fa-list-alt m-auto" style="color:#c9c0b1;"></i> 문의 내역(로그인이 필요합니다.)</li>
+	                </c:if>
 	            </ul>
 	        </div>
 	    </div>
@@ -209,9 +217,10 @@
 	    		<thead>
 		    		<tr>
 						<th width="15%">번호</th>
-						<th width="50%">제목</th>
+						<th width="40%">제목</th>
 						<th width="15%">작성자</th>
 						<th width="20%">작성일</th>
+						<th width="10%">답변 현황</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -232,6 +241,14 @@
 						</td>
 						<td>${q.qWriter}</td>
 						<td>${q.qDate}</td>
+						<td>
+							<c:if test='${ q.aStatus == "N" }'>
+								X
+							</c:if>
+							<c:if test='${ q.aStatus == "Y" }'>
+								O
+							</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr align="center" height="20">
@@ -269,7 +286,7 @@
 							<a href="${ after }">[다음]</a>
 						</c:if>
 					</td>
-					</tr>
+					</tr>					
 				</tbody>
 	    	</table>
 	    	</div>

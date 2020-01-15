@@ -15,6 +15,10 @@ body {
         background-color: white;
         background-size: cover;
     }
+    #wrapper {
+    	width:100%;
+    	height:100vh;
+    }
     #loginbox {
         width:280px;
         top: 50%;
@@ -70,8 +74,8 @@ body {
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
-    <div id="loginbox">
-    
+    <div id="wrapper">
+    	<div id="loginbox">    
     	<c:if test="${ empty sessionScope.loginUser }">
     		<form action="login.do" method="post">
     			<table id="loginTable" style="test-align:center;">
@@ -91,5 +95,7 @@ body {
 			</form>
 		</c:if>
     </div>
+    </div>
+    <c:import url="../common/footbar.jsp"/>
 </body>
 </html>

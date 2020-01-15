@@ -48,6 +48,7 @@
     align-items: center;
     transition: 0.4s;
 }
+
 .search-btn i {
 	color:#c9c0b1;
 }

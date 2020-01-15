@@ -15,11 +15,6 @@
 		margin:auto;
 	}
 	
-	#wrapper {
-    	width:100%;
-    	height:87.5vh;
-    }
-	
 	 .guide {
 		display:none;
 		font-size:12px;
@@ -37,18 +32,18 @@
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
-	<div id=wrapper>
+
 	<h1 align="center">회원 가입</h1>
 	<br>
 	<br>
 	<div class="centerText">
-		<form action="minsert.do" method="post" id="joinForm" 
-		enctype="multipart/form-data" onsubmit="return validate()"> <!-- 유효성검사 하는 것 -->
+		<form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()">
 			<table width="500" cellspacing="5">
 				<tr>
 					<td width="150">* 아이디</td>
 					<td width="450">
 						<input type="text" name="user_id" id="user_id">
+						<!-- ajax 이후 적용 -->
 						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
 						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
 						<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
@@ -86,6 +81,8 @@
 					</td>
 				</tr>				
 				<tr>
+				<!-- Postcodify API를 이용하여 주소 입력하기 -->
+				<!-- 1. 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 calss를 부여한다 -->
 					<td>우편번호</td>
 					<td>
 						<input type="text" name="post" class="postcodify_postcode5" value="" size="6" />
@@ -104,13 +101,9 @@
 						<input type="text" name="address2" class="postcodify_extra_info" value="" />
 					</td>
 				</tr>
-				<!-- <tr>
-					<td>프로필 사진</td>
-					<td><input type="file" name="photo"></td>
-				</tr> -->
 				<tr>
 					<td colspan="2" align="center">
-						<button>가입하기</button>&nbsp;
+						<button onclick="validate();">가입하기</button>&nbsp;
 						<input type="reset" value="취소하기">
 					</td>	
 				</tr>
@@ -121,14 +114,17 @@
 			<a href="home.do">시작페이지로 이동</a>
 		</div>
 	</div>
-	</div>
+	
+	<!-- 2. jQuery와 Postcodify를 로딩한다 -->
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+	<!-- 3. "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
 	<script> 
 		$(function() { 
 			$("#postcodify_search_button").postcodifyPopUp(); 
 		}); 
 	</script>
 	
+	<!-- ajax 이후에 추가할 스크립트 -->
 	<script>
 		$(function(){
 			$("#user_id").on("keyup", function(){
@@ -145,7 +141,6 @@
 					url:"dupid.do",
 					data:{user_id:user_id},
 					success:function(data) {
-						console.log(data);
 						if(data.isUsable == true) {
 							$(".error").hide();
 							$(".ok").show();
@@ -173,6 +168,6 @@
 		}
 		
 	</script>
-	<c:import url="../common/footbar.jsp"/>
+	
 </body>
 </html>

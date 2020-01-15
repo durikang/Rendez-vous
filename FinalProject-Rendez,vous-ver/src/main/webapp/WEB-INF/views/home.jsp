@@ -573,7 +573,7 @@ div ul {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-<!-- 클래스명 바꾸면 안됌 -->
+
 <div class="swiper-area">
 	<div class="swiper-container">
 		<h2>추천 수업</h2>

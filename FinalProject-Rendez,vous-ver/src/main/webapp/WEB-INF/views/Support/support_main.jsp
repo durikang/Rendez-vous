@@ -233,8 +233,7 @@
   	<script src="support/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 	<script src="<c:url value="/resources/support/vendor/jquery/jquery.min.js"/>"></script>
-	<script
-		src="<c:url value="/resources/support/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
+	<script src="<c:url value="/resources/support/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 
 	<c:import url="../common/footbar.jsp"/>
 	

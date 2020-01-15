@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -7,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Document</title>
+<title>Rendez,vous</title>
 
 
 <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
@@ -291,7 +290,7 @@ button:hover {
 .bar {
 	width: 50px;
 	height: 10px;
-	border: 2px solid #ccff00;
+	border: 2px solid #368D9C;
 	margin: 6px;
 	cursor: pointer;
 	transition: 0.4s;
@@ -310,6 +309,10 @@ input[name="r"] {
 	width: 500%;
 	height: 100%;
 	display: flex;
+}
+
+.ad {
+	margin:225px 0px 0px 0px;
 }
 
 .slide {
@@ -528,12 +531,9 @@ div ul {
    /* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
 }
 
-.slidershow middle {
-	width:1000px;
-	height:1000px;
-	background: gray;
+.trigger {
+	margin:0px 0px 1000px 0px;
 }
-
 
 </style>
 
@@ -545,13 +545,13 @@ div ul {
 		<section id="banner">
 			<div class="slideList">
 				<div class="slideImg">
-					<img src="resources/homeImg/slide1.PNG" alt="이미지 설명">
+					<img src="resources/homeImg/slide1.PNG">
 				</div>
 				<div class="slideImg">
-					<img src="resources/homeImg/slide2.PNG" alt="이미지 설명">
+					<img src="resources/homeImg/slide2.PNG">
 				</div>
 				<div class="slideImg">
-					<img src="resources/homeImg/slide3.PNG" alt="이미지 설명">
+					<a href = "링크할 주소"><img src="resources/homeImg/slide3.png"></a>
 				</div>
 			</div>
 		</section>
@@ -628,9 +628,10 @@ new Swiper('.swiper-container', {
                 <input type="button" id="cancel2" value="취소"> 
             </div> 
         </div>    
-						
+	
+	<div class="ad" style="background-color:darkgray; width: 1920px; height: 500px;">
 	<div class="slidershow middle">
-		<div class="slides">
+		<div class="slides" style="z-index:1">
 			<input type="radio" name="r" id="r1" checked> 
 			<input type="radio" name="r" id="r2"> 
 			<input type="radio" name="r" id="r3"> 
@@ -662,6 +663,7 @@ new Swiper('.swiper-container', {
 			<label for="r5" class="bar"></label>
 		</div>
 	</div>
+    </div>
 
 	<script>
 		var slideCount = $(".slideImg").length;
@@ -703,8 +705,7 @@ new Swiper('.swiper-container', {
 	</script>
 
 	<!--팝업창-->
-	<div class="layer_popup" style="z-index:1; position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;"
-		id="layer_pop">
+	<div class="layer_popup" style="position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;" id="layer_pop">
 		<table width="500" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td><img src="resources/homeImg/pop.png" width="500"
@@ -807,5 +808,4 @@ new Swiper('.swiper-container', {
 
 	<c:import url="common/footbar.jsp" /> 
 </body>
-
 </html>

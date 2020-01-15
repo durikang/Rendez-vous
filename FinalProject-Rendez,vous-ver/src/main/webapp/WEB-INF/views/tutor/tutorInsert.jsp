@@ -191,51 +191,6 @@
 	<form action="tutorInsert.do" method="post" enctype="multipart/form-data">
 	<div id="page1" class="tab">
 	
-
-	<div class="box">
-		<div class="title">프로필사진<b class="pink">*</b></div>
-		<div class="cont">
-			<div class="caution caution1">
-				<b class="pink">주의</b><br>
-				<span class="gray8">* 얼굴이 나오지 않은 동물/캐릭터/단순배경사진/증명사진은 승인되지 않습니다.</span><br>
-				<div style="overflow:hidden">
-					<div class="pf">
-						<img src="<%= request.getContextPath() %>/resources/h1/Images/eximg01.png">
-					</div>
-					<div class="pf">
-						<img src="<%= request.getContextPath() %>/resources/h1/Images/eximg02.png">
-					</div>
-					<div class="pf">
-						<img src="<%= request.getContextPath() %>/resources/h1/Images/eximg03.png">
-					</div>
-					<div class="pf">
-						<img src="<%= request.getContextPath() %>/resources/h1/Images/eximg04.png">
-					</div>
-				</div>
-			</div>
-			
-			
-			<div style="margin: 30px 0">
-				<img class="upf_b button" src="<%= request.getContextPath() %>/resources/h1/Images/btn_pfimg.png">
-				<div class ="upf" id="picture-cover" id="ProfileThumbnailUrl" style="background-image:url('//taling.me/Content/Images/placeholders/profile-default.thumb.jpg')">
-					<input type="hidden" id="ProfileThumbnailUrl" value="//taling.me/Content/Images/placeholders/profile-default.thumb.jpg"/>
-					<input type="file" id="tutorPropic" name="tutorPropic" style="width:150px;height:130px;opacity:0;"/>
-				</div>				
-			</div>
-			<script>
-				$('#tutorPropic').change(function (e) {
-					var file = (e.target || window.event.srcElement).files[0];
-
-					var reader = new FileReader();
-					reader.onload = function() {
-						$('#picture-cover').css("background-image", "url('"+reader.result+"')");						
-					}
-					reader.readAsDataURL(file);
-				});
-			</script>
-
-		</div>
-	</div>
 	<div class="box">
 		<div class="title">별명<b class="pink">*</b></div>
 		<div class="cont">

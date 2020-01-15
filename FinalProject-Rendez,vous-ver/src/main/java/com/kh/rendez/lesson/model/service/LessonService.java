@@ -48,6 +48,14 @@ public interface LessonService {
 
 	String selectTutorPic(int lNo);
 
+	int insertReview(Review inReview);
+
+	Review selectUReview(Review selecter);
+
+	int updateReview(Review inReview);
+
+	
+
 	
 
 

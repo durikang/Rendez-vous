@@ -40,6 +40,10 @@ public class TutorDao {
 		return (ArrayList)sqlSession.selectList("tutorMapper.selectTCert",uNo);
 	}
 
+	public String selectTutorStatus(int uno) {
+		return sqlSession.selectOne("tutorMapper.selectTutorStatus",uno);
+	}
+
 
 
 	

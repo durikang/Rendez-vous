@@ -184,6 +184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="hcont">
 		<c:import url="../common/menubar.jsp"/>
 	</div>
+	<c:import url="../common/hyunsidebar.jsp"/>
 <!-- //HEADER -->
 
 

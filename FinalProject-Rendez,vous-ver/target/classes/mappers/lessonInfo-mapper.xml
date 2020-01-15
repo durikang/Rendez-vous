@@ -57,16 +57,14 @@
 	</select>
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+	<!-- 튜터사진을 유저프로픽에서 갖고옴 -->
+	<select id="selectTutorPic" parameterType="_int" resultType="String">
+	SELECT P.U_C_NAME
+	FROM USERPROPIC P,LESSON_INFO I
+	WHERE P.USER_NO = I.USER_NO
+	AND I.L_NO = #{lNo}
+	</select>
 	
 	
 	
@@ -146,6 +144,7 @@
 		SELECT *
 		FROM LESSON
 		WHERE L_NO= #{lNo}
+		AND START_TIME>SYSDATE
 	</select>
 	
 	
@@ -197,6 +196,15 @@
 		<result property="uCName" column="U_C_NAME"/>
 	</resultMap>
 	
+	
+	<resultMap type="Review" id="rResultSet">
+		<id property="lNo" column="L_NO"/>
+		<id property="uNo" column="USER_NO"/>
+		<result property="rContent" column="REVIEW_CONTENT"/>
+		<result property="rRating" column="REVIEW_RATING"/>
+		<result property="rDate" column="REVIEW_DATE"/>
+	</resultMap>
+	
 
 	<select id="checkUserReview" parameterType="Review" resultType="_int">
 		SELECT COUNT(*)
@@ -216,16 +224,37 @@
 	
 
 	
+	<insert id="insertReview" parameterType="Review">
+	INSERT INTO REVIEW VALUES(#{lNo},#{uNo},#{rContent},#{rRating},SYSDATE)
+	</insert>
 	
-	
-	
-	<!-- 튜터사진을 유저프로픽에서 갖고옴 -->
-	<select id="selectTutorPic" parameterType="_int" resultType="String">
-	SELECT P.U_C_NAME
-	FROM USERPROPIC P,LESSON_INFO I
-	WHERE P.USER_NO = I.USER_NO
-	AND I.L_NO = #{lNo}
+	<select id="selectUReview" parameterType="Review" resultMap="rResultSet">
+	SELECT * 
+	FROM REVIEW
+	WHERE USER_NO = #{uNo}
+	AND L_NO = #{lNo}
 	</select>
+	
+	<update id="updateReview" parameterType="Review">
+	UPDATE REVIEW 
+	SET REVIEW_CONTENT = #{rContent},
+		REVIEW_RATING = #{rRating},
+		REVIEW_DATE = SYSDATE
+	WHERE USER_NO = #{uNo}
+	AND L_NO = #{lNo}	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 	

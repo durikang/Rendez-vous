@@ -20,7 +20,61 @@
 					
 		.star-rating { width:205px; }                
 		.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(${contextPath}/resources/h1/ystar.png)no-repeat; }
-		.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }			
+		.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
+		
+		.modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .starR {
+			background:
+				url('${contextPath}/resources/h1/ystarcon.png')
+				no-repeat right 0;
+			background-size: auto 100%;
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			text-indent: -9999px;
+			cursor: pointer;
+		}
+
+		.starR.on {
+			background-position: 0 0;
+		}	
+		
+		
+		
 					
 
 	</style>
@@ -245,24 +299,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							</div>
 						</div>
 					</c:forEach>
-					
-						
-						
-<!-- 						<div class="option on">
-							<div class="top">
-								<div class="timedetail">
-								<div class="indate">01.04(토)</div>13:00~16:00								
-								</div>
-							<span>|</span> <div class="region_name">종로</div><img src="/Content/Images/icon_up.png" class="up"><img src="/Content/Images/icon_down.png" class="dwn">
-							</div>
-							<div class="box" style="">
-							
-								 <div class="info">
-									<div class="detail_info">상세장소 : 시간공방 종각역점<br></div>										
-								 </div>
-								 
-							</div>
-						</div> -->
 
 
 								
@@ -305,8 +341,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<a onclick="toPay()" style="text-decoration: none;"><span class="btntxt_s">수업 신청하기</span></a>
 			</div>
 			
+			
+			<c:if test=""></c:if>
+			
 			<script>
 				function toPay(){
+					
+					
+					<c:if test="${empty loginUser }">
+					alert("로그인이 필요합니다");
+					return;
+					</c:if>
+					
+					<c:if test="${empty lTime }">
+					alert("신청 가능한 수업이 없습니다.");
+					return;
+					</c:if>
+					
 					var lno = ${li.lNo};
 					location.href = 'detail.do?lNo='+lno;
 				}
@@ -765,7 +816,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 										<div class="review_box">		
 										<span class='star-rating'>
 											<span style ="width:${lessonAvg * 20}%; float: left;" ></span>
-										</span> 		
+										</span> 	
+										<c:if test="${lessonAvg != 'NaN'}">
+										${lessonAvg}
+										</c:if>
 										</div>
 	
 										<div class="review_list" id="bookmarkReview">
@@ -829,12 +883,172 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				if(uRStatus=='unable'){
 					alert('수강을 받으신 회원분만 리뷰를 남기실 수 있습니다.');
 				}else if(uRStatus=='able'){
-					alert('able');
+					$("#myBtn").click();
 				}
 			}
 			
 			
+			function updateReview(){
+				$("#myBtn").click();
+			}
+			
+			
 			</script>
+			
+
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn" hidden>진짜 리뷰 버튼</button>
+ 
+    <!-- The Modal -->
+				<div id="myModal" class="modal">
+
+					<!-- Modal content -->
+					<div class="modal-content" style="width: 500px">
+					<c:if test="${uRStatus eq 'able' }">	
+						<div class="modal-header">
+
+							<h4>${li.lTitle } 에 대한 리뷰를 등록해주세요</h4>
+						</div>
+							
+						<form action="insertReview.do" onsubmit="return submitReview();">
+						<div class="modal-body">
+							
+
+							<div class="starRev">
+								<span class="starR">1</span> <span class="starR">2</span> <span
+									class="starR">3</span> <span class="starR">4</span> <span
+									class="starR">5</span>
+							</div>
+							
+							<br>
+							<hr>
+							
+							<textarea class="form-control" rows="5"
+								style="margin: 0px; width: 400px; height: 90px;"
+								placeholder="내용을 입력해주세요" name="rContent" id="rContent"></textarea>
+						</div>
+						<div class="modal-footer">
+							<input type="text" name="lNo" value="${ li.lNo }" hidden="">
+							<input type="text" id="rRating" name="rRating" hidden="">
+							<button type="submit" class="btn btn-primary ">등록하기</button>
+							<button type="button" id="close" class="btn btn-default ">닫기</button>
+						</div>
+						</form>
+						</c:if>
+						
+						<c:if test="${uRStatus eq 'reviewed' }">	
+						<div class="modal-header">
+							<h4>리뷰를 수정합니다.</h4>
+						</div>						
+						
+						<form action="updateReview.do" onsubmit="return submitReview();">
+						<div class="modal-body">
+							
+
+							<div class="starRev">
+								<span class="starR">1</span> <span class="starR">2</span> <span
+									class="starR">3</span> <span class="starR">4</span> <span
+									class="starR">5</span>
+							</div>
+							
+							<br>
+							<hr>
+							
+							<textarea class="form-control" rows="5"
+								style="margin: 0px; width: 400px; height: 90px;"
+								placeholder="내용을 입력해주세요" name="rContent" id="rContent">${userReview.rContent}</textarea>
+						</div>
+						<div class="modal-footer">
+							<input type="text" name="lNo" value="${ li.lNo }" hidden="">
+							<input type="text" id="rRating" name="rRating" value="${userReview.rRating}" hidden="">
+							<button type="submit" class="btn btn-primary ">수정하기</button>
+							<button type="button" id="close" class="btn btn-default ">닫기</button>
+						</div>
+						</form>
+						
+						<script>
+						$(function(){
+							$("#uReview").click(function(){
+								$(".starR").eq(${userReview.rRating}-1).click();
+							});
+							
+						});
+						
+						
+						
+						</script>	
+						</c:if>
+
+					</div>
+				</div>
+				
+
+
+
+
+
+
+
+				<!-- 모달 스크립트 -->   
+	<script type="text/javascript">
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close");                                          
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    //별점
+    		$('.starRev span').click(function(){
+			  $(this).parent().children('span').removeClass('on');
+			  $(this).addClass('on').prevAll('span').addClass('on');
+			  $("#rNum").val($(this).parent().children('.on').last().text());
+			  return false;
+			});
+    
+    $(".starR").click(function(){
+    	var rRating =  $(this).text();
+    	$("#rRating").val(rRating); 
+    });
+    
+    function submitReview(){
+		
+    	var rContent = $("#rContent").val();
+    	var rRa = $("#rRating").val();
+    	
+		if(rContent.length == 0){
+			alert("리뷰 내용을 입력해주세요");
+			return false;
+		}
+		
+		if(rRa == 0 || rRa.length ==0){
+			alert("별점을 입력해주세요");
+			return false;
+		}
+    	
+    	return true;
+    }
+    
+    
+    
+
+
+	
+	</script>
+    
+
 			
 			
 			
@@ -1046,84 +1260,9 @@ $(window).scroll(function() {
 	roffsetTop = document.getElementById("review").offsetTop + 650;
 	qoffsetTop = document.getElementById("qna").offsetTop + 650;
 	
-	//스크롤에 따라 버튼에 ul에 온 속성을 부여 함
-/* 	if($(window).scrollTop() > toffsetTop && $(window).scrollTop() < IoffsetTop)
-	{
-		$('#sli').removeClass("on");
-		$('#tli').addClass("on");
-		$('#ili').removeClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').removeClass("on");
-	}
-	else if($(window).scrollTop() > IoffsetTop && $(window).scrollTop() < roffsetTop)
-	{		
-		$('#sli').removeClass("on");		
-		$('#tli').removeClass("on");
-		$('#ili').addClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').removeClass("on");
-	}
-	else if($(window).scrollTop() > roffsetTop && $(window).scrollTop() < qoffsetTop)
-	{		
-		$('#sli').removeClass("on");
-		$('#tli').removeClass("on");
-		$('#ili').removeClass("on");
-		$('#rli').addClass("on");
-		$('#qli').removeClass("on");
-	}
-	else if($(window).scrollTop() > qoffsetTop)
-	{		
-		$('#sli').removeClass("on");
-		$('#tli').removeClass("on");
-		$('#ili').removeClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').addClass("on");
-	}
-	else
-	{
-		$('#sli').addClass("on");
-		$('#tli').removeClass("on");		
-		$('#ili').removeClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').removeClass("on");
-	} */
-});
-
- $(document).on('click', '#btn-add-wishlist', function () {
-	var btn = $(this);
-
-	$.post('/Talent/AddWishList/166', {}, function (res) {
-		if (res=='0000') {
-			btn.attr('id', 'btn-remove-wishlist');
-			$("#wishsrc").attr("src","https://taling.me/Content/Images/class/icon_btn_wish_on.png");
-			alert('위시리스트에 등록 되었습니다');
-			fbq('track', 'AddToCart', { 
-				currency: 'KRW',
-				value: 35000,
-				content_type: 'product',
-				content_ids: ['166'],
-				content_category: '국악'
-			});
-		} else {
-			alert('위시리스트에서 등록 중 오류가 발생했습니다');
-		}
-	});
 });
 
 
-
-
-
-function openQuestion()
-{	
-	$('#popup-write-qna').show();	
-}
-
-function openAnswer(idx)
-{	
-	$('#popup-write-answer').show();
-	document.getElementById('qId').value = idx;
-}
 </script>
 
 <c:import url="../common/footbar.jsp"/>

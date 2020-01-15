@@ -45,9 +45,9 @@ public class TutorController {
 	}
 	
 	@RequestMapping("tutorInsert.do")
-	public String tutorInsert(
+	public ModelAndView tutorInsert(
+		ModelAndView mv,
 		HttpServletRequest request,
-		@RequestParam(name="tutorPropic", required=false) MultipartFile tutorPropic,
 		String tNick,
 		String tInfo,
 		@RequestParam(name="certName", required=false) List<String> certName,
@@ -75,6 +75,8 @@ public class TutorController {
 		inTutor.settSocial(tInstagram+","+tBlog+","+tYoutube);
 		
 		int result1 = tService.insertTutor(inTutor);
+		int result2 =0;
+		int result3 =0;
 		if(result1>0) {
 			for(int i =0;i<certImg.size();i++) {
 				
@@ -88,22 +90,27 @@ public class TutorController {
 				inCer.setoFile(certImg.get(i).getOriginalFilename());
 				inCer.setcFile(cFileName);
 	
-				int result2 = tService.insertCertification(inCer);	
+				result2 = tService.insertCertification(inCer);	
 				}
 			}	
 			
-			int result3 = tService.updateMemberType(uno);
-	
+			if(result2>0) {
+				result3 = tService.updateMemberType(uno);
+			}
+			
+			if(result3>0) {
+				mv.addObject("msg","튜터 신청이 완료되있습니다  승인 완료 후 수업 등록이 가능합니다.");
+				mv.setViewName("home");
+			}
 		}
-		
-		return "tutor/tutorInsert";
+	
+		return mv;
 	}
 	
 	
 	@RequestMapping("tutorCert.do")
 	public ModelAndView tutorCert(HttpServletRequest request,ModelAndView mv,
-			int uNo
-			) {
+			int uNo) {
 		
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");

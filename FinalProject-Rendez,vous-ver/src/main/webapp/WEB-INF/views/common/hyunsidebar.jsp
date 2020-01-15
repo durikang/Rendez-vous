@@ -62,10 +62,9 @@ div {
 	
 		 <!-- style="color: rgb(40, 52, 68); -->
 		
+		<li><a href="tutorMain.do">튜터메인</a></li>
 		<li><a href="lessonInsert.do">수업등록하기</a></li>
-		<li><a href="tutorInsertPage.do">수업 관리</a></li>
-		<li><a href="">수업 정보 수정</a></li>
-		<li><a href="/question/tel.kh">모든 수업 리스트 페이지로</a></li>
+		<li><a href="lessonManage.do">수업 관리</a></li>
 	</ul>
 	
 

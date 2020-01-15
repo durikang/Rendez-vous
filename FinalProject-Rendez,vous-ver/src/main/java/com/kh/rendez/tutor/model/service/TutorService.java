@@ -20,6 +20,8 @@ public interface TutorService {
 
 	int updateMemberType(int uno);
 
+	String selectTutorStatus(int uno);
+
 	
 
 }

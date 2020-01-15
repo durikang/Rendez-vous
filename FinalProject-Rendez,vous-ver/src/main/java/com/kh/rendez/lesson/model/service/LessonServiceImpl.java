@@ -110,6 +110,23 @@ public class LessonServiceImpl implements LessonService {
 		return lDao.selectTutorPic(lNo);
 	}
 
+	@Override
+	public int insertReview(Review inReview) {
+		return lDao.insertReview(inReview);
+	}
+
+	@Override
+	public Review selectUReview(Review selecter) {
+		return lDao.selectUReview(selecter);
+	}
+
+	@Override
+	public int updateReview(Review inReview) {
+		return lDao.updateReview(inReview);
+	}
+
+
+
 
 
 	

@@ -64,7 +64,7 @@
 	
 	.async-hide { opacity: 0 !important}
 	
-	        .modal {
+	  	.modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
@@ -188,7 +188,7 @@
 							<input type="text" value="${li.lPrice}" hidden>
 							<div class="button_gray cursor" id="myBtn" onclick="addLS(this);">수업 일정 추가</div>
 							&nbsp;
-							<div class="button_gray cursor" onclick="fnStatusChange('CS01','19200');">등록완료하기</div>
+							<div class="button_gray cursor" onclick="updateLesson(this);" style="width: 180px">수업 정보 수정하기</div>
 							&nbsp;	
 							<div class="button_white cursor" onclick="fnStatusChange('CS01','19200');">등록완료하기</div>				
 					</div>
@@ -263,8 +263,15 @@
 				var lprice = $(value).parent().children().eq(1).val();
 				$("#adlno").val(lno);
 				$("#adprice").val(lprice);
-				
+	
 			}
+			
+			function updateLesson(value){
+				var lno = $(value).parent().children().eq(0).val();
+				alert(lno);
+				
+			}	
+				
 	
 		
 		</script>

@@ -92,6 +92,20 @@ public class LessonDao {
 		return sqlSession.selectOne("lessonInfoMapper.selectTutorPic",lNo);
 	}
 
+	public int insertReview(Review inReview) {
+		return sqlSession.insert("lessonInfoMapper.insertReview",inReview);
+	}
+
+	public Review selectUReview(Review selecter) {
+		return sqlSession.selectOne("lessonInfoMapper.selectUReview",selecter);
+	}
+
+	public int updateReview(Review inReview) {
+		return sqlSession.update("lessonInfoMapper.updateReview",inReview);
+	}
+
+	
+
 	
 
 

@@ -42,7 +42,8 @@
 	<br>
 	<br>
 	<div class="centerText">
-		<form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()"> <!-- 유효성검사 하는 것 -->
+		<form action="minsert.do" method="post" id="joinForm" 
+		enctype="multipart/form-data" onsubmit="return validate()"> <!-- 유효성검사 하는 것 -->
 			<table width="500" cellspacing="5">
 				<tr>
 					<td width="150">* 아이디</td>
@@ -103,6 +104,10 @@
 						<input type="text" name="address2" class="postcodify_extra_info" value="" />
 					</td>
 				</tr>
+				<!-- <tr>
+					<td>프로필 사진</td>
+					<td><input type="file" name="photo"></td>
+				</tr> -->
 				<tr>
 					<td colspan="2" align="center">
 						<button>가입하기</button>&nbsp;

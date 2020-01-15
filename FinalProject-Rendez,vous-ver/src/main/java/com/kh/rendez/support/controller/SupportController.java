@@ -116,7 +116,7 @@ public class SupportController {
 	}
 	
 	@RequestMapping("qinsert.do")
-	public String insertQna(HttpServletRequest request, Qna q) {
+	public String insertQna(HttpServletRequest request, Qna q) {		
 		int result = 0;
 		if(!q.getqContent().isEmpty() && !q.getqTitle().isEmpty()) {
 			result = sService.insertQna(q);

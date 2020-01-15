@@ -314,12 +314,12 @@ a {
                 <div class="appcont" style="margin-top:80px;">				
                     <div class="call">
                         <div class="center">튜터님께 연락 받으실 휴대전화 번호</div>
-                        <div class="center2">${phone }</div>
+                        <div class="center2">${loginUser.phone }</div>
                         <!--div class="center3">번호수정></div-->
                     </div>	
                     <br>
                     <div class="call bottom" style="height:157px;">
-                        <div class="center4"><a href="/Support/Refund" target="_blank">랑데뷰 결제 금액 환불 요건 [환불약관 보러가기]</a></div>
+                        <div class="center4"><a href="#" target="_blank">랑데뷰 결제 금액 환불 요건 [환불약관 보러가기]</a></div>
                         <div class="center5" style="padding-left:230px;">
                             ㆍ원데이는 전체 수업료 결제로만 진행됩니다.<br>
                             ㆍ원데이 수업 진행 24시간 전에 환불 요청하는 경우 결제금액이 100% 환불됩니다.<br>

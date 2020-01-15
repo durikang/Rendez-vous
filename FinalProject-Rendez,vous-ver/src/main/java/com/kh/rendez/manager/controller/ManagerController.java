@@ -1,9 +1,12 @@
 package com.kh.rendez.manager.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,11 +15,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.rendez.manager.common.Pagination;
 import com.kh.rendez.manager.model.exception.ManagerException;
 import com.kh.rendez.manager.model.service.ManagerService;
+import com.kh.rendez.manager.model.vo.AdminLesson;
+import com.kh.rendez.manager.model.vo.AdminMember;
 import com.kh.rendez.manager.model.vo.AdminStatic;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
@@ -33,22 +42,9 @@ public class ManagerController {
 	JavaMailSender mailSender;
 	
 	@RequestMapping("managerHome.do")
-	public ModelAndView ManagerHome(ModelAndView mv) {
+	public String ManagerHome() {
 		
-		AdminStatic as = new AdminStatic();
-		
-		as.setTodayMember(mnService.countMember(1));
-		as.setThisMonthMember(mnService.countMember(2));
-		
-		as.setTodayPay(mnService.sumPay(1));
-		as.setThisMonthPay(mnService.sumPay(2));
-		
-		mv.addObject("adminStatic",as);
-		
-		mv.setViewName("manager/managerHome");
-		return mv;
-		
-		
+		return "manager/managerHome";
 	}
 	@RequestMapping("mn.do")
 	public ModelAndView memberList(ModelAndView mv,
@@ -165,6 +161,7 @@ public class ManagerController {
 		}
         return success;
 	}
+	
 	@RequestMapping("mnRequest.do")
 	public ModelAndView RequestTutorView(ModelAndView mv,@RequestParam(value="page",required=false) Integer page) {
 		// 페이징 처리를 위해 마이바티스 프로젝트에서 PageInfo, Pagination 복사
@@ -174,6 +171,7 @@ public class ManagerController {
 		
 		ArrayList<MemberJoinTutor> list = mnService.selectTutorList(currentPage);	
 		
+		System.out.println(list);
 		
 		if(list != null) {
 			mv.addObject("list", list);
@@ -185,6 +183,61 @@ public class ManagerController {
 		
 		return mv;
 	}
+	@RequestMapping(value="newMemList.do", produces="appllication/json; charset=utf-8")
+	@ResponseBody
+	public String realTimeMemberList(HttpServletResponse response) throws JsonIOException, IOException{
+		ArrayList<AdminMember> mlist =mnService.selectMemberList();
+	
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(mlist);
+			
+	}
+	
+	@RequestMapping(value="realTimeCount.do", produces="appllication/json; charset=utf-8")
+	@ResponseBody
+	public String realTimeMemberCount(HttpServletResponse response) throws JsonIOException, IOException{
+		AdminStatic as = new AdminStatic();
+		
+		as.setTodayMember(mnService.countMember(1));
+		as.setThisMonthMember(mnService.countMember(2));
+		
+		as.setTodayPay(mnService.sumPay(1));
+		as.setThisMonthPay(mnService.sumPay(2));
+		
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(as);
+	}
+	
+	// 실시간 수업 순위
+	@RequestMapping(value="realTimeLessonList.do", produces="appllication/json; charset=utf-8")
+	@ResponseBody
+	public String realTimeLessonList(HttpServletResponse response) throws JsonIOException, IOException{
+		ArrayList<AdminLesson> Lessonlist =  mnService.selectRealTimeLessonList();
+		
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(Lessonlist);
+		
+	}
+	
+	@RequestMapping("changeTutor.do")
+	public ModelAndView changeTutor(ModelAndView mv,@RequestParam("uNo") List<Integer> uNo,@RequestParam("page") Integer page){
+		System.out.println(uNo);
+		System.out.println(page);
+		String msg = mnService.changeTutorStatus(uNo) !=0 ? "성공적으로 변경 하였습니다.":"실패 하였습니다.";
+		mv.addObject("mv",msg);
+		mv.addObject("page",page);
+		mv.setViewName("redirect:mnRequest.do");
+		
+		return mv;
+		
+	}
+	
 	
 	
 	

@@ -36,6 +36,7 @@
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
 </head>
 <style>
+
 * {
 	margin: 0;
 	padding: 0;
@@ -169,6 +170,7 @@
 	width: 80px;
 	background: #c9c0b1;
 }
+
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -200,6 +202,7 @@
 			</div>
 		</div>
 	</header>
+
 	<div class="board_box">
 		<div class="wrapper">
 			<div class="sidebar">
@@ -273,6 +276,7 @@
 								O
 							</c:if></td>
 							</tr>
+
 						</c:forEach>
 						<tr align="center" height="20">
 							<td colspan="6">
@@ -296,6 +300,7 @@
 									</c:if>
 								</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
 							[다음]
+
 						</c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
 									<c:url var="after" value="support_qna.do">
 										<c:param name="page" value="${ pi.currentPage + 1 }" />
@@ -314,6 +319,7 @@
 			<img src="resources/support/img/KakaoTalk.png"
 			style="width: 80px; height: 80px;">
 	</a>
+
 	</span>
 	<!-- Bootstrap core JavaScript -->
 	<!-- <script src="support/vendor/jquery/jquery.min.js"></script>

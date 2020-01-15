@@ -188,6 +188,7 @@
 			</div>
 		</div>
 	</header>
+
 	<div class="board_box">
 		<div class="wrapper">
 			<div class="sidebar">
@@ -303,6 +304,7 @@
 			<img src="resources/support/img/KakaoTalk.png"
 			style="width: 80px; height: 80px;">
 	</a>
+
 	</span>
 	<!-- Bootstrap core JavaScript -->
 	<!-- <script src="support/vendor/jquery/jquery.min.js"></script>

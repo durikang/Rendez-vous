@@ -34,12 +34,13 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat&subset=latin,latin-ext">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext">
 	
-	<script src="<c:url value="/resources/myPage/js/blocs-ck.js" />"></script>   
+    <script src="<c:url value="/resources/myPage/js/blocs-ck.js" />"></script>   
     <script src="<c:url value="/resources/myPage/js/blocs.js" />"></script>
     <script src="<c:url value="/resources/myPage/js/bootstrap.js" />"></script>
     <script src="<c:url value="/resources/myPage/js/formHandler.js" />"></script>
     <script src="<c:url value="/resources/myPage/js/jqBootstrapValidation.js" />"></script>
     <script src="<c:url value="/resources/myPage/js/jquery-2.1.0.min.js" />"></script>
+	
  </head>
 <style>
 	.myReview {
@@ -109,6 +110,75 @@
 	width:138px;
 	height:138px;
 	}
+	
+	
+		     #submit{ 
+         width: 127px; 
+         height: 48px; 
+         text-align: center; 
+         border: none; 
+         margin-top: 20px; 
+         cursor: pointer; 
+     } 
+     #submit:hover{ 
+         color: #fff; 
+         background-color: #216282; 
+         opacity: 0.9; 
+     } 
+     #cancel { 
+         width: 127px; height: 48px; 
+         text-align: center; 
+         border: none; 
+         margin-top: 20px; 
+         cursor: pointer; 
+     } 
+     #cancel:hover{ 
+         color: #fff; 
+         background-color: #216282; 
+         opacity: 0.9; 
+     }
+		
+	    .modal { 
+         position: fixed; 
+         left: 0; 
+         top: 0; 
+         width: 100%; 
+         height: 100%; 
+         background-color: rgba(0, 0, 0, 0.5); 
+         opacity: 0; 
+         visibility: hidden; 
+         transform: scale(1.1); 
+         transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+     } 
+     .modal-content { 
+         position: absolute; 
+         top: 50%; 
+         left: 50%; 
+         transform: translate(-50%, -50%); 
+         background-color: white; 
+         padding: 1rem 1.5rem; 
+         width: 500px; 
+         height: 350px; 
+         border-radius: 0.5rem; 
+     } 
+     .close-button { 
+         float: right; 
+         width: 1.5rem; 
+         line-height: 1.5rem; 
+         text-align: center; 
+         cursor: pointer; 
+         border-radius: 0.25rem; 
+         background-color: lightgray; 
+     } 
+     .close-button:hover { 
+         background-color: darkgray; 
+     } 
+     .show-modal { 
+         opacity: 1; 
+         visibility: visible; 
+         transform: scale(1.0); 
+         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
+     } 
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
@@ -218,12 +288,56 @@
                     </p>
                 </div>
             </div>
+            
             <div class="row voffset">
+        <!-- 모달 -->
+        
+        <!-- 버튼 --> 
+        <button class="trigger">이메일 보내기</button> 
+        <!-- 팝업 될 레이어 --> 
+        <div class="modal"> 
+            <div class="modal-content"> 
+                <span class="close-button">&times;</span> 
+                <h1 class="title">메일 보내기</h1> 
+                <form action="auth.do" method="POST"> 
+                  <label for="email">Email</label> 
+                  <input type="email" name="e_mail" placeholder="Your email" required="required"> 
+                  <label></label> 
+                  <input type="button" id="cancel" value="취소"> 
+                  <input type="submit" id="submit" value="보내기"> 
+                </form> 
+            </div> 
+        </div>
+   
+       <script type="text/javascript"> 
+            var modal = document.querySelector(".modal"); 
+            var trigger = document.querySelector(".trigger"); 
+            var closeButton = document.querySelector(".close-button"); 
+            var cancelButton = document.querySelector("#cancel");
+   
+           //console.log(modal);
+   
+           function toggleModal() { 
+                modal.classList.toggle("show-modal"); 
+            }
+   
+           function windowOnClick(event) { 
+                if (event.target === modal) { 
+                    toggleModal(); 
+                } 
+            }
+   
+           trigger.addEventListener("click", toggleModal); 
+            closeButton.addEventListener("click", toggleModal); 
+            cancel.addEventListener("click", toggleModal); 
+            window.addEventListener("click", windowOnClick); 
+        </script>
+         <!-- 여기까지 모달 코드 -->   	
                 <div class="col-sm-3">
-                    	<script>function wish() {
+                    	<!-- <script>function wish() {
                     		window.open("#", '찜목록', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
-                    	}</script>
-                    <a href="" data-lightbox="img/people-woman-coffee-meeting.jpg"
+                    	}</script> -->
+                    <a data-lightbox="img/people-woman-coffee-meeting.jpg"
                        data-caption="Image description"><img src="resources/myPage/img/people-woman-coffee-meeting.jpg"
                                                              class="img-responsive animated zoomIn" alt="Portfolio"/></a>
                 </div>
@@ -317,13 +431,14 @@
 									</td>
 								</tr>
 							</c:forEach>
+							<!-- <a onclick="scrollToTarget('#moon')"></a> -->
 							<tr align="center" height="20">
 								<td colspan="6">
 					<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
 									[이전] &nbsp;
 							   	   </c:if> 
 							   	   <c:if test="${ pi.currentPage > 1 }">
-										<c:url var="before" value="support_list.do">
+										<c:url var="before" value="mypage.do">
 											<c:param name="page" value="${ pi.currentPage - 1 }" />
 										</c:url>
 										<a href="${ before }">[이전]</a>
@@ -333,7 +448,7 @@
 											<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
 										</c:if>
 										<c:if test="${ p ne pi.currentPage }">
-											<c:url var="pagination" value="support_list.do">
+											<c:url var="pagination" value="mypage.do">
 												<c:param name="page" value="${ p }" />
 											</c:url>
 											<a href="${ pagination }">[${ p }]</a>
@@ -343,7 +458,7 @@
 											[다음]
 								   </c:if> 
 								   <c:if test="${ pi.currentPage < pi.maxPage }">
-										<c:url var="after" value="support_list.do">
+										<c:url var="after" value="mypage.do">
 											<c:param name="page" value="${ pi.currentPage + 1 }" />
 										</c:url>
 										<a href="${ after }">[다음]</a>

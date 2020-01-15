@@ -37,13 +37,12 @@
 	<br>
 	<br>
 	<div class="centerText">
-		<form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()">
+		<form action="minsert.do" method="post" id="joinForm" enctype="multipart/form-data" onsubmit="return validate()">
 			<table width="500" cellspacing="5">
 				<tr>
 					<td width="150">* 아이디</td>
 					<td width="450">
 						<input type="text" name="user_id" id="user_id">
-						<!-- ajax 이후 적용 -->
 						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
 						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
 						<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
@@ -81,8 +80,6 @@
 					</td>
 				</tr>				
 				<tr>
-				<!-- Postcodify API를 이용하여 주소 입력하기 -->
-				<!-- 1. 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 calss를 부여한다 -->
 					<td>우편번호</td>
 					<td>
 						<input type="text" name="post" class="postcodify_postcode5" value="" size="6" />
@@ -115,16 +112,13 @@
 		</div>
 	</div>
 	
-	<!-- 2. jQuery와 Postcodify를 로딩한다 -->
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-	<!-- 3. "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
 	<script> 
 		$(function() { 
 			$("#postcodify_search_button").postcodifyPopUp(); 
 		}); 
 	</script>
 	
-	<!-- ajax 이후에 추가할 스크립트 -->
 	<script>
 		$(function(){
 			$("#user_id").on("keyup", function(){
@@ -168,6 +162,6 @@
 		}
 		
 	</script>
-	
+	<c:import url="../common/footbar.jsp"/>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -118,6 +119,14 @@
 	text-align: center;
 }
 
+.board_area h1 {
+	text-align:left;
+	margin-left: 5%;
+	padding-bottom:2%;
+	border-bottom : 2px solid black;
+	width:90%;
+}
+
 #boardTable {
 	width: 90%;
 	margin: auto;
@@ -157,6 +166,12 @@
 	bottom: 100px;
 	display: none;
 }
+
+#qTitle:hover {
+	text-decoration:none;
+	font-weight:bold;
+	color: #c9c0b1; 
+}
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -188,19 +203,15 @@
 			</div>
 		</div>
 	</header>
-
 	<div class="board_box">
 		<div class="wrapper">
 			<div class="sidebar">
 				<h2>문의 내역</h2>
 				<ul>
-					<li><a href="support_main.do"><i class="fas fa-home"
-							style="color: #c9c0b1;"></i>Home</a></li>
-					<li><a href="support_qna.do"><i
-							class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q
-							& A</a></li>
-					<li><a href="support_list.do"><i
-							class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>
+					<li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
 				</ul>
 			</div>
 		</div>
@@ -238,39 +249,47 @@
 							</tr>
 						</thead>
 						<tbody>
-
 							<c:forEach var="q" items="${ list }">
 								<tr>
 									<td>${q.qNo}</td>
-									<td><c:if test="${ !empty loginUser }">
-											<c:url var="myQnaDetail" value="myQnaDetail.do">
-												<c:param name="qNo" value="${ q.qNo }" />
-												<c:param name="page" value="${ pi.currentPage }" />
-											</c:url>
-											<a href="${ myQnaDetail }">${ q.qTitle }</a>
-										</c:if> <c:if test="${ empty loginUser }">
-							${ q.qTitle }
-						</c:if></td>
+									<td>
+										<c:if test="${ !empty loginUser }">
+										<c:url var="myQnaDetail" value="myQnaDetail.do">
+											<c:param name="qNo" value="${ q.qNo }" />
+											<c:param name="page" value="${ pi.currentPage }" />
+										</c:url>
+											<a id="qTitle" href="${ myQnaDetail }">${ q.qTitle }</a>
+										</c:if>
+										<c:if test="${ empty loginUser }">
+											${ q.qTitle }
+										</c:if>
+									</td>
 									<td>${q.qWriter}</td>
 									<td>${q.qDate}</td>
-									<td><c:if test='${ q.aStatus == "N" }'>
-								X
-							</c:if> <c:if test='${ q.aStatus == "Y" }'>
-								O
-							</c:if></td>
+									<td>
+										<c:if test='${ q.aStatus == "N" }'>
+											X
+										</c:if> 
+										<c:if test='${ q.aStatus == "Y" }'>
+											O
+										</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 							<tr align="center" height="20">
 								<td colspan="6">
-									<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
-							[이전] &nbsp;
-						</c:if> <c:if test="${ pi.currentPage > 1 }">
+									<!-- [이전] --> 
+									<c:if test="${ pi.currentPage <= 1 }">
+										[이전] &nbsp;
+									</c:if> 
+									<c:if test="${ pi.currentPage > 1 }">
 										<c:url var="before" value="support_list.do">
 											<c:param name="page" value="${ pi.currentPage - 1 }" />
 										</c:url>
 										<a href="${ before }">[이전]</a>
-									</c:if> <!-- [페이지] --> <c:forEach var="p" begin="${ pi.startPage }"
-										end="${ pi.endPage }">
+									</c:if> 
+									<!-- [페이지] --> 
+									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 										<c:if test="${ p eq pi.currentPage }">
 											<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
 										</c:if>
@@ -280,31 +299,31 @@
 											</c:url>
 											<a href="${ pagination }">[${ p }]</a>
 										</c:if>
-									</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
-							[다음]
-						</c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
+									</c:forEach> 
+									<!-- [다음] --> 
+									<c:if test="${ pi.currentPage >= pi.maxPage }">
+										[다음]
+									</c:if> 
+									<c:if test="${ pi.currentPage < pi.maxPage }">
 										<c:url var="after" value="support_list.do">
 											<c:param name="page" value="${ pi.currentPage + 1 }" />
 										</c:url>
 										<a href="${ after }">[다음]</a>
 									</c:if>
 								</td>
-							</tr>
-							</c:if>
-							<c:if test="${ empty list }">
-								<h1>문의 내역이 없습니다.</h1>
-							</c:if>
+							</tr>						
 						</tbody>
 					</table>
+				</c:if>
+				<c:if test="${ empty list }">
+					<h1>문의 내역이 없습니다.</h1>
+				</c:if>
 			</div>
 		</div>
 	</div>
-	<span id="remoCon"> <a href="#"
-		onClick="window.open('chatbot.do', '', 'width=500,height=700, left=1400, top=250')">
-			<img src="resources/support/img/KakaoTalk.png"
-			style="width: 80px; height: 80px;">
+	<span id="remoCon"> <a href="#" onClick="window.open('chatbot.do', '', 'width=500,height=700, left=1400, top=250')">
+			<img src="resources/support/img/KakaoTalk.png" style="width: 80px; height: 80px;">
 	</a>
-
 	</span>
 	<!-- Bootstrap core JavaScript -->
 	<!-- <script src="support/vendor/jquery/jquery.min.js"></script>

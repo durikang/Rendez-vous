@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -14,29 +15,21 @@
 
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap core CSS -->
 <!-- <link href="support/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/support/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/support/vendor/bootstrap/css/bootstrap.min.css">
 
 <!-- Custom fonts for this template -->
-<link href="resources/support/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="resources/support/vendor/simple-line-icons/css/simple-line-icons.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
-	rel="stylesheet" type="text/css">
+<link href="resources/support/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link href="resources/support/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"	rel="stylesheet" type="text/css">
 
 
 <!-- Custom styles for this template -->
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
 </head>
 <style>
-
 * {
 	margin: 0;
 	padding: 0;
@@ -119,9 +112,12 @@
 	text-align: center;
 }
 
-.board_area button {
-	margin-right: 10%;
-	margin-bottom: 2%;
+.board_area h1 {
+	text-align:left;
+	margin-left: 5%;
+	padding-bottom:2%;
+	border-bottom : 2px solid black;
+	width:90%;
 }
 
 #boardTable {
@@ -165,12 +161,18 @@
 }
 
 .write_btn {
-	float: right;
-	margin-bottom: 1%;
+	float:right;
+	margin-right:6%;
+	margin-top: 1%;
 	width: 80px;
-	background: #c9c0b1;
+	border:1px solid #c9c0b1; 
 }
 
+#qTitle:hover {
+	text-decoration:none;
+	font-weight:bold;
+	color: #c9c0b1; 
+}
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -202,17 +204,14 @@
 			</div>
 		</div>
 	</header>
-
 	<div class="board_box">
 		<div class="wrapper">
 			<div class="sidebar">
 				<h2>q & a</h2>
 				<ul>
-					<li><a href="support_main.do"><i class="fas fa-home"
-							style="color: #c9c0b1;"></i>Home</a></li>
-					<li><a href="support_qna.do"><i
-							class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q
-							& A</a></li>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>					
 					<c:if test="${ !empty loginUser }">
 						<li><a href="support_list.do"><i
 								class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
@@ -242,9 +241,6 @@
 			</div>
 			<div class="board_area">
 				<h1>Q & A</h1>
-				<c:if test="${ !empty loginUser }">
-					<button class="write_btn">문의 하기</button>
-				</c:if>
 				<table id="boardTable">
 					<thead>
 						<tr>
@@ -259,36 +255,50 @@
 						<c:forEach var="q" items="${ list }">
 							<tr>
 								<td>${q.qNo}</td>
-								<td><c:if test="${ !empty loginUser }">
+								<td>
+									<c:if test="${ !empty loginUser }">
 										<c:url var="qnaDetail" value="qnaDetail.do">
 											<c:param name="qNo" value="${ q.qNo }" />
 											<c:param name="page" value="${ pi.currentPage }" />
 										</c:url>
-										<a href="${ qnaDetail }">${ q.qTitle }</a>
-									</c:if> <c:if test="${ empty loginUser }">
-							${ q.qTitle }
-						</c:if></td>
-								<td>${q.qWriter}</td>
+										<a id="qTitle" href="${ qnaDetail }">${ q.qTitle }</a>
+									</c:if> 
+									<c:if test="${ empty loginUser }">
+										로그인 후 조회 가능
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${ !empty loginUser }">
+										${q.qWriter}							
+									</c:if>
+									<c:if test="${ empty loginUser }">
+										-
+									</c:if>
+								</td>
 								<td>${q.qDate}</td>
 								<td><c:if test='${ q.aStatus == "N" }'>
-								X
-							</c:if> <c:if test='${ q.aStatus == "Y" }'>
-								O
-							</c:if></td>
+											X
+									</c:if> 
+									<c:if test='${ q.aStatus == "Y" }'>
+											O
+									</c:if>
+								</td>
 							</tr>
-
 						</c:forEach>
 						<tr align="center" height="20">
 							<td colspan="6">
-								<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
-							[이전] &nbsp;
-						</c:if> <c:if test="${ pi.currentPage > 1 }">
+								<!-- [이전] --> 
+								<c:if test="${ pi.currentPage <= 1 }">
+									[이전] &nbsp;
+								</c:if> 
+								<c:if test="${ pi.currentPage > 1 }">
 									<c:url var="before" value="support_qna.do">
 										<c:param name="page" value="${ pi.currentPage - 1 }" />
 									</c:url>
 									<a href="${ before }">[이전]</a>
-								</c:if> <!-- [페이지] --> <c:forEach var="p" begin="${ pi.startPage }"
-									end="${ pi.endPage }">
+								</c:if> 
+								<!-- [페이지] --> 
+								<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 									<c:if test="${ p eq pi.currentPage }">
 										<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
 									</c:if>
@@ -298,19 +308,24 @@
 										</c:url>
 										<a href="${ pagination }">[${ p }]</a>
 									</c:if>
-								</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
-							[다음]
-
-						</c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
+								</c:forEach> 
+								<!-- [다음] --> 
+								<c:if test="${ pi.currentPage >= pi.maxPage }">
+									[다음]
+								</c:if> 
+								<c:if test="${ pi.currentPage < pi.maxPage }">
 									<c:url var="after" value="support_qna.do">
 										<c:param name="page" value="${ pi.currentPage + 1 }" />
 									</c:url>
 									<a href="${ after }">[다음]</a>
-								</c:if>
+								</c:if>									
 							</td>
 						</tr>
 					</tbody>
-				</table>				
+				</table>
+				<c:if test="${ !empty loginUser }">
+					<button class="write_btn">문의 하기</button>
+				</c:if>				
 			</div>
 		</div>
 	</div>
@@ -319,7 +334,6 @@
 			<img src="resources/support/img/KakaoTalk.png"
 			style="width: 80px; height: 80px;">
 	</a>
-
 	</span>
 	<!-- Bootstrap core JavaScript -->
 	<!-- <script src="support/vendor/jquery/jquery.min.js"></script>
@@ -353,5 +367,7 @@
 	</script>
 
 	<c:import url="../common/footbar.jsp" />
+	<!-- git hub test1 -->
 </body>
+
 </html>

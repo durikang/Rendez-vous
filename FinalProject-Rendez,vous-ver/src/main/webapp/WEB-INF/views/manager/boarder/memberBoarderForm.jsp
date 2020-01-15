@@ -278,7 +278,7 @@
 					
 							<select name="disRate"class="selectpicker">
 						      <c:forEach var="i" begin="1" end="9">					         
-								  <option value="${0.1 * i }">${ i*10 }%할인</option>        
+								  <option value="${10 * i }">${ i*10 }%할인</option>        
 						      </c:forEach>
 							</select><br><br>
 					    <p><input type="text" id="from" placeholder="시작일을 선택하세요" name="startDate"> ~ <input type="text" id="to" name="endDate" placeholder="종료일을 선택하세요."></p>

@@ -1,12 +1,15 @@
 package com.kh.rendez.manager.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.rendez.manager.model.vo.AdminLesson;
+import com.kh.rendez.manager.model.vo.AdminMember;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.MemberJoinUserpropic;
@@ -58,6 +61,16 @@ public class ManagerDao {
 	}
 	public int sumPay(int i) {
 		return sqlSession.selectOne("managerMapper.sumPay",i);
+	}
+	public ArrayList<AdminMember> selectTopMemberList() {
+
+		return (ArrayList)sqlSession.selectList("managerMapper.selectTopMemberList");
+	}
+	public ArrayList<AdminLesson> selectRealTimeLessonList() {
+		return (ArrayList)sqlSession.selectList("managerMapper.selectRealTimeLessonList");
+	}
+	public int changeTutorStatus(List<Integer> uNo) {
+		return sqlSession.update("managerMapper.changeTutorStatus",uNo);
 	}
 
 	

@@ -143,6 +143,13 @@
 		.mySlides {display:none}
 		.w3-left, .w3-right, .w3-badge {cursor:pointer}
 		.w3-badge {height:13px;width:13px;padding:0}	
+		
+		.header {
+			margin-top:5px;	
+  			position: relative;
+  			background: white;
+  			border: none;
+		}
 
 		
 	</style>	
@@ -187,7 +194,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="wrap">
 <!--HEADER -->
 	<div class="hcont">
-		<h1>상단네비</h1>
+		<c:import url="../common/menubar.jsp"/>
 	</div>
 <!-- //HEADER -->
 

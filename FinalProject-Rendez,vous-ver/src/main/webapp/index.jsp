@@ -7,12 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+
 	<script>
 		window.onload=function(){
 			location.href='home.do';
 		}
-		/* 수정  */
+		/* 수정1  */
 	</script>
 	
 </body>

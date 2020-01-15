@@ -29,7 +29,7 @@ public class SearchImpl implements SearchService{
 		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return jsDao.selectSearchList(sInfo.getsValue(),pi);
+		return jsDao.selectSearchList(sInfo,pi);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class SearchImpl implements SearchService{
 		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return jsDao.SearchCateMainList(sInfo.getCateMain(), pi);
+		return jsDao.SearchCateMainList(sInfo, pi);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class SearchImpl implements SearchService{
 		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return jsDao.SearchCateSubList(sInfo.getCateSub(), pi);
+		return jsDao.SearchCateSubList(sInfo, pi);
 	}
 
 	@Override
@@ -75,17 +75,32 @@ public class SearchImpl implements SearchService{
 			return new ArrayList<tClass>();
 		}
 		
-		return jsDao.selectSearchDetailList(dc,pi);
+		return jsDao.selectSearchDetailList(sInfo,dc,pi);
 	}
 
 	@Override
 	public Collection<? extends classCount> selectRegionMain(searchInfo sInfo) {
 		
+		/*if(sInfo.getsType().equals("searchDetail")) {
+			ArrayList<DetailClass> dc = jsDao.getDetailList(sInfo);
+			// 디테일 검색에 대한 지역의 숫자 검색
+			return jsDao.selectRegionMainDetail(dc);
+		}
+		*/
+		
 		return jsDao.selectRegionMain(sInfo);
+
 	}
 
 	@Override
 	public Collection<? extends classCount> selectRegionSub(searchInfo sInfo) {
+		
+		/*if(sInfo.getsType().equals("searchDetail")) {
+			ArrayList<DetailClass> dc = jsDao.getDetailList(sInfo);
+			// 디테일 검색에 대한 지역의 숫자 검색
+			return jsDao.selectRegionSubDetail(dc);
+		}*/
+		
 		return jsDao.selectRegionSub(sInfo);
 	}
 

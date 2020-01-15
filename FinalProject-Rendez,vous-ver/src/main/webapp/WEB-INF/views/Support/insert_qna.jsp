@@ -26,6 +26,9 @@
 
 <!-- Custom styles for this template -->
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
+
+<!-- ckeditor -->
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 </head>
 <style>
     * {
@@ -173,6 +176,16 @@
 	  	border-radius:10px;
 	  	background:#c9c0b1;
 	  }
+	  
+	  #cancel:hover {
+	  	text-decoration:none;
+	  	color:black;
+	  	font-weight:bold;
+	  }
+	  
+	  #submit:hover {
+	  	font-weight:bold;
+	  }
 </style>
 <body>
 	<c:import url="../common/menubar.jsp"/>
@@ -203,15 +216,16 @@
 	</header>
     <div class="board_box">
 	    <div class="wrapper">
-	        <div class="sidebar">
-	            <h2>q & a</h2>
-	            <ul>
-	                <li><a href="support_main.do"><i class="fas fa-home" style="color:#c9c0b1;"></i>Home</a></li>
-	                <li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color:#c9c0b1;"></i>Q & A</a></li>
-	                <li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color:#c9c0b1;"></i>문의 내역</a></li>
-	            </ul>
-	        </div>
-	    </div>
+			<div class="sidebar">
+				<h2>q & a</h2>
+				<ul>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>
+					<li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
+				</ul>
+			</div>
+		</div>
 	    <div class="content_area">
 	    	<div class="board_area">
 	    		<h1>Q & A 등록</h1>
@@ -228,12 +242,35 @@
 						</tr>
 						<tr>
 							<td height="400">내용</td>
-							<td><textarea id="qContent" cols="120" rows="15" name="qContent" style="resize:none;"></textarea></td>
+							<td>
+								<textarea name="qContent"></textarea>
+			   	                <script>
+			                        $(document).ready(function(){
+			                        	CKEDITOR.replace( 'qContent', {
+			                        		filebrowserImageUploadUrl:'/image/upload',
+			                        		height:300
+			                        	});
+			                        	
+			                        	CKEDITOR.on('dialogDefinition', function(e){
+			                        		var dialogName = e.data.name;
+			                        		var dialogDefinition = e.data.definition;
+			                        		
+			                        		switch(dialogName) {
+			                        			case 'image' :
+			                        				//dialogDefinition.removeContents('info');
+			                        				dialogDefinition.removeContents('Link');
+			                        				dialogDefinition.removeContents('advanced');
+			                        				break;
+			                        		}
+			                        	});
+			                        });
+				                </script>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center">
-								<button type="submit">등록하기</button> &nbsp;
-								<button type="button"><a href="support_qna.do">목록으로</a></button>
+								<button type="submit" id="submit">등록하기</button> &nbsp;
+								<button type="button"><a id="cancel" href="support_qna.do">목록으로</a></button>
 							</td>
 						</tr>
 					</table>
@@ -270,5 +307,6 @@
   </script>
 
 	<c:import url="../common/footbar.jsp"/>	
+	
 </body>
 </html>

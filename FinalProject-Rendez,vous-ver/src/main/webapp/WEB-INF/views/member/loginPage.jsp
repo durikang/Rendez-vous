@@ -15,6 +15,10 @@ body {
         background-color: white;
         background-size: cover;
     }
+    #wrapper {
+    	width:100%;
+    	height:100vh;
+    }
     #loginbox {
         width:280px;
         top: 50%;
@@ -23,7 +27,6 @@ body {
         position: absolute;
         color: lightgray;
     }
-
     #loginbox h1 {
         font-size: 40px;
         border-bottom: 1px solid lightgray;
@@ -31,7 +34,6 @@ body {
         padding: 13px 0;
         text-align: center;
     }
-
     #logintext {
         width:100%;
         overflow: hidden;
@@ -39,13 +41,11 @@ body {
         padding: 8px 0;
         margin: 8px 0;
     }
-
     #logintext i {
         width: 26px;
         float: left;
         text-align: center;
     }
-
     #logintext input {
         border: none;
         outline: none;
@@ -56,7 +56,6 @@ body {
         float: left;
         margin: 0 10px;
     }
-
     #btn, #btnLogin {
         width:45%;
         float: left;
@@ -70,8 +69,8 @@ body {
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
-    <div id="loginbox">
-    
+    <div id="wrapper">
+    	<div id="loginbox">    
     	<c:if test="${ empty sessionScope.loginUser }">
     		<form action="login.do" method="post">
     			<table id="loginTable" style="test-align:center;">
@@ -91,5 +90,7 @@ body {
 			</form>
 		</c:if>
     </div>
+    </div>
+    <c:import url="../common/footbar.jsp"/>
 </body>
 </html>

@@ -1,19 +1,30 @@
 package com.kh.rendez.support.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -116,7 +127,7 @@ public class SupportController {
 	}
 	
 	@RequestMapping("qinsert.do")
-	public String insertQna(HttpServletRequest request, Qna q) {
+	public String insertQna(HttpServletRequest request, Qna q) {		
 		int result = 0;
 		if(!q.getqContent().isEmpty() && !q.getqTitle().isEmpty()) {
 			result = sService.insertQna(q);
@@ -188,13 +199,13 @@ public class SupportController {
 	
 	@RequestMapping("addAnswer.do")
 	@ResponseBody
-	public String addAnswer(Answer a, HttpSession session) {
+	public String addAnswer(Answer a, int refQno, HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		a.setaWriter(loginUser.getUser_name());
 		
 		int result = sService.insertAnswer(a);
-		
-		if(result > 0) {
+		int result1 = sService.updateAnswerStatus(refQno);
+		if(result > 0 && result1 > 0) {
 			return "success";
 		} else {
 			throw new SupportException("댓글 등록 실패!");
@@ -210,4 +221,10 @@ public class SupportController {
 		
 		return gson.toJson(aList);
 	}
+	
+	@RequestMapping("support_faq.do")
+	public String faqView() {
+		return "Support/support_faq";
+	}
+	
 }

@@ -89,7 +89,18 @@
 	<section class="features-icons bg-light text-center">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4" style="margin: 0 0 0 10%;">
+				<div class="col-lg-4">
+					<div class="features-icons-item mx-auto mb-0 mb-lg-3">
+						<div class="features-icons-icon d-flex">
+							<i class="far fa-comment-dots m-auto" id="faq_btn" style="color: #c9c0b1;"></i>
+						</div>
+						<h3>F A Q</h3>
+						<br>
+						<p class="lead mb-3">회원들이 많이 질문한 내용을</p>
+						<p class="lead mb-3">확인할 수 있습니다.</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
 					<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
 						<div class="features-icons-icon d-flex">
 							<i class="far fa-question-circle m-auto" id="qna_btn" style="color: #c9c0b1;"></i>
@@ -99,8 +110,8 @@
 						<p class="lead mb-3">Q & A 게시판에서 사람들의</p>
 						<p class="lead mb-3">문의 내역을 확인 할 수 있습니다.</p>
 					</div>
-				</div>
-				<div class="col-lg-4" style="margin: 0 0 0 10%;">
+				</div>				
+				<div class="col-lg-4">
 					<div class="features-icons-item mx-auto mb-0 mb-lg-3">
 						<div class="features-icons-icon d-flex">
 							<i class="far fa-list-alt m-auto" id="list_btn" style="color: #c9c0b1;"></i>
@@ -155,36 +166,6 @@
 			</div>
 		</div>
 	</section>
-	<!-- Testimonials
-  <section class="testimonials text-center bg-light">
-    <div class="container">
-      <h2 class="mb-5">What people are saying...</h2>
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" src="img/testimonials-1.jpg" alt="">
-            <h5>Margaret E.</h5>
-            <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" src="img/testimonials-2.jpg" alt="">
-            <h5>Fred S.</h5>
-            <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" src="img/testimonials-3.jpg" alt="">
-            <h5>Sarah W.</h5>
-            <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-   -->
 	<!-- 지도 API 들어갈 부분 -->
 	<section class="testimonials text-center bg-light">
 		<div class="container">
@@ -262,9 +243,22 @@
 			location.href="support_qna.do";
 		});
 		
-		$("#list_btn").on("click", function(){
-			location.href="support_list.do";
+
+		$("#faq_btn").on("click", function(){
+			location.href="support_faq.do";
 		});
+
+		<c:if test="${!empty loginUser}">
+			$("#list_btn").on("click", function(){
+				location.href="support_list.do";
+			});
+		</c:if>
+		
+		<c:if test="${empty loginUser}">
+			$("#list_btn").on("click", function(){
+				alert("로그인이 필요한 기능입니다.");
+			});
+		</c:if>
 	</script>
 	<script type='text/javascript'>
 	  //<![CDATA[

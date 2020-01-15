@@ -18,17 +18,28 @@
 		<result property="u_status" column="U_STATUS"/>
 	</resultMap>
 	
+	<select id="loginCheck" resultType="int">
+			SELECT count(*) FROM member
+			WHERE user_id = #{user_id} AND user_pwd = #{user_pwd}
+	</select>
+	
 	<select id="selectOne" resultType="member" parameterType="member">
 		SELECT *
 		FROM MEMBER
 		WHERE USER_ID = #{user_id}
 		AND USER_PWD = #{user_pwd}
+		AND U_STATUS = 'Y'
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO
-		MEMBER 
-		VALUES (SEQ_MNO.NEXTVAL, #{user_id}, #{user_pwd}, #{user_name}, #{gender}, #{age}, #{phone}, #{address}, SYSDATE, SYSDATE, DEFAULT, DEFAULT)
+		INSERT ALL
+      	INTO
+      	MEMBER 
+      	VALUES (SEQ_MNO.NEXTVAL, #{user_id}, #{user_pwd}, #{user_name}, #{gender}, #{age}, #{phone}, #{address}, SYSDATE, SYSDATE, DEFAULT, DEFAULT)
+      	INTO
+      	USERPROPIC
+      	VALUES(SEQ_MNO.CURRVAL,'default.jpg','default.jpg')
+      	SELECT *
 	</insert>
 	
 	<select id="idCheck" parameterType="string" resultType="_int">
@@ -36,4 +47,21 @@
 		FROM MEMBER
 		WHERE USER_ID=#{user_id}
 	</select>
+	
+	<update id="deleteMember" parameterType="Member">
+		UPDATE MEMBER
+		SET U_STATUS = 'N'
+		WHERE USER_ID = #{user_id}
+	</update>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		SET USER_PWD = #{user_pwd},
+			UESR_NAME = #{user_name},
+			GENDER = #{gender},
+			AGE = #{age},
+			PHONE = #{phone},
+			ADDRESS = #{address},
+			UPDATE_DATE = #{update_date}
+	</update>
 </mapper>

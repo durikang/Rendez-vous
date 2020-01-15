@@ -1,6 +1,9 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -110,6 +113,18 @@
 }
 </style>
 <body class="menu_body">
+
+
+
+	<c:if test="${ !empty msg}">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg"/>
+	</c:if>
+
+
+
     <header class="header">
 <img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
@@ -129,12 +144,19 @@
                 	<li><a href="loginPage.do">로그인</a></li>
                 </c:if>
 
-                <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
+                <c:if test="${ !empty sessionScope.loginUser }">
 					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
 				</c:if>
 				
+				<%-- <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
+					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
+				</c:if> --%>
+				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
-					<a href="#">관리자 페이지</a>
+
+					<li>|</li>
+					<a href="managerHome.do">관리자 페이지</a>
+
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser }">
@@ -162,4 +184,5 @@
     	
     </script>
 </body>
+
 </html>

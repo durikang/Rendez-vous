@@ -137,9 +137,10 @@ public class Member {
 	public String toString() {
 		return "Member [user_no=" + user_no + ", user_id=" + user_id + ", user_pwd=" + user_pwd + ", user_name="
 				+ user_name + ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address
-				+ ", enroll_Date=" + enroll_date + ", update_Date=" + update_date + ", user_type=" + user_type
+				+ ", enroll_date=" + enroll_date + ", update_date=" + update_date + ", user_type=" + user_type
 				+ ", uStatus=" + uStatus + "]";
 	}
 
+	
 	
 }

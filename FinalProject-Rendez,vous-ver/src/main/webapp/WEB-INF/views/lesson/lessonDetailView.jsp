@@ -20,7 +20,61 @@
 					
 		.star-rating { width:205px; }                
 		.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(${contextPath}/resources/h1/ystar.png)no-repeat; }
-		.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }			
+		.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
+		
+		.modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .starR {
+			background:
+				url('${contextPath}/resources/h1/ystarcon.png')
+				no-repeat right 0;
+			background-size: auto 100%;
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			text-indent: -9999px;
+			cursor: pointer;
+		}
+
+		.starR.on {
+			background-position: 0 0;
+		}	
+		
+		
+		
 					
 
 	</style>
@@ -143,6 +197,14 @@
 		.mySlides {display:none}
 		.w3-left, .w3-right, .w3-badge {cursor:pointer}
 		.w3-badge {height:13px;width:13px;padding:0}	
+		
+		.header {
+			margin-top:5px;	
+  			position: relative;
+  			background: white;
+  			border: none;
+  			height: 100px;
+		}
 
 		
 	</style>	
@@ -187,7 +249,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="wrap">
 <!--HEADER -->
 	<div class="hcont">
-		<h1>상단네비</h1>
+		<c:import url="../common/menubar.jsp"/>
 	</div>
 <!-- //HEADER -->
 
@@ -237,24 +299,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							</div>
 						</div>
 					</c:forEach>
-					
-						
-						
-<!-- 						<div class="option on">
-							<div class="top">
-								<div class="timedetail">
-								<div class="indate">01.04(토)</div>13:00~16:00								
-								</div>
-							<span>|</span> <div class="region_name">종로</div><img src="/Content/Images/icon_up.png" class="up"><img src="/Content/Images/icon_down.png" class="dwn">
-							</div>
-							<div class="box" style="">
-							
-								 <div class="info">
-									<div class="detail_info">상세장소 : 시간공방 종각역점<br></div>										
-								 </div>
-								 
-							</div>
-						</div> -->
 
 
 								
@@ -297,8 +341,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<a onclick="toPay()" style="text-decoration: none;"><span class="btntxt_s">수업 신청하기</span></a>
 			</div>
 			
+			
+			<c:if test=""></c:if>
+			
 			<script>
 				function toPay(){
+					
+					
+					<c:if test="${empty loginUser }">
+					alert("로그인이 필요합니다");
+					return;
+					</c:if>
+					
+					<c:if test="${empty lTime }">
+					alert("신청 가능한 수업이 없습니다.");
+					return;
+					</c:if>
+					
 					var lno = ${li.lNo};
 					location.href = 'detail.do?lNo='+lno;
 				}
@@ -306,20 +365,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</script>
 			
 
-<!-- 			<div class="price">	
-				
-							
-				<div class="hp1"><b>￦12,000원</b> / 시간</div>
-				<div class="tp1">￦36,000 / 총 1회 3시간</div>
-				
-			</div>
- -->
 			<!--바닥 박스 시작-->
-			<!--div class="btn_area">
 
-				
-				
-				<!--span class="btntxt_s">오늘 5명이 튜터에게 문의를 남겼습니다.</span-->
 			<!--/div-->
 			<!--바닥 박스 끝-->
 		</div>
@@ -521,15 +568,113 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- 수업타이틀 -->
 			<div class="class_detail" id="sumary" style="width: 840px">
 				<div class="class_name">
-					<div class="tutor_img"><a href="http://taling.me/Content/Uploads/Profile/aa73a9b108426fbddb18c590ffd278ea8117ef07.png" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('http://taling.me/Content/Uploads/Profile/s_aa73a9b108426fbddb18c590ffd278ea8117ef07.png');"></div></a></div>
-					<div class="name">선찬주</div>
-					<div class="nickname">가야금 튜터</div>
+					<div class="tutor_img"><a href="${ contextPath }/resources/user/img/${tPropic}" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/user/img/${tPropic}');"></div></a></div>
+					<div class="name">${ tName }</div>
+					<div class="nickname">${ tutor.tNick }</div>
 				</div>
 				<div class="class_title">
 					
 					<!--찜하기 시작-->
-											<a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="bnt_wishlist"><img src="https://taling.me/Content/Images/class/icon_btn_wish.png"> 찜하기</a>					
-										<!--찜하기 끝-->
+						<a class="bnt_wishlist" id="won"><img src="${contextPath}/resources/h1/Images/icon_btn_wish_on.png"> 찜하기</a>
+						<a class="bnt_wishlist" id="woff"><img src="${contextPath}/resources/h1/Images/icon_btn_wish.png"> 찜하기</a>
+					<!--찜하기 끝-->
+					
+					
+					
+
+
+					
+					<script>
+						$(function(){
+								
+							
+							$("#won").hide();
+												
+							
+							$("#won").click(function(){
+								
+								<c:if test="${empty loginUser }">
+								alert("로그인이 필요합니다");
+								return;
+								</c:if>
+								
+
+								
+								if($("#won").css("display")=='block' && $("#woff").css("display")=='none'){
+									
+									<c:if test="${!empty loginUser }">
+									var uno = ${loginUser.user_no};
+									</c:if>
+									
+									var lno = ${li.lNo};
+									
+									  $.ajax({
+								            url:"fav.do",
+								            data:{flag:'delete',uno:uno,lno:lno},
+											type:"post",
+								            success:function(data){
+					               
+								            },error:function(){
+								               console.log("ajax 통신 실패");
+								            }
+								            })
+														
+									
+									
+									alert("찜 목록에서 삭제하였습니다");							
+									$("#won").hide();
+									$("#woff").show();
+									
+								}
+								
+
+							});		
+							
+							$("#woff").click(function(){
+								
+								<c:if test="${empty loginUser }">
+								alert("로그인이 필요합니다");
+								return;
+								</c:if>
+								
+								
+								if($("#won").css("display")=='none' && $("#woff").css("display")=='block'){
+									
+									<c:if test="${!empty loginUser }">
+									var uno = ${loginUser.user_no};
+									</c:if>
+									
+									var lno = ${li.lNo};
+									
+									  $.ajax({
+								            url:"fav.do",
+								            data:{flag:'insert',uno:uno,lno:lno},
+											type:"post",
+								            success:function(data){
+					               
+								            },error:function(){
+								               console.log("ajax 통신 실패");
+								            }
+								            })
+									
+									
+									
+									alert("찜 목록에서 추가하였습니다");							
+									$("#won").show();
+									$("#woff").hide();
+								}
+								
+							});	
+							
+							
+							<c:if test="${!empty favCheck }">
+							$("#won").show();
+							$("#woff").hide();
+							</c:if>						
+						});					
+					</script>
+					
+					
 					<div class="info">
 						<a class="starimg">
 							<div class="title">${li.lTitle }</div>
@@ -559,13 +704,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<h1>튜터정보</h1>
 					<div class="cert">
 						<ul>
-							<li class="com">서울대학교  가야금</li>							
-							<li class="com">신분 인증 됨</li>										
+							<c:forEach var="tc" items="${tutorCer}">
+							<li class="com">${tc}</li>	
+							</c:forEach>									
 						</ul>
 					</div>
 					<div class="d_info04">
-						
-			
+						${ tutor.tInfo }
 					</div>					
 				</div>
 			</div>
@@ -665,32 +810,253 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- 리뷰 -->
 			<div class="class_detail detail_sec_bor" id="review" style="width: 840px">
 				<div class="section01">
-					<h1>리뷰(6)</h1>
-					<a class="btn_st" id="btn-write-review">리뷰쓰기</a>
-				<!-- 						<div class="review_box">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-													<img src="https://taling.me/Content/Images/class/icon_star.png">
-												5.0</div> -->
+					<h1>리뷰(<c:out value="${fn:length(lRList) }" />)</h1>
+					<a class="btn_st" id="wReview" onclick="writeReview();">리뷰쓰기</a>
+					<a class="btn_st" id="uReview" onclick="updateReview();">리뷰수정</a>
 										<div class="review_box">		
 										<span class='star-rating'>
-											<span style ="width:50%; float: left;" ></span>
-										</span> 		
+											<span style ="width:${lessonAvg * 20}%; float: left;" ></span>
+										</span> 	
+										<c:if test="${lessonAvg != 'NaN'}">
+										${lessonAvg}
+										</c:if>
 										</div>
 	
 										<div class="review_list" id="bookmarkReview">
 						<ul>
 							<div id="innerReviewDiv">
-								
-							</div>
+																	
+									<c:forEach var="lr" items="${lRList }">
+									<li>
+										<dl>
+											<dt>
+												<p class="profile_img" style="background: #000; z-index: 0; width: 100%; background-size: cover; background-position: center; background-image: url(${contextPath}/resources/user/img/${lr.uCName });"></p>
+												<p class="name">${lr.uName }</p>
+											</dt>
+											<dd>
+												${lr.rContent }
+											</dd>
+											<dd class="date"><fmt:formatDate value="${lr.rDate }" pattern="yyyy-MM-dd HH:mm:ss"/></dd>
+										</dl>
+									</li>	
+									</c:forEach>
+									
+									
+								</div>
 						</ul>
 					</div>
 					<div class="paging" id="innerPageDiv"></div>
 				</div>
 			</div>
 			<!-- /리뷰 -->
+
+			
+			
+			<script>
+			
+			$(function(){
+				
+				$("#uReview").hide();
+				
+				<c:if test="${!empty uRStatus }">
+				uRStatus = '${uRStatus}';
+				</c:if>
+				
+				if(uRStatus=='reviewed'){
+					$("#wReview").hide();
+					$("#uReview").show();
+							
+				}
+			
+			});		
+			
+			
+			function writeReview(){
+				
+				<c:if test="${empty loginUser }">
+				alert("로그인이 필요합니다");
+				return;
+				</c:if>
+				
+
+
+				if(uRStatus=='unable'){
+					alert('수강을 받으신 회원분만 리뷰를 남기실 수 있습니다.');
+				}else if(uRStatus=='able'){
+					$("#myBtn").click();
+				}
+			}
+			
+			
+			function updateReview(){
+				$("#myBtn").click();
+			}
+			
+			
+			</script>
+			
+
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn" hidden>진짜 리뷰 버튼</button>
+ 
+    <!-- The Modal -->
+				<div id="myModal" class="modal">
+
+					<!-- Modal content -->
+					<div class="modal-content" style="width: 500px">
+					<c:if test="${uRStatus eq 'able' }">	
+						<div class="modal-header">
+
+							<h4>${li.lTitle } 에 대한 리뷰를 등록해주세요</h4>
+						</div>
+							
+						<form action="insertReview.do" onsubmit="return submitReview();">
+						<div class="modal-body">
+							
+
+							<div class="starRev">
+								<span class="starR">1</span> <span class="starR">2</span> <span
+									class="starR">3</span> <span class="starR">4</span> <span
+									class="starR">5</span>
+							</div>
+							
+							<br>
+							<hr>
+							
+							<textarea class="form-control" rows="5"
+								style="margin: 0px; width: 400px; height: 90px;"
+								placeholder="내용을 입력해주세요" name="rContent" id="rContent"></textarea>
+						</div>
+						<div class="modal-footer">
+							<input type="text" name="lNo" value="${ li.lNo }" hidden="">
+							<input type="text" id="rRating" name="rRating" hidden="">
+							<button type="submit" class="btn btn-primary ">등록하기</button>
+							<button type="button" id="close" class="btn btn-default ">닫기</button>
+						</div>
+						</form>
+						</c:if>
+						
+						<c:if test="${uRStatus eq 'reviewed' }">	
+						<div class="modal-header">
+							<h4>리뷰를 수정합니다.</h4>
+						</div>						
+						
+						<form action="updateReview.do" onsubmit="return submitReview();">
+						<div class="modal-body">
+							
+
+							<div class="starRev">
+								<span class="starR">1</span> <span class="starR">2</span> <span
+									class="starR">3</span> <span class="starR">4</span> <span
+									class="starR">5</span>
+							</div>
+							
+							<br>
+							<hr>
+							
+							<textarea class="form-control" rows="5"
+								style="margin: 0px; width: 400px; height: 90px;"
+								placeholder="내용을 입력해주세요" name="rContent" id="rContent">${userReview.rContent}</textarea>
+						</div>
+						<div class="modal-footer">
+							<input type="text" name="lNo" value="${ li.lNo }" hidden="">
+							<input type="text" id="rRating" name="rRating" value="${userReview.rRating}" hidden="">
+							<button type="submit" class="btn btn-primary ">수정하기</button>
+							<button type="button" id="close" class="btn btn-default ">닫기</button>
+						</div>
+						</form>
+						
+						<script>
+						$(function(){
+							$("#uReview").click(function(){
+								$(".starR").eq(${userReview.rRating}-1).click();
+							});
+							
+						});
+						
+						
+						
+						</script>	
+						</c:if>
+
+					</div>
+				</div>
+				
+
+
+
+
+
+
+
+				<!-- 모달 스크립트 -->   
+	<script type="text/javascript">
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close");                                          
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    //별점
+    		$('.starRev span').click(function(){
+			  $(this).parent().children('span').removeClass('on');
+			  $(this).addClass('on').prevAll('span').addClass('on');
+			  $("#rNum").val($(this).parent().children('.on').last().text());
+			  return false;
+			});
+    
+    $(".starR").click(function(){
+    	var rRating =  $(this).text();
+    	$("#rRating").val(rRating); 
+    });
+    
+    function submitReview(){
+		
+    	var rContent = $("#rContent").val();
+    	var rRa = $("#rRating").val();
+    	
+		if(rContent.length == 0){
+			alert("리뷰 내용을 입력해주세요");
+			return false;
+		}
+		
+		if(rRa == 0 || rRa.length ==0){
+			alert("별점을 입력해주세요");
+			return false;
+		}
+    	
+    	return true;
+    }
+    
+    
+    
+
+
+	
+	</script>
+    
+
+			
+			
+			
+			
+			
+			
+			
+			
 
 			<!-- 문의 -->
 			<div class="class_detail detail_sec_bor" id="qna" style="width: 840px">
@@ -894,261 +1260,19 @@ $(window).scroll(function() {
 	roffsetTop = document.getElementById("review").offsetTop + 650;
 	qoffsetTop = document.getElementById("qna").offsetTop + 650;
 	
-	//스크롤에 따라 버튼에 ul에 온 속성을 부여 함
-/* 	if($(window).scrollTop() > toffsetTop && $(window).scrollTop() < IoffsetTop)
-	{
-		$('#sli').removeClass("on");
-		$('#tli').addClass("on");
-		$('#ili').removeClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').removeClass("on");
-	}
-	else if($(window).scrollTop() > IoffsetTop && $(window).scrollTop() < roffsetTop)
-	{		
-		$('#sli').removeClass("on");		
-		$('#tli').removeClass("on");
-		$('#ili').addClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').removeClass("on");
-	}
-	else if($(window).scrollTop() > roffsetTop && $(window).scrollTop() < qoffsetTop)
-	{		
-		$('#sli').removeClass("on");
-		$('#tli').removeClass("on");
-		$('#ili').removeClass("on");
-		$('#rli').addClass("on");
-		$('#qli').removeClass("on");
-	}
-	else if($(window).scrollTop() > qoffsetTop)
-	{		
-		$('#sli').removeClass("on");
-		$('#tli').removeClass("on");
-		$('#ili').removeClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').addClass("on");
-	}
-	else
-	{
-		$('#sli').addClass("on");
-		$('#tli').removeClass("on");		
-		$('#ili').removeClass("on");
-		$('#rli').removeClass("on");
-		$('#qli').removeClass("on");
-	} */
-});
-
- $(document).on('click', '#btn-add-wishlist', function () {
-	var btn = $(this);
-
-	$.post('/Talent/AddWishList/166', {}, function (res) {
-		if (res=='0000') {
-			btn.attr('id', 'btn-remove-wishlist');
-			$("#wishsrc").attr("src","https://taling.me/Content/Images/class/icon_btn_wish_on.png");
-			alert('위시리스트에 등록 되었습니다');
-			fbq('track', 'AddToCart', { 
-				currency: 'KRW',
-				value: 35000,
-				content_type: 'product',
-				content_ids: ['166'],
-				content_category: '국악'
-			});
-		} else {
-			alert('위시리스트에서 등록 중 오류가 발생했습니다');
-		}
-	});
 });
 
 
-
-
-
-function openQuestion()
-{	
-	$('#popup-write-qna').show();	
-}
-
-function openAnswer(idx)
-{	
-	$('#popup-write-answer').show();
-	document.getElementById('qId').value = idx;
-}
 </script>
 
-	<!-- FOOTER -->
-	<div class="footer_cont">
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		
-	</div>
-	<!-- /FOOTER -->
+<c:import url="../common/footbar.jsp"/>
 
  
-       
-<div id="popup-login" class="popup popup-login" data-hide="popup-login">
-	<div class="popup-content">
-		<h1>탈잉에 오신 것을 환영해요!</h1>
-		<p>
-			<strong>탈잉</strong>은 서로 간 재능을 연결해<br>
-			모두의 경쟁력을 높이는 플랫폼 서비스입니다.
-		</p>
-		<button id="btn-popup-login-facebook" type="button" class="btn btn-facebook">
-			<img src="https://taling.me/Content/Images/btn-login-facebook.png">
-		</button>
-		<div>- 또는 -</div>
-		<form action="#" method="post" id="frm-login">
-			<input type="id" id="email" name="email" value="" class="form-control" placeholder="Email">
-			<input type="password" id="password" name="password" value="" class="form-control" placeholder="Password">			
-			<div class="chk-keep-login-container">
-				<input type="checkbox" name="keepLogin" id="chk-keep-login"> <label for="chk-keep-login">로그인 유지</label>
-			</div>
-			<input type="submit" value="이메일 아이디로 로그인" class="btn btn-submit">
-		</form>
-		<a href="https://taling.me/Account/FindPassword" class="btn-find-password">비밀번호를 잊으셨다면</a>
-		<hr>
-		<div class="box-promote">
-			탈잉 회원이 아니세요? <a href="#" data-hide="popup-login" data-show="popup-join">당장 가입</a>
-		</div>
-	</div>
-</div>
-<div id="popup-join" class="popup popup-join" data-hide="popup-join">
-	<div class="popup-content">
-		<h1>탈잉 회원가입</h1>
-		<p>
-			회원으로 가입하시면<br>
-			<strong>탈잉</strong>의 모든 서비스를 이용하실 수 있습니다
-		</p>
-		<button id="btn-popup-join-facebook" type="button" class="btn btn-facebook">
-			<img src="https://taling.me/Content/Images/btn-join-facebook.png">
-		</button>
-		<div style="line-height: 1">- 또는 -</div>
-		<form action="#" method="post" id="frm-join">
-			<input type="id" name="name" value="" class="form-control" placeholder="Name">
-			<input type="id" name="email" value="" class="form-control" placeholder="Email">
-			<input type="password" name="password" value="" class="form-control" placeholder="Password">
-			<input type="password" name="confirm" value="" class="form-control" placeholder="Confirm Password">
-			<div class="box-accept-terms">
-				비밀번호는 영문 숫자조합 8자리 이상<br>
-				<input id="chk-accept-terms" type="checkbox" name="accept" value="" class="checkbox-inline">
-				<label for="chk-accept-terms">
-					<a href="https://taling.me/Support/Rule" target="_blank">탈잉이용약관</a> 및
-					<a href="https://taling.me/Support/Rule" target="_blank">개인정보취급방침</a>에 동의합니다
-				</label>
-			</div>
-			<input type="submit" value="이메일 아이디로 가입" class="btn btn-submit">
-			
-		</form>
-		<hr>
-		<div class="box-promote">
-			이미 탈잉 회원이세요? <a href="#" data-hide="popup-join" data-show="popup-login">로그인</a>
-		</div>
-	</div>
-</div>
 
-
-
-
-<!-- Channel Plugin Scripts -->
-<script>
-var scrollTop=0;
-$('#custom-button-trigger').click(function(){
-	scrollTop= $(window).scrollTop();
-	$('#custom-button-1').click();
-});
- (function() {
-   var w = window;
-   if (w.ChannelIO) {
-     return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-   }
-   var d = window.document;
-   var ch = function() {
-     ch.c(arguments);
-   };
-   ch.q = [];
-   ch.c = function(args) {
-     ch.q.push(args);
-   };
-   w.ChannelIO = ch;
-   function l() {
-     if (w.ChannelIOInitialized) {
-       return;
-     }
-     w.ChannelIOInitialized = true;
-     var s = document.createElement('script');
-     s.type = 'text/javascript';
-     s.async = true;
-     s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-     s.charset = 'UTF-8';
-     var x = document.getElementsByTagName('script')[0];
-     x.parentNode.insertBefore(s, x);
-   }
-   if (document.readyState === 'complete') {
-     l();
-   } else if (window.attachEvent) {
-     window.attachEvent('onload', l);
-   } else {
-     window.addEventListener('DOMContentLoaded', l, false);
-     window.addEventListener('load', l, false);
-   }
- })();
-  ChannelIO('boot', {
-   "pluginKey": "8fc98895-06a5-402d-8740-1cb9261ebc91",
-	"customLauncherSelector": "#custom-button-1",
-    "hideDefaultLauncher": true,
-	   "userId": "", //fill with user id
-	   "profile": {
-		 "name": "", //fill with user name
-		 "mobileNumber": "", //fill with user phone number
-		 "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-		 "CUSTOM_VALUE_2": "VALUE_2"
-	   }
- });
-  ChannelIO('onHide', function() {
-	$(window).scrollTop(scrollTop);
-});
-</script>
-<!-- End Channel Plugin -->	
-	
-	<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('a51b01dc9ea662d0ef7ed2c6242a6946');
-    </script>
-    
-    <script>
-        function shareFacebook() {
-            FB.ui(
-            {
-                method: 'share',
-                href: 'https://taling.me/Talent/Detail/166'
-            }, function (response) { });
-        }
-
-		function shareKakaoTalk() {
-            Kakao.Link.sendTalkLink({
-                label: '탈잉에서 "[원데이] 외국인들 시선강탈! 가야금을 예고강사에게 전문적으로 배우세요! (예고 및 국악학원 출강)"을 확인해보세요 https://taling.me/Talent/Detail/166',
-                image: {
-                    src: 'https://s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/s_41d6f52384099fcb7eeeacbbf2727e37b3ecb4b3.jpg',
-                    width: 420,
-                    height: 250
-                },
-                webButton: {
-                    text: '잉여 탈출하러 가기',
-                    url: 'https://taling.me/Talent/Detail/166'
-                }
-            });
-        }
-
-   
-    </script>
-    
 
 
 
 <!-- Mirrored from taling.me/Talent/Detail/166 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Dec 2019 22:07:36 GMT -->
 
-<div id="ch-plugin"><div id="ch-plugin-script" style="display:none" class="ch-messenger-hidden"><iframe id="ch-plugin-script-iframe" style="position:relative!important;height:100%!important;width:100%!important;border:none!important;"></iframe></div><div id="ch-plugin-core"><style data-styled="" data-styled-version="4.3.2"></style><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-erNlkL bRmDYI sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><div hidden="" class="sc-kEmuub cCdpiZ sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-bxivhb ggxtKj"><div class="sc-ifAKCX ccgoiG"><div class="textLauncherContent sc-EHOje blkbwA"></div><div class="textLauncherIcon sc-bZQynM gSNwmf"><div hidden="" class="sc-htpNat sc-htoDjs jiXddj">0</div></div></div></div></div></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="fb_xdm_frame_https" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://staticxx.facebook.com/connect/xd_arbiter.php?version=44#channel=f1189abb19d0174&amp;origin=file%3A%2F%2F" style="border: none;"></iframe></div><div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style></body>
+</body>
 </html>

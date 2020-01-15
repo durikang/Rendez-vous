@@ -12,7 +12,7 @@
 body {
     font-family: arial, sans-serif;
     margin: 0;
-    background-color: #c9c0b1;
+    background-color: whitesmoke;
 }
 #header {
     width: 100%;
@@ -26,7 +26,7 @@ body {
     padding: 10px;
     width: 80%;
     margin: auto;
-    color: #c9c0b1;
+    color: white;
 } 
 
 #container {
@@ -34,7 +34,7 @@ body {
     height: 500px;
     margin: 0px auto;
     margin-top: 20px;
-    background-color: whitesmoke;
+    background-color:white;
     border: 1px solid #333;
     overflow: scroll;
     font-size: 16px;
@@ -49,7 +49,7 @@ textarea {
     resize: none;
     width: 80%;
     font-size: 16px;
-    background-color:whitesmoke;
+    background-color:white;
 }
 
 #send {
@@ -119,7 +119,7 @@ textarea {
             	send_message("튜터로 수업을 등록하는 " + 
             				 "<br>&nbsp; 방법은 어렵지 않아요!! <br>&nbsp; 수업 등록 시 안내되는 가이드 라인 <br>&nbsp; 따라 작성해주시면 됩니다." + 
             				"<br>&nbsp;<br>&nbsp; ※ Rendez,vous는 튜터 1인 1수업으로 운영됩니다." + 
-            				"<br>&nbsp;<br>&nbsp; * <a href='#' target='blank'>튜터 등록 하러 가기!!</a> *" + 
+            				"<br>&nbsp;<br>&nbsp; * <a href='tutorInsertPage.do' target='blank'>튜터 등록 하러 가기!!</a> *" + 
             				"<br>&nbsp;<br>&nbsp; 1. 처음으로")
             }
             

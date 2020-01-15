@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.rendez.baesung.payment.model.vo.Coupon;
+import com.kh.rendez.baesung.payment.model.vo.InsertCouponInfo;
 import com.kh.rendez.baesung.payment.model.vo.LessonTime;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.baesung.search.model.vo.tClass;
@@ -38,6 +40,20 @@ public class PaymentDao {
 
 	public int updateLessionInfo(int lNo) {
 		return sqlSession.update("paymentMapper.LessionStatusUpdate", lNo);
+	}
+
+	public ArrayList<Coupon> selectCouponList(int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("paymentMapper.selectCouponList",userNo);
+	}
+
+
+	public int insertCoupon(InsertCouponInfo cInfo) {
+		return  sqlSession.insert("paymentMapper.insertCoupon", cInfo);
+	}
+
+	public int updateCoupon(int couponNo) {
+		return sqlSession.update("paymentMapper.expirationCoupon",couponNo);
 	}
 
 	

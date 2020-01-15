@@ -32,64 +32,109 @@
 	 <result property="lType" column="lType"/>
 	</resultMap>
 	
-	
-
-	   <select id="selectSearch" parameterType="string" resultMap="tClassResultSet">
-   SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+	   <select id="selectSearch" parameterType="searchInfo" resultMap="tClassResultSet">
+   SELECT DISTINCT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
    U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
     ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
    FROM LESSON_INFO L
+   JOIN LESSON LS ON(L.L_NO = LS.L_NO)
    JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
    JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
    JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
    JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
    LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
    LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
-   WHERE ((L.L_TITLE LIKE '%' || #{value} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{value} || '%'))
+WHERE ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%'))
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
-   ORDER BY L.L_NO DESC
+ 	<choose>
+ 	<when test="cOrder == null">
+ 	ORDER BY L.L_NO DESC
+ 	</when>
+ 	<when test="cOrder == 'Review'">
+ 	ORDER BY L_REVIEW_COUNT DESC
+ 	</when>
+ 	<when test="cOrder == 'Price'">
+ 	ORDER BY L.PRICE
+ 	</when>
+ 	<when test="cOrder == 'Grade'">
+ 	ORDER BY TOTAL_REVIEW_RATING DESC
+ 	</when>
+	</choose>
    </select>
 	
-	<select id="selectCateMainList" parameterType="string" resultMap="tClassResultSet">
-	SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
-	U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
+	<select id="selectCateMainList" parameterType="searchInfo" resultMap="tClassResultSet">
+	SELECT DISTINCT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+   U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
     ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
-	FROM LESSON_INFO L
-	JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
-	JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
-	JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
-	JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
-	LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
-	LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
-	WHERE L_CATE_MAIN = #{main}
-	AND LA.LA_TYPE = 1
-	AND L.L_STATUS = 'Y'
-	ORDER BY L.L_NO DESC
+   FROM LESSON_INFO L
+   JOIN LESSON LS ON(L.L_NO = LS.L_NO)
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+WHERE L_CATE_MAIN = #{cateMain}
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
+   AND LA.LA_TYPE = 1
+   AND L.L_STATUS = 'Y'
+   <choose>
+ 	<when test="cOrder == null">
+ 	ORDER BY L.L_NO DESC
+ 	</when>
+ 	<when test="cOrder == 'Review'">
+ 	ORDER BY L_REVIEW_COUNT DESC
+ 	</when>
+ 	<when test="cOrder == 'Price'">
+ 	ORDER BY L.PRICE
+ 	</when>
+ 	<when test="cOrder == 'Grade'">
+ 	ORDER BY TOTAL_REVIEW_RATING DESC
+ 	</when>
+	</choose>
 	</select>
 	
-	<select id="SearchCateSubList" parameterType="string" resultMap="tClassResultSet">
-	SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
-	U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
+	<select id="SearchCateSubList" parameterType="searchInfo" resultMap="tClassResultSet">
+	SELECT DISTINCT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+   U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
     ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
-	FROM LESSON_INFO L
-	JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
-	JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
-	JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
-	JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
-	LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
-	LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
-	WHERE L_CATE_SUB = #{sub}
-	AND LA.LA_TYPE = 1
-	AND L.L_STATUS = 'Y'
-	ORDER BY L.L_NO DESC
+   FROM LESSON_INFO L
+   JOIN LESSON LS ON(L.L_NO = LS.L_NO)
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+	WHERE L_CATE_SUB = #{cateSub}
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
+   AND LA.LA_TYPE = 1
+   AND L.L_STATUS = 'Y'
+   <choose>
+ 	<when test="cOrder == null">
+ 	ORDER BY L.L_NO DESC
+ 	</when>
+ 	<when test="cOrder == 'Review'">
+ 	ORDER BY L_REVIEW_COUNT DESC
+ 	</when>
+ 	<when test="cOrder == 'Price'">
+ 	ORDER BY L.PRICE
+ 	</when>
+ 	<when test="cOrder == 'Grade'">
+ 	ORDER BY TOTAL_REVIEW_RATING DESC
+ 	</when>
+	</choose>
 	</select>
 	
 	<select id="getListCount" resultType="_int" parameterType="searchInfo">
-	SELECT count(*)
+	SELECT COUNT(DISTINCT L.L_NO)
 	FROM LESSON_INFO L
+	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
 	 L.L_STATUS = 'Y'
+	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
 	<choose>
 		<when test="sType == 'Search'">
 		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
@@ -105,88 +150,93 @@
 	</select>
 	
 	<select id="getDetailListCount" resultType="_int" parameterType="searchInfo">
-	SELECT COUNT(DISTINCT L_NO)
-	FROM SEARCH_DETAIL
+	SELECT COUNT(DISTINCT L.L_NO)
+	FROM SEARCH_DETAIL L
+	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
-		 L_STATUS = 'Y'
+		 L.L_STATUS = 'Y'
+		 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
 		<if test="sDay != null">
-			 AND L_DAY IN 
+			 AND L.L_DAY IN 
 			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">
             #{item}
         	</foreach> 
 		</if>
 		<if test="sTime != null">
-			AND (L_TIME LIKE 
+			AND (L.L_TIME LIKE 
 			 <foreach collection="sTime" item="item"  open="" close="" separator="OR L_TIME LIKE">	 
             '%' || #{item} || '%'      
         	</foreach>)
 		</if>
 		<if test="tType != null">
-			AND TTYPE = #{tType}
+			AND L.TTYPE = #{tType}
 		</if>
 		<if test="regionMain != null">
-			AND L_REGION = #{regionMain}
+			AND L.L_REGION = #{regionMain}
 		</if>
 		<if test="regionSub != null">
-			AND L_REGION_SUB = #{regionSub}
+			AND L.L_REGION_SUB = #{regionSub}
 		</if>
 		<if test="sValue != null">
-			AND (L_TITLE LIKE '%' || #{sValue} || '%') OR (L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+			AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
 		</if>
 		<if test="cateMain != null">
-			AND L_CATE_MAIN = #{cateMain}
+			AND L.L_CATE_MAIN = #{cateMain}
 		</if>
 		<if test="cateSub != null">
-			AND L_CATE_SUB = #{cateSub}
+			AND L.L_CATE_SUB = #{cateSub}
 		</if>
 	</where>
 	</select>
 	
 	<select id="getDetailList" resultMap="DetailClassResultMap" parameterType="searchInfo">
-	SELECT DISTINCT L_NO
-	FROM SEARCH_DETAIL
+	SELECT DISTINCT L.L_NO
+	FROM SEARCH_DETAIL L
+	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
-	 L_STATUS = 'Y'
+		 L.L_STATUS = 'Y'
+		 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
 		<if test="sDay != null">
-			 AND L_DAY IN 
+			 AND L.L_DAY IN 
 			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">
             #{item}
         	</foreach> 
 		</if>
 		<if test="sTime != null">
-			AND (L_TIME LIKE 
+			AND (L.L_TIME LIKE 
 			 <foreach collection="sTime" item="item"  open="" close="" separator="OR L_TIME LIKE">	 
             '%' || #{item} || '%'      
         	</foreach>)
 		</if>
 		<if test="tType != null">
-			AND TTYPE = #{tType}
+			AND L.TTYPE = #{tType}
 		</if>
 		<if test="regionMain != null">
-			AND L_REGION LIKE  '%' || #{regionMain} || '%'
+			AND L.L_REGION = #{regionMain}
 		</if>
 		<if test="regionSub != null">
-			AND L_REGION_SUB = #{regionSub}
+			AND L.L_REGION_SUB = #{regionSub}
 		</if>
 		<if test="sValue != null">
-			AND (L_TITLE LIKE '%' || #{sValue} || '%') OR (L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+			AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
 		</if>
 		<if test="cateMain != null">
-			AND L_CATE_MAIN = #{cateMain}
+			AND L.L_CATE_MAIN = #{cateMain}
 		</if>
 		<if test="cateSub != null">
-			AND L_CATE_SUB = #{cateSub}
+			AND L.L_CATE_SUB = #{cateSub}
 		</if>
 	</where>
 	
 	</select>
 	
 	
-	<select id="selectDetailSearch" resultMap="tClassResultSet" parameterType="list">
-	SELECT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
+	<select id="selectDetailSearch" resultMap="tClassResultSet" parameterType="hashmap">
+	SELECT DISTINCT L.L_NO, L.L_TITLE, LA.C_NAME, L.PRICE, L.USER_NO, M.USER_NAME, T.T_NICK, 
 	U_C_NAME, NVL(AR.AVG_RATING, 0) AS TOTAL_REVIEW_RATING, NVL(C_COUNT,0) AS T_USER_NUMBER
     ,L.L_REGION_SUB, NVL(ar.l_review_count,0) AS L_REVIEW_COUNT, L.L_CATE_MAIN, L.L_CATE_SUB
 	FROM LESSON_INFO L
+	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
 	JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
 	JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
@@ -194,12 +244,26 @@
 	LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
 	LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
 	WHERE L.L_NO IN 
-	 <foreach collection="list" item="item"  open="(" close=")" separator=",">
+	 <foreach collection="ar" item="item"  open="(" close=")" separator=",">
             #{item}
         	</foreach> 
+        	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
         	AND  L.L_STATUS = 'Y' 
         	AND LA.LA_TYPE = 1
-	ORDER BY L.L_NO DESC
+	<choose>
+ 	<when test="sInfo.cOrder == null">
+ 	ORDER BY L.L_NO DESC
+ 	</when>
+ 	<when test="sInfo.cOrder == 'Review'">
+ 	ORDER BY L_REVIEW_COUNT DESC
+ 	</when>
+ 	<when test="sInfo.cOrder == 'Price'">
+ 	ORDER BY L.PRICE
+ 	</when>
+ 	<when test="sInfo.cOrder == 'Grade'">
+ 	ORDER BY TOTAL_REVIEW_RATING DESC
+ 	</when>
+	</choose>
 	</select>
 	
 	<select id="selectRegionMainCount" parameterType="searchInfo" resultMap="classCountResultMap">
@@ -207,6 +271,7 @@
 	FROM LESSON_INFO
 	WHERE L_NO IN ( SELECT L.L_NO
    FROM LESSON_INFO L
+   JOIN LESSON LS ON(L.L_NO = LS.L_NO)
    JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
    JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
    JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
@@ -216,6 +281,7 @@
   <where> 
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    <choose>
 		<when test="sType == 'Search'">
 		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
@@ -236,6 +302,7 @@
 	FROM LESSON_INFO
 	WHERE L_NO IN ( SELECT L.L_NO
    FROM LESSON_INFO L
+   JOIN LESSON LS ON(L.L_NO = LS.L_NO)
    JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
    JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
    JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
@@ -245,6 +312,7 @@
    <where> 
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
+   AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    <choose>
 		<when test="sType == 'Search'">
 		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
@@ -260,6 +328,48 @@
 	GROUP BY L_REGION_SUB
 	</select>
 	
+	<select id="selectRegionMainCountDeatil" parameterType="list" resultMap="classCountResultMap">
+	SELECT L_REGION as location, COUNT(*) as count, 'RegionMain' as lType
+	FROM LESSON_INFO
+	WHERE L_NO IN ( SELECT L.L_NO
+   FROM LESSON_INFO L
+   JOIN LESSON LS ON(L.L_NO = LS.L_NO)
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+  WHERE L.L_NO IN 
+	 <foreach collection="list" item="item"  open="(" close=")" separator=",">
+            #{item}
+        	</foreach> 
+        	AND  L.L_STATUS = 'Y' 
+        	AND LA.LA_TYPE = 1
+        	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0)  
+	GROUP BY L_REGION
+	</select>
 	
+	<select id="selectRegionSubCountDeatil" parameterType="list" resultMap="classCountResultMap">
+	SELECT L_REGION_SUB as location, COUNT(*)as count, 'RegionSub' as lType
+	FROM LESSON_INFO
+	WHERE L_NO IN ( SELECT L.L_NO
+   FROM LESSON_INFO L
+    JOIN LESSON LS ON(L.L_NO = LS.L_NO)
+   JOIN TUTOR T ON(L.USER_NO = T.USER_NO)
+   JOIN LESSON_ATTACHMENT LA ON(LA.L_NO = L.L_NO)
+   JOIN MEMBER M ON(M.USER_NO = L.USER_NO)
+   JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
+   LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
+   LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
+     WHERE L.L_NO IN 
+	 <foreach collection="list" item="item"  open="(" close=")" separator=",">
+            #{item}
+        	</foreach> 
+        	AND  L.L_STATUS = 'Y' 
+        	AND LA.LA_TYPE = 1
+        	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0)  
+	GROUP BY L_REGION_SUB
+	</select>
 	
 </mapper>

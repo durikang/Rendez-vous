@@ -459,7 +459,8 @@ label {
                           <div class="option">
                          <div class="top">
                          <label onclick="selectRegion('${lTime.lNo}','${lTime.lInning}')"></label>
-                         <div class="text">${lTime.lDay} ${lTime.lTime }	<span>|</span> <font>${tClass.lRegionSub }</font>
+                         <div class="text">${lTime.lDay} ${lTime.lTime }	<span>|</span> <font>${tClass.lRegionSub }</font><span> |</span>
+                         <font>(${lTime.remain}/${lTime.total })</font>
                          <img src="resources/baesung/images/icon_up.png" class="up">
                          <img src="resources/baesung/images/icon_down.png" class="dwn">
                          </div>

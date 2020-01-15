@@ -182,7 +182,6 @@
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
-	<!-- commit test -->
    <!-- <script>
    <c:if test="${ !empty msg }">
       alert('${msg}');

@@ -129,11 +129,16 @@
                 	<li><a href="loginPage.do">로그인</a></li>
                 </c:if>
 
-                <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
+                <c:if test="${ !empty sessionScope.loginUser }">
 					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
 				</c:if>
 				
+				<%-- <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
+					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
+				</c:if> --%>
+				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
+					<li>|</li>
 					<a href="managerHome.do">관리자 페이지</a>
 				</c:if>
 				

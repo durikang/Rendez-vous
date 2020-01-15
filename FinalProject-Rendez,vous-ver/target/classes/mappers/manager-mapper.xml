@@ -11,10 +11,10 @@
 		<result property="uPwd" column="USER_PWD" />
 		<result property="uName" column="USER_NAME" />
 		<result property="phone" column="PHONE" />
-		<result property="gender" column="GENDER" />
-		<result property="Age" column="AGE" />
+		<result property="uGender" column="GENDER" />
+		<result property="uAge" column="AGE" />
 		<result property="addr" column="ADDRESS" />
-		<result property="userType" column="USER_TYPE" />
+		<result property="uType" column="USER_TYPE" />
 		<result property="uStatus" column="U_STATUS" />
 		<result property="enrollDate" column="ENROLL_DATE" />
 		<result property="updateDate" column="UPDATE_DATE" />
@@ -23,25 +23,7 @@
 	
 
 	
-	<!-- 멤버와 유저 사진 조인 ResultSet  -->
-	<resultMap id="mAnduJoinResultSet" type="MemberJoinUserpropic">
-	
-		<id property="uNo" column="USER_NO" />
-		<result property="uId" column="USER_ID" />
-		<result property="uPwd" column="USER_PWD" />
-		<result property="uName" column="USER_NAME" />
-		<result property="phone" column="PHONE" />
-		<result property="uGender" column="GENDER" />
-		<result property="uAge" column="AGE" />
-		<result property="address" column="ADDRESS" />
-		<result property="uType" column="USER_TYPE" />
-		<result property="uStatus" column="U_STATUS" />
-		<result property="enrollDate" column="ENROLL_DATE" />
-			
-		<result property="uOriginName" column="U_O_NAME" />
-		<result property="uChangeName" column="U_C_NAME" />
-		
-	</resultMap>
+
 	
 	<!-- 쿠폰 조회  -->
 	<resultMap id="couponResultSet" type="Coupon">
@@ -115,7 +97,6 @@
 		select count(*)
 		<if test="value == 1">
 			from member
-			left join userpropic using(user_no)
 		</if>
 		<if test="value == 2">
 			from coupon
@@ -141,7 +122,6 @@
 	
 		select count(*)
 		from member
-		left join userpropic using(user_no)
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
@@ -157,11 +137,10 @@
 		</where>
 	</select>
 	<!-- 전체 회원수(튜터 포함) 조회  -->
-	<select id="selectMemberList" resultMap="mAnduJoinResultSet">
-	
+	<select id="selectMemberList" resultMap="AdminMemberResultSet">
+		
 		select *
 		from member
-		left join userpropic using(user_no)
 		where user_type !='A'
 		
 	</select>
@@ -175,12 +154,11 @@
 	
 	<!-- 멤버 검색용 쿼리 (마이바티스 동적 쿼리 활용) -->
 	<select id="searchMemberList" parameterType="Search"
-		resultMap="mAnduJoinResultSet">
+		resultMap="AdminMemberResultSet">
 		
 		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
 
 		SELECT * FROM member
-		left join userpropic using(user_no)
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
@@ -198,8 +176,21 @@
 	</select>
 	
 	<!-- 쿠폰 생성하기  -->
-	<insert id="insertCoupon" parameterType="Coupon">
-		insert into Coupon values(COUPON_SEQ.nextval,#{cName},#{cCode},#{disRate},#{startDate},#{endDate},'R',#{uNo})
+	<insert id="insertCoupon">
+		
+			<foreach collection="list" item="i" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+                 INTO coupon VALUES(
+                 get_seq('coupon_seq'),
+                 #{i.cName},
+                 #{i.cCode},
+                 #{i.disRate},
+                 #{i.startDate},
+                 #{i.endDate},
+                 'R',
+                 #{i.uNo})
+             </foreach>
+			
+				
 	</insert>
 	
 	<!-- 회원 가입자 오늘 & 이번달 수 조회 -->
@@ -315,6 +306,18 @@
 				</when>
 			</choose>
 		</where>	
+	</select>
+	<select id="selectMuIdList" resultMap="AdminMemberResultSet" parameterType="list">
+		
+		select *
+		from member
+		<where>
+			user_no in
+			<foreach collection="list" item="n" open="(" close=")" separator=",">
+				 ${n}
+			</foreach>
+		</where>
+	
 	</select>
 	
 </mapper>

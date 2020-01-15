@@ -13,7 +13,6 @@ import com.kh.rendez.manager.model.vo.AdminLesson;
 import com.kh.rendez.manager.model.vo.AdminMember;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
-import com.kh.rendez.manager.model.vo.MemberJoinUserpropic;
 import com.kh.rendez.manager.model.vo.PageInfo;
 import com.kh.rendez.manager.model.vo.Search;
 import com.kh.rendez.support.model.vo.Qna;
@@ -32,23 +31,25 @@ public class ManagerDao {
 		return sqlSession.selectOne("managerMapper.getListMemberSearchCount",search);
 	}
 
-	public ArrayList<MemberJoinUserpropic> selectMemberList(PageInfo pi) {
+	public ArrayList<AdminMember> selectMemberList(PageInfo pi) {
+		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("managerMapper.selectMemberList", null, rowBounds);
-	
 	}
 
-	public ArrayList<MemberJoinUserpropic> searchMemberList(Search search, PageInfo pi) {
+	public ArrayList<AdminMember> searchMemberList(Search search, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("managerMapper.searchMemberList",search,rowBounds);
 	}
-	public int insertCoupon(Coupon coupon) {
+	public int insertCoupon(ArrayList<Coupon> clist) {
 		
-		return sqlSession.insert("managerMapper.insertCoupon",coupon);
+		return sqlSession.insert("managerMapper.insertCoupon",clist);
+		
+		
 	}
 	public ArrayList<MemberJoinTutor> selectTutorList(PageInfo pi) {
 
@@ -109,6 +110,11 @@ public class ManagerDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("managerMapper.selectQnaList",2,rowBounds);
+	}
+// 쿠폰 생성에 필요한 uNo에 맞는  uId 를 갖는 멤버 셀렉
+	public ArrayList<AdminMember> selectMuIdList(List<Integer> unolist) {
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.selectMuIdList",unolist);
 	}
 	
 }

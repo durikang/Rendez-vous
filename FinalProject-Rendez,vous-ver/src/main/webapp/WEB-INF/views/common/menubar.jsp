@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -114,6 +116,14 @@
 }
 </style>
 <body class="menu_body">
+	
+	<c:if test="${ !empty msg}">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg"/>
+	</c:if>
+	
     <header class="header">
 
     <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>

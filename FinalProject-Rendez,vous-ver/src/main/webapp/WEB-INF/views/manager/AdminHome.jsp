@@ -37,6 +37,13 @@
 	color: black;
 	font-family: 'Nanum Pen Script', cursive;
 }
+.backLogo{
+	background: center / contain no-repeat url("${contextPath}/resources/managerResources/Img/build.png");
+	background-size: cover;
+	color:white;
+}
+
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -163,9 +170,9 @@
 <body>
 	<c:import url="mnCommon/menubar.jsp" />
 	<br>
-	<h1 align="center">메인 홈입니다.</h1>
+	<c:import url="mnCommon/sidebar.jsp"/>
 	<div class="container">
-		<br>
+	<c:import url="mnCommon/jumbotron.jsp"/>
 		<hr>
 
 		<div class="container div-color">
@@ -235,11 +242,8 @@
 				</table>
 			</div>
 		</div>
-		
-		
-		
-		
 	</div>
-
+	<br><br><br><br><br>
+	<c:import url="mnCommon/footbar.jsp"/>
 </body>
 </html>

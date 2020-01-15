@@ -56,6 +56,7 @@
 		
 		
 		</div>
-	
+		<br><br><br><br><br><br><br><br>
+	<c:import url="../../common/footbar.jsp"/>
 </body>
 </html>

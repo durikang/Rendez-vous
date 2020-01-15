@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>	
@@ -73,7 +74,16 @@
 	</script>
     
 	<!-- Page-hiding snippet (recommended)  -->
-	<style>.async-hide { opacity: 0 !important} </style>
+	<style>
+			.async-hide { opacity: 0 !important} 
+			.header {
+				margin-top:5px;	
+	  			position: relative;
+	  			background: white;
+	  			border: none;
+					}
+	
+	</style>
 	<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
 	h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
 	(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
@@ -144,16 +154,15 @@
 
 </head>
 <body style="">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTJJTC6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
 <div id="wrap">
+
 <!--HEADER -->
 	<div class="hcont">
-		<h1>상단네비</h1>
+		<c:import url="../common/menubar.jsp"/>
 	</div>
 <!-- //HEADER -->
+
 
 
 <input type="hidden" id="Id" name="Id" value="19200">
@@ -507,82 +516,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 	<!-- FOOTER -->
-	<div class="footer_cont">
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		<h1>풋터</h1>
-		<br>
-		
-	</div>
 	<!-- /FOOTER -->
 
-
-<!-- Channel Plugin Scripts -->
-<script>
-var scrollTop=0;
-$('#custom-button-trigger').click(function(){
-	scrollTop= $(window).scrollTop();
-	$('#custom-button-1').click();
-});
- (function() {
-   var w = window;
-   if (w.ChannelIO) {
-     return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-   }
-   var d = window.document;
-   var ch = function() {
-     ch.c(arguments);
-   };
-   ch.q = [];
-   ch.c = function(args) {
-     ch.q.push(args);
-   };
-   w.ChannelIO = ch;
-   function l() {
-     if (w.ChannelIOInitialized) {
-       return;
-     }
-     w.ChannelIOInitialized = true;
-     var s = document.createElement('script');
-     s.type = 'text/javascript';
-     s.async = true;
-     s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-     s.charset = 'UTF-8';
-     var x = document.getElementsByTagName('script')[0];
-     x.parentNode.insertBefore(s, x);
-   }
-   if (document.readyState === 'complete') {
-     l();
-   } else if (window.attachEvent) {
-     window.attachEvent('onload', l);
-   } else {
-     window.addEventListener('DOMContentLoaded', l, false);
-     window.addEventListener('load', l, false);
-   }
- })();
-  ChannelIO('boot', {
-   "pluginKey": "8fc98895-06a5-402d-8740-1cb9261ebc91",
-	"customLauncherSelector": "#custom-button-1",
-    "hideDefaultLauncher": true,
-	   "userId": "znznwkdrns@naver.com", //fill with user id
-	   "profile": {
-		 "name": "유현식", //fill with user name
-		 "mobileNumber": "01073267776", //fill with user phone number
-		 "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-		 "CUSTOM_VALUE_2": "VALUE_2"
-	   }
- });
-  ChannelIO('onHide', function() {
-	$(window).scrollTop(scrollTop);
-});
-</script>
-<!-- End Channel Plugin -->	
-
 </div>
-
-
-
-<div id="ch-plugin"><div id="ch-plugin-script" style="display:none" class="ch-messenger-hidden"><iframe id="ch-plugin-script-iframe" style="position:relative!important;height:100%!important;width:100%!important;border:none!important;"></iframe></div><div id="ch-plugin-core"><style data-styled="" data-styled-version="4.3.2"></style><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-erNlkL bRmDYI sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><div hidden="" class="sc-kEmuub cCdpiZ sc-RbTVP hrWefY"><div class="sc-eNNmBn cXBieY"><div name="push-exit" width="45" height="45" size="24" class="sc-dnqmqq sc-cBrjTV iByMcc"></div><div class="sc-jUpvKA ccOxya"><div size="34" class="sc-kGXeez kGMzSU"></div><div class="sc-fkyLDJ epSaPl">(알 수 없음)</div><div class="sc-iCwjlJ hRSOFL">9:00am</div></div><div class="sc-eopZyb bYeAnX"><div class="sc-jRuhRL coGTKb"><span class=""></span></div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style><div hidden="" class="sc-bxivhb ggxtKj"><div class="sc-ifAKCX ccgoiG"><div class="textLauncherContent sc-EHOje blkbwA"></div><div class="textLauncherIcon sc-bZQynM gSNwmf"><div hidden="" class="sc-htpNat sc-htoDjs jiXddj">0</div></div></div></div></div></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="fb_xdm_frame_https" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://staticxx.facebook.com/connect/xd_arbiter.php?version=44#channel=f1b8168ca9c4e58&amp;origin=https%3A%2F%2Ftaling.me" style="border: none;"></iframe></div><div></div></div></div><style data-styled="" data-styled-version="4.3.2"></style></body>
+<c:import url="../common/footbar.jsp"/>
+</body>
 </html>

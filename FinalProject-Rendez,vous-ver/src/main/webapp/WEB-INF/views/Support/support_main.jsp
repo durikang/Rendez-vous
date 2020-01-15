@@ -231,11 +231,13 @@
 		$("#qna_btn").on("click", function(){
 			location.href="support_qna.do";
 		});
+		
 		<c:if test="${!empty loginUser}">
 			$("#list_btn").on("click", function(){
 				location.href="support_list.do";
 			});
 		</c:if>
+		
 		<c:if test="${empty loginUser}">
 			$("#list_btn").on("click", function(){
 				alert("로그인이 필요한 기능입니다.");

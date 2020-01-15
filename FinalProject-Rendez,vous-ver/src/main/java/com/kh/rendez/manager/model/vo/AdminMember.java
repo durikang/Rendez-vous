@@ -13,13 +13,13 @@ public class AdminMember implements Serializable {
 	private String uId;
 	private String uPwd;
 	private String uName;
-	private String gender;
-	private int Age;
+	private String uGender;
+	private int uAge;
 	private String phone;
 	private String addr;
 	private Date enrollDate;
 	private Date updateDate;
-	private String userType;
+	private String uType;
 	private String uStatus;
 	
 	
@@ -33,20 +33,20 @@ public class AdminMember implements Serializable {
 
 
 
-	public AdminMember(String uNo, String uId, String uPwd, String uName, String gender, int age, String phone,
-			String addr, Date enrollDate, Date updateDate, String userType, String uStatus) {
+	public AdminMember(String uNo, String uId, String uPwd, String uName, String uGender, int uAge, String phone,
+			String addr, Date enrollDate, Date updateDate, String uType, String uStatus) {
 		super();
 		this.uNo = uNo;
 		this.uId = uId;
 		this.uPwd = uPwd;
 		this.uName = uName;
-		this.gender = gender;
-		Age = age;
+		this.uGender = uGender;
+		this.uAge = uAge;
 		this.phone = phone;
 		this.addr = addr;
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
-		this.userType = userType;
+		this.uType = uType;
 		this.uStatus = uStatus;
 	}
 
@@ -109,29 +109,29 @@ public class AdminMember implements Serializable {
 
 
 
-	public String getGender() {
-		return gender;
+	public String getuGender() {
+		return uGender;
 	}
 
 
 
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setuGender(String uGender) {
+		this.uGender = uGender;
 	}
 
 
 
 
-	public int getAge() {
-		return Age;
+	public int getuAge() {
+		return uAge;
 	}
 
 
 
 
-	public void setAge(int age) {
-		Age = age;
+	public void setuAge(int uAge) {
+		this.uAge = uAge;
 	}
 
 
@@ -193,15 +193,15 @@ public class AdminMember implements Serializable {
 
 
 
-	public String getUserType() {
-		return userType;
+	public String getuType() {
+		return uType;
 	}
 
 
 
 
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public void setuType(String uType) {
+		this.uType = uType;
 	}
 
 
@@ -221,12 +221,22 @@ public class AdminMember implements Serializable {
 
 
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
+
 	@Override
 	public String toString() {
-		return "AdminMember [uNo=" + uNo + ", uId=" + uId + ", uPwd=" + uPwd + ", uName=" + uName + ", gender=" + gender
-				+ ", Age=" + Age + ", phone=" + phone + ", addr=" + addr + ", enrollDate=" + enrollDate
-				+ ", updateDate=" + updateDate + ", userType=" + userType + ", uStatus=" + uStatus + "]";
+		return "AdminMember [uNo=" + uNo + ", uId=" + uId + ", uPwd=" + uPwd + ", uName=" + uName + ", uGender="
+				+ uGender + ", uAge=" + uAge + ", phone=" + phone + ", addr=" + addr + ", enrollDate=" + enrollDate
+				+ ", updateDate=" + updateDate + ", uType=" + uType + ", uStatus=" + uStatus + "]";
 	}
+
+
+
 
 
 	

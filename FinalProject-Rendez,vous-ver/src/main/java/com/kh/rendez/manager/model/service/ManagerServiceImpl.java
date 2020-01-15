@@ -1,6 +1,7 @@
 package com.kh.rendez.manager.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,9 @@ import com.kh.rendez.manager.model.vo.AdminLesson;
 import com.kh.rendez.manager.model.vo.AdminMember;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
-import com.kh.rendez.manager.model.vo.MemberJoinUserpropic;
 import com.kh.rendez.manager.model.vo.PageInfo;
 import com.kh.rendez.manager.model.vo.Search;
+import com.kh.rendez.support.model.vo.Qna;
 
 @Service("mnService")
 public class ManagerServiceImpl implements ManagerService {
@@ -22,7 +23,7 @@ public class ManagerServiceImpl implements ManagerService {
 	private ManagerDao mnDao;
 //	회원 셀렉
 	@Override
-	public ArrayList<MemberJoinUserpropic> selectList(int currentPage) {
+	public ArrayList<AdminMember> selectList(int currentPage) {
 		// 전체 게시글 수 조회
 		int listCount = mnDao.getListCount(1);
 		
@@ -34,7 +35,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 //		회원 검색
 	@Override
-	public ArrayList<MemberJoinUserpropic> searchMemberList(Search search,int currentPage) {
+	public ArrayList<AdminMember> searchMemberList(Search search,int currentPage) {
 		int listCount = mnDao.getListMemberSearchCount(search);
 		
 		// 페이지 정보 저장
@@ -43,11 +44,10 @@ public class ManagerServiceImpl implements ManagerService {
 		return mnDao.searchMemberList(search,pi);
 	}
 	@Override
-	public int insertCoupon(Coupon coupon) {
+	public int insertCoupon(ArrayList<Coupon> clist) {
 
 		
-		
-		return mnDao.insertCoupon(coupon);
+		return mnDao.insertCoupon(clist);
 	}
 	@Override
 	public ArrayList<MemberJoinTutor> selectTutorList(int currentPage) {
@@ -72,14 +72,51 @@ public class ManagerServiceImpl implements ManagerService {
 	public ArrayList<AdminMember> selectMemberList() {
 		return mnDao.selectTopMemberList();
 	}
+	
 	@Override
 	public ArrayList<AdminLesson> selectRealTimeLessonList() {
 		// TODO Auto-generated method stub
 		return mnDao.selectRealTimeLessonList();
 	}
+//	튜터 승인 & 비승인 기능
 	@Override
-	public int changeTutorStatus(List<Integer> uNo) {
-		return mnDao.changeTutorStatus(uNo);
+	public int changeTutorStatus(HashMap<String, Object> map) {
+		return mnDao.changeTutorStatus(map);
+	}
+//	전체 답변 갯수 & 답변 안한 갯 수 리턴 
+	@Override
+	public int selectQnaResponseCount(int i) {
+		return mnDao.selectQnaResponseCount(i);
+	}
+//	전체 답변 리턴
+	@Override
+	public ArrayList<Qna> selectQna(int currentPage) {
+		int listCount = mnDao.getListCount(4);
+		// 페이지 정보 저장
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		return mnDao.selectQna(pi);
+	}
+//	qna 검색결과 리턴
+	@Override
+	public ArrayList<Qna> searchQnaList(Search search, int currentPage) {
+		int listCount=mnDao.getListQnaCount(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
+		
+		return mnDao.searchQnaList(pi,search);
+	}
+	@Override
+	public ArrayList<Qna> selectQna(int i, int currentPage) {
+		
+		int listCount=mnDao.getListCount(i);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
+		
+		return mnDao.selectNoQna(pi);
+	}
+	
+	@Override
+	public ArrayList<AdminMember> selectMemberList(List<Integer> unolist) {
+		return mnDao.selectMuIdList(unolist);
 	}
 
 

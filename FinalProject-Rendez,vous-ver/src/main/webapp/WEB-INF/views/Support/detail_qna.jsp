@@ -266,6 +266,9 @@
 				<tr>
 					<td colspan="4">
 						<button onclick="location.href='${ qlist }'">목록으로</button>
+						<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
+						<button onclick="location.href='manageHo.do'">이전으로(관리자 전용)</button>
+						</c:if>
 						<c:if test="${ loginUser.user_name eq q.qWriter }">
 							<button onclick="location.href='${ qupView }'">수정하기</button>
 							<button id="delete" onclick="location.href='${ qdelete }'">삭제하기</button>

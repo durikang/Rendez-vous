@@ -23,7 +23,6 @@
 		
 		<!-- 두리 별칭  -->
 		<typeAlias type="com.kh.rendez.manager.model.vo.LessonJoin" alias="LessonJoin"/>
-		<typeAlias type="com.kh.rendez.manager.model.vo.MemberJoinUserpropic" alias="MemberJoinUserpropic"/>
 		<typeAlias type="com.kh.rendez.manager.model.vo.Coupon" alias="Coupon"/>
 		<typeAlias type="com.kh.rendez.manager.model.vo.Search" alias="Search"/>
 		<typeAlias type="com.kh.rendez.manager.model.vo.MemberJoinTutor" alias="MemberJoinTutor"/>
@@ -33,6 +32,7 @@
 		
 		<!-- 봄 -->
 	   <typeAlias type="com.kh.rendez.member.model.vo.Member" alias="Member"/>   
+	   <typeAlias type="com.kh.rendez.Wish.model.vo.Wish" alias="Wish"/>   
 		<!-- 준섭  -->
 		<typeAlias type="com.kh.rendez.support.model.vo.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.rendez.support.model.vo.Answer" alias="Answer"/>

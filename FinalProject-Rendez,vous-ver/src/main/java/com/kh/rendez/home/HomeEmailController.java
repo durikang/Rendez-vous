@@ -38,7 +38,7 @@ public class HomeEmailController {
             Random r = new Random();
             int dice = r.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
             
-            String setfrom = "khyewon922@gmail.com";
+            String setfrom = "rendez.vous2019.12.26@gmail.com";
             String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
             String title = "회원가입 인증 이메일 입니다."; // 제목
             String content =
@@ -77,13 +77,12 @@ public class HomeEmailController {
             }
             
             ModelAndView mv = new ModelAndView();    //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을 지정한다.
- 
-            response_email.setContentType("text/html; charset=UTF-8");
-            PrintWriter out_email = response_email.getWriter();
-            out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-            out_email.flush();         
+            mv.addObject("msg","이메일이 발송되었습니다. 인증번호를 입력해주세요.");
+            mv.setViewName("home");
+            
             
             return mv;
             
         }
+        
 }

@@ -113,14 +113,18 @@
 }
 </style>
 <body class="menu_body">
-	
+
+
+
 	<c:if test="${ !empty msg}">
 		<script>
 			alert("${msg}");
 		</script>
 		<c:remove var="msg"/>
 	</c:if>
-	
+
+
+
     <header class="header">
 <img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
@@ -149,8 +153,10 @@
 				</c:if> --%>
 				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
+
 					<li>|</li>
 					<a href="managerHome.do">관리자 페이지</a>
+
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser }">

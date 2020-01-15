@@ -137,7 +137,7 @@
 			<li><a href="manageHo.do">홈페이지 관리</a></li>
 			<li><a href="mn.do">회원 / 튜터 관리</a></li>
 			<li><a href="mnRequest.do">튜터 신청 관리</a></li>
-			<li><a href="#">통계</a></li>
+			<li><a href="static.do">통계</a></li>
 		</ul>
 
 	</header>

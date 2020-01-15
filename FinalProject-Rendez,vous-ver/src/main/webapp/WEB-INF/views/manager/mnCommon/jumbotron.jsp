@@ -9,18 +9,14 @@
 
 <style>
    .backLogo{
-	background: center / contain no-repeat url("${contextPath}/resources/managerResources/Img/build.png");
-	background-size: cover;
-	color:white;
+		background: center / contain no-repeat url("${contextPath}/resources/managerResources/Img/build.png");
+		background-size: cover;
+		color:white;
 	}
 </style>
-
 </head>
 <body>
-  <div class="jumbotron backLogo">
-    <h1>Bootstrap Tutorial</h1>
-    <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
-    responsive, mobile-first projects on the web.</p>
+  <div class="jumbotron backLogo" style="width: 900px; height: 250px;">
   </div>
   
   

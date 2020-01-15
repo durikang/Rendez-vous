@@ -57,16 +57,14 @@
 	</select>
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+	<!-- 튜터사진을 유저프로픽에서 갖고옴 -->
+	<select id="selectTutorPic" parameterType="_int" resultType="String">
+	SELECT P.U_C_NAME
+	FROM USERPROPIC P,LESSON_INFO I
+	WHERE P.USER_NO = I.USER_NO
+	AND I.L_NO = #{lNo}
+	</select>
 	
 	
 	
@@ -146,12 +144,122 @@
 		SELECT *
 		FROM LESSON
 		WHERE L_NO= #{lNo}
+		AND START_TIME>SYSDATE
 	</select>
 	
 	
 
 
+	<insert id="insertUserFav" parameterType="Wish">
+	INSERT INTO WISH VALUES( #{user_no},#{l_no},(SELECT NVL(MAX(W_NO),0) FROM WISH WHERE USER_NO= #{user_no})+1,SYSDATE)
+	</insert>
+	
+	<delete id="deleteUserFav" parameterType="Wish">
+	DELETE FROM WISH
+	WHERE USER_NO = #{user_no}
+	AND L_NO = #{l_no}
+	</delete>
+	
+	<select id="checkUserFav" parameterType="Wish" resultType="_int">
+	SELECT COUNT(*)
+	FROM WISH
+	WHERE USER_NO = #{user_no}
+	AND L_NO= #{l_no}
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- payment -->
+	
+	
+	<select id="checkUserPay" parameterType="Payment" resultType="_int">
+		SELECT COUNT(*)
+		FROM PAYMENT
+		WHERE USER_NO=#{uNo}
+		AND L_NO=#{lNo}
+		AND PAYMENT_STATUS =3
+	</select>
+	
+	
+	<!-- review -->
+	
+	<resultMap type="LessonReview" id="lrResultset">
+		<id property="lNo" column="L_NO"/>
+		<id property="uNo" column="USER_NO"/>
+		<result property="rContent" column="REVIEW_CONTENT"/>
+		<result property="rRating" column="REVIEW_RATING"/>
+		<result property="rDate" column="REVIEW_DATE"/>
+		<result property="uName" column="USER_NAME"/>
+		<result property="uCName" column="U_C_NAME"/>
+	</resultMap>
+	
+	
+	<resultMap type="Review" id="rResultSet">
+		<id property="lNo" column="L_NO"/>
+		<id property="uNo" column="USER_NO"/>
+		<result property="rContent" column="REVIEW_CONTENT"/>
+		<result property="rRating" column="REVIEW_RATING"/>
+		<result property="rDate" column="REVIEW_DATE"/>
+	</resultMap>
+	
 
+	<select id="checkUserReview" parameterType="Review" resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE USER_NO= #{uNo}
+		AND L_NO= #{lNo}
+	</select>
+	
+	<select id="selectLessonReviewList" parameterType="_int" resultMap="lrResultset">
+		SELECT R.*,M.USER_NAME,P.U_C_NAME
+		FROM REVIEW R,MEMBER M,USERPROPIC P
+		WHERE R.USER_NO = M.USER_NO
+		AND R.USER_NO = P.USER_NO
+		AND R.L_NO =#{lNo}
+		ORDER BY 5 DESC
+	</select>
+	
+
+	
+	<insert id="insertReview" parameterType="Review">
+	INSERT INTO REVIEW VALUES(#{lNo},#{uNo},#{rContent},#{rRating},SYSDATE)
+	</insert>
+	
+	<select id="selectUReview" parameterType="Review" resultMap="rResultSet">
+	SELECT * 
+	FROM REVIEW
+	WHERE USER_NO = #{uNo}
+	AND L_NO = #{lNo}
+	</select>
+	
+	<update id="updateReview" parameterType="Review">
+	UPDATE REVIEW 
+	SET REVIEW_CONTENT = #{rContent},
+		REVIEW_RATING = #{rRating},
+		REVIEW_DATE = SYSDATE
+	WHERE USER_NO = #{uNo}
+	AND L_NO = #{lNo}	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
 
 
 

@@ -386,9 +386,9 @@ public class ManagerController {
 		return mv;
 	}
 	
-	@RequestMapping("EnrollArea.do")
+	@RequestMapping("static.do")
 	public ModelAndView EnrollArea(ModelAndView mv) {
-		mv.setViewName("manager/boarder/EnrollArea");
+		mv.setViewName("manager/boarder/statisticsBoarder");
 		return mv;
 	}
 

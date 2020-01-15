@@ -409,7 +409,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
                             쿠폰					
                             </div>
                             <div class="right2">					
-                                <a onclick="couponPop();"><span id="couponArea2" style="font-size:13px;font-weight:500;">쿠폰없음 </span>&gt;</a>
+                                <a onclick="couponPop();" style="color: #ff005b;"><span id="couponArea2" style="font-size:13px;font-weight:500;">쿠폰없음 </span>&gt;</a>
                             </div>
                         </div>
                         <div class="level3">
@@ -417,7 +417,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
                             결제 금액
                             </div>
                             <div class="right2">
-                                <span id="payArea2">${tClass.price}</span>원 <font color="#666" style="font-size:12px;">(수업가격 + VAT 10%)</font>
+                                <span id="payArea2">${tClass.price}</span>원 <font color="#666" style="font-size:12px;" id="priceInfo"></font>
                             </div>
                         </div>
                         <div class="level2 top">					
@@ -446,9 +446,51 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         <input type="hidden" id="aid" name="aid" value="155272">
         <div class="next button" onclick="pay()" id="testNext">다음</div>
     </div>
-
+	 <input type="hidden" value="${tClass.price}" id="payFinalPrice">
 
     <script>
+    function couponUse(val1, name, price)//code, name, discountRate
+	{
+		Price = '';
+		val = 0;
+		val = val1;
+		if(val==0) // 쿠폰 해제 
+		{
+			
+			$('#couponArea2').text('쿠폰없음');
+			//$('#priceInfo').text('할인미적용');
+			
+			Price = '${tClass.price}';
+			strtotalPrice = formatMoney(Price.toString());
+			
+			$('#payArea2').text(strtotalPrice);
+			$('#payFinalPrice').val(Price);
+		
+			//strtotalPrice = formatMoney(totalPrice.toString());
+			//stronePrice = formatMoney(onePrice.toString());
+
+
+		}
+		else
+		{					
+			
+			//strPrice = formatMoney(price.toString());
+			
+			Price = ${tClass.price} * ((100 -price)/100);
+			strtotalPrice = formatMoney(Price.toString());
+			
+			$('#payArea2').text(strtotalPrice);
+			$('#couponArea2').text(name+' '+price+'%할인');
+			$('#payFinalPrice').val(Price);
+			//$('#priceInfo').text('쿠폰할인적용');
+	
+			
+			//stronePrice = formatMoney(onePrice.toString());
+
+		
+		}
+	}
+    
         function payCheck(val)
         {			
             var area = $('#pay');
@@ -459,6 +501,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
             $('#paynum').val(val);
             
             //location.href = 'payComplete.do?payMethod='+payMethod;
+            //location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val;
         }
     
         function pay(){
@@ -488,7 +531,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	    pay_method : payMethod,
         	    merchant_uid : 'merchant_' + new Date().getTime(),
         	    name : '${tClass.lTitle}',
-        	    amount : ${tClass.price },
+        	    amount : Price,
         	    buyer_email : 'whqotjd@naver.com',
         	    buyer_name : '${loginUser.user_name}',
         	    buyer_tel : '${loginUser.phone}',
@@ -503,7 +546,8 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	        msg += '결제 금액 : ' + rsp.paid_amount;
         	        msg += '카드 승인번호 : ' + rsp.apply_num;
         	        
-        	        location.href = 'payComplete.do?payMethod='+payMethod;
+        	        //alert(val);
+        	        location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val+'&Price='+Price;
         	    } else {
         	        var msg = '결제에 실패하였습니다.';
         	        msg += '에러내용 : ' + rsp.error_msg;
@@ -513,9 +557,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	
         }
         
-        
-        
-        
+
      /* function pay(val)
         {
             paynum = $('#paynum').val();
@@ -644,7 +686,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 
 	function couponPop()
 	{
-		popupWindow = window.open('coupon.do', '_blank', 'height=800,width=550,scrollbars=no,status=no');
+		popupWindow = window.open('coupon.do', '_blank', 'height=800,width=450,scrollbars=no,status=no');
 	}
 
 	function cend()
@@ -659,85 +701,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 		return formatMoney(val.substring(0, val.length - 3)) + ',' + val.substring(val.length - 3, val.length);
 	}
 
-	function couponUse(val, name, price)
-	{
-		$('#payPassTotal').val(0);
-		$('#payPassOne').val(0);
-		if(val==0)
-		{
-			strPrice = formatMoney(price.toString());
-		
-			$('#couponArea1').text('쿠폰없음');
-			$('#couponArea2').text('쿠폰없음');
-			
-			var amount = Number($('#Amount').val());
-			var time = Number($('#Time').val());
-			var totalTimes = Number($('#TotalTimes').val());
-		
-			
-			totalPrice = (amount*time*totalTimes-price)*1100/1000;		
-			onePrice = (amount-price)*1100/1000;
-			
-			if(totalPrice < 1)
-			{
-				totalPrice = 0;
-			}
-			if(onePrice < 1)
-			{
-				onePrice = 0;
-			}
-
-			strtotalPrice = formatMoney(totalPrice.toString());
-			stronePrice = formatMoney(onePrice.toString());
-
-			$('#payArea1').text(stronePrice);
-			$('#payArea2').text(strtotalPrice);
-
-			$('#couponId').val('');
-
-		}
-		else
-		{					
-			strPrice = formatMoney(price.toString());
-		
-			$('#couponArea1').text(name+' '+strPrice+'원');
-			$('#couponArea2').text(name+' '+strPrice+'원');
-			
-			var amount = Number($('#Amount').val());
-			var time = Number($('#Time').val());
-			var totalTimes = Number($('#TotalTimes').val());
-		
-			if(totalTimes==1)
-			{
-				totalPrice = (amount*5-price)*1100/1000;
-				onePrice = (amount*5-price)*1100/1000;
-			}
-			else
-			{
-				totalPrice = (amount*time*totalTimes-price)*1100/1000;
-				onePrice = (amount-price)*1100/1000;
-			}
-			
-			if(totalPrice < 1)
-			{
-				totalPrice = 0;
-				$('#payPassTotal').val(1);
-			}
-			if(onePrice < 1)
-			{
-				onePrice = 0;
-				$('#payPassOne').val(1);
-			}
-
-			strtotalPrice = formatMoney(totalPrice.toString());
-			stronePrice = formatMoney(onePrice.toString());
-
-			$('#payArea1').text(stronePrice);
-			$('#payArea2').text(strtotalPrice);
-
-			$('#couponId').val(val);
-		}
-	}
+	
 </script>
 
 </body>

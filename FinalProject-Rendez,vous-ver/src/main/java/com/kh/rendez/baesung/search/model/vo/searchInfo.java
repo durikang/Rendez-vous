@@ -15,28 +15,15 @@ public class searchInfo {
 	private ArrayList sTime; // 수업시간
 	private Integer tType; // 수업형태
 	private String day; // 임시 날짜
-	private String time; // 임시 시간 
+	private String time; // 임시 시간
+	private String cOrder; // 정렬방법
 	
-	public searchInfo() {}
+	public searchInfo () {}
 
 	public searchInfo(String sType, String sValue) {
+		super();
 		this.sType = sType;
 		this.sValue = sValue;
-	}
-
-	public searchInfo(String sType, String sValue, String cateMain, String cateSub, String regionMain, String regionSub,
-			ArrayList sDay, ArrayList sTime, Integer tType, String day, String time) {
-		this.sType = sType;
-		this.sValue = sValue;
-		this.cateMain = cateMain;
-		this.cateSub = cateSub;
-		this.regionMain = regionMain;
-		this.regionSub = regionSub;
-		this.sDay = sDay;
-		this.sTime = sTime;
-		this.tType = tType;
-		this.day = day;
-		this.time = time;
 	}
 
 	public String getsType() {
@@ -127,13 +114,24 @@ public class searchInfo {
 		this.time = time;
 	}
 
+	public String getcOrder() {
+		return cOrder;
+	}
+
+	public void setcOrder(String cOrder) {
+		this.cOrder = cOrder;
+	}
+
 	@Override
 	public String toString() {
 		return "searchInfo [sType=" + sType + ", sValue=" + sValue + ", cateMain=" + cateMain + ", cateSub=" + cateSub
 				+ ", regionMain=" + regionMain + ", regionSub=" + regionSub + ", sDay=" + sDay + ", sTime=" + sTime
-				+ ", tType=" + tType + ", day=" + day + ", time=" + time + "]";
+				+ ", tType=" + tType + ", day=" + day + ", time=" + time + ", cOrder=" + cOrder + "]";
 	}
+	
+	
 
+	
 	
 	
 

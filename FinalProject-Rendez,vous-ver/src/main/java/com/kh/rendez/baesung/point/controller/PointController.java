@@ -29,6 +29,12 @@ public class PointController {
 		////
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("loginUser");
+		if(m == null) {
+			session.setAttribute("msg", "로그인이 필요한 페이지입니다.");
+			mv.setViewName("redirect:home.do");
+			return mv;
+		}
+		
 		int point = pointService.selectPoint(m.getUser_no());
 		String checkPoint = pointService.checkrepetition(m.getUser_no());
 		String checkCoupon = pointService.checkCoupon(m.getUser_no());
@@ -57,12 +63,14 @@ public class PointController {
 		if(value.equals("coupon")) {
 		int result = pointService.insertCoupon(m.getUser_no());
 		//System.out.println("쿠폰 결과 : "  + result);
-		session.setAttribute("msg", "쿠폰이 성공적으로 등록되었습니다");
+		//session.setAttribute("msg", "쿠폰이 성공적으로 등록되었습니다");
+		//session.removeAttribute("msg");
 			
 		}else {
 		int result = pointService.insertPoint(m.getUser_no(),Integer.parseInt(value));	
 		//System.out.println("포인트 : "  + result);
-		session.setAttribute("msg", "포인트가 성공적으로 적립되었습니다.");
+		//session.setAttribute("msg", "포인트가 성공적으로 적립되었습니다.");
+		//session.removeAttribute("msg");
 		}
 		
 		

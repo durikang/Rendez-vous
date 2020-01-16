@@ -175,7 +175,7 @@ element.style {
     color: #afafaf;
 }
 .main3_cont .page b {
-    color: #ff005a;
+    color: rgb(184,145,105);
 }
 .footer_cont {
     width: 1050px;
@@ -527,14 +527,14 @@ option {
 }
 
 .main3_cont .catesub_list.filter .inbox .right .days li.on {
-    color: #ff005a;
-    border: 1px solid #ff005a;
+    color: rgb(184,145,105);
+    border: 1px solid rgb(184,145,105);
 }
 
 
 .main3_cont .catesub_list.filter .inbox .right select:focus {
-    border: 1px solid #ff005a;
-    color: #ff005a;
+    border: 1px solid rgb(184,145,105);
+    color: rgb(184,145,105);
     outline: none;
 }
 .main3_cont .catesub_list.filter .inbox .right .filter_button:hover {
@@ -562,7 +562,7 @@ option {
 
 .cont2 .cont2_class .price .price2 {
     font-size: 16px;
-    color: #ff005a;
+    color: rgb(184,145,105);
     font-weight: bold;
     display: inline;
 }
@@ -1283,7 +1283,7 @@ text-decoration: none;
                                                     <!--a class="heart2"></a-->
                         </div>
                         <div class="profile_box">
-                            <div class="profile" style="background-image: url('resources/lessonImg/${s.uCName}');">
+                            <div class="profile" style="background-image: url('resources/user/img/${s.uCName}');">
                             </div>
                             <div class="name">${ s.userName }</div>
                             <div class="nick">${ s.tNick }</div>
@@ -1519,7 +1519,7 @@ text-decoration: none;
 				
 			if($(item).text()  == '${sInfo.cateSub}'){
 	
-				$(item).css('color','rgb(255, 0, 90)');
+				$(item).css('color','rgb(184,145,105)');
 			}
 			
 		}
@@ -1654,7 +1654,7 @@ text-decoration: none;
 
 					    if($(index).attr('name') == orderType ){	
 	    	               
-					    	$(index).css('color','red');
+					    	$(index).css('color','rgb(184,145,105)');
 						   
 		                  
 			             }   

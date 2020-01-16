@@ -95,4 +95,10 @@
 	UPDATE COUPON SET STATUS = 'Y' WHERE COUPON_NO = #{couponNo}
 	</update>
 	
+	<update id="updatePoint" parameterType="_int">
+	UPDATE USER_POINT SET POINT = (select point - #{usePoint} FROM USER_POINT 
+	WHERE USER_NO = #{uNo}) WHERE USER_NO = #{uNo}
+	</update>
+	
+	
 </mapper>

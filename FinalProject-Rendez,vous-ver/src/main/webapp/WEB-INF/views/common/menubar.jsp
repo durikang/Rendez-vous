@@ -48,6 +48,7 @@
     align-items: center;
     transition: 0.4s;
 }
+
 .search-btn i {
 	color:#c9c0b1;
 }
@@ -122,6 +123,7 @@ menu_body a {
 
 </style>
 <body class="menu_body">
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>	
     <header class="header">
 		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">

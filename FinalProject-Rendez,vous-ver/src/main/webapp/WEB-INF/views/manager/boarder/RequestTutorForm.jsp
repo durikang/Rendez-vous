@@ -155,7 +155,6 @@ $(function() {
 					<button type="submit" class="btn btn-info" onclick="changeButton(this,'Y')">비허용하기</button>
 				<script>
 					function changeButton(value,value2){
-						alert(value2);
 						$(".cStr").val(value2);
 									
 					}

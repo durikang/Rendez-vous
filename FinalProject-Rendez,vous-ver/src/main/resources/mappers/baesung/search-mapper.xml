@@ -155,7 +155,7 @@ WHERE L_CATE_MAIN = #{cateMain}
 	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
 		 L.L_STATUS = 'Y'
-		 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
+		 AND L.START_TIME >= SYSDATE AND LS.REMAIN !=0
 		<if test="sDay != null">
 			 AND L.L_DAY IN 
 			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">
@@ -195,7 +195,7 @@ WHERE L_CATE_MAIN = #{cateMain}
 	JOIN LESSON LS ON(L.L_NO = LS.L_NO)
 	<where>
 		 L.L_STATUS = 'Y'
-		 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
+		 AND L.START_TIME >= SYSDATE AND LS.REMAIN !=0
 		<if test="sDay != null">
 			 AND L.L_DAY IN 
 			 <foreach collection="sDay" item="item"  open="(" close=")" separator=",">

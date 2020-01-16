@@ -76,7 +76,7 @@ WHERE ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' |
    JOIN USERPROPIC UPR ON(UPR.USER_NO = L.USER_NO)
    LEFT JOIN AVG_REVIEW AR ON(AR.L_NO = L.L_NO)
    LEFT JOIN COUNT_CLASS CC ON(CC.L_NO = L.L_NO)
-WHERE L_CATE_MAIN = #{cateMain}
+	WHERE L_CATE_MAIN = #{cateMain}
    AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    AND LA.LA_TYPE = 1
    AND L.L_STATUS = 'Y'
@@ -137,10 +137,10 @@ WHERE L_CATE_MAIN = #{cateMain}
 	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
 	<choose>
 		<when test="sType == 'Search'">
-		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		AND ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%'))
 		</when>
 		<when test="sType == 'Main'">
-		AND L.L_CATE_MAIN = #{cateMain}
+		AND L.L_CATE_MAIN LIKE '%' || #{cateMain} || '%'
 		</when>
 		<otherwise>
 		AND L.L_CATE_SUB = #{cateSub}
@@ -172,13 +172,13 @@ WHERE L_CATE_MAIN = #{cateMain}
 			AND L.TTYPE = #{tType}
 		</if>
 		<if test="regionMain != null">
-			AND L.L_REGION = #{regionMain}
+			AND L.L_REGION LIKE '%' || #{regionMain} || '%'
 		</if>
 		<if test="regionSub != null">
 			AND L.L_REGION_SUB = #{regionSub}
 		</if>
 		<if test="sValue != null">
-			AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+			AND ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%'))
 		</if>
 		<if test="cateMain != null">
 			AND L.L_CATE_MAIN = #{cateMain}
@@ -212,13 +212,13 @@ WHERE L_CATE_MAIN = #{cateMain}
 			AND L.TTYPE = #{tType}
 		</if>
 		<if test="regionMain != null">
-			AND L.L_REGION = #{regionMain}
+			AND L.L_REGION LIKE '%' || #{regionMain} || '%' 
 		</if>
 		<if test="regionSub != null">
 			AND L.L_REGION_SUB = #{regionSub}
 		</if>
 		<if test="sValue != null">
-			AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+			AND ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%'))
 		</if>
 		<if test="cateMain != null">
 			AND L.L_CATE_MAIN = #{cateMain}
@@ -247,7 +247,7 @@ WHERE L_CATE_MAIN = #{cateMain}
 	 <foreach collection="ar" item="item"  open="(" close=")" separator=",">
             #{item}
         	</foreach> 
-        	 AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
+        	 
         	AND  L.L_STATUS = 'Y' 
         	AND LA.LA_TYPE = 1
 	<choose>
@@ -284,10 +284,10 @@ WHERE L_CATE_MAIN = #{cateMain}
    AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    <choose>
 		<when test="sType == 'Search'">
-		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		AND ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%'))
 		</when>
 		<when test="sType == 'Main'">
-		AND L.L_CATE_MAIN = #{cateMain}
+		AND L.L_CATE_MAIN LIKE '%' || #{cateMain} || '%'
 		</when>
 		<otherwise>
 		AND L.L_CATE_SUB = #{cateSub}
@@ -315,10 +315,10 @@ WHERE L_CATE_MAIN = #{cateMain}
    AND LS.START_TIME >= SYSDATE AND LS.REMAIN !=0
    <choose>
 		<when test="sType == 'Search'">
-		AND (L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%')
+		AND ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' || #{sValue} || '%'))
 		</when>
 		<when test="sType == 'Main'">
-		AND L.L_CATE_MAIN = #{cateMain}
+		AND L.L_CATE_MAIN LIKE '%' || #{cateMain} || '%'
 		</when>
 		<otherwise>
 		AND L.L_CATE_SUB = #{cateSub}

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +39,10 @@ import com.kh.rendez.member.model.exception.MemberException;
 @SessionAttributes("loginUser")
 @Controller
 public class MemberController {
+	// 암호화 처리 시 작성
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
 	@Autowired
 	private MemberService mService;
 	private SupportService sService;
@@ -51,10 +56,12 @@ public class MemberController {
 	      String pwd = request.getParameter("pwd");
 	      
 	      m.setUser_id(id);
-	      m.setUser_pwd(pwd);
+	      
 	      
 	      Member loginUser = mService.loginMember(m);
-	      if(loginUser != null) {
+	      
+	      
+	      if(loginUser != null && bcryptPasswordEncoder.matches(pwd, loginUser.getUser_pwd())) {
 	         session.setAttribute("loginUser", loginUser);
 	         return "home";
 	      } else {
@@ -67,6 +74,19 @@ public class MemberController {
 	public String logout(SessionStatus status) {		
 		status.setComplete();
 		return "home";
+	}
+	
+	@RequestMapping("pwdCheck.do")
+	public String pwdCheck(Member m, Model model, HttpServletRequest request) {
+		
+		Member loginUser = mService.loginMember(m);
+		 
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
+			return "member/myInfo";
+		}else {
+			model.addAttribute("msg", "비밀번호 불일치");
+			return "member/pwdCheckPage";
+		}
 	}
 	
 	@RequestMapping("mypage.do")
@@ -102,6 +122,11 @@ public class MemberController {
 		return "member/join";
 	}
 	
+	@RequestMapping("pwdCheckPage.do")
+		public String pwdCheckPageView() {
+			return "member/pwdCheckPage";
+	}
+	
 	@RequestMapping("dupid.do")
 	public ModelAndView idDuplicateCheck(String user_id, ModelAndView mv) {
 		
@@ -134,6 +159,9 @@ public class MemberController {
 		}*/		
 		
 		m.setAddress(post + "," + address1 + ", " + address2);
+		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
+		
+		m.setUser_pwd(encPwd);
 		
 		int result = mService.insertMember(m);
 		
@@ -183,13 +211,15 @@ public class MemberController {
 			int result = mService.updateMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg", "회원 정보 수정이 되었습니다.");
+				model.addAttribute("msg2", "회원 정보 수정 성공");
 				model.addAttribute("loginUser", m);
 			} else {
 				throw new MemberException("회원 정보 수정 실패");
 			}
-			return "home";
+			return "member/myInfo";
 		}
+		
+		
 		
 		@RequestMapping("mdelete.do")
 		public String memberDelete(Member m, Model model) {
@@ -197,7 +227,7 @@ public class MemberController {
 			int result = mService.deleteMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg", "msg");
+				model.addAttribute("msg", "회원탈퇴 성공");
 				
 			} else {
 				throw new MemberException("회원 탈퇴 실패");

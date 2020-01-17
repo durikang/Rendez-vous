@@ -27,7 +27,6 @@
 		SELECT *
 		FROM MEMBER
 		WHERE USER_ID = #{user_id}
-		AND USER_PWD = #{user_pwd}
 		AND U_STATUS = 'Y'
 	</select>
 	
@@ -52,12 +51,12 @@
 	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
-		SET USER_PWD = #{user_pwd},
-			UESR_NAME = #{user_name},
+		SET USER_NAME = #{user_name},
 			GENDER = #{gender},
 			AGE = #{age},
 			PHONE = #{phone},
 			ADDRESS = #{address},
-			UPDATE_DATE = #{update_date}
+			UPDATE_DATE = SYSDATE
+		WHERE USER_ID = #{user_id}
 	</update>
 </mapper>

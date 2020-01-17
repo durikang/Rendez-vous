@@ -43,7 +43,6 @@
                <td width="150">* 아이디</td>
                <td width="450">
                   <input type="text" name="user_id" id="user_id">
-                  <!-- ajax 이후 적용 -->
                   <span class="guide ok">이 아이디는 사용 가능합니다.</span>
                   <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
                   <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>

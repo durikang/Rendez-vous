@@ -1,7 +1,9 @@
 package com.kh.rendez.member.model.service;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +55,5 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(Member m) {
 		return mDao.deleteMember(m);
 	}
-	
+
 }

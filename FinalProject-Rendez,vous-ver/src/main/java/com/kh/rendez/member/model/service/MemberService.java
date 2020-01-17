@@ -26,6 +26,7 @@ public interface MemberService {
 	
 	// 내가 쓴 문의내역 리스트
 	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
+
 	
 
 

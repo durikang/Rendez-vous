@@ -33,12 +33,6 @@ public class MemberDao {
 	public int deleteMember(Member m) {
 		return sqlSession.update("memberMapper.deleteMember", m);
 	}
-	
-/*	//패스워드 체크
-	public int passCheck(Member m) {
-		int result=sqlSession.selectOne("memberMapper.loginCheck", m);
-		return result;
-	}*/
 
 	public int checkIdDup(String id) {
 		return sqlSession.selectOne("memberMapper.idCheck", id);
@@ -54,6 +48,7 @@ public class MemberDao {
 		
 		return (ArrayList)sqlSession.selectList("supportMapper.selectMyQnaList", writer, rowBounds);
 	}
+
 	
 
 	

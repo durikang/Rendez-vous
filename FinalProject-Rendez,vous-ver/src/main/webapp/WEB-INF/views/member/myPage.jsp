@@ -258,7 +258,7 @@
                     <div class="text-center">
                         <a class="btn btn-lg wire-btn-white btn-wire btn-rd" onclick="pwdCheckPage()">내 정보</a>
                     	<script>function pwdCheckPage() {
-                    		window.open("pwdCheckPage.do", '패스워드 체크', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
+                    		window.open("pwdCheckPage.do", '패스워드 체크ㅡ', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
                     	}</script>
                     	<tr>
 					<td colspan="2" align="center">

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>	
-	<title>수업 인서트 페이지</title>
+	<title>수업 등록하기</title>
 
 	
 	<meta charset="UTF-8">   
@@ -830,11 +830,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div id="page3" class="tab">
 		
 		<div class="box">
-		<div class="title">가격/시간/횟수<b class="pink">*</b></div>
+		<div class="title">한 회당 가격<b class="pink">*</b></div>
 		<div class="cont">
 			<div class="inner1" style="margin:0">
-				<div class="gray5 title">시간당 가격</div>
-				<input type="text" id="lPrice" name="lPrice" value="" class="basic phone" placeholder="시간당 가격을 입력하세요"> 원
+				<input type="text" id="lPrice" name="lPrice" value="" class="basic phone" placeholder="한 회당 가격을 입력하세요"> 원
 			</div>
 			<script>
 				$('#UnitPrice').change(function(){updateCalculation()});
@@ -845,136 +844,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</script>
 		</div>
 	</div>
-	<div class="box">
-		<div class="title">총 수업가격<b class="pink"></b></div>
-		<div class="cont">
-			<div class="caution caution2" style="overflow:hidden">
-				<font><span id="calc-unit-price">0</span>원&nbsp;&nbsp;X&nbsp;&nbsp;<span id="calc-time">0</span>시간&nbsp;&nbsp;X&nbsp;&nbsp;<span id="calc-total-times">0</span>회</font>
-				<div class="rs">
-					총&nbsp;&nbsp;<font class="pink"><b><span id="calc-result">0</span></b>원</font><br>
-					연결수수료&nbsp;&nbsp;<b><span id="calc-fee">0</span></b>원
-				</div>
-			</div>
-			<div style="text-align:right;margin:20px 0;" class="pink">
-				<!--a href="#" class="pink"><img src="/tutor/Content/Images/icon_info.png" style="margin-top:-2px">&nbsp;탈잉 수업과정 및 결제정책</a-->
-			</div>
-		
-			<div class="sample1">
-				<div class="arw">
-					<img class="button" src="/tutor/Content/Images/icon_down.png" onclick="arwpaper(this)">
-					<img class="button" style="display:none"src="/tutor/Content/Images/icon_up.png" onclick="arwpaper(this)">
-				</div>
-				<span>예시 이미지 및 화면보기</span>
-				<div class="ex">
-					<img src="/tutor/Content/Images/img_example_03.png">
-				</div>
-			</div>
-	
-		</div>
-	</div>
-	<!--div class="box">
-		<div class="title">수강생에게 보낼 메시지<b class="pink">*</b></div>
-		<div class="cont">
-			<textarea class="basic len980" placeholder="수강생과 수업 연결 시에 메시지가 전달됩니다"></textarea>			
-		</div>
-	</div-->
-	<div class="box process">
+
+<%-- 	<div class="box process">
 		<div class="left">
-			<div><b style="color:#ff005a">튜터</b></div>
-			<div style="margin-top:56px"><b style="color:#333366">수강생</b></div>
-			<div style="margin-top:60px"><b>결제/수수료&<br>환불정책</b></div>
+			<div style="margin-right: 10px"><b style="color:#ff005a">등록/진행 절차</b></div>
 		</div>
 		<div class="right">
-			<div class="top1">
-				<div class="bar_p"></div>
-				<div class="bar_g"></div>
+			<div class="top1" >
 				<div class="stone">수업등록</div>
-				<div class="bar"><img src="/tutor/Content/Images/arrow_process_red.png"></div>
-				<div class="stone">연락처 수신</div>
-				<div class="bar"><img src="/tutor/Content/Images/arrow_process_red.png"><br><img src="/tutor/Content/Images/arrow_process_bl.png"></div>
+				<div class="bar"><img src="${contextPath}/resources/h1/Images/arrow_process_red.png"></div>
+				<div class="stone">수업</div>
+				<div class="bar"><img src="${contextPath}/resources/h1/Images/arrow_process_red.png"></div>
 				<div class="stone">일정조율</div>
-				<div class="bar"><img src="/tutor/Content/Images/arrow_process_red.png"><br><img src="/tutor/Content/Images/arrow_process_bl.png"></div>
+				<div class="bar"><img src="${contextPath}/resources/h1/Images/arrow_process_red.png"></div>
 				<div class="stone">수업 진행</div>
-				<div class="bar"><img src="/tutor/Content/Images/arrow_process_red.png"><br><img src="/tutor/Content/Images/arrow_process_bl.png"></div>
+				<div class="bar"><img src="${contextPath}/resources/h1/Images/arrow_process_red.png"></div>
 				<div class="stone" style="margin-left:17px;padding:18px 65px;">
 				수업료 환급</div>
 			</div>
-			<div class="top2">
-				<div class="lt">
-					<div class="frame"></div>
-					<div class="stone">수업신청</div>
-					<img src="/tutor/Content/Images/arrow_process_bl.png">
-				
-					<div style="padding-right:46px">
-						<div class="cbar"></div>
-						<div class="cir"></div>
-						<div class="info">
-							<b>신청시</b>
-							<br>
-																
-							전체 수업료<br>탈잉으로 <span class="pink"id="calc-fee2">0원</span>
-							결제
-							
-						</div>
-					</div>
-					
-				</div>
-				<div class="rt">
-					<div style="width:26%;margin-right:35px;" >
-						<div class="cbar"></div>
-						<div class="cir"></div>
-						<div class="info">
-
-														
-							<b>수업24시간 전 취소</b>		<br>					
-							수강생에게 전액 환불
-							<br>
-							<b>24시간 이내 취소</b>
-							<br>							
-							튜터님께 1시간 수업료
-													</div>
-					</div>
-					<div style="width:30%;margin-right:36px; display:none;">
-						<div class="cbar"></div>
-						<div class="cir"></div>
-						<div class="info">
-							<b>첫수업 후 취소 시</b>
-							<br>
-							튜터에게<br>1시간 수업료<br><span  class="pink"id="calc-fee4">0원</span>
-							환불
-						</div>
-					</div>
-					<div style="width:15%">
-						<div class="cbar pi"></div>
-						<div class="cir pi"></div>
-						
-						<p class="triangle-border" style="position:absolute;margin-top:-150px;margin-left:-47px;">
-													
-														 전체 수업료의 20%는<br>
-							<span>탈잉 연결 수수료</span>로<br>
-							확정됩니다.
-													</p>
-
-						<div class="info">
-								<b class="fix">수수료<br><span id="calc-fee5">0</span><br>확정</b>
-						</div>
-					</div>
-					<div  style="width:55%">
-						<div class="cbar"></div>
-						<div class="cir"></div>
-						<div class="info">
-							<b>잔여수업료</b>
-							<br>							
-														튜터가 수강생<br>또는 탈잉에게<br>
-							<span class="pink" id="calc-result2">0원</span><br> 직접수취
-							
-
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
-	</div>
+	</div> --%>
 	<div class="box">
 		<div class="caution caution2" style="overflow:hidden;width:1200px">
 			<p class="gray8">
@@ -988,7 +877,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 				<br><br>
-				<a onclick="pop_pay()" ><font class="pink"><img src="/tutor/Content/Images/icon_info.png">&nbsp;탈잉 수수료 정책의 이점에 대해서 더 알아보세요.</font></a>
+				<a onclick="pop_pay()" ><font class="pink"><img src="${contextPath}/resources/h1/Images/icon_info.png">&nbsp;탈잉 수수료 정책의 이점에 대해서 더 알아보세요.</font></a>
 				<!--https://taling.me/Tutor/Register_pop.html-->
 				<script>
 					function pop_pay(){

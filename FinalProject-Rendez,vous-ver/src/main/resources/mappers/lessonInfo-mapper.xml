@@ -103,6 +103,47 @@
 		FROM LESSON_ATTACHMENT
 		WHERE L_NO= #{lNo}
 	</select>
+	
+	
+	
+	<update id="updateLessonImg" parameterType="LessonAttachment">
+	UPDATE LESSON_ATTACHMENT 
+	SET O_NAME = #{oName},
+		C_NAME = #{cName},
+		LA_DAY = SYSDATE
+	WHERE LA_NO = #{laNo}
+	</update>
+	
+	<delete id="deleteLessonImg" parameterType="_int">
+	DELETE FROM LESSON_ATTACHMENT
+	WHERE LA_NO = #{laNo}
+	
+	</delete>
+	
+	<!-- 사진 추가를 위한 최대LA_TYPE을 셀렉 -->
+	<select id="selectMaxNum" parameterType="_int" resultType="_int">
+	SELECT MAX(LA_TYPE)
+	FROM LESSON_ATTACHMENT
+	WHERE L_NO = #{lNo}
+	</select>
+	
+	<!-- 사진 추가 -->
+	<insert id="addLessonImg" parameterType="LessonAttachment">
+		INSERT INTO LESSON_ATTACHMENT VALUES(
+		SEQ_LANO.NEXTVAL,#{oName},#{cName},#{laType},SYSDATE,#{lNo}
+		)
+	</insert>
+	
+	<!-- 사진 추가후 해당 객체를 보내주기 -->
+	<select id="selectAddedImg" parameterType="_int" resultMap="laResultSet">
+	SELECT * 
+	FROM (SELECT *
+	FROM LESSON_ATTACHMENT
+	WHERE L_NO=#{lNo}
+	ORDER BY LA_TYPE DESC)
+	WHERE ROWNUM=1	
+	</select>
+	
 
 
 
@@ -248,7 +289,46 @@
 	
 	
 	
+	<!-- 수업 상세를 합치기 위한 처리 -->
+	<resultMap id="tResultSet" type="Tutor">
+		<id property="uNo" column="USER_NO"/>
+		<result property="tNick" column="T_NICK"/>
+		<result property="tCareer" column="T_CAREER"/>
+		<result property="tInfo" column="T_INFO"/>
+		<result property="tSocial" column="TSOCIAL"/>
+		<result property="tStatus" column="TSTATUS"/>
+	</resultMap>
 	
+	<resultMap type="LessonDetailInfo" id="ldiResultset">
+		<id property="lNo" column="L_NO"/>
+		<result property="lTitle" column="L_TITLE"/>
+		<result property="lIntroduction" column="L_INTRODUCTION"/>
+		<result property="lTarget" column="L_TARGET"/>
+		<result property="lYtb" column="L_YTB"/>
+		<result property="lRegion" column="L_REGION"/>
+		<result property="lRegionSub" column="L_REGION_SUB"/>
+		<result property="lRegionDetail" column="L_REGION_DETAIL"/>
+		<result property="lCateMain" column="L_CATE_MAIN"/>
+		<result property="lCateSub" column="L_CATE_SUB"/>
+		<result property="lPrice" column="PRICE"/>
+		<result property="lStatus" column="L_STATUS"/>
+		<result property="uNo" column="USER_NO"/>
+		<result property="uName" column="USER_NAME"/>
+		<result property="ucName" column="U_C_NAME"/>
+		<collection property="laList" resultMap="laResultSet" javaType="java.util.ArrayList" />
+		<collection property="tutor" resultMap="tResultSet"/>
+	</resultMap>
+	
+	<select id="selectLDI" resultMap="ldiResultset">
+	SELECT I.*,A.*,T.*,M.USER_NAME,P.U_C_NAME
+	FROM LESSON_INFO I, LESSON_ATTACHMENT A, TUTOR T, MEMBER M, USERPROPIC P
+	WHERE I.L_NO = A.L_NO
+	AND I.USER_NO = T.USER_NO
+	AND T.USER_NO = M.USER_NO
+	AND M.USER_NO =  T.USER_NO
+	AND I.USER_NO = P.USER_NO
+	AND I.L_NO=#{lNo}
+	</select>
 	
 	
 	

@@ -7,13 +7,16 @@
    </settings>
    
    <typeAliases>
-      <!-- 조배성 별칭  -->
-      <typeAlias type="com.kh.rendez.baesung.search.model.vo.tClass" alias="tClass"/>
-      <typeAlias type="com.kh.rendez.baesung.search.model.vo.searchInfo" alias="searchInfo"/>   
-      <typeAlias type="com.kh.rendez.baesung.search.model.vo.classCount" alias="classCount"/>   
-      <typeAlias type="com.kh.rendez.baesung.search.model.vo.DetailClass" alias="DetailClass"/>   
-      <typeAlias type="com.kh.rendez.baesung.payment.model.vo.LessonTime" alias="LessonTime"/>
-      <typeAlias type="com.kh.rendez.baesung.payment.model.vo.Payment"  alias="Payment"/>
+      <!-- 조배성 별칭 -->
+	<typeAlias alias="tClass" type="com.kh.rendez.baesung.search.model.vo.tClass"/>
+	<typeAlias alias="searchInfo" type="com.kh.rendez.baesung.search.model.vo.searchInfo"/>
+	<typeAlias alias="classCount" type="com.kh.rendez.baesung.search.model.vo.classCount"/>
+	<typeAlias alias="DetailClass" type="com.kh.rendez.baesung.search.model.vo.DetailClass"/>
+	<typeAlias alias="LessonTime" type="com.kh.rendez.baesung.payment.model.vo.LessonTime"/>
+	<typeAlias alias="Payment" type="com.kh.rendez.baesung.payment.model.vo.Payment"/>
+	<typeAlias alias="payCoupon" type="com.kh.rendez.baesung.payment.model.vo.Coupon"/>
+	<typeAlias alias="InsertCouponInfo" type="com.kh.rendez.baesung.payment.model.vo.InsertCouponInfo"/>
+	<typeAlias alias="Point" type="com.kh.rendez.baesung.point.model.vo.Point"/>
       <!-- 유현식 별칭 -->
       <typeAlias alias="LessonInfo" type="com.kh.rendez.lesson.model.vo.LessonInfo"/>
       <typeAlias alias="LessonAttachment" type="com.kh.rendez.lesson.model.vo.LessonAttachment"/>
@@ -22,16 +25,16 @@
       <typeAlias alias="Certification2" type="com.kh.rendez.tutor.model.vo.Certification"/>
       <typeAlias alias="Review" type="com.kh.rendez.review.model.vo.Review"/>
       <typeAlias alias="LessonReview" type="com.kh.rendez.lesson.model.vo.LessonReview"/>
+      <typeAlias alias="LessonDetailInfo" type="com.kh.rendez.lesson.model.vo.LessonDetailInfo"/>
       
       <!-- 두리 별칭  -->
       <typeAlias type="com.kh.rendez.manager.model.vo.LessonJoin" alias="LessonJoin"/>
-      <typeAlias type="com.kh.rendez.manager.model.vo.MemberJoinUserpropic" alias="MemberJoinUserpropic"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.Coupon" alias="Coupon"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.Search" alias="Search"/>
-      <typeAlias type="com.kh.rendez.manager.model.vo.Certification" alias="Certification"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.MemberJoinTutor" alias="MemberJoinTutor"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.AdminMember" alias="AdminMember"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.AdminPay" alias="AdminPay"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.AdminLesson" alias="AdminLesson"/>
       
       <!-- 봄 -->
       <typeAlias type="com.kh.rendez.member.model.vo.Member" alias="Member"/>
@@ -44,9 +47,10 @@
    </typeAliases>
    
    <mappers>
-      <!--  조배성 -검색 맵퍼입니다. -->
-      <mapper resource="mappers/baesung/search-mapper.xml"/>
-      <mapper resource="mappers/baesung/payment-mapper.xml"/>
+      <!-- 조배성 -검색 맵퍼입니다. -->
+	<mapper resource="mappers/baesung/search-mapper.xml"/>
+	<mapper resource="mappers/baesung/payment-mapper.xml"/>
+	<mapper resource="mappers/baesung/point-mapper.xml"/>
       <!-- 유현식 매퍼입니다. -->
       <mapper resource="mappers/lessonInfo-mapper.xml"/>
       <mapper resource="mappers/tutor-mapper.xml"/>

@@ -51,6 +51,12 @@ public class SearchInfonation {
 			sInfo.setTime(null);
 		}}
 
+		if(sInfo.getcOrder() != null) {
+			if(sInfo.getcOrder().equals("")) {
+				sInfo.setcOrder(null);
+			}
+		}
+		
 		return sInfo;
 	}
 	

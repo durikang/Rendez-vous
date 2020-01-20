@@ -15,11 +15,6 @@
 		margin:auto;
 	}
 	
-	#wrapper {
-    	width:100%;
-    	height:87.5vh;
-    }
-	
 	 .guide {
 		display:none;
 		font-size:12px;
@@ -37,12 +32,12 @@
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
-	<div id=wrapper>
+
 	<h1 align="center">회원 가입</h1>
 	<br>
 	<br>
 	<div class="centerText">
-		<form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()"> <!-- 유효성검사 하는 것 -->
+		<form action="minsert.do" method="post" id="joinForm" enctype="multipart/form-data" onsubmit="return validate()">
 			<table width="500" cellspacing="5">
 				<tr>
 					<td width="150">* 아이디</td>
@@ -105,7 +100,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<button>가입하기</button>&nbsp;
+						<button onclick="validate();">가입하기</button>&nbsp;
 						<input type="reset" value="취소하기">
 					</td>	
 				</tr>
@@ -116,7 +111,7 @@
 			<a href="home.do">시작페이지로 이동</a>
 		</div>
 	</div>
-	</div>
+	
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	<script> 
 		$(function() { 
@@ -140,7 +135,6 @@
 					url:"dupid.do",
 					data:{user_id:user_id},
 					success:function(data) {
-						console.log(data);
 						if(data.isUsable == true) {
 							$(".error").hide();
 							$(".ok").show();
@@ -152,7 +146,7 @@
 						}
 					},
 					error:function(){
-						console.log("ajax 통신 실패");
+						console.log("ajax 통신 실패!");
 					}					
 				});				
 			});

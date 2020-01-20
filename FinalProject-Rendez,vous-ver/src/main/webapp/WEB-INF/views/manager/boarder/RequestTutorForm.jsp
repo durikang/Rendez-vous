@@ -41,37 +41,93 @@
    width: 100px;
    height: 100%;
 }
+.td-hidden{
+	display:none;
+}
 
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+$(function(){
+    $("#all").change(function(){            //id전체 체크박스에 변화가 있을떄 
+        if($("#all").prop("checked")){      //id전체 체크박스에 체크가 되면
+            $(".tutor").prop("checked",true);         //일반사용자에 체크
+        }else{                              //전체 체크박스에 체크가 해제 되면
+            $(".tutor").prop("checked",false);       //일반사용자에 체크 해제
+        }
+    });
+    $(".tutor").change(function(){         //전문사용자 체크박스에 변화가 있을때
+        if($(".tutor").prop("checked")){   //전문사용자 체크박스와 유저 체크박스 둘다에 체크가 되면
+            $("#all").prop("checked",true);                               //id전체 체크박스에 체크
+        }else{                                                            //전문사용자 체크박스와 유저 체크박스 둘중 하나라도 체크 되어 있지 않으면  
+            $("#all").prop("checked",false);                              //id전체 체크박스에 체크해제
+        }
+    });
+});
+
+
+$(function() {
+
+	$(".listArea td").mouseenter(function() {
+		$(this).parent().css({
+			"background" : "skyblue",
+			"cursor" : "pointer"
+		});
+	}).mouseout(function() {
+		$(this).parent().css("background", "white");
+	}).click(function() {
+		var uNo = $(this).parent().children().eq(0).html();
+		
+		location.href="tutorCert.do?uNo="+uNo;
+		
+	});
+
+});
+
+
+
+
+
+
+</script>
+
 </head>
 <body>
 	<c:import url="../mnCommon/menubar.jsp" />
 	<br>
-	<h1 align="center">튜터 신청 관리 페이지 입니다.</h1>
-		<div class="container">
+	<br>
+	<c:import url="../mnCommon/sidebar.jsp"/>
+	<div class="container">
+	<c:import url="../mnCommon/jumbotron.jsp"/>
 		<hr>
 		
 		<div class="row">
 			<div class="col">
+				<form action="changeTutor.do" method="get" id="tutorForm" >
+					<label for="all">전체</label>
+					<input type="checkbox" id="all">
 				<table class="table listArea">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">회원 번호</th>
+							<th scope="col">아이디</th>
 							<th scope="col">튜터 별명</th>
 							<th scope="col">튜터 경력</th>
-							<th scope="col">튜터 소개</th>
 							<th scope="col">소셜미디어</th>
 							<th scope="col">허용 여부</th>
 						</tr>
 					</thead>
+					
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 							<tr>
-								<th scope="row">${m.uNo}</th>
+								<td class="td-hidden">${m.uNo}</td>
+								<th scope="row"><input type="checkbox" name="uNo" class="tutor" value="${ m.uNo }"> &nbsp;${m.uNo}</th>
+								<td>${ m.uId }</td>
 								<td>${ m.tuNick }</td>
 								<td class="text">${ m.tuCareer } </td>
-								<td class="text">${ m.tuInfo } </td>
 								<td>
 									<c:choose>
 									<c:when test="${m.tuSocial eq null }">없음</c:when>
@@ -82,13 +138,10 @@
 								</td>
 								<td>
 									<c:if test="${ m.tuStatus eq 'R' }">
-										Ready
+										<i class="fas fa-times"></i>
 									</c:if>
 									<c:if test="${ m.tuStatus eq 'Y'}">
-										Permit
-									</c:if>									
-									<c:if test="${ m.tuStatus eq 'C'}">
-										Cancel
+										<i class="fas fa-check"></i>
 									</c:if>
 								</td>
 							</tr>
@@ -96,6 +149,22 @@
 					</tbody>
 				</table>
 				<hr>
+					<input type="hidden" value="${ pi.currentPage }" name="page">
+					<input type="hidden" value="" name="cStr" class="cStr">
+					<button type="submit" class="btn btn-info" onclick="changeButton(this,'R')">허용하기</button>
+					<button type="submit" class="btn btn-info" onclick="changeButton(this,'Y')">비허용하기</button>
+				<script>
+					function changeButton(value,value2){
+						$(".cStr").val(value2);
+									
+					}
+				
+				
+				</script>
+				
+				</form>
+				<hr>
+				
 
 
 				<br>
@@ -154,6 +223,8 @@
 			</div>
 		</div>
 	</div>
+	<br><br><br><br><br><br><br><br>
+	<c:import url="../../common/footbar.jsp"/>
 	
 </body>
 </html>

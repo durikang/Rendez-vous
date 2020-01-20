@@ -6,6 +6,7 @@ import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
+import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
 import com.kh.rendez.review.model.vo.Review;
@@ -53,6 +54,18 @@ public interface LessonService {
 	Review selectUReview(Review selecter);
 
 	int updateReview(Review inReview);
+
+	LessonDetailInfo selectLDI(int lNo);
+
+	int updateLessonImg(LessonAttachment ua);
+
+	int deleteLessonImg(int laNo);
+
+	int selectMaxNum(int lNo);
+
+	int addLessonImg(LessonAttachment addImg);
+
+	LessonAttachment selectAddedImg(int lNo);
 
 	
 

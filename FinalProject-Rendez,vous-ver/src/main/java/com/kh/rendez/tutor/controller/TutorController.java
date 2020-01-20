@@ -12,6 +12,8 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,12 +23,34 @@ import com.kh.rendez.tutor.model.service.TutorService;
 import com.kh.rendez.tutor.model.vo.Certification;
 import com.kh.rendez.tutor.model.vo.Tutor;
 
-
+@SessionAttributes("loginUser")
 @Controller
 public class TutorController {
 	
 	@Autowired
 	private TutorService tService;
+	
+	@RequestMapping("tutorMain.do")
+	public ModelAndView tutorMainGo(ModelAndView mv,
+			HttpServletRequest request) {
+		
+		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		String tStatus = tService.selectTutorStatus(loginUser.getUser_no());
+		
+		mv.addObject("tStatus",tStatus);
+		mv.setViewName("lesson/tutorMainView");
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("tutorInsertPage.do")
@@ -35,6 +59,7 @@ public class TutorController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		if(loginUser == null || loginUser.getUser_type().equals("T")) {
+			mv.addObject("msg","잘못된 접근입니다");
 			mv.setViewName("home");
 			return mv;
 		}
@@ -46,7 +71,7 @@ public class TutorController {
 	
 	@RequestMapping("tutorInsert.do")
 	public ModelAndView tutorInsert(
-		ModelAndView mv,
+		ModelAndView mv,SessionStatus status,
 		HttpServletRequest request,
 		String tNick,
 		String tInfo,
@@ -99,6 +124,7 @@ public class TutorController {
 			}
 			
 			if(result3>0) {
+				status.setComplete();
 				mv.addObject("msg","튜터 신청이 완료되있습니다  승인 완료 후 수업 등록이 가능합니다.");
 				mv.setViewName("home");
 			}

@@ -10,6 +10,7 @@ import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
+import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
 import com.kh.rendez.review.model.vo.Review;
@@ -102,6 +103,30 @@ public class LessonDao {
 
 	public int updateReview(Review inReview) {
 		return sqlSession.update("lessonInfoMapper.updateReview",inReview);
+	}
+
+	public LessonDetailInfo selectLDI(int lNo) {
+		return sqlSession.selectOne("lessonInfoMapper.selectLDI",lNo);
+	}
+
+	public int updateLessonImg(LessonAttachment ua) {
+		return sqlSession.update("lessonInfoMapper.updateLessonImg",ua);
+	}
+
+	public int deleteLessonImg(int laNo) {
+		return sqlSession.delete("lessonInfoMapper.deleteLessonImg",laNo);
+	}
+
+	public int selectMaxNum(int lNo) {
+		return sqlSession.selectOne("lessonInfoMapper.selectMaxNum",lNo);
+	}
+
+	public int addLessonImg(LessonAttachment addImg) {
+		return sqlSession.insert("lessonInfoMapper.addLessonImg",addImg);
+	}
+
+	public LessonAttachment selectAddedImg(int lNo) {
+		return sqlSession.selectOne("lessonInfoMapper.selectAddedImg",lNo);
 	}
 
 	

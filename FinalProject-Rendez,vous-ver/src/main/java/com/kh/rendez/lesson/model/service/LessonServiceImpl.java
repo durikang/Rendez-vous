@@ -10,6 +10,7 @@ import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.lesson.model.dao.LessonDao;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
+import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
 import com.kh.rendez.review.model.vo.Review;
@@ -123,6 +124,36 @@ public class LessonServiceImpl implements LessonService {
 	@Override
 	public int updateReview(Review inReview) {
 		return lDao.updateReview(inReview);
+	}
+
+	@Override
+	public LessonDetailInfo selectLDI(int lNo) {
+		return lDao.selectLDI(lNo);
+	}
+
+	@Override
+	public int updateLessonImg(LessonAttachment ua) {
+		return lDao.updateLessonImg(ua);
+	}
+
+	@Override
+	public int deleteLessonImg(int laNo) {
+		return lDao.deleteLessonImg(laNo);
+	}
+
+	@Override
+	public int selectMaxNum(int lNo) {
+		return lDao.selectMaxNum(lNo);
+	}
+
+	@Override
+	public int addLessonImg(LessonAttachment addImg) {
+		return lDao.addLessonImg(addImg);
+	}
+
+	@Override
+	public LessonAttachment selectAddedImg(int lNo) {
+		return lDao.selectAddedImg(lNo);
 	}
 
 

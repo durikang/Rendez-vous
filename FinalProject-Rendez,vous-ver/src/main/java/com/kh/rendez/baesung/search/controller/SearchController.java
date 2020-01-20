@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.rendez.baesung.common.Pagination;
 import com.kh.rendez.baesung.common.SearchInfonation;
+import com.kh.rendez.baesung.common.cCListination;
 import com.kh.rendez.baesung.search.model.service.SearchService;
 import com.kh.rendez.baesung.search.model.vo.classCount;
 import com.kh.rendez.baesung.search.model.vo.searchInfo;
@@ -28,7 +29,7 @@ public class SearchController {
 		
 		int currentPage = page != null ? page : 1;
 		sInfo.setsType("Search");
-		
+			
 		ArrayList<tClass> sList = jsService.selectSearchList(sIf.nullInfonation(sInfo),currentPage);
 		
 		ArrayList<classCount> cCList = new ArrayList();
@@ -41,7 +42,8 @@ public class SearchController {
 				result += cc.getCount();}}
 
 		cCList.add(new classCount("",result,"All"));
-		//System.out.println(cCList);
+		
+		cCListination.setcCList(cCList);
 		
 		mv.addObject("sList", sList);
 		mv.addObject("cCList",cCList);
@@ -68,10 +70,12 @@ public class SearchController {
 		int result = 0;
 		for(classCount cc : cCList) {		
 			if(cc.getlType().equals("RegionSub")) {
-				result++;}}
+				result+= cc.getCount();}}
 
 		cCList.add(new classCount("",result,"All"));
 
+		cCListination.setcCList(cCList);
+		
 		mv.addObject("sList", sList);
 		mv.addObject("cCList",cCList);
 		mv.addObject("pi", Pagination.getPageInfo());
@@ -96,11 +100,14 @@ public class SearchController {
 		int result = 0;
 		for(classCount cc : cCList) {		
 			if(cc.getlType().equals("RegionSub")) {
-				result++;}}
+				result+= cc.getCount();}}
 
 		cCList.add(new classCount("",result,"All"));
 		
 		/*System.out.println(sInfo);*/
+		
+		cCListination.setcCList(cCList);
+		
 		mv.addObject("sList", sList);
 		mv.addObject("cCList",cCList);
 		mv.addObject("pi", Pagination.getPageInfo());
@@ -114,6 +121,8 @@ public class SearchController {
 	@RequestMapping("detailSearch.do")
 	public ModelAndView detailSearchList(ModelAndView mv,
 			searchInfo sInfo,@RequestParam(value="currentPage", required=false) Integer page) {
+		
+		
 		
 		int currentPage = page != null ? page : 1;
 		sInfo.setsType("searchDetail");
@@ -139,9 +148,22 @@ public class SearchController {
 			ArrayList<tClass> sList = jsService.selectSearchDetailList(sIf.nullInfonation(sInfo),currentPage);
 		
 			//System.out.println(sList);
+			/*ArrayList<classCount> cCList = new ArrayList();
+			cCList.addAll(jsService.selectRegionMain(sIf.nullInfonation(sInfo)));
+			cCList.addAll(jsService.selectRegionSub(sIf.nullInfonation(sInfo)));
+			
+			int result = 0;
+			for(classCount cc : cCList) {		
+				if(cc.getlType().equals("RegionSub")) {
+					result += cc.getCount();}}
+
+			cCList.add(new classCount("",result,"All"));*/
+			
+			mv.addObject("cCList",cCListination.getcCList());
 			mv.addObject("sList", sList);
 			mv.addObject("pi", Pagination.getPageInfo());
 			mv.addObject("sInfo", sInfo);
+			//System.out.println("보내주기전 sInfo : " + sInfo);
 			mv.setViewName("baesung/search/Search");
 			
 
@@ -152,6 +174,19 @@ public class SearchController {
 			ArrayList<tClass> sList = jsService.selectSearchDetailList(sIf.nullInfonation(sInfo),currentPage);
 		
 			//System.out.println(sList);
+			/*ArrayList<classCount> cCList = new ArrayList();
+			cCList.addAll(jsService.selectRegionMain(sIf.nullInfonation(sInfo)));
+			cCList.addAll(jsService.selectRegionSub(sIf.nullInfonation(sInfo)));
+			
+			int result = 0;
+			for(classCount cc : cCList) {		
+				if(cc.getlType().equals("RegionSub")) {
+					result += cc.getCount();}}
+
+			cCList.add(new classCount("",result,"All"));*/
+			
+			mv.addObject("cCList",cCListination.getcCList());
+			
 			mv.addObject("sList", sList);
 			mv.addObject("pi", Pagination.getPageInfo());
 			mv.addObject("sInfo", sInfo);
@@ -164,6 +199,19 @@ public class SearchController {
 			ArrayList<tClass> sList = jsService.selectSearchDetailList(sIf.nullInfonation(sInfo),currentPage);
 			
 			//System.out.println(sList);
+			
+			/*ArrayList<classCount> cCList = new ArrayList();
+			cCList.addAll(jsService.selectRegionMain(sIf.nullInfonation(sInfo)));
+			cCList.addAll(jsService.selectRegionSub(sIf.nullInfonation(sInfo)));
+			
+			int result = 0;
+			for(classCount cc : cCList) {		
+				if(cc.getlType().equals("RegionSub")) {
+					result += cc.getCount();}}
+
+			cCList.add(new classCount("",result,"All"));*/
+			
+			mv.addObject("cCList",cCListination.getcCList());
 			mv.addObject("sList", sList);
 			mv.addObject("pi", Pagination.getPageInfo());
 			mv.addObject("sInfo", sInfo);

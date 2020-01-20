@@ -11,39 +11,19 @@
 		<result property="uPwd" column="USER_PWD" />
 		<result property="uName" column="USER_NAME" />
 		<result property="phone" column="PHONE" />
-		<result property="gender" column="GENDER" />
-		<result property="Age" column="AGE" />
+		<result property="uGender" column="GENDER" />
+		<result property="uAge" column="AGE" />
 		<result property="addr" column="ADDRESS" />
-		<result property="userType" column="USER_TYPE" />
+		<result property="uType" column="USER_TYPE" />
 		<result property="uStatus" column="U_STATUS" />
 		<result property="enrollDate" column="ENROLL_DATE" />
 		<result property="updateDate" column="UPDATE_DATE" />
-		
-		<result property="count" column="count" />
 		
 	</resultMap>
 	
 
 	
-	<!-- 멤버와 유저 사진 조인 ResultSet  -->
-	<resultMap id="mAnduJoinResultSet" type="MemberJoinUserpropic">
-	
-		<id property="uNo" column="USER_NO" />
-		<result property="uId" column="USER_ID" />
-		<result property="uPwd" column="USER_PWD" />
-		<result property="uName" column="USER_NAME" />
-		<result property="phone" column="PHONE" />
-		<result property="uGender" column="GENDER" />
-		<result property="uAge" column="AGE" />
-		<result property="address" column="ADDRESS" />
-		<result property="uType" column="USER_TYPE" />
-		<result property="uStatus" column="U_STATUS" />
-		<result property="enrollDate" column="ENROLL_DATE" />
-			
-		<result property="uOriginName" column="U_O_NAME" />
-		<result property="uChangeName" column="U_C_NAME" />
-		
-	</resultMap>
+
 	
 	<!-- 쿠폰 조회  -->
 	<resultMap id="couponResultSet" type="Coupon">
@@ -61,6 +41,7 @@
 	<resultMap id="mAndtuJoinResultSet" type="MemberJoinTutor">
 	
 		<id property="uNo" column="USER_NO" />
+		<result property="uId" column="USER_ID"/>
 		<result property="uType" column="USER_TYPE" />
 			
 		<!-- 튜터 정보 -->
@@ -72,11 +53,10 @@
 		
 		<!-- 튜터 경력인증 -->
 		
-		<collection property="certi" javaType="java.util.ArrayList" resultMap="certificationResultSet"/>
 	
 	</resultMap>
 	
-	<!-- 결재 매핑  -->	
+	<!-- 결제 매핑  -->	
 	<resultMap type="AdminPay" id="AdminPayResultSet">
 		<id property="pNo" column="PM_NO"/>
 		<result property="pStatus" column="PAYMENT_STATUS"/>
@@ -90,37 +70,51 @@
 		<result property="sum" column="PSUM"/>
 				
 	</resultMap>
-	<!-- 튜터 인증 매핑  -->
-	<resultMap type="Certification" id="certificationResultSet">
-		<id property="tuNo" column="C_NO"/>
-		<result property="tuTitle" column="USER_NO"/>
-		<result property="tuTitle" column="C_TITLE"/>
-		<result property="originName" column="O_FILE"/>
-		<result property="changeName" column="C_FILE"/>
+
+	
+	<resultMap type="AdminLesson" id="AdminLessonResultSet">
+		<id property="no" column="NO"/>
+		<result property="title" column="TITLE"/>
+		<result property="introduction" column="INTRODUCTION"/>
+		<result property="target" column="TARGET"/>
+		<result property="price" column="PRICE"/>
+		<result property="rating" column="RATING"/>
 	</resultMap>
+	
 
-
-	
-	
-	
-	
+	<resultMap id="QnaResultSet" type="Qna">
+		<id property="qNo" column="Q_NO"/>
+		<result property="qTitle" column="Q_TITLE"/>
+		<result property="qWriter" column="Q_WRITER"/>
+		<result property="qContent" column="Q_CONTENT"/>
+		<result property="qDate" column="Q_DATE"/>
+		<result property="aStatus" column="A_STATUS"/>
+		<result property="qStatus" column="Q_STATUS"/>		
+	</resultMap>
 
 		<!-- 회원 수와 쿠폰 갯수 조회  -->
 	<select id="getListCount" resultType="_int">
 		select count(*)
 		<if test="value == 1">
 			from member
-			left join userpropic using(user_no)
 		</if>
 		<if test="value == 2">
 			from coupon
 		</if>
-		<if test="value ==3">
+		<if test="value == 3">
 			from member m
 			left join tutor using(user_no)
 			left join certification using(user_no)
 			where user_type='T'
 		</if>
+		<if test="value == 4">
+			from qna
+		</if>
+		<if test="value == 5">
+			from qna
+			where a_status='N'
+		</if>
+		
 	</select>
 	<!-- 회원수를 검색하여 리턴하는 구문  -->
 	<select id="getListMemberSearchCount" resultType="_int">
@@ -128,7 +122,6 @@
 	
 		select count(*)
 		from member
-		left join userpropic using(user_no)
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
@@ -144,29 +137,28 @@
 		</where>
 	</select>
 	<!-- 전체 회원수(튜터 포함) 조회  -->
-	<select id="selectMemberList" resultMap="mAnduJoinResultSet">
-	
+	<select id="selectMemberList" resultMap="AdminMemberResultSet">
+		
 		select *
 		from member
-		left join userpropic using(user_no)
+		where user_type !='A'
 		
 	</select>
+	<!-- 튜터 신청 멤버들만 셀렉  -->
 	<select id="selectTutorList" resultMap="mAndtuJoinResultSet">
 		select *
 		from member m
 		left join tutor using(user_no)
-		left join certification using(user_no)
 		where user_type='T'
 	</select>
 	
 	<!-- 멤버 검색용 쿼리 (마이바티스 동적 쿼리 활용) -->
 	<select id="searchMemberList" parameterType="Search"
-		resultMap="mAnduJoinResultSet">
+		resultMap="AdminMemberResultSet">
 		
 		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
 
 		SELECT * FROM member
-		left join userpropic using(user_no)
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
@@ -184,19 +176,33 @@
 	</select>
 	
 	<!-- 쿠폰 생성하기  -->
-	<insert id="insertCoupon" parameterType="Coupon">
-		insert into Coupon values(COUPON_SEQ.nextval,#{cName},#{cCode},#{disRate},#{startDate},#{endDate},'R',#{uNo})
+	<insert id="insertCoupon">
+		
+			<foreach collection="list" item="i" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+                 INTO coupon VALUES(
+                 get_seq('coupon_seq'),
+                 #{i.cName},
+                 #{i.cCode},
+                 #{i.disRate},
+                 #{i.startDate},
+                 #{i.endDate},
+                 'R',
+                 #{i.uNo})
+             </foreach>
+			
+				
 	</insert>
 	
 	<!-- 회원 가입자 오늘 & 이번달 수 조회 -->
-	<select id="countMember" resultType="_int" parameterType="AdminMember">
+	<select id="countMember" resultType="_int">
+	
 		select count(user_no) as count
 		from member
 		<choose>
-		<when test="value =1">
+		<when test="value == 1">
 		where to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') and u_status='Y'
 		</when>
-		<when test="value=2">
+		<when test="value == 2">
 		where extract(month from enroll_date) = extract(month from sysdate) and u_status='Y'
 		</when>
 		</choose>
@@ -206,17 +212,112 @@
 		select nvl(sum(payment_cost),0) as PSUM
 		from payment
 		<choose>
-		<when test="value = 1 ">
+		<when test="value == 1 ">
 		where to_date(payment_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') and payment_status='1'
 		</when>
-		<when test="value = 2 ">
+		<when test="value == 2 ">
 		where extract(month from payment_date) = extract(month from sysdate) and payment_status='1'
 		</when>
 		</choose>
 	</select>
 	
+	<!-- 실시간 회원 리스트 조회  -->
+	<select id="selectTopMemberList" resultMap="AdminMemberResultSet">
+		SELECT *
+		FROM(SELECT *
+			FROM member
+			WHERE u_STATUS = 'Y' and user_type='N' and to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') 
+			ORDER BY enroll_date DESC)
+		WHERE ROWNUM <![CDATA[ <= ]]> 5  
+	</select>
 	
-	
-	
+	<!-- 실시간 수업 조회  -->
+	<select id="selectRealTimeLessonList" resultMap="AdminLessonResultSet">
+		select *
+		from lessonRating
+	</select>
 
+ 	<!-- 일반회원을 튜터 회원으로  튜터를 일반 회원으로-->
+	<update id="changeTutorStatus" parameterType="hashmap">
+		update tutor
+			<choose>	
+				<when test='cStr.equals("R")'>
+					set tstatus='Y'
+					where user_no in
+					<foreach collection="uNo" item="n" open="(" close=")" separator=",">
+						${n}
+					</foreach>
+				</when>
+			</choose>
+			<choose>	
+				<when test='cStr.equals("Y")'>
+					set tstatus='R'
+					where user_no in
+					<foreach collection="uNo" item="n" open="(" close=")" separator=",">
+						${n}
+					</foreach>
+				</when>
+			</choose>
+	</update>
+	
+	
+	
+	 
+	<select id="selectQnaList" resultMap="QnaResultSet" parameterType="_int">
+		
+		select *
+		<if test="value == 1">
+		from qna
+		</if>
+		<if test="value == 2">
+		from qna
+		where a_status='N'
+		</if>
+		
+	</select>
+	
+	<select id="searchQnaCount" resultType="_int">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+		select count(*)
+		from qna
+		<where>
+			<choose>
+				<when test="searchCondition == 'qWriter'">
+					AND q_writer LIKE #{sv}
+				</when>
+				<when test="searchCondition == 'qTitle'">
+					AND q_title LIKE #{sv}
+				</when>
+			</choose>
+		</where>	
+	</select>
+	
+	<select id="searchQnaList" resultMap="QnaResultSet" parameterType="Search">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+		select *
+		from qna
+		<where>
+			<choose>
+				<when test="searchCondition == 'qWriter'">
+					AND q_writer LIKE #{sv}
+				</when>
+				<when test="searchCondition == 'qTitle'">
+					AND q_title LIKE #{sv}
+				</when>
+			</choose>
+		</where>	
+	</select>
+	<select id="selectMuIdList" resultMap="AdminMemberResultSet" parameterType="list">
+		
+		select *
+		from member
+		<where>
+			user_no in
+			<foreach collection="list" item="n" open="(" close=")" separator=",">
+				 ${n}
+			</foreach>
+		</where>
+	
+	</select>
+	
 </mapper>

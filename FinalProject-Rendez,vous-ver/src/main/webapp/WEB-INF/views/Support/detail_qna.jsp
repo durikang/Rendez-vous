@@ -225,15 +225,16 @@
 	</header>
     <div class="board_box">
 	    <div class="wrapper">
-	        <div class="sidebar">
-	            <h2>q & a</h2>
-	            <ul>
-	                <li><a href="support_main.do"><i class="fas fa-home" style="color:#c9c0b1;"></i>Home</a></li>
-	                <li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color:#c9c0b1;"></i>Q & A</a></li>
-	                <li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color:#c9c0b1;"></i>문의 내역</a></li>
-	            </ul>
-	        </div>
-	    </div>
+			<div class="sidebar">
+				<h2>q & a</h2>
+				<ul>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>
+					<li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
+				</ul>
+			</div>
+		</div>
 	    <div class="content_area">
 	    	<div class="board_area">
 	    		<table id="boardTable">
@@ -266,23 +267,26 @@
 				<tr>
 					<td colspan="4">
 						<button onclick="location.href='${ qlist }'">목록으로</button>
+						<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
+						<button onclick="location.href='manageHo.do'">이전으로(관리자 전용)</button>
+						</c:if>
 						<c:if test="${ loginUser.user_name eq q.qWriter }">
 							<button onclick="location.href='${ qupView }'">수정하기</button>
 							<button id="delete" onclick="location.href='${ qdelete }'">삭제하기</button>
 						</c:if>			
 					</td>
 				</tr>				
+					<c:if test="${ loginUser.user_type == 'A' }">
 				<tr>
 					<td>답변</td>
 					<td colspan="2">
 						<textarea cols="100" rows="3" id="aContent" style="resize:none"></textarea>
 					</td>
 					<td>
-						<c:if test="${ loginUser.user_type == 'A' }">
 							<button id="aSubmit">등록하기</button>
-						</c:if>
 					</td>
 				</tr>
+				</c:if>
 			</tbody>
 	    	</table>
 	    	

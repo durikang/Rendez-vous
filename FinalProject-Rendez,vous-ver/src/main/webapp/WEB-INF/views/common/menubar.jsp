@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -52,7 +50,7 @@
 }
 
 .search-btn i {
-   color:#c9c0b1;
+	color:#c9c0b1;
 }
 .search-text {
     border: none;
@@ -79,7 +77,7 @@
     margin-right: auto;
 }
 .nav_links {
-   margin: 0 10px;
+	margin: 0 10px;
     list-style: none;
 }
 .nav_links li {
@@ -92,8 +90,13 @@
     font-weight: bold;
     text-decoration:none;
 }
-.nav_links li,a {
+.nav_links li{
     font-weight: 500;
+    font-size: 16px;
+    color: black;
+}
+menu_body a {
+	font-weight: 500;
     font-size: 16px;
     color: black;
 }
@@ -114,21 +117,21 @@
 .button:hover {
     background-color: #ddd8cf;
 }
+.search-box:hover{
+	cursor: pointer;
+}
+
 </style>
 <body class="menu_body">
-   
    <c:if test="${ !empty msg}">
       <script>
          alert("${msg}");
       </script>
       <c:remove var="msg"/>
    </c:if>
-   
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>	
     <header class="header">
-
-    <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-<img class="logo" src="resources/common/img/logo1.png" alt="logo">
-
+		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
             <input class="search-text" type="text" id="search" placeholder="Search">
             <a class="search-btn">
@@ -141,29 +144,29 @@
                 <li>|</li>
 
                 <c:if test="${ empty sessionScope.loginUser }">
-                   <li><a href="loginPage.do">로그인</a></li>
+                	<li><a href="loginPage.do">로그인</a></li>
                 </c:if>
 
                 <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
-               <li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
-            </c:if>
-            
-            <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
-               <a href="managerHome.do">관리자 페이지</a>
-            </c:if>
-            
-            <c:if test="${ !empty sessionScope.loginUser }">
-               <li>|</li>
-                   <li><a href="logout.do">로그아웃</a></li>
-            </c:if>
+					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
+				</c:if>
+				
+				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
+					<a href="managerHome.do">관리자 페이지</a>
+				</c:if>
+				
+				<c:if test="${ !empty sessionScope.loginUser }">
+					<li>|</li>
+                	<li><a href="logout.do">로그아웃</a></li>
+				</c:if>
             </ul>
         </nav>
     </header>
     <script>
-       $(".logo").on("click", function(){
-          location.href='home.do';
-       });
-       
+    	$(".logo").on("click", function(){
+    		location.href='home.do';
+    	});
+    	
         function search2(){
            var sValue = $("#search").val();
            if(sValue ==""){
@@ -173,8 +176,8 @@
            
            location.href = "search.do?sValue=" + sValue;
         }
-       
-       
+    	
+    	
     </script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-	<title></title>
+	<title>${ldi.lTitle }</title>
 	<!-- <meta property="og:url" content="http://taling.me/Talent/Detail/166" /> -->
 	<link rel="image_src" href="http://s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/41d6f52384099fcb7eeeacbbf2727e37b3ecb4b3.jpg" />
 	
@@ -358,7 +358,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					return;
 					</c:if>
 					
-					var lno = ${li.lNo};
+					var lno = ${ldi.lNo};
 					location.href = 'detail.do?lNo='+lno;
 				}
 			
@@ -387,7 +387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<ol class="carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		
-		<c:forEach var="i" begin="1" end="${fn:length(laList)-1}">
+		<c:forEach var="i" begin="1" end="${fn:length(ldi.laList)-1}">
 			
 		<li data-target="#myCarousel" data-slide-to="${i}">
 				
@@ -416,7 +416,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</div> --%>
 
 		
-		<c:forEach var="la" items="${laList }">
+		<c:forEach var="la" items="${ldi.laList }">
 		<div class="item"> 
 			<a href="${ contextPath }/resources/lessonImg/${la.cName}" target="_blank">
 			<div style="background:#000;z-index:0;width:840px;height:540px;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/lessonImg/${la.cName}');" ></div>
@@ -568,9 +568,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- 수업타이틀 -->
 			<div class="class_detail" id="sumary" style="width: 840px">
 				<div class="class_name">
-					<div class="tutor_img"><a href="${ contextPath }/resources/user/img/${tPropic}" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/user/img/${tPropic}');"></div></a></div>
-					<div class="name">${ tName }</div>
-					<div class="nickname">${ tutor.tNick }</div>
+					<div class="tutor_img"><a href="${ contextPath }/resources/user/img/${ldi.ucName}" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/user/img/${ldi.ucName}');"></div></a></div>
+					<div class="name">${ ldi.uName }</div>
+					<div class="nickname">${ ldi.tutor.tNick }</div>
 				</div>
 				<div class="class_title">
 					
@@ -606,7 +606,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 									var uno = ${loginUser.user_no};
 									</c:if>
 									
-									var lno = ${li.lNo};
+									var lno = ${ldi.lNo};
 									
 									  $.ajax({
 								            url:"fav.do",
@@ -644,7 +644,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 									var uno = ${loginUser.user_no};
 									</c:if>
 									
-									var lno = ${li.lNo};
+									var lno = ${ldi.lNo};
 									
 									  $.ajax({
 								            url:"fav.do",
@@ -677,20 +677,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					
 					<div class="info">
 						<a class="starimg">
-							<div class="title">${li.lTitle }</div>
+							<div class="title">${ldi.lTitle }</div>
 							<!-- <img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png">								(6) -->
 													</a>
 					</div>
 					<div class="info">
 						<ul>
 							<li class="ar">
-																${li.lRegionSub }							</li>							
+																${ldi.lRegionSub }							</li>							
 							<li class="hu"><font color="#ff005a">1</font>시간/회</li>
 							<li class="gr">
 																인원:<font color="#ff005a">${ minPerson }~${ maxPerson }</font>명
 								</li>
 							<li class="ohu">
-																<font color="#ff005a">￦<fmt:formatNumber value="${li.lPrice}" maxFractionDigits="3"/></font>/회당
+																<font color="#ff005a">￦<fmt:formatNumber value="${ldi.lPrice}" maxFractionDigits="3"/></font>/회당
 							</li>
 						</ul>
 					</div>
@@ -736,7 +736,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<h1>수업소개</h1>
 					<div class="d_info04">
 
-					${li.lIntroduction }
+					${ldi.lIntroduction }
 
 
 
@@ -770,7 +770,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<div class="section01">
 					<h1 class="mt50">수업대상</h1>
 					<ul class="d_info03">
-						<li><p> ${li.lTarget } </p></li>
+						<li><p> ${ldi.lTarget } </p></li>
 					</ul>
 				</div>
 			</div>
@@ -786,8 +786,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<h1>튜터영상</h1>
 					<!--a href="#" class="btn_list">List</a-->
 							<div>
-								<c:if test="${!empty li.lYtb }">
-								<iframe width="680" height="426" src="https://www.youtube.com/embed/${li.lYtb}" frameborder="0" allowfullscreen=""></iframe>
+								<c:if test="${!empty ldi.lYtb }">
+								<iframe width="680" height="426" src="https://www.youtube.com/embed/${ldi.lYtb}" frameborder="0" allowfullscreen=""></iframe>
 								</c:if>
 							</div>								
 <!-- 							<div>
@@ -907,7 +907,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<c:if test="${uRStatus eq 'able' }">	
 						<div class="modal-header">
 
-							<h4>${li.lTitle } 에 대한 리뷰를 등록해주세요</h4>
+							<h4>${ldi.lTitle } 에 대한 리뷰를 등록해주세요</h4>
 						</div>
 							
 						<form action="insertReview.do" onsubmit="return submitReview();">
@@ -928,7 +928,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 								placeholder="내용을 입력해주세요" name="rContent" id="rContent"></textarea>
 						</div>
 						<div class="modal-footer">
-							<input type="text" name="lNo" value="${ li.lNo }" hidden="">
+							<input type="text" name="lNo" value="${ ldi.lNo }" hidden="">
 							<input type="text" id="rRating" name="rRating" hidden="">
 							<button type="submit" class="btn btn-primary ">등록하기</button>
 							<button type="button" id="close" class="btn btn-default ">닫기</button>
@@ -959,7 +959,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 								placeholder="내용을 입력해주세요" name="rContent" id="rContent">${userReview.rContent}</textarea>
 						</div>
 						<div class="modal-footer">
-							<input type="text" name="lNo" value="${ li.lNo }" hidden="">
+							<input type="text" name="lNo" value="${ ldi.lNo }" hidden="">
 							<input type="text" id="rRating" name="rRating" value="${userReview.rRating}" hidden="">
 							<button type="submit" class="btn btn-primary ">수정하기</button>
 							<button type="button" id="close" class="btn btn-default ">닫기</button>

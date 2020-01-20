@@ -16,11 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.lesson.model.vo.Lesson;
 import com.kh.rendez.lesson.model.vo.LessonAttachment;
+import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
 import com.kh.rendez.member.model.vo.Member;
@@ -45,14 +47,6 @@ public class LessonController {
 	public String goHynnmenubar() {
 		
 		return "common/hyunmenubar";
-	}
-	
-	@RequestMapping("tutorMain.do")
-	public ModelAndView tutorMainGo(ModelAndView mv) {
-		
-		mv.setViewName("lesson/tutorMainView");
-		
-		return mv;
 	}
 	
 	
@@ -85,19 +79,12 @@ public class LessonController {
 			@RequestParam(name="msg", required=false) String msg
 			) {
 		
-		
-		LessonInfo li = lService.selectOneLI(lNo);
-		ArrayList<LessonAttachment> laList = lService.selectLAofLI(lNo);
-		ArrayList<Lesson> lTime = lService.selectTimeofLI(lNo);
-		Tutor tutor = tService.selectTutorOfLI(lNo);
-		String tName = tService.selectTutorName(lNo);
+		LessonDetailInfo ldi = lService.selectLDI(lNo);
 		ArrayList<LessonReview> lRList = lService.selectLessonReviewList(lNo);
-		String tPropic = lService.selectTutorPic(lNo);
-		//li,tutor,tName,tPropic 나중에 하나로해서 갖고오자
-		
-		
+		ArrayList<Lesson> lTime = lService.selectTimeofLI(lNo);
+	
 		//튜터 경력 처리
-		String[] tutorCerArr = tutor.gettCareer().split(","); 
+		String[] tutorCerArr = ldi.getTutor().gettCareer().split(","); 
 		ArrayList<String> tutorCer = new ArrayList<>();
 		
 		for(int i=0;i<tutorCerArr.length;i++) {
@@ -162,18 +149,14 @@ public class LessonController {
 		if(msg !=null) {
 			mv.addObject("msg",msg);
 		}
-		
+				
 
-			
-		mv.addObject("li",li);
-		mv.addObject("laList",laList);
-		mv.addObject("lTime",lTime);
-		mv.addObject("tutor",tutor);
-		mv.addObject("tPropic",tPropic);
-		mv.addObject("tName",tName);
+		mv.addObject("ldi",ldi);
 		mv.addObject("tutorCer",tutorCer);
-		mv.addObject("lRList",lRList);
 		mv.addObject("lessonAvg",lessonAvg);
+		mv.addObject("lRList",lRList);
+		mv.addObject("lTime",lTime);
+		
 		
 		mv.setViewName("lesson/lessonDetailView");
 		
@@ -218,6 +201,7 @@ public class LessonController {
 			ModelAndView mv,
 			HttpServletRequest request,
 			LessonInfo li,
+			RedirectAttributes rd,
 			@RequestParam(name="covImg", required=false) MultipartFile covImg,
 			@RequestParam(name="extImg", required=false) List<MultipartFile> extImg
 			) {
@@ -251,7 +235,7 @@ public class LessonController {
 			lno = lService.selectLNo(li.getuNo());
 			
 			if(!covImg.getOriginalFilename().equals("")) {
-				String reFileName = saveLessonImg(covImg,request,lno);      //파일을 저장
+				String reFileName = saveLessonImg(covImg,request,lno,1);      //파일을 저장
 				if(reFileName != null) {                                    // 파일 저장이 성공이라면 DB에 저장
 					LessonAttachment la = new LessonAttachment();
 					la.setoName(covImg.getOriginalFilename());
@@ -260,34 +244,35 @@ public class LessonController {
 					la.setlNo(lno);
 					
 					int result2 = lService.insertAttachment(la);
-					num++;
 				}
 			}
 			//커버 이미지 등록 끝
-
-			for(MultipartFile m : extImg) {
+			int lNum = 2;
+			for(int i=0;i<extImg.size();i++) {
 				
-				if(!m.getOriginalFilename().equals("")) {
-					String reFileName = saveLessonImg(m,request,lno);
+				
+				if(!extImg.get(i).getOriginalFilename().equals("")) {
+					
+					String reFileName = saveLessonImg(extImg.get(i),request,lno,lNum);
 					
 					if(reFileName != null) {                                    // 파일 저장이 성공이라면 DB에 저장
 						LessonAttachment la = new LessonAttachment();
-						la.setoName(m.getOriginalFilename());
+						la.setoName(extImg.get(i).getOriginalFilename());
 						la.setcName(reFileName);
-						la.setLaType(2);
+						la.setLaType(lNum++);
 						la.setlNo(lno);
-						/**/
+						
 						int result3 = lService.insertAttachment(la);
-						num++;
 					}
 				}
 			}
-			num=0;
+			lNum=0;
+		
 		}
 		
-		String msg = "수업 추가에 성공하였습니다";
-		
-		mv.setViewName("redirect:lessonManage.do?msg="+msg);
+
+		rd.addFlashAttribute("msg","수업을 정상적으로 등록하였습니다");
+		mv.setViewName("redirect:lessonManage.do");
 		
 		return mv;
 	}
@@ -303,6 +288,7 @@ public class LessonController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		if(loginUser == null || !loginUser.getUser_type().equals("T")) {
+			mv.addObject("msg","잘못된 접근입니다 ");
 			mv.setViewName("home");
 			return mv;
 		}
@@ -323,6 +309,9 @@ public class LessonController {
 			System.out.println(msg);
 		}
 		
+		Date currTime = new Date(System.currentTimeMillis());
+		
+		mv.addObject("currTime",currTime);
 		mv.addObject("liList",liList);
 		mv.addObject("laList",laList);
 		mv.addObject("lList",lList);
@@ -443,6 +432,114 @@ public class LessonController {
 		return mv;
 	}
 	
+	//수업정보 업데이트 하러가기
+	@RequestMapping("updateLessonInfo.do")
+	public ModelAndView updateLessonInfo(ModelAndView mv,
+			HttpServletRequest request,
+			int lNo) {
+		
+		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		//로그인유저에 대한 처리 해주기
+		
+		
+		LessonInfo li = lService.selectOneLI(lNo);
+		ArrayList<LessonAttachment> laList = lService.selectLAofLI(lNo);
+		
+		li.setlIntroduction(li.getlIntroduction().replace("<br>", "\n"));
+		li.setlTarget(li.getlTarget().replace("<br>", "\n"));
+		
+		mv.addObject("li",li);
+		mv.addObject("laList",laList);
+		
+		mv.setViewName("lesson/lessonUpdate");
+		
+		return mv;
+	}
+	
+	//수업 이미지 정보 관리하는 페이지로 가기
+	@RequestMapping("updateLessonAttachment.do")
+	public ModelAndView updateLessonAttachment(ModelAndView mv,
+			HttpServletRequest request,
+			int lNo) {
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	//수업 이미지 업데이트 하는 ajax
+	@RequestMapping("updateLessonImg.do")
+	@ResponseBody
+	public String updateLessonImg(MultipartFile file,int laNo,String cName, 
+			HttpServletRequest request) {
+		LessonAttachment ua = new LessonAttachment();
+		ua.setoName(file.getOriginalFilename());
+		ua.setLaNo(laNo);
+		
+		String ccName = overWriteLessonImg(file,request,cName);
+		ua.setcName(ccName);
+		
+		int result = 0;
+		if(ccName!=null) {
+			 result = lService.updateLessonImg(ua);
+		}
+		
+	
+		
+		String msg="";
+		if(result>0) {
+			msg="success";
+		}else {
+			msg="fail";
+		}
+		
+		
+		return msg;
+	}
+	
+	//수업 이미지 삭제하는 ajax
+	@RequestMapping("deleteLessonImg")
+	@ResponseBody
+	public String deleteLessonImg(int laNo,int lNo) {
+		Gson gson = new Gson();
+		return gson.toJson(lService.deleteLessonImg(laNo) >0 ? "success" : "fail");
+	}
+	
+	// 수업 이미지 추가하는 ajax
+	@RequestMapping("addLessonImg.do")
+	@ResponseBody
+	public String addLessonImg(MultipartFile file,int lNo, 
+			HttpServletRequest request) {
+		
+		int maxNum = lService.selectMaxNum(lNo);
+		
+		String reFileName = addLessonImg(file,request,lNo,maxNum+1);
+				
+		LessonAttachment addImg = new LessonAttachment();
+		addImg.setcName(reFileName);
+		addImg.setLaType(maxNum+1);
+		addImg.setoName(file.getOriginalFilename());
+		addImg.setlNo(lNo);
+		
+		int result = lService.addLessonImg(addImg);
+		
+		LessonAttachment added =null;
+		if(result>0) {
+			added = lService.selectAddedImg(lNo);
+		}
+		
+		ArrayList<LessonAttachment> laList = new ArrayList<>();
+		laList.add(added);
+		
+		Gson gson = new Gson();
+		
+		
+		return gson.toJson(laList);
+	}
+	
 	
 	
 	
@@ -477,8 +574,7 @@ public class LessonController {
 	
 	
 	//파일전송 메소드
-	int num =0; //파일 번호를 지정하기 위한 전역변수
-	public String saveLessonImg(MultipartFile file, HttpServletRequest request,int lno) {
+	public String saveLessonImg(MultipartFile file, HttpServletRequest request,int lno,int lNum) {
 		
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -493,7 +589,7 @@ public class LessonController {
 		
 		int dot = file.getOriginalFilename().lastIndexOf(".");
 		String ext = file.getOriginalFilename().substring(dot).toLowerCase();
-		String reFileName = lno+"_"+num+ext;
+		String reFileName = lno+"_"+lNum+ext;
 	
 		String filePath = folder + "\\" + reFileName;
 		
@@ -506,9 +602,68 @@ public class LessonController {
 		return reFileName;
 	}
 	
+	//파일 수정 메소드
+	public String overWriteLessonImg(MultipartFile file, HttpServletRequest request,String cName) {
+		
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\lessonImg";
+		
+		File folder = new File(savePath); 
+		
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		int dot = file.getOriginalFilename().lastIndexOf(".");
+		String ext = file.getOriginalFilename().substring(dot).toLowerCase();
+		
+		int dot2 = cName.lastIndexOf(".");
+		String cFirstName = cName.substring(0, dot2);
+		System.out.println(cFirstName);
+		
+		String filePath = folder + "\\" + cFirstName+ext;
+		
+		try {
+			file.transferTo(new File(filePath)); // 이 때 파일 저장 된다.
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		} 
+		
+		return cFirstName+ext;
+	}
 	
 	
-	
+	//파일 추가 메소드
+	public String addLessonImg(MultipartFile file, HttpServletRequest request,int lNo,int lNum) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\lessonImg";
+		
+		File folder = new File(savePath); 
+		
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		int dot = file.getOriginalFilename().lastIndexOf(".");
+		String ext = file.getOriginalFilename().substring(dot).toLowerCase();
+		
+		String reFileName = lNo+"_"+lNum+ext;
+		
+		String filePath = folder + "\\" + reFileName;
+		
+		try {
+			file.transferTo(new File(filePath)); // 이 때 파일 저장 된다.
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		} 
+		
+		
+		return reFileName;
+	}
 	
 	
 	

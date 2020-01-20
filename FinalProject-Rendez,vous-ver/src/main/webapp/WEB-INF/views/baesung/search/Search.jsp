@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
     <style>
 
     /* 헤더영역 시작*/
@@ -1034,6 +1035,7 @@ text-decoration: none;
 			
 
             <script>
+            
                 $('#searchList').click(function(){
                     var day = "";
                     var time = "";
@@ -1179,10 +1181,75 @@ text-decoration: none;
                 
             </script>
             
-            <div class="filter_head" style="margin-top: 216px;">
-                <div class="num_class">
+            <c:choose>
+            	<c:when test="${ sInfo.sType == 'Search' }">
+            		<c:set var="loc" value="search.do"/> 
+            	</c:when>
+            	<c:when test="${ sInfo.sType == 'cateMain' }">
+            		<c:set var="loc" value="cateMain.do"/> 
+            	</c:when>
+            	<c:when test="${ sInfo.sType == 'cateSub' }">
+            		<c:set var="loc" value="cateSub.do"/> 
+            	</c:when>
+            	<c:when test="${ sInfo.sType == 'searchDetail' }">
+            		<c:set var="loc" value="detailSearch.do"/> 
+            	</c:when>
+            </c:choose>
+            
+               <c:url value="${loc}" var="orderlistReview">
+			
+				<c:param name="sType" value="${sInfo.sType}"/>
+				<c:param name="sValue" value="${sInfo.sValue}"/>
+				<c:param name="cateMain" value="${sInfo.cateMain}"/>
+				<c:param name="cateSub" value="${sInfo.cateSub}"/>
+				<c:param name="regionMain" value="${sInfo.regionMain}"/>
+				<c:param name="regionSub" value="${sInfo.regionSub}"/>
+				<c:param name="sDay" value="${sInfo.sDay}"/>
+				<c:param name="sTime" value="${sInfo.sTime}"/>
+				<c:param name="tType" value="${sInfo.tType}"/>
+				<c:param name="day" value="${sInfo.day}"/>
+				<c:param name="time" value="${sInfo.time}"/>
+				<c:param name="cOrder" value="Review"/>
+                </c:url>
+                
+                <c:url value="${loc}" var="orderlistPrice">
+				<c:param name="sType" value="${sInfo.sType}"/>
+				<c:param name="sValue" value="${sInfo.sValue}"/>
+				<c:param name="cateMain" value="${sInfo.cateMain}"/>
+				<c:param name="cateSub" value="${sInfo.cateSub}"/>
+				<c:param name="regionMain" value="${sInfo.regionMain}"/>
+				<c:param name="regionSub" value="${sInfo.regionSub}"/>
+				<c:param name="sDay" value="${sInfo.sDay}"/>
+				<c:param name="sTime" value="${sInfo.sTime}"/>
+				<c:param name="tType" value="${sInfo.tType}"/>
+				<c:param name="day" value="${sInfo.day}"/>
+				<c:param name="time" value="${sInfo.time}"/>
+				<c:param name="cOrder" value="Price"/>
+                </c:url>
+                
+                <c:url value="${loc}" var="orderlistGrade">
+				<c:param name="sType" value="${sInfo.sType}"/>
+				<c:param name="sValue" value="${sInfo.sValue}"/>
+				<c:param name="cateMain" value="${sInfo.cateMain}"/>
+				<c:param name="cateSub" value="${sInfo.cateSub}"/>
+				<c:param name="regionMain" value="${sInfo.regionMain}"/>
+				<c:param name="regionSub" value="${sInfo.regionSub}"/>
+				<c:param name="sDay" value="${sInfo.sDay}"/>
+				<c:param name="sTime" value="${sInfo.sTime}"/>
+				<c:param name="tType" value="${sInfo.tType}"/>
+				<c:param name="day" value="${sInfo.day}"/>
+				<c:param name="time" value="${sInfo.time}"/>
+				<c:param name="cOrder" value="Grade"/>
+                </c:url>
+            
+            <div class="filter_head" style="margin-top: 216px; margin-bottom: 30px;">
+                <div class="num_class" style="float: left;">
                     ${ pi.listCount }개의 수업
-                </div>
+                     <div style="float: right; clear: both;">
+                     &nbsp; | <a href="${orderlistReview}" class="orderType" name="Review">리뷰 개수순</a> | <a href="${orderlistPrice}" class="orderType" name="Price">낮은 가격순</a> | <a href="${orderlistGrade}" class="orderType" name="Grade">평점 높은순</a>
+                    </div>
+                     </div>      
+ 
                 <!--select name="fluit" onchange="go(this.value)">				
                     <option value="5" >추천도순</option>
                     <option value="3" >낮은 가격순</option>
@@ -1253,20 +1320,7 @@ text-decoration: none;
             
         
             <!-- 4. 검색 옵션에 따라 어떤 매핑을 해야할지 정해주는 옵션 -->
-            <c:choose>
-            	<c:when test="${ sInfo.sType == 'Search' }">
-            		<c:set var="loc" value="search.do"/> 
-            	</c:when>
-            	<c:when test="${ sInfo.sType == 'cateMain' }">
-            		<c:set var="loc" value="cateMain.do"/> 
-            	</c:when>
-            	<c:when test="${ sInfo.sType == 'cateSub' }">
-            		<c:set var="loc" value="cateSub.do"/> 
-            	</c:when>
-            	<c:when test="${ sInfo.sType == 'searchDetail' }">
-            		<c:set var="loc" value="detailSearch.do"/> 
-            	</c:when>
-            </c:choose>
+            
                
 			  
             <div class="page">
@@ -1290,6 +1344,8 @@ text-decoration: none;
 			<c:param name="tType" value="${sInfo.tType}"/>
 			<c:param name="day" value="${sInfo.day}"/>
 			<c:param name="time" value="${sInfo.time}"/>
+			<c:param name="cOrder" value="${sInfo.cOrder }"></c:param>
+			
 			</c:url>
 			
 			<a href="${blistBack}">
@@ -1323,6 +1379,7 @@ text-decoration: none;
 			<c:param name="tType" value="${sInfo.tType}"/>
 			<c:param name="day" value="${sInfo.day}"/>
 			<c:param name="time" value="${sInfo.time}"/>
+			<c:param name="cOrder" value="${sInfo.cOrder }"></c:param>
 			</c:url>
 			
 			<a href="${ blistCheck}">${p}</a>
@@ -1349,6 +1406,7 @@ text-decoration: none;
 			<c:param name="tType" value="${sInfo.tType}"/>
 			<c:param name="day" value="${sInfo.day}"/>
 			<c:param name="time" value="${sInfo.time}"/>
+			<c:param name="cOrder" value="${sInfo.cOrder }"></c:param>
 			</c:url>
 			
 			<a href="${blistEnd}">| &nbsp;다음&nbsp;&nbsp;
@@ -1470,25 +1528,43 @@ text-decoration: none;
 		
 		$("#MainIndex option").each(function(index,item){
 			
+			if($(item).val() == ''){
+				 $(item).text('지역ALL(0)');		 
+			 }else{
+				 $(item).text($(item).val()  + '(0)');
+			 }
+			
+			// 선택되었던 것 다시 선택해주기 
+			
+			if($(item).val() == '${sInfo.regionMain}'){
+				
+                $('#regionSubLayer'+$(item).val()).removeClass('off');
+                $('#regionSubLayer'+$(item).val()).addClass('on');
+             							
+                $(item).prop("selected", true);
+			}
+			
+
 			 //alert($(item).val());		
 			 <c:forEach items="${cCList}" var="cCList">
-	    	
+			
 			//alert('${cCList.location}');
 			if('${cCList.lType}' != 'RegionSub'){
 			
 			 if($(item).val() == '${ fn:substring(cCList.location,0,2)}'){
-				
-				 if($(item).val() == ''){
 					 
-					 $(item).text('지역ALL('+'${cCList.count}' + ')');
+				 if($(item).val() == ''){
+
+					 $(item).text('지역ALL('+'${cCList.count}' + ')');		 
 				 }else{
 					 $(item).text($(item).val()  + '('+'${cCList.count}' + ')');
-				 }		
-			}  	
+				 }		 
+			}
+
 			} 
-			 
-			 
+		
 	  		</c:forEach> 	
+	  		
 		})
 	
 		
@@ -1497,8 +1573,18 @@ text-decoration: none;
 			
 			 //alert($(item).val());
 			 
+			if($(item).val() == ''){
+				 
+			 }else{
+				 $(item).text($(item).val()  + '(0)');
+			 }	
+			 
+			if($(item).val() == '${sInfo.regionSub}'){
+				$(item).prop("selected", true);
+			}
+			 
 			 <c:forEach items="${cCList}" var="cCList">
-	    	
+			 
 			//alert('${cCList.location}');
 			if('${cCList.lType}' != 'RegionMain'){
 			 if($(item).val() == '${ cCList.location}'){
@@ -1509,11 +1595,72 @@ text-decoration: none;
 					 $(item).text($(item).val()  + '('+'${cCList.count}' + ')');
 				 }	
 	 	
-			}  	
+			}
+			 
 			}
 	  		</c:forEach> 	 
 		})
+		
+		var days = '${sInfo.day}';	
+		if(days != ''){
+		var daysArr = days.split(',');
+		
+		 $("#days").children().each(function(element2, index2){			
+					
+			 daysArr.forEach(function(element, index) {
+				 
+				   if($(index2).attr('day') == element ){	
+    	               
+					   $(index2).attr('class','on');
+	                  
+		             } });  });}
+		
+		var time = '${sInfo.time}';
+		if(time != ''){
+			var timeArr = time.split(',');
+			
+			 $("#times").children().each(function(element2, index2){			
+						
+				 timeArr.forEach(function(element, index) {
+					 
+					   if($(index2).attr('time') == element ){	
+	    	               
+						   $(index2).attr('class','on');
+		                  
+			             } });  });}
+		
+		var tType = '${sInfo.tType}';
+		if(tType != ''){
+			var tTypeArr = tType.split(',');
+			
+			 $("#tTypes").children().each(function(element2, index2){			
+						
+				 tTypeArr.forEach(function(element, index) {
+					 
+					   if($(index2).attr('ttype') == element ){	
+	    	               
+						   $(index2).attr('class','on');
+		                  
+			             } });  });}
+		
+		var orderType = '${sInfo.cOrder}';
+		//alert(orderType);
+		
+		  if(orderType != ''){
+			
+			 $(".orderType").each(function(element, index){			
+						
+				// alert($(index).attr('name'));
 
+					    if($(index).attr('name') == orderType ){	
+	    	               
+					    	$(index).css('color','red');
+						   
+		                  
+			             }   
+					   		 
+			 });}   
+		
    });
     
     </script>

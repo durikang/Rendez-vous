@@ -16,7 +16,6 @@ public class AdminPay {
 	
 	public AdminPay() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public AdminPay(int pNo, String pStatus, Date pDate, int pCost, String pType, int uNo, String lInning, int lNo,

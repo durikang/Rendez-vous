@@ -26,6 +26,8 @@
 
 <!-- Custom styles for this template -->
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
+
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 </head>
 <style>
     * {
@@ -110,11 +112,44 @@
 		width:100%;
 		margin:auto;
 		margin-top:5%;
+		border-collapse: collapse;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	}
 	
-	#boardTable td {
-		border:1px solid black;
+	#boardTable thead tr {
+		background-color: #c9c0b1;
+		color:white;
+		font-weight:bold;
+	}
+	
+	#boardTable thead tr td {
+		border-right:1px solid white;
+	}
+	
+	
+	#boardTable th, #boardTable td {
 		text-align:center;
+		padding: 12px 15px;
+	}
+	
+	#boardTable tbody tr {
+		border-bottom:1px solid #dddddd;
+	}
+	
+	#boardTable tbody tr td {
+		border-right:1px solid #dddddd;
+	}
+	
+	#boardTable tbody tr td button {
+		margin: 0 5%;
+	}
+	
+	#boardTable tbody tr:nth-of-type(even) {
+		background-color: #f3f3f3;
+	}
+	
+	#boardTable tbody tr:last-of-type {
+		border-bottom : 2px solid #c9c0b1;
 	}
 
 	#remoCon {
@@ -139,6 +174,16 @@
 	  	width:80px;
 	  	border-radius:10px;
 	  	background:#c9c0b1;
+	  }
+	  
+	  #cancel:hover {
+	  	text-decoration:none;
+	  	color:black;
+	  	font-weight:bold;
+	  }
+	  
+	  #submit:hover {
+	  	font-weight:bold;
 	  }
 </style>
 <body>
@@ -170,15 +215,16 @@
 	</header>
     <div class="board_box">
 	    <div class="wrapper">
-	        <div class="sidebar">
-	            <h2>q & a</h2>
-	            <ul>
-	                <li><a href="support_main.do"><i class="fas fa-home" style="color:#c9c0b1;"></i>Home</a></li>
-	                <li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color:#c9c0b1;"></i>Q & A</a></li>
-	                <li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color:#c9c0b1;"></i>문의 내역</a></li>
-	            </ul>
-	        </div>
-	    </div>
+			<div class="sidebar">
+				<h2>q & a</h2>
+				<ul>
+					<li><a href="support_main.do"><i class="fas fa-home" style="color: #c9c0b1;"></i>Home</a></li>
+					<li><a href="support_faq.do"><i class="fas fa-comment-dots m-auto" style="color: #c9c0b1;"></i>F A Q</a></li>
+					<li><a href="support_qna.do"><i class="fas fa-question-circle m-auto" style="color: #c9c0b1;"></i>Q & A</a></li>
+					<li><a href="support_list.do"><i class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>문의 내역</a></li>
+				</ul>
+			</div>
+		</div>
 	    <div class="content_area">
 	    	<div class="board_area">
 	    		<h1>Q & A 수정</h1>
@@ -197,13 +243,36 @@
 							<td><input type="text" name="qWriter" size="80%" value="${q.qWriter}" readonly></td>
 						</tr>
 						<tr>
-							<td height="500">내용</td>
-							<td><textarea cols="150" rows="20" name="qContent">${ q.qContent }</textarea></td>
+							<td height="400">내용</td>
+							<td>
+								<textarea name="qContent"></textarea>
+			   	                <script>
+			                        $(document).ready(function(){
+			                        	CKEDITOR.replace( 'qContent', {
+			                        		filebrowserImageUploadUrl:'/image/upload',
+			                        		height:300
+			                        	});
+			                        	
+			                        	CKEDITOR.on('dialogDefinition', function(e){
+			                        		var dialogName = e.data.name;
+			                        		var dialogDefinition = e.data.definition;
+			                        		
+			                        		switch(dialogName) {
+			                        			case 'image' :
+			                        				//dialogDefinition.removeContents('info');
+			                        				dialogDefinition.removeContents('Link');
+			                        				dialogDefinition.removeContents('advanced');
+			                        				break;
+			                        		}
+			                        	});
+			                        });
+				                </script>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center">
-								<input type="submit" value="수정하기"> &nbsp;
-								<button><a href="support_qna.do">취소하기</a></button>
+								<input id="submit" type="submit" value="수정하기"> &nbsp;
+								<button><a id="cancel" href="support_qna.do">취소하기</a></button>
 							</td>
 						</tr>
 					</table>

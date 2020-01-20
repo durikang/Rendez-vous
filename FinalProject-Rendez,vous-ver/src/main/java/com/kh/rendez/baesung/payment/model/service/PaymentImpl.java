@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.rendez.baesung.payment.model.dao.PaymentDao;
+import com.kh.rendez.baesung.payment.model.vo.Coupon;
+import com.kh.rendez.baesung.payment.model.vo.InsertCouponInfo;
 import com.kh.rendez.baesung.payment.model.vo.LessonTime;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
 import com.kh.rendez.baesung.search.model.vo.tClass;
@@ -46,4 +48,23 @@ public class PaymentImpl implements PaymentService{
 			
 		return jpDao.updateLession(lt);
 	}
+
+	@Override
+	public ArrayList<Coupon> selectCouponList(int userNo) {
+		
+		return jpDao.selectCouponList(userNo);
+	}
+
+	@Override
+	public int insertCoupon(InsertCouponInfo cInfo) {
+		
+		return jpDao.insertCoupon(cInfo);
+	}
+
+	@Override
+	public int updateCoupon(int couponNo) {
+		return jpDao.updateCoupon(couponNo);
+	}
+
+	
 }

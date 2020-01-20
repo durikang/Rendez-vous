@@ -131,6 +131,7 @@
 	<div class="hcont">
 		<c:import url="../common/menubar.jsp"/>
 	</div>
+	<c:import url="../common/hyunsidebar.jsp"/>
 <!-- //HEADER -->
 
 	<!--container-->
@@ -190,7 +191,7 @@
 							&nbsp;
 							<div class="button_gray cursor" onclick="updateLesson(this);" style="width: 180px">수업 정보 수정하기</div>
 							&nbsp;	
-							<div class="button_white cursor" onclick="fnStatusChange('CS01','19200');">등록완료하기</div>				
+							<!-- <div class="button_white cursor" onclick="fnStatusChange('CS01','19200');">등록완료하기</div> -->				
 					</div>
 							
 				</div>
@@ -210,6 +211,7 @@
 					<th>끝나는시각</th>
 					<th>잔여인원</th>
 					<th>총원</th>
+					<th>시간</th>
 					</tr>
 
 					<c:forEach var="l" items="${lList}">
@@ -221,6 +223,7 @@
 					<td><fmt:formatDate value="${l.eTime}" pattern="HH:mm"/></td>
 					<td>${l.remain }</td>
 					<td>${l.total }</td>
+					<td></td>
 					</tr>
 					</c:if>		
 					</c:forEach>			
@@ -267,9 +270,10 @@
 			}
 			
 			function updateLesson(value){
-				var lno = $(value).parent().children().eq(0).val();
-				alert(lno);
-				
+				var lNo = $(value).parent().children().eq(0).val();
+				if(confirm("수정하시겠습니까?")){
+				location.href="updateLessonInfo.do?lNo="+lNo;
+				}
 			}	
 				
 	
@@ -296,11 +300,10 @@
  
       <!-- Modal content -->
       <div class="modal-content">
-        <button class="close">close</button>                                                               
-        <p>Some text in the Modal..</p>
+        <button class="close">close</button>
         <form action="lessonTimeInsert.do">
                  <input id="adlno" type="text" name="lno" hidden> <br>
-                   가격 : <input id="adprice" name="price" type="number"> <br>          
+        <input id="adprice" name="price" type="number" hidden=""> <br>          
 		날짜: <input type="date" name="dday"> <br>
 		시작 시간 : <input type="time" name="stime"> <br>
 		종료 시간 : <input type="time" name="etime"><br>

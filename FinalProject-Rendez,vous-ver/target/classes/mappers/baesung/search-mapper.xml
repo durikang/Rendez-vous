@@ -168,7 +168,7 @@ WHERE ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' |
             '%' || #{item} || '%'      
         	</foreach>)
 		</if>
-		<if test="tType != null">
+		<if test="tType != null and tType != 2">
 			AND L.TTYPE = #{tType}
 		</if>
 		<if test="regionMain != null">
@@ -208,7 +208,7 @@ WHERE ((L.L_TITLE LIKE '%' || #{sValue} || '%') OR (L.L_INTRODUCTION LIKE  '%' |
             '%' || #{item} || '%'      
         	</foreach>)
 		</if>
-		<if test="tType != null">
+		<if test="tType != null and tType != 2">
 			AND L.TTYPE = #{tType}
 		</if>
 		<if test="regionMain != null">

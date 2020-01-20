@@ -1074,11 +1074,12 @@ text-decoration: none;
                             }
                             else
                             {
-                                tType = tType + "," + $(this).attr("tType");
+                                tType = "2";
                             }
                         }
                     });
                     
+                 
                     
                     regionSub = $("#region").val();
                     regionMain = $("#regionMain").val();
@@ -1542,6 +1543,7 @@ text-decoration: none;
                 $('#regionSubLayer'+$(item).val()).addClass('on');
              							
                 $(item).prop("selected", true);
+                $('#regionMain').val($(item).val());	
 			}
 			
 
@@ -1581,6 +1583,7 @@ text-decoration: none;
 			 
 			if($(item).val() == '${sInfo.regionSub}'){
 				$(item).prop("selected", true);
+				$('#region').val($(item).val());
 			}
 			 
 			 <c:forEach items="${cCList}" var="cCList">
@@ -1630,6 +1633,9 @@ text-decoration: none;
 			             } });  });}
 		
 		var tType = '${sInfo.tType}';
+		if(tType == '2'){
+			tType = '0,1';
+		}
 		if(tType != ''){
 			var tTypeArr = tType.split(',');
 			

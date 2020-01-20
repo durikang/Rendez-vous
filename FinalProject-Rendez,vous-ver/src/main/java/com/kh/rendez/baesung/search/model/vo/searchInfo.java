@@ -26,6 +26,22 @@ public class searchInfo {
 		this.sValue = sValue;
 	}
 
+	public searchInfo(String sType, String sValue, String cateMain, String cateSub, String regionMain, String regionSub,
+			ArrayList sDay, ArrayList sTime, Integer tType, String day, String time, String cOrder) {
+		this.sType = sType;
+		this.sValue = sValue;
+		this.cateMain = cateMain;
+		this.cateSub = cateSub;
+		this.regionMain = regionMain;
+		this.regionSub = regionSub;
+		this.sDay = sDay;
+		this.sTime = sTime;
+		this.tType = tType;
+		this.day = day;
+		this.time = time;
+		this.cOrder = cOrder;
+	}
+
 	public String getsType() {
 		return sType;
 	}
@@ -128,12 +144,6 @@ public class searchInfo {
 				+ ", regionMain=" + regionMain + ", regionSub=" + regionSub + ", sDay=" + sDay + ", sTime=" + sTime
 				+ ", tType=" + tType + ", day=" + day + ", time=" + time + ", cOrder=" + cOrder + "]";
 	}
-	
-	
 
-	
-	
-	
 
-	
 }

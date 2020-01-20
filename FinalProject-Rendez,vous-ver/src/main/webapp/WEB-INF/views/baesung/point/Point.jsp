@@ -129,6 +129,9 @@
 }
 #n_id{position:absolute;left:674.5px;z-index:20;box-sizing: border-box;}
 #n_start{position: absolute;left:625.5px; top: 400px; width: 150px; height: 150px;box-sizing: border-box;}
+#n_start:hover{
+	cursor: pointer;
+}
 .roulette_wrap{
 	background-image: url(resources/baesung/images/bg_event_main.png);
 	width: 60%;

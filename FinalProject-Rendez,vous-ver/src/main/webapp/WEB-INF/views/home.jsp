@@ -143,14 +143,14 @@ button:hover {
 
 /* reset */
 #wrap {
-	width: 1920px;
+	width: 100%;
 	margin: 0px auto;
 }
 
 /* banner */
 #banner {
 	position: relative;
-	width: 1920px;
+	width: 100%;
 	margin: 0 auto;
 	text-align: center;
 	height: 450px;
@@ -346,7 +346,7 @@ input[name="r"] {
 }
 
 body {
-	text-align: center;
+	text-align:center;
 	display: block;
 	margin: 0 auto;
 	font-size: 16px;
@@ -510,18 +510,37 @@ div ul {
 /**************************************/
 .swiper-area {
 	width:80%;
+	height:15%;
 	margin:auto;
-	margin-top:12%;
 	margin-bottom:5%;
+	padding-top:2%;
+}
+
+#img-area {
+	width:100%;
+	height:50%;
+}
+
+#text-area {
+	margin-top:2%;
+	margin-left:15%;
+	width:100%;
+	height:50%;
+	text-align:left;
+}
+
+.trigger2 {
+	cursor:pointer;
+	float:right;
 }
 
 .swiper-container {
-   height:420px; 
+   height:50vh; 
    width:1200px;  
 }
 .swiper-slide {
+   margin-top:6%;
    text-align:center;
-   display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
    align-items:center; /* 위아래 기준 중앙정렬 */
    justify-content:center; /* 좌우 기준 중앙정렬 */
 }
@@ -531,8 +550,50 @@ div ul {
    /* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
 }
 
-.trigger {
-	margin:0px 0px 1000px 0px;
+#icon-area1, #icon-area2 {
+	width:80%;
+	height:40%;
+	margin:auto;
+}
+
+#icon-ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#icon-ul li{
+	margin:20px 0 0 29px;
+	float:left;
+}
+
+#icon-ul2 {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#icon-ul2 li{
+	margin:20px 0 0 22px;
+	float:left;
+}
+
+.newYear {
+	width:60%;
+	margin:auto;
+	margin-top:5%;
+}
+
+.newYear img {
+	width:100%;
+	height:180px;
+	margin:auto;
+	border-radius:15px;
+}
+
+.slideimgsize {
+	width:;
+	height:;
 }
 
 </style>
@@ -575,97 +636,290 @@ div ul {
 
 
 <div class="swiper-area">
-	<div class="swiper-container">
+	<div class="swiper-container swiper1">
 		<h2>추천 수업</h2>
+		<a class="trigger2"><img src="https://img.icons8.com/android/24/000000/menu.png"></a> 
 	   <div class="swiper-wrapper">
-	      <div class="swiper-slide"><img src="resources/homeImg/ex.PNG"></div>
-	      <div class="swiper-slide"><img src="resources/homeImg/ex2.PNG"></div>
-	      <div class="swiper-slide"><img src="resources/homeImg/ex3.PNG"></div>
-	      <div class="swiper-slide"><img src="resources/homeImg/ex.PNG"></div>
-	      <div class="swiper-slide"><img src="resources/homeImg/ex2.PNG"></div>
-	      <div class="swiper-slide"><img src="resources/homeImg/ex3.PNG"></div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>■1:1전문■ 고퀄레슨NO.1</h3>
+	      		<p>01월18일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>	
+	      	</div>	      	
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>	
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex3.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[이벤트]에어비앤비 호스트!</h3>
+	      		<p>01월29일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex4.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[원데이/재테크]이 걸로 끝!</h3>
+	      		<p>01월23일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex5.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[원데이]빠르고 쉽게 배우는 금융</h3>
+	      		<p>01월30일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex6.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[원데이]나만의 귀걸이 만들기</h3>
+	      		<p>협의 후 결정 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
 	   </div>
 	</div>	
 </div>
 
-<script>
-
-new Swiper('.swiper-container', {
-
-   slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
-   spaceBetween : 30, // 슬라이드간 간격
-   slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-
-   // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-   // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-   loopFillGroupWithBlank : true,
-
-   loop : true, // 무한 반복
-   autoplay: true,
-   autoplaySpeed: 2000,
-
-});
-
-</script>
+<div class="newYear">
+	<img src="resources/homeImg/배너1.PNG">
+</div>
 	
 		<!-- 버튼 -->
-		<button class="trigger2">카테고리</button> 
-
+		
 		<!-- 팝업 될 레이어 --> 
         <div class="modal2"> 
             <div class="modal-content2"> 
                 <span class="close-button2">&times;</span> 
-                <br><br>
-                <a href="#">디자인</a><br>
-                <a href="#">실무역량</a><br>
-                <a href="#">뷰티</a><br>
-                <a href="#">영상</a><br>
-                <a href="#">외국어</a><br>
-                <a href="#">음악</a><br>
-                <a href="#">라이프스타일</a><br>
-                <a href="#">기타</a><br>
-                <br>
+              	<div id="icon-area1">
+              		<ul id="icon-ul">
+	              		<li>		              		
+		                	<a href="#"><img src="https://img.icons8.com/nolan/64/design.png"><br>디자인</a>
+	                	</li>
+	              		<li>	              			
+	                		<a href="#"><img src="https://img.icons8.com/nolan/64/workstation.png"><br>실무역량</a>
+	              		</li>
+	              		<li>	              			
+	                		<a href="#"><img src="https://img.icons8.com/nolan/64/lipstick.png"><br>뷰티</a>
+	              		</li>
+	              		<li>	              			
+                			<a href="#"><img src="https://img.icons8.com/nolan/64/documentary.png"><br>영상</a>
+	              		</li>              		
+	              	</ul>
+              	</div>
+              	<div id="icon-area2">
+              		<ul id="icon-ul2">
+	              		<li>	              			
+                			<a href="#"><img src="https://img.icons8.com/nolan/64/google-translate.png"><br>외국어</a>
+	              		</li>
+	              		<li>	              			
+                			<a href="#"><img src="https://img.icons8.com/nolan/64/musical-notes.png"><br>음악</a>
+	              		</li>
+	              		<li>	              			
+                			<a href="#"><img src="https://img.icons8.com/nolan/64/running.png"><br>라이프스타일</a>
+	              		</li>
+	              		<li>	              			
+                			<a href="#"><img src="https://img.icons8.com/nolan/64/settings--v1.png"><br>기타</a>
+	              		</li>
+	              	</ul>
+              	</div>
                 <input type="button" id="cancel2" value="취소"> 
             </div> 
         </div>    
 	
-	<div class="ad" style="background-color:darkgray; width: 1920px; height: 500px;">
-	<div class="slidershow middle">
-		<div class="slides" style="z-index:1">
-			<input type="radio" name="r" id="r1" checked> 
-			<input type="radio" name="r" id="r2"> 
-			<input type="radio" name="r" id="r3"> 
-			<input type="radio" name="r" id="r4"> 
-			<input type="radio" name="r" id="r5">
-
-			<div class="slide s1">
-				<img src="resources/homeImg/광고.jpg">
-			</div>
-			<div class="slide">
-				<img src="resources/homeImg/광고2.jpg">
-			</div>
-			<div class="slide">
-				<img src="resources/homeImg/광고3.jpg">
-			</div>
-			<div class="slide">
-				<img src="resources/homeImg/광고4.png">
-			</div>
-			<div class="slide">
-				<img src="resources/homeImg/광고5.jpg">
-			</div>
-		</div>
-
-		<div class="navigation">
-			<label for="r1" class="bar"></label> 
-			<label for="r2" class="bar"></label>
-			<label for="r3" class="bar"></label> 
-			<label for="r4" class="bar"></label>
-			<label for="r5" class="bar"></label>
+	<div class="ad" style="background-color:lightgray; width: 100%; height: 440px; margin-bottom:9%;">
+		<div class="swiper-container swiper2">
+		   <div class="swiper-wrapper">
+		      <div class="swiper-slide" style="padding-left:5%;"><img src="resources/homeImg/광고배너5.PNG"></div>
+		      <div class="swiper-slide" style="padding-right:5%;"><img src="resources/homeImg/광고배너2.PNG"></div>
+		      <div class="swiper-slide" style="padding-left:5%;"><img src="resources/homeImg/광고배너3.PNG"></div>
+		      <div class="swiper-slide" style="padding-right:5%;"><img src="resources/homeImg/광고배너4.PNG"></div>
+		   </div>
+		   <div class="swiper-button-next">
+		   <img src="https://img.icons8.com/cotton/64/000000/circled-chevron-right.png" style="margin-left:-80%; margin-top:-50%;"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+		   <div class="swiper-button-prev">
+		   <img src="https://img.icons8.com/cotton/64/000000/circled-chevron-left.png" style="margin-left:-50%; margin-top:-50%;"></div><!-- 이전 버튼 -->
 		</div>
 	</div>
-    </div>
+	
+	<div class="swiper-container swiper3" style="margin-bottom:4%;">
+		   <div class="swiper-container swiper1">
+		<h2>만원 이하 클래스</h2>
+	   <div class="swiper-wrapper">
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>■1:1전문■ 고퀄레슨NO.1</h3>
+	      		<p>01월18일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>	
+	      	</div>	      	
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>	
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex3.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[이벤트]에어비앤비 호스트!</h3>
+	      		<p>01월29일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	   </div>
+	</div>
+		</div>
+		
+		<div class="swiper-container swiper4">
+		   <div class="swiper-container swiper1">
+		<h2>신규 클래스</h2>
+	   <div class="swiper-wrapper">
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>■1:1전문■ 고퀄레슨NO.1</h3>
+	      		<p>01월18일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>	
+	      	</div>	      	
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>	
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex3.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[이벤트]에어비앤비 호스트!</h3>
+	      		<p>01월29일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	      <div class="swiper-slide">
+	      	<div id="img-area">
+	      		<img src="resources/homeImg/ex2.PNG">
+	      	</div>
+	      	<div id="text-area">
+	      		<h3>[보험가입자필독/1:1]</h3>
+	      		<p>01월17일 시작 : 지역</p><br>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
+	      	</div>
+	      </div>
+	   </div>
+	</div>
+		</div>
 
-	<script>
+	<!-- <script>
 		var slideCount = $(".slideImg").length;
 		var currentIndex = 0;
 		var slidePosition;
@@ -680,11 +934,11 @@ new Swiper('.swiper-container', {
 				left : slidePosition
 			}, 400);
 		}, 3000);
-	</script>
+	</script> -->
 
 	<!----------------------------------->
 	
-	<script>
+	<!-- <script>
 		$(document).ready(function() {
 			$("#content #tab1").hide(); // Initially hide all content
 			$("#content #tab2").hide();
@@ -702,7 +956,7 @@ new Swiper('.swiper-container', {
 				$('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
 			});
 		});
-	</script>
+	</script> -->
 
 	<!--팝업창-->
 	<div class="layer_popup" style="position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;" id="layer_pop">
@@ -750,7 +1004,7 @@ new Swiper('.swiper-container', {
 	<br><br><br><br><br>
 
 	<!-- 버튼 -->
-	<button class="trigger">광고, 이벤트 받아보기</button>
+	<div class="btn"><button class="trigger">광고, 이벤트 받아보기</button></div>
 
 	<!-- 팝업 될 레이어 -->
 	<div class="modal">
@@ -805,6 +1059,78 @@ new Swiper('.swiper-container', {
 	<br><br><br><br><br>
 	<br><br><br><br><br>
 	<br><br><br><br><br>
+		<script>
+
+		new Swiper('.swiper1', {
+		
+		   slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+		   spaceBetween : 30, // 슬라이드간 간격
+		   slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+		
+		   // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		   // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		   loopFillGroupWithBlank : true,
+		
+		   loop : true, // 무한 반복
+		   autoplay: true,
+		   autoplaySpeed: 2000,
+		
+		});
+		
+		new Swiper('.swiper3', {
+			
+			   slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+			   spaceBetween : 30, // 슬라이드간 간격
+			   slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+			
+			   // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+			   // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+			   loopFillGroupWithBlank : true,
+			
+			   loop : true, // 무한 반복
+			   autoplay: true,
+			   autoplaySpeed: 2000,
+			
+			});
+		
+		new Swiper('.swiper4', {
+			
+			   slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+			   spaceBetween : 30, // 슬라이드간 간격
+			   slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+			
+			   // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+			   // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+			   loopFillGroupWithBlank : true,
+			
+			   loop : true, // 무한 반복
+			   autoplay: true,
+			   autoplaySpeed: 2000,
+			
+			});
+		
+		new Swiper('.swiper2', {
+			
+		   slidesPerView : 2, // 동시에 보여줄 슬라이드 갯수
+		   spaceBetween : 30, // 슬라이드간 간격
+		   slidesPerGroup : 2, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+		
+		   // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		   // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		
+		   loop : true, // 무한 반복
+		   autoplay: true,
+		   autoplaySpeed: 2000,
+		   
+		   navigation : { // 네비게이션 설정
+				nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+				prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+			},
+				
+		});
+		
+		
+		</script>
 
 	<c:import url="common/footbar.jsp" /> 
 </body>

@@ -22,6 +22,7 @@
 		width: 70%;
 		margin-top : 30%;
 	}
+	
 </style>
 </head>
 <body>

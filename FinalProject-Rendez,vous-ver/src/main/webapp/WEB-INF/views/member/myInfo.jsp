@@ -12,7 +12,7 @@
 $(function(){
 	if(${msg ne null}){
 		alert('${msg}');
-	};
+	});
 	
 	if($("#pwForm").submit(function(){
 		if($("#pw").val() !== $("#pw2").val()){
@@ -38,8 +38,8 @@ $(function(){
 		}else if($("#user_name").val()) !== $("#user_name").val()){
 			alert("공백은 입력이 불가능합니다.");
 			return false;
-		};
-	});
+		}
+	}));
 		
 	if($("myForm").submit(function(){
 		if($("#phone").val()) !== $("#phone").val()){
@@ -53,7 +53,7 @@ $(function(){
 			alert("공백은 입력이 불가능합니다.");
 			return false;
 		}
-	};
+	});
 </script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
    <script> 
@@ -82,8 +82,7 @@ $(function(){
         	self.close();
 		</script>
 		</c:if>
-		
-	
+
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
@@ -93,7 +92,7 @@ $(function(){
 			<div>
 				<form id="myForm" action="mupdate.do" method="post">
 					<p>
-						ID 
+						EMAIL 
 						<input class="w3-input" type="text" id="user_id" name="user_id" readonly value="${ loginUser.user_id }"> 
 					</p>
 					<!-- <p>
@@ -102,7 +101,7 @@ $(function(){
 					</p>
 					<p>
 						Confirm
-						<input class="w3-input" id="pw2" name="pw2" placeholder="변경할 패스워드 재확인을 위해 동일하게 입력해주세요." type="password" required >
+						<input class="w3-input" id="pw2" name="pw2" placeholder="변경할 패스워드 확인을 위해 동일하게 입력해주세요." type="password" required >
 					</p> -->
 					<p>
 						NAME 

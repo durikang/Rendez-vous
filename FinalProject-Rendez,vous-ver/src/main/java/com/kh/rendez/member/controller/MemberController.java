@@ -66,7 +66,7 @@ public class MemberController {
 	         return "home";
 	      } else {
 	         model.addAttribute("msg", "로그인 실패");
-	         return "common/errorPage";
+	         return "member/loginPage";
 	      }
 	   }
 	
@@ -76,6 +76,7 @@ public class MemberController {
 		return "home";
 	}
 	
+	// 회원정보 수정 시 입력하는 비밀번호 확인용
 	@RequestMapping("pwdCheck.do")
 	public String pwdCheck(Member m, Model model, HttpServletRequest request) {
 		
@@ -88,6 +89,7 @@ public class MemberController {
 			return "member/pwdCheckPage";
 		}
 	}
+
 	
 	@RequestMapping("mypage.do")
 	public ModelAndView myPageView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page, HttpSession session) {
@@ -140,11 +142,12 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping("minsert.do")
+	@RequestMapping(value="minsert.do", method=RequestMethod.POST)
 	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
 								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
 								@RequestParam("address2") String address2, 
+								/*@RequestParam("email1") String email1, @RequestParam("email2") String email2,*/
 								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
 		
 		/*if(!file.getuOriginName().equals("")) {
@@ -156,7 +159,27 @@ public class MemberController {
 				m.setuOriginName(file.getuOriginName());
 				m.setuChangeName(uChangeName);
 			}			
-		}*/		
+		}*/	
+/*		      
+		      if(!file.getOriginalFilename().equals("")) {
+		         String renameFileName = saveFile(file, request);
+		         
+		         if(renameFileName != null) {
+		            vo.setMem_photo(file.getOriginalFilename());
+		            vo.setMem_uphoto(renameFileName);
+		         }
+		      }*/
+		         
+		      
+		/*m.setUser_id(email1+"@"+email2);
+		      		      
+		System.out.println(email1+"@"+email2);
+		System.out.println(m);*/
+		
+		/*m.setUser_id(email);
+	      
+		System.out.println(email1+"@"+email2);
+		System.out.println(m);*/
 		
 		m.setAddress(post + "," + address1 + ", " + address2);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
@@ -165,6 +188,7 @@ public class MemberController {
 		
 		int result = mService.insertMember(m);
 		
+		/*if(result > 0 || m.getMem_photo() == null || m.getMem_uphoto() != null || m.getMem_photo() != null || m.getMem_uphoto() == null) {*/
 		if(result > 0) {
 			model.addAttribute("msg", "회원가입이 완료 되었습니다.");
 			return "home";

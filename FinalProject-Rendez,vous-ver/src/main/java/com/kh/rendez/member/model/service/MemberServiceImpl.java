@@ -38,8 +38,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int checkIdDup(String id) {
-		return mDao.checkIdDup(id);
+	public int checkIdDup(String user_id) {
+		return mDao.checkIdDup(user_id);
 	}
 
 	@Override

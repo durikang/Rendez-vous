@@ -34,8 +34,8 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMember", m);
 	}
 
-	public int checkIdDup(String id) {
-		return sqlSession.selectOne("memberMapper.idCheck", id);
+	public int checkIdDup(String user_id) {
+		return sqlSession.selectOne("memberMapper.idCheck", user_id);
 	}
 	
 	public int getMyQnaListCount(int currentPage, String writer) {

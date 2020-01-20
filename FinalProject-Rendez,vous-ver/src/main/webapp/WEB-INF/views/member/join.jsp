@@ -30,24 +30,38 @@
    .error {
       color:red;
    } 
+   
+    #wrapper {
+    	margin-top :10%;
+    	width:100%;
+    	height:70vh;
+    }
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
+ <div id="wrapper">
    <h1 align="center">회원 가입</h1>
-   <br>
    <br>
    <div class="centerText">
       <form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()">
-         <table width="500" cellspacing="5">
+         <table width="600" cellspacing="5">
             <tr>
-               <td width="150">* 아이디</td>
-               <td width="450">
-                  <input type="text" name="user_id" id="user_id">
-                  <span class="guide ok">이 아이디는 사용 가능합니다.</span>
-                  <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
-                  <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
-               </td>
-            </tr>
+				<td>* 이메일</td>
+                <td><input type="text" name="user_id" id="email1"  placeholder="이메일을 입력해주세요">
+                      <!--  @<input type="text" name="email2" id="email2"> 
+                        <select name="email3" id="email3">
+                           <option>직접입력</option>
+                           <option>naver.com</option>
+                           <option>nate.com</option>
+                           <option>gmail.com</option>
+                           <option>daum.net</option>
+                        </select>
+                        <br>-->
+                        <span class="guide ok">이 이메일은 사용 가능합니다.</span>
+						<span class="guide error">이 이메일은 사용할 수 없습니다.</span>
+						<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
+                </td>
+               	</tr>
             <tr>
                <td>* 이름</td>
                <td><input type="text" name="user_name"></td>
@@ -68,15 +82,15 @@
                </td>
             </tr>
             <tr>
-               <td>나이</td>
+               <td>* 나이</td>
                <td>
                   <input type="number" min="20" max="100" name="age">
                </td>
             </tr>
             <tr>
-               <td>전화번호</td>
+               <td>* 전화번호</td>
                <td>
-                  <input type="tel" name="phone">
+                  <input type="tel" name="phone" class="phone-number-check">
                </td>
             </tr>            
             <tr>
@@ -99,6 +113,7 @@
                </td>
             </tr>
             <tr>
+            <br>
                <td colspan="2" align="center">
                   <button onclick="validate();">가입하기</button>&nbsp;
                   <input type="reset" value="취소하기">
@@ -111,6 +126,7 @@
          <a href="home.do">시작페이지로 이동</a>
       </div>
    </div>
+   </div>
    <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
    <script> 
       $(function() { 
@@ -118,12 +134,12 @@
       }); 
    </script>
    
-   <script>
+    <script>
       $(function(){
-         $("#user_id").on("keyup", function(){
-            var user_id = $(this).val().trim();
+         $("#email1").on("keyup", function(){
+            var email1 = $(this).val().trim();
              
-            if(user_id.length < 4) {
+            if(email1.length < 4) {
                $(".guide").hide(); // 나타났던 span 태그 숨기기
                $("#idDuplicateCheck").val(0); // 중복 여부 확인 값 리셋
                
@@ -132,7 +148,7 @@
             
             $.ajax({
                url:"dupid.do",
-               data:{user_id:user_id},
+               data:{user_id:email1},
                success:function(data) {
                   if(data.isUsable == true) {
                      $(".error").hide();
@@ -153,13 +169,123 @@
       
       function validate(){
          if($("#idDuplicateCheck").val() == 0) {
-            alert('사용 가능한 아이디를 입력해주세요.');
-            $("#user_id").focus();
+            alert('사용 가능한 이메일을 입력해주세요.');
+            $("#email1").focus();
             return false;
          }
          return true;
       }
       
+   </script>
+   
+   <!-- <script>
+      $(function(){
+         $("#email2").on("focusout", function(){
+        	var email1 = $("#email1").val().trim();
+            var email2 = $("#email2").val().trim();
+             
+            if(email2 != "") {
+               $(".guide").hide(); // 나타났던 span 태그 숨기기
+               $("#idDuplicateCheck").val(0); // 중복 여부 확인 값 리셋
+               
+               return;
+            }
+            var email = email1 + "@" + email2;
+            
+            $.ajax({
+               url:"dupid.do",
+               data:{user_id:email},
+               success:function(data) {
+                  if(data.isUsable == true) {
+                     $(".error").hide();
+                     $(".ok").show();
+                     $("#idDuplicateCheck").val(1);
+                  } else { // 중복일 경우
+                     $(".error").show();
+                     $(".ok").hide();
+                     $("#idDuplicateCheck").val(0);
+                  }
+               },
+               error:function(){
+                  console.log("ajax 통신 실패");
+               }               
+            });            
+         });
+      });
+      
+      function validate(){
+         if($("#idDuplicateCheck").val() == 0) {
+            alert('사용 가능한 이메일을 입력해주세요.');
+            $("#email1").focus();
+            return false;
+         }
+         return true;
+      }
+   </script>
+   -->
+   
+   <script>
+   $(document).ready(function() {	
+	   $("#email3").change(function() {
+	    if($("#email3").val() != "직접입력") {
+	     $("#email2").val($("#email3").val());
+	    } else {
+	     alert("이메일 주소를 선택하여주세요")
+	     $("#email2").val("");
+	     $("#email3").focus();
+	    }
+	   });
+	  });
+   </script>
+   
+   <!-- 전화번호 유효성검사 -->
+   <script>
+	   $(function(){
+	    $(".phone-number-check").on('keydown', function(e){
+	       // 숫자만 입력받기
+	        var trans_num = $(this).val().replace(/-/gi,'');
+		var k = e.keyCode;
+					
+		if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
+		{
+	  	    e.preventDefault();
+		}
+	    }).on('blur', function(){ // 포커스를 잃었을때 실행
+	        if($(this).val() == '') return;
+	
+	        // 기존 번호에서 - 를 삭제
+	        var trans_num = $(this).val().replace(/-/gi,'');
+	      
+	        // 입력값이 있을때만 실행
+	        if(trans_num != null && trans_num != '')
+	        {
+	            // 총 핸드폰 자리수는 11글자이거나, 10자여야 함
+	            if(trans_num.length==11 || trans_num.length==10) 
+	            {   
+	                // 유효성 체크
+	                var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+	                if(regExp_ctn.test(trans_num))
+	                {
+	                    // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿈
+	                    trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
+	                    $(this).val(trans_num);
+	                }
+	                else
+	                {
+	                    alert("유효하지 않은 전화번호 입니다.");
+	                    $(this).val("");
+	                    $(this).focus();
+	                }
+	            }
+	            else 
+	            {
+	                alert("유효하지 않은 전화번호 입니다.");
+	                $(this).val("");
+	                $(this).focus();
+	            }
+	      }
+	  });  
+	});
    </script>
    <c:import url="../common/footbar.jsp"/>
 </body>

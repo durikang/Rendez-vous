@@ -141,7 +141,7 @@ div {
 }
 
 .tutor_cont .title_box .steps .on {
-    color: #ff005a;
+    color: rgb(184,145,105);
 }
 .tutor_cont .title_box .steps li {
     margin: 0 15px;
@@ -240,7 +240,7 @@ img {
     font-size: 20px;
     margin-top: 12px;
     padding-left: 40px;
-    color: #ff005b;
+    color: rgb(184,145,105);
 }
 
 a {
@@ -249,7 +249,7 @@ a {
 }
 .appcont .level2 {
     margin-top: 20px;
-    height: 100px;
+    height: 72px;
     background: #e3e3e3;
 }
 .appcont .top {
@@ -328,8 +328,8 @@ input[type=checkbox], input[type=radio] {
     line-height: 25px;
 }
 .appcont .level .on {
-    background: #ff005a;
-    border: 1px solid #ff005a;
+    background: rgb(184,145,105);
+    border: 1px solid rgb(184,145,105);
     color: #fff;
 }
 .appcont .level .levelbox {
@@ -358,20 +358,24 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
     font-family: 'Noto Sans','CJK KR','ë³¸ê³ ë”•' !important;
 }
 .appcont .level .on {
-    background: #ff005a;
-    border: 1px solid #ff005a;
+    background: rgb(184,145,105);
+    border: 1px solid rgb(184,145,105);
     color: #fff;
 }
 #testNext:hover{
     background:rgb(92, 92, 92);
     cursor: pointer;
 }
+#Paypoint::placeholder{
+	text-align: right;
+	
+}
 
     </style>
 </head>
 <body>
     <c:import url="../../common/menubar.jsp"/>
-    
+    <div style="border-top: 1px solid #c9c9c9;"></div>
     <div class="tutor_cont">
         <div class="title_box">
             <h3>수업신청</h3>
@@ -388,7 +392,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
              ${tClass.lTitle }	</div>
         <div class="apply">
             <div class="pf_box">
-                <div class="pf" style="background-image:url(resources/baesung/images/${tClass.uCName})"></div>
+                <div class="pf" style="background-image:url(resources/user/img/${tClass.uCName})"></div>
                 <p class="triangle-border top gray" style="margin-top:50px; margin-bottom: 50px;">
                     결제 후 신청이 완료되니 서둘러주세요! 수업이 조기 마감될 수 있습니다.	
             </p></div>
@@ -401,7 +405,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
                             전체 수업료						
                             </div>
                             <div class="right2">
-                                <font style="font-size:14px;font-weight:500;">${tClass.price }원</font>
+                                <font style="font-size:16px;font-weight:500;"><fmt:formatNumber value="${tClass.price }" pattern="#,###" />원</font>
                             </div>
                         </div>
                         <div class="level3">
@@ -409,30 +413,40 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
                             쿠폰					
                             </div>
                             <div class="right2">					
-                                <a onclick="couponPop();"><span id="couponArea2" style="font-size:13px;font-weight:500;">쿠폰없음 </span>&gt;</a>
+                                <a onclick="couponPop();" style="color: rgb(184,145,105);"><span id="couponArea2" style="font-size:16px;font-weight:500;">쿠폰없음 </span>&gt;</a>
                             </div>
                         </div>
                         <div class="level3">
                             <div class="left">					
-                            결제 금액
+                            	포인트
                             </div>
                             <div class="right2">
-                                <span id="payArea2">${tClass.price}</span>원 <font color="#666" style="font-size:12px;">(수업가격 + VAT 10%)</font>
-                            </div>
+<input type="text" id="Paypoint" style="width: 120px; height: 30px; border: 1px solid #d8d8d8;" placeholder="${point}p" ><button id="point_button" onclick="pointCal(this)" style="background: rgb(184,145,105);margin-left: 10px;width: 50px;height: 30px; border: 1px solid #d8d8d8; color: white;border-radius: 10px;">사용</button>                            </div>
                         </div>
                         <div class="level2 top">					
                             <div class="center2">수업료는 탈잉에서 보관하다가 첫 수업 후 튜터님께 전달 해 드려요.</div>									
-                        </div>		
+                        </div>	
+                        	
                     </div>
     
-                    <div class="all">
-                        <div>						
-                            <input type="hidden" onclick="layer();" id="allCheck" checked="">
+    				
+                     <div class="all">
+                        <div>		
+                        	<div class="left" style="    float: left;width: 100px;font-weight: 500;font-size: 16px;margin-top: 20px;line-height: 20px;">
+                        	결제금액 
+                        	</div>
+                        	<div class="right2" style="float: left;width: 500px;font-weight: 600;font-size: 35px;margin-top: 12px;padding-left: 40px;color: rgb(184,145,105);">
+                                <span id="payArea2"><fmt:formatNumber value="${tClass.price }" pattern="#,###" /></span>원 <font color="#666" style="font-size:12px;" id="priceInfo"></font>
+                            </div>
+                        	<!-- <div class="right" style="float: left;width: 500px;font-weight: 400;font-size: 16px;margin-top: 20px;padding-left: 10px;">
+                        	<input type="text" id="point" style="width: 140px; height: 37px; border: 1px solid #d8d8d8;" placeholder="" ><button style="background: #ff005b;margin-left: 10px;width: 50px;height: 37px; border: 1px solid #d8d8d8; color: white;border-radius: 10px;">사용</button>
+                        	</div> -->
+                        				
+                           <!--  <input type="hidden" onclick="layer();" id="allCheck" checked=""> -->
                         </div>
-                    </div>
-                    <br>
-                    
-                    <div class="level bottom" style="height:88px;">
+                    </div> 
+
+                    <div class="level bottom" style="height:88px; clear: both;">
                         <div class="left">결제수단</div>
                         <div class="right" id="pay">
                                 <div class="levelbox" id="button1" style="cursor:pointer" onclick="payCheck(1);">신용카드/간편결제</div>
@@ -446,9 +460,113 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         <input type="hidden" id="aid" name="aid" value="155272">
         <div class="next button" onclick="pay()" id="testNext">다음</div>
     </div>
-
+	 <input type="hidden" value="${tClass.price}" id="payFinalPrice">
 
     <script>
+    Price = '${tClass.price}';
+    CouponOnOff = "off";
+    PointOnOff = "off";
+    usePoint = 0;
+    val = 0;
+    
+	function pointCal(value){
+		usePoint = $("#Paypoint").val();
+
+		if(PointOnOff == "off"){// 포인트 사용시 
+		
+		if(usePoint <= 0 || usePoint == "" || isNaN(usePoint) ){
+			alert('올바른 값을 입력하세요');
+			return;
+		}		
+		if(Number(usePoint) > Number('${point}')){
+			alert("사용가능한 포인트를 확인해주세요");
+			return;
+		}	
+		
+		/// 유효성 검사후 포인트 차감하는 메소스 
+		
+		Price = Number(Price) - Number(usePoint);
+		strtotalPrice = formatMoney(Price.toString());	
+		$('#payArea2').text(strtotalPrice);
+		PointOnOff = "on";
+		
+		//alert(Price);
+		
+		$(value).text("해제");
+		$(value).css("background", "#888");
+		$("#Paypoint").attr("disabled",true); 
+	
+		}else{ // 포인트 해제시
+			
+			
+			Price = Number(Price) + Number(usePoint);
+			//alert(Price);
+			strtotalPrice = formatMoney(Price.toString());	
+			$('#payArea2').text(strtotalPrice);
+			PointOnOff = "off";
+			
+			$(value).text("사용");
+			$(value).css("background", "rgb(184,145,105)");
+			$("#Paypoint").attr("disabled",false);
+			$("#Paypoint").val("");	
+			usePoint = 0;
+		}
+		
+		
+		
+		
+	}
+    
+    
+    function couponUse(val1, name, price)//code, name, discountRate
+	{
+		
+		
+		val = val1;
+		if(val==0) // 쿠폰 해제 
+		{
+			if(PointOnOff == "off"){
+				
+			$('#couponArea2').text('쿠폰없음');
+			
+			Price = '${tClass.price}';
+			strtotalPrice = formatMoney(Price.toString());
+			
+			$('#payArea2').text(strtotalPrice);
+			$('#payFinalPrice').val(Price);
+			
+			}else{
+				
+				$('#couponArea2').text('쿠폰없음');
+				
+				Price =  ${tClass.price} - Number(usePoint);
+				strtotalPrice = formatMoney(Price.toString());	
+				
+				$('#payArea2').text(strtotalPrice);
+				$('#payFinalPrice').val(Price);
+			}			
+
+		}
+		else
+		{					
+			if(PointOnOff == "off"){
+			
+			Price = (${tClass.price} * ((100 -price)/100));
+			}else{
+			Price = (${tClass.price} * ((100 -price)/100)) - Number(usePoint);
+			}
+			
+			
+			strtotalPrice = formatMoney(Price.toString());
+			
+			$('#payArea2').text(strtotalPrice);
+			$('#couponArea2').text(name+' '+price+'%할인');
+			$('#payFinalPrice').val(Price);
+
+		
+		}
+	}
+    
         function payCheck(val)
         {			
             var area = $('#pay');
@@ -459,6 +577,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
             $('#paynum').val(val);
             
             //location.href = 'payComplete.do?payMethod='+payMethod;
+            //location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val;
         }
     
         function pay(){
@@ -488,7 +607,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	    pay_method : payMethod,
         	    merchant_uid : 'merchant_' + new Date().getTime(),
         	    name : '${tClass.lTitle}',
-        	    amount : ${tClass.price },
+        	    amount : Price,
         	    buyer_email : 'whqotjd@naver.com',
         	    buyer_name : '${loginUser.user_name}',
         	    buyer_tel : '${loginUser.phone}',
@@ -498,24 +617,25 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	}, function(rsp) {
         	    if ( rsp.success ) {
         	        var msg = '결제가 완료되었습니다.';
-        	        msg += '고유ID : ' + rsp.imp_uid;
+        	         /* msg += '고유ID : ' + rsp.imp_uid;
         	        msg += '상점 거래ID : ' + rsp.merchant_uid;
         	        msg += '결제 금액 : ' + rsp.paid_amount;
-        	        msg += '카드 승인번호 : ' + rsp.apply_num;
+        	        msg += '카드 승인번호 : ' + rsp.apply_num;  */
         	        
-        	        location.href = 'payComplete.do?payMethod='+payMethod;
+        	        //alert(val);
+        	         alert(msg);
+        	        location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val+'&Price='+Price+'&usePoint='+usePoint;
         	    } else {
         	        var msg = '결제에 실패하였습니다.';
         	        msg += '에러내용 : ' + rsp.error_msg;
+        	        alert(msg);
         	    }
-        	    alert(msg);
+        	   
         	});
         	
         }
         
-        
-        
-        
+
      /* function pay(val)
         {
             paynum = $('#paynum').val();
@@ -644,7 +764,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 
 	function couponPop()
 	{
-		popupWindow = window.open('coupon.do', '_blank', 'height=800,width=550,scrollbars=no,status=no');
+		popupWindow = window.open('coupon.do', '_blank', 'height=800,width=450,scrollbars=no,status=no');
 	}
 
 	function cend()
@@ -659,85 +779,9 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 		return formatMoney(val.substring(0, val.length - 3)) + ',' + val.substring(val.length - 3, val.length);
 	}
 
-	function couponUse(val, name, price)
-	{
-		$('#payPassTotal').val(0);
-		$('#payPassOne').val(0);
-		if(val==0)
-		{
-			strPrice = formatMoney(price.toString());
-		
-			$('#couponArea1').text('쿠폰없음');
-			$('#couponArea2').text('쿠폰없음');
-			
-			var amount = Number($('#Amount').val());
-			var time = Number($('#Time').val());
-			var totalTimes = Number($('#TotalTimes').val());
-		
-			
-			totalPrice = (amount*time*totalTimes-price)*1100/1000;		
-			onePrice = (amount-price)*1100/1000;
-			
-			if(totalPrice < 1)
-			{
-				totalPrice = 0;
-			}
-			if(onePrice < 1)
-			{
-				onePrice = 0;
-			}
-
-			strtotalPrice = formatMoney(totalPrice.toString());
-			stronePrice = formatMoney(onePrice.toString());
-
-			$('#payArea1').text(stronePrice);
-			$('#payArea2').text(strtotalPrice);
-
-			$('#couponId').val('');
-
-		}
-		else
-		{					
-			strPrice = formatMoney(price.toString());
-		
-			$('#couponArea1').text(name+' '+strPrice+'원');
-			$('#couponArea2').text(name+' '+strPrice+'원');
-			
-			var amount = Number($('#Amount').val());
-			var time = Number($('#Time').val());
-			var totalTimes = Number($('#TotalTimes').val());
-		
-			if(totalTimes==1)
-			{
-				totalPrice = (amount*5-price)*1100/1000;
-				onePrice = (amount*5-price)*1100/1000;
-			}
-			else
-			{
-				totalPrice = (amount*time*totalTimes-price)*1100/1000;
-				onePrice = (amount-price)*1100/1000;
-			}
-			
-			if(totalPrice < 1)
-			{
-				totalPrice = 0;
-				$('#payPassTotal').val(1);
-			}
-			if(onePrice < 1)
-			{
-				onePrice = 0;
-				$('#payPassOne').val(1);
-			}
-
-			strtotalPrice = formatMoney(totalPrice.toString());
-			stronePrice = formatMoney(onePrice.toString());
-
-			$('#payArea1').text(stronePrice);
-			$('#payArea2').text(strtotalPrice);
-
-			$('#couponId').val(val);
-		}
-	}
+	
+	
+	
 </script>
 
 </body>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pointMapper">
+	<select id="checkUserPoint" resultType="_int">
+	SELECT COUNT(*)
+	FROM USER_POINT
+	WHERE USER_NO = #{uNo}
+	</select>
+	
+	<insert id="insertNewPoint" parameterType="_int">
+	INSERT INTO USER_POINT VALUES(#{uNo}, 0, SYSDATE, 'NEW')
+	</insert>
+	
+	<select id="selectPoint" parameterType="_int" resultType="_int">
+	SELECT POINT
+	FROM USER_POINT
+	WHERE USER_NO = #{uNo}
+	</select>
+	
+	<insert id="insertCoupon" parameterType="_int">
+	INSERT INTO COUPON VALUES(coupon_seq.nextval, '룰렛20%쿠폰', (SELECT DBMS_RANDOM.STRING('X', 8) STR FROM DUAL), 20, SYSDATE, SYSDATE+7, 'R', #{uNo})
+	</insert>
+
+	<update id="updatePoint" parameterType="hashmap">
+	UPDATE USER_POINT SET POINT = (select point + #{point} FROM USER_POINT 
+	WHERE USER_NO = #{uNo}), UPDATE_DATE = SYSDATE, UPDATE_TYPE = 'roulette' WHERE USER_NO = #{uNo}
+	</update>
+	
+	<select id="checkrepetition" parameterType="_int" resultType="string">
+	SELECT UPDATE_TYPE 
+	FROM USER_POINT
+	WHERE USER_NO = #{uNo} AND TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</select>
+	
+	<select id="checkCoupon" parameterType="_int" resultType="string">
+	SELECT COUPON_NAME
+	FROM COUPON
+	WHERE USER_NO= #{uNo} AND TO_CHAR(START_DATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</select>
+	
+</mapper>

@@ -42,6 +42,12 @@
 						WHERE L_NO = #{lNo})
 	</select>
 	
+	<select id="selectTutorStatus" parameterType="_int" resultType="String">
+	SELECT TSTATUS
+	FROM TUTOR
+	WHERE USER_NO = #{uno}
+	</select>
+	
 	
 	
 	

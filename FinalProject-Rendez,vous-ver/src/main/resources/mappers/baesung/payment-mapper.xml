@@ -29,6 +29,18 @@
 	<result property="lTime" column="L_TIME"/>
 	<result property="remain" column="REMAIN"/>
 	<result property="total" column="TOTAL"/>
+	<result property="olDay" column="OL_DAY"/>
+	</resultMap>
+	
+	<resultMap type="payCoupon" id="payCouponResultMap">
+	<id property="couponNo" column="COUPON_NO"/>
+	<result property="couponName" column="COUPON_NAME"/>
+	<result property="couponCode" column="COUPON_CODE"/>
+	<result property="discountRate" column="DISCOUNT_RATE"/>
+	<result property="startDate" column="START_DATE"/>
+	<result property="endDate" column="END_DATE"/>
+	<result property="cStatus" column="STATUS"/>
+	<result property="userNo" column="USER_NO"/>
 	</resultMap>
 	
 	<select id="classSearch" resultMap="tClassResultSet" parameterType="_int">
@@ -48,7 +60,7 @@
 	<select id="selectLessonTime" parameterType="_int" resultMap="LessonTimeResultSet">
 	SELECT *
 	FROM LESSON_TIME
-	WHERE L_NO = #{lNo}
+	WHERE L_NO = #{lNo} AND OL_DAY >= SYSDATE
 	</select>
 	
 	<insert id="insertPayment" parameterType="Payment">
@@ -56,7 +68,7 @@
 	</insert>
 	
 	<select id="CheckRemain" parameterType="_int" resultType="_int">
-	SELECT SUM(REMAIN) FROM LESSON WHERE L_NO = #{lNo}
+	SELECT SUM(REMAIN) FROM LESSON WHERE L_NO = #{lNo} AND L_DAY >= SYSDATE
 	</select>
 	
 	<update id="LessonRemainDown" parameterType="LessonTime">
@@ -67,6 +79,25 @@
 	
 	<update id="LessionStatusUpdate" parameterType="_int">
 	UPDATE LESSON_INFO SET L_STATUS = 'N' WHERE L_NO = #{lNo}
+	</update>
+	
+	<select id="selectCouponList" resultMap="payCouponResultMap">
+	SELECT COUPON_NO, COUPON_NAME, DISCOUNT_RATE, TO_CHAR(START_DATE, 'YYYY-MM-DD') START_DATE,
+	TO_CHAR(END_DATE, 'YYYY-MM-DD') END_DATE, USER_NO
+	FROM COUPON WHERE USER_NO = #{userNo} AND STATUS = 'R' AND END_DATE >= SYSDATE
+	</select>
+	
+	<update id="insertCoupon" parameterType="InsertCouponInfo">
+	UPDATE COUPON SET USER_NO = #{userNo} WHERE COUPON_CODE = #{code}
+	</update>
+	
+	<update id="expirationCoupon" parameterType="_int">
+	UPDATE COUPON SET STATUS = 'Y' WHERE COUPON_NO = #{couponNo}
+	</update>
+	
+	<update id="updatePoint" parameterType="_int">
+	UPDATE USER_POINT SET POINT = (select point - #{usePoint} FROM USER_POINT 
+	WHERE USER_NO = #{uNo}) WHERE USER_NO = #{uNo}
 	</update>
 	
 	

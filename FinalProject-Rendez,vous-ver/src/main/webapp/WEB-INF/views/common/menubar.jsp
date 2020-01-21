@@ -90,8 +90,13 @@
     font-weight: bold;
     text-decoration:none;
 }
-.nav_links li,a {
+.nav_links li{
     font-weight: 500;
+    font-size: 16px;
+    color: black;
+}
+menu_body a {
+	font-weight: 500;
     font-size: 16px;
     color: black;
 }
@@ -112,9 +117,15 @@
 .button:hover {
     background-color: #ddd8cf;
 }
+.search-box:hover{
+	cursor: pointer;
+}
+
 </style>
 <body class="menu_body">
+
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+
     <header class="header">
 		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">

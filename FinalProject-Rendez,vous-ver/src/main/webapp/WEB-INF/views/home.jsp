@@ -637,8 +637,6 @@ div ul {
 <!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-
-
 <div class="swiper-area">
 	<div class="swiper-container swiper1">
 		<h2>추천 수업</h2>

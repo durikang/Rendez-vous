@@ -659,7 +659,7 @@ div ul {
 	      </div>
 	      </c:forEach>
 	</div>	
-</div>
+   </div>
 </div>
 
 <div class="newYear">

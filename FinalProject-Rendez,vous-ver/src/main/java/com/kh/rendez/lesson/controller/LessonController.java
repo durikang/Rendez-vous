@@ -483,6 +483,32 @@ public class LessonController {
 		return mv;
 	}
 	
+	// 수업 정보 업데이트 (이미지는 따로)
+	@RequestMapping("lupdate.do")
+	public ModelAndView lessonInfoUpdate(ModelAndView mv,
+			RedirectAttributes ra,
+			LessonInfo li
+			) {
+		
+		int result = lService.lessonInfoUpdate(li);
+		
+		if(result>0) {
+			ra.addFlashAttribute("msg","수업 정보를 수정하였습니다.");
+		}else {
+			ra.addFlashAttribute("msg","수업 정보를 수정하지 못하였습니다.");
+		}
+		
+		mv.setViewName("redirect:lessonManage.do?lno="+li.getlNo());
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	//수업 이미지 업데이트 하는 ajax
 	@RequestMapping("updateLessonImg.do")

@@ -129,6 +129,10 @@ public class LessonDao {
 		return sqlSession.selectOne("lessonInfoMapper.selectAddedImg",lNo);
 	}
 
+	public int lessonInfoUpdate(LessonInfo li) {
+		return sqlSession.update("lessonInfoMapper.lessonInfoUpdate",li);
+	}
+
 	
 
 	

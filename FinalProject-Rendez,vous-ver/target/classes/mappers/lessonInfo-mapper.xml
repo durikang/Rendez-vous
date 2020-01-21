@@ -66,6 +66,18 @@
 	AND I.L_NO = #{lNo}
 	</select>
 	
+	<!-- 수업 정보를 업데이트함 -->
+	<update id="lessonInfoUpdate" parameterType="LessonInfo">
+	UPDATE LESSON_INFO
+	SET L_TITLE = #{lTitle}, L_INTRODUCTION= #{lIntroduction}, L_TARGET= #{lTarget},L_YTB= #{lYtb},
+		L_REGION = #{lRegion}, L_REGION_SUB = #{lRegionSub}, L_CATE_MAIN = #{lCateMain}, L_CATE_SUB = #{lCateSub},
+		PRICE = #{lPrice}
+	WHERE L_NO = #{lNo}
+	</update>
+	
+
+	
+	
 	
 	
 	

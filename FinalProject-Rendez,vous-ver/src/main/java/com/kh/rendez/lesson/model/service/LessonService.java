@@ -67,6 +67,8 @@ public interface LessonService {
 
 	LessonAttachment selectAddedImg(int lNo);
 
+	int lessonInfoUpdate(LessonInfo li);
+
 	
 
 	

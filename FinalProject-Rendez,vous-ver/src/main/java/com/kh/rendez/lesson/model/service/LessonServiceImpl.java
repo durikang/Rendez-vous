@@ -156,6 +156,11 @@ public class LessonServiceImpl implements LessonService {
 		return lDao.selectAddedImg(lNo);
 	}
 
+	@Override
+	public int lessonInfoUpdate(LessonInfo li) {
+		return lDao.lessonInfoUpdate(li);
+	}
+
 
 
 

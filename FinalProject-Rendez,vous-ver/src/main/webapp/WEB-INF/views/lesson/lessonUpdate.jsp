@@ -160,7 +160,8 @@
 	
 	
 	<!-- page1 -->
-	<form action="linsert.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
+	<form action="lupdate.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
+	<input type="text" hidden="" name="lNo" value="${li.lNo }">
 	<div id="page1" class="tab">
 	
 	<div class="box">
@@ -993,12 +994,6 @@
 				return false;
 			}
  			
- 			if($("#Idcard").val().length<1){
-				alert("대표 사진은 반드시 등록해야 합니다");
-				$("#pg2").click();
-				return false;
-			}
-
  						
  			
  			if($("#lPrice").val().length<1){
@@ -1011,16 +1006,6 @@
  			
 
  			
- 			
- 			
- 			
- 			
- 			
- 			if($("#Idcard").val().length<1){
-				alert("커버 이미지는 반드시 등록해야 합니다");
-				$("#pg2").click();
-				return false;
- 			}
  			
 			
 		}

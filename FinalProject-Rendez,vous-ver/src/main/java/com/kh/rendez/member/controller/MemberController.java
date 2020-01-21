@@ -83,10 +83,11 @@ public class MemberController {
 		Member loginUser = mService.loginMember(m);
 		 
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
-			return "member/myInfo";
+			model.addAttribute("msg3", "비밀번호 일치");
+			return "member/myPage";
 		}else {
 			model.addAttribute("msg", "비밀번호 불일치");
-			return "member/pwdCheckPage";
+			return null;
 		}
 	}
 
@@ -139,6 +140,8 @@ public class MemberController {
 		mv.addAllObjects(map);
 		mv.setViewName("jsonView");
 		
+		System.out.println(user_id);
+		
 		return mv;
 	}
 	
@@ -146,8 +149,7 @@ public class MemberController {
 	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
 								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
-								@RequestParam("address2") String address2, 
-								/*@RequestParam("email1") String email1, @RequestParam("email2") String email2,*/
+								@RequestParam("address2") String address2,
 								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
 		
 		/*if(!file.getuOriginName().equals("")) {
@@ -170,17 +172,6 @@ public class MemberController {
 		         }
 		      }*/
 		         
-		      
-		/*m.setUser_id(email1+"@"+email2);
-		      		      
-		System.out.println(email1+"@"+email2);
-		System.out.println(m);*/
-		
-		/*m.setUser_id(email);
-	      
-		System.out.println(email1+"@"+email2);
-		System.out.println(m);*/
-		
 		m.setAddress(post + "," + address1 + ", " + address2);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
 		
@@ -240,7 +231,7 @@ public class MemberController {
 			} else {
 				throw new MemberException("회원 정보 수정 실패");
 			}
-			return "member/myInfo";
+			return "member/myPage";
 		}
 		
 		
@@ -257,7 +248,7 @@ public class MemberController {
 				throw new MemberException("회원 탈퇴 실패");
 			}
 			
-			return "member/myInfo";
+			return "member/myPage";
 		}
 		
 		

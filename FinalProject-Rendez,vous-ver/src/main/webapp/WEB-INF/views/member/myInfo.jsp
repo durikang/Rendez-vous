@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
+<!-- <script>
 $(function(){
 	if(${msg ne null}){
 		alert('${msg}');
@@ -54,7 +54,7 @@ $(function(){
 			return false;
 		}
 	});
-</script>
+</script> -->
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
    <script> 
       $(function() { 

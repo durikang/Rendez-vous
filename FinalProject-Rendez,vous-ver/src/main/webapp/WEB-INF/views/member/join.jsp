@@ -15,7 +15,6 @@
       margin:auto;
    }
    
-   
     .guide {
       display:none;
       font-size:12px;
@@ -39,29 +38,27 @@
 </style>
 <body>
 <c:import url="../common/menubar.jsp"/>
- <div id="wrapper">
+<div id="wrapper">
    <h1 align="center">회원 가입</h1>
+   <br>
    <br>
    <div class="centerText">
       <form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()">
-         <table width="600" cellspacing="5">
+         <table width="500" cellspacing="5">
             <tr>
-				<td>* 이메일</td>
-                <td><input type="text" name="user_id" id="email1"  placeholder="이메일을 입력해주세요">
-                      <!--  @<input type="text" name="email2" id="email2"> 
-                        <select name="email3" id="email3">
-                           <option>직접입력</option>
-                           <option>naver.com</option>
-                           <option>nate.com</option>
-                           <option>gmail.com</option>
-                           <option>daum.net</option>
-                        </select>
-                        <br>-->
-                        <span class="guide ok">이 이메일은 사용 가능합니다.</span>
-						<span class="guide error">이 이메일은 사용할 수 없습니다.</span>
-						<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
-                </td>
-               	</tr>
+               <td width="150">* 아이디</td>
+               <td width="450">
+               
+            <input type="text" name="user_id" id="user_id">
+                  <label id="gol">@</label>
+			<input type="text" name="net" id="net">
+             <br>
+                  <!-- ajax 이후 적용 -->
+                  <span class="guide ok">이 아이디는 사용 가능합니다.</span>
+                  <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
+                  <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
+               </td>
+            </tr>
             <tr>
                <td>* 이름</td>
                <td><input type="text" name="user_name"></td>
@@ -75,7 +72,7 @@
                <td><input type="password" name="user_pwd2"></td>
             </tr>
             <tr>
-               <td>성별</td>
+               <td>* 성별</td>
                <td>
                   <input type="radio" name="gender" value="M">남
                   <input type="radio" name="gender" value="F">여
@@ -90,7 +87,7 @@
             <tr>
                <td>* 전화번호</td>
                <td>
-                  <input type="tel" name="phone" class="phone-number-check">
+                   <input type="tel" name="phone" class="phone-number-check">
                </td>
             </tr>            
             <tr>
@@ -113,7 +110,6 @@
                </td>
             </tr>
             <tr>
-            <br>
                <td colspan="2" align="center">
                   <button onclick="validate();">가입하기</button>&nbsp;
                   <input type="reset" value="취소하기">
@@ -134,13 +130,14 @@
       }); 
    </script>
    
-    <script>
+   <script>
       $(function(){
-         $("#email1").on("keyup", function(){
-            var email1 = $(this).val().trim();
-             
-            if(email1.length < 4) {
+         $("#net").on("keyup", function(){
+             var user_id = $("#user_id").val()+$("#gol").html()+$(this).val();
+             console.log(user_id);
+            if(user_id.length < 4) {
                $(".guide").hide(); // 나타났던 span 태그 숨기기
+               
                $("#idDuplicateCheck").val(0); // 중복 여부 확인 값 리셋
                
                return;
@@ -148,7 +145,7 @@
             
             $.ajax({
                url:"dupid.do",
-               data:{user_id:email1},
+               data:{user_id:user_id},
                success:function(data) {
                   if(data.isUsable == true) {
                      $(".error").hide();
@@ -169,73 +166,13 @@
       
       function validate(){
          if($("#idDuplicateCheck").val() == 0) {
-            alert('사용 가능한 이메일을 입력해주세요.');
-            $("#email1").focus();
+            alert('사용 가능한 아이디를 입력해주세요.');
+            $("#user_id").focus();
             return false;
          }
          return true;
       }
       
-   </script>
-   
-   <!-- <script>
-      $(function(){
-         $("#email2").on("focusout", function(){
-        	var email1 = $("#email1").val().trim();
-            var email2 = $("#email2").val().trim();
-             
-            if(email2 != "") {
-               $(".guide").hide(); // 나타났던 span 태그 숨기기
-               $("#idDuplicateCheck").val(0); // 중복 여부 확인 값 리셋
-               
-               return;
-            }
-            var email = email1 + "@" + email2;
-            
-            $.ajax({
-               url:"dupid.do",
-               data:{user_id:email},
-               success:function(data) {
-                  if(data.isUsable == true) {
-                     $(".error").hide();
-                     $(".ok").show();
-                     $("#idDuplicateCheck").val(1);
-                  } else { // 중복일 경우
-                     $(".error").show();
-                     $(".ok").hide();
-                     $("#idDuplicateCheck").val(0);
-                  }
-               },
-               error:function(){
-                  console.log("ajax 통신 실패");
-               }               
-            });            
-         });
-      });
-      
-      function validate(){
-         if($("#idDuplicateCheck").val() == 0) {
-            alert('사용 가능한 이메일을 입력해주세요.');
-            $("#email1").focus();
-            return false;
-         }
-         return true;
-      }
-   </script>
-   -->
-   
-   <script>
-   $(document).ready(function() {	
-	   $("#email3").change(function() {
-	    if($("#email3").val() != "직접입력") {
-	     $("#email2").val($("#email3").val());
-	    } else {
-	     alert("이메일 주소를 선택하여주세요")
-	     $("#email2").val("");
-	     $("#email3").focus();
-	    }
-	   });
-	  });
    </script>
    
    <!-- 전화번호 유효성검사 -->

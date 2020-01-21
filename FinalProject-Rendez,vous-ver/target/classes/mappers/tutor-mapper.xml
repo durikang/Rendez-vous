@@ -84,12 +84,17 @@
 	INSERT INTO CERTIFICATION VALUES(SEQ_CNO.NEXTVAL,#{uNo},#{cTitle},#{oFile},#{cFile})
 	</insert>
 	
-	<select id="selectTCert" parameterType="_int" resultMap="cResultSet">
-	SELECT * 
-	FROM CERTIFICATION
-	WHERE USER_NO = #{uNo}
+	<!-- 두리  -->
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from certification
 	</select>
-	
+	<!-- 두리 -->
+	<select id="selectTCert" parameterType="_int" resultMap="cResultSet">
+		SELECT * 
+		FROM CERTIFICATION
+		WHERE USER_NO = #{uNo}
+	</select>
 
 
 	

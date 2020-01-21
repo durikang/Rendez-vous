@@ -123,8 +123,13 @@
 
 </style>
 <body class="menu_body">
-
-
+   <c:if test="${ !empty msg}">
+      <script>
+         alert("${msg}");
+      </script>
+      <c:remove var="msg"/>
+   </c:if>
+   
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
     <header class="header">
@@ -135,7 +140,13 @@
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
         </div>        
-         <a class="cta" href="hynnmenubar.do"><button class="button">튜터 등록</button></a>
+         
+		 <c:if test="${!empty loginUser and  loginUser.user_type eq 'A' }">
+         <a id="tInsert" class="cta" href="tutorInsertPage.do"><button class="button">튜터 등록</button></a>
+       	 </c:if>
+         <c:if test="${!empty loginUser and loginUser.user_type eq 'T' }">
+         <a id="tMain" class="cta" href="tutorMain.do"><button class="button">튜터 메뉴</button></a>
+         </c:if>
         <nav>
             <ul class="nav_links">
                 <li>|</li>
@@ -154,7 +165,7 @@
 				
 				<c:if test="${ !empty sessionScope.loginUser }">
 					<li>|</li>
-                	<li><a href="logout.do">로그아웃</a></li>
+                	<li><a href="logout.do" onclick="bhide()">로그아웃</a></li>
 				</c:if>
             </ul>
         </nav>
@@ -173,8 +184,15 @@
            
            location.href = "search.do?sValue=" + sValue;
         }
-    	
+        
+        function bhide(){
+        	$(".cta").hide();
+        }
+        	
     	
     </script>
+    
+
+    
 </body>
 </html>

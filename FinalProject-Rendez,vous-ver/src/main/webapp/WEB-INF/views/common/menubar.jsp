@@ -129,6 +129,7 @@
       </script>
       <c:remove var="msg"/>
    </c:if>
+   
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
     <header class="header">

@@ -86,8 +86,8 @@ public class MemberController {
 			model.addAttribute("msg3", "비밀번호 일치");
 			return "member/myPage";
 		}else {
-			model.addAttribute("msg", "비밀번호 불일치");
-			return null;
+			model.addAttribute("msg4", "비밀번호 불일치");
+			return "member/myPage";
 		}
 	}
 
@@ -148,6 +148,8 @@ public class MemberController {
 	@RequestMapping(value="minsert.do", method=RequestMethod.POST)
 	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
 								@RequestParam("post") String post,
+								@RequestParam("user_id") String id,
+								@RequestParam("net") String id2,
 								@RequestParam("address1") String address1,
 								@RequestParam("address2") String address2,
 								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
@@ -171,7 +173,7 @@ public class MemberController {
 		            vo.setMem_uphoto(renameFileName);
 		         }
 		      }*/
-		         
+		m.setUser_id(id+"@"+id2);
 		m.setAddress(post + "," + address1 + ", " + address2);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
 		
@@ -237,18 +239,19 @@ public class MemberController {
 		
 		
 		@RequestMapping("mdelete.do")
-		public String memberDelete(Member m, Model model) {
+		public String memberDelete(Member m, Model model,SessionStatus status) {
 			
 			int result = mService.deleteMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg", "회원탈퇴 성공");
+				model.addAttribute("msg0", "회원탈퇴 성공");
+				status.setComplete();
+				return "member/myPage";
 				
 			} else {
 				throw new MemberException("회원 탈퇴 실패");
 			}
-			
-			return "member/myPage";
+
 		}
 		
 		

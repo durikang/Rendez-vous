@@ -516,7 +516,7 @@
 	<div class="modal3">
 		<div class="modal-content3">
 			<span class="close-button5">&times;</span>
-			<c:if test="${ !empty msg }">
+			<c:if test="${ !empty msg4 }">
 				<script>
 											alert("비밀번호가 일치하지 않습니다.");
 										</script>
@@ -573,11 +573,10 @@
 						         $("#postcodify_search_button").postcodifyPopUp(); 
 						      }); 
 						   </script>
-				<c:if test="${ !empty msg }">
+				<c:if test="${ !empty msg0 }">
 					<script>
 			        	alert("회원 탈퇴 완료");
-			        	opener.parent.location.replace("logout.do");
-			        	self.close();
+						location.href='home.do';
 					</script>
 				</c:if>
 
@@ -678,7 +677,7 @@
 								<button type="button"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
 									onclick="location.href='${ mdelete }'">탈퇴하기</button>
-								<td align="right" class="pop"><a href="javascript:closeWin();"><font color="black">닫기</font></a>
+								<td align="right" class="pop"><a onclick="closeWin();"><font color="black">닫기</font></a>
 								</td> <br>
 							</div>
 						</form>

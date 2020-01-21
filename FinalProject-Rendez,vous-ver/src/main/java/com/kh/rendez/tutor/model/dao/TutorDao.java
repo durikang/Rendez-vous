@@ -44,6 +44,14 @@ public class TutorDao {
 		return sqlSession.selectOne("tutorMapper.selectTutorStatus",uno);
 	}
 
+	public Tutor selectTutorInfo(int uNo) {
+		return sqlSession.selectOne("tutorMapper.selectTutorInfo",uNo);
+	}
+
+	public String selectTutorPic(int uNo) {
+		return sqlSession.selectOne("tutorMapper.selectTutorPic",uNo);
+	}
+
 
 
 	

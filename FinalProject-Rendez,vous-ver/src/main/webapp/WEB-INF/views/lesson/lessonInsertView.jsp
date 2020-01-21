@@ -260,7 +260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 	
 	<!-- page1 -->
-	<form action="linsert.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
+	<form id="form1" name="form1" action="linsert.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
 	<div id="page1" class="tab">
 	
 	<div class="box">
@@ -895,7 +895,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</div>
 	</div>
 	<div class="button_box">
-		<a href="*" target="_blank"><div class="next button prev">미리보기</div></a>
+		<a onclick="openPop();" target="_blank"><div class="next button prev">미리보기</div></a>
 		<button class="next button on" style="border: none;">등록하기</button>
 	</div>
 
@@ -943,15 +943,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				$("#lPrice").focus();
 				return false;
 			}
- 			
- 			
- 			
 
- 			
- 			
- 			
- 			
- 			
  			
  			if($("#Idcard").val().length<1){
 				alert("커버 이미지는 반드시 등록해야 합니다");
@@ -961,6 +953,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  			
 			
 		}
+				
+	    function openPop(){
+
+	    	
+	    	
+			var pop_title = "프리뷰뷰뷰" ;
+	         
+	        window.open("insertPreview.do", pop_title) ;
+	         
+	        var form1 = document.form1;
+	        form1.target = pop_title ;
+	        form1.action = "insertPreview.do" ;
+	         
+	        form1.submit();
+	         
+	         
+	         
+	    }
+		
+		
+		
+		
+		
 	
 	
 	

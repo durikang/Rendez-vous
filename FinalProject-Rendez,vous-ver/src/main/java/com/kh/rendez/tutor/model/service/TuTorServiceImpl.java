@@ -51,6 +51,16 @@ public class TuTorServiceImpl implements TutorService {
 		return tDao.selectTutorStatus(uno);
 	}
 
+	@Override
+	public Tutor selectTutorInfo(int uNo) {
+		return tDao.selectTutorInfo(uNo);
+	}
+
+	@Override
+	public String selectTutorPic(int uNo) {
+		return tDao.selectTutorPic(uNo);
+	}
+
 
 
 

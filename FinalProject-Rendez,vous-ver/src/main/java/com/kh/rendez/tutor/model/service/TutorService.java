@@ -22,6 +22,10 @@ public interface TutorService {
 
 	String selectTutorStatus(int uno);
 
+	Tutor selectTutorInfo(int uNo);
+
+	String selectTutorPic(int uNo);
+
 	
 
 }

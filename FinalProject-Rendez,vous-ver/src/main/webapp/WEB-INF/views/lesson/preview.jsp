@@ -8,7 +8,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-	<title>${ldi.lTitle }</title>
+	<title>미리보기 페이지</title>
 	<!-- <meta property="og:url" content="http://taling.me/Talent/Detail/166" /> -->
 	<link rel="image_src" href="http://s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/41d6f52384099fcb7eeeacbbf2727e37b3ecb4b3.jpg" />
 	
@@ -286,22 +286,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 								</div>
 							<span>| </span>수강인원
 							</div>
-						</div>
-					
-					
-					<c:forEach var="lti" items="${lTime }">
-						<div class="option">
-							<div class="top">
-								<div class="timedetail">
-								<div class="indate"><fmt:formatDate value="${lti.lDay}" pattern="MM.dd(E)"/></div><fmt:formatDate value="${lti.sTime}" pattern="HH:mm"/>~<fmt:formatDate value="${lti.eTime}" pattern="HH:mm"/>							
-								</div>
-							<span>|</span> <div class="region_name"></div> ${ lti.remain }/ ${ lti.total }
-							</div>
-						</div>
-					</c:forEach>
-
-
-								
+						</div>					
 				</div>
 								
 				<!--여기까지 new region id box-->
@@ -342,28 +327,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</div>
 			
 			
-			<c:if test=""></c:if>
-			
-			<script>
-				function toPay(){
-					
-					
-					<c:if test="${empty loginUser }">
-					alert("로그인이 필요합니다");
-					return;
-					</c:if>
-					
-					<c:if test="${empty lTime }">
-					alert("신청 가능한 수업이 없습니다.");
-					return;
-					</c:if>
-					
-					var lno = ${ldi.lNo};
-					location.href = 'detail.do?lNo='+lno;
-				}
-			
-			</script>
-			
 
 			<!--바닥 박스 시작-->
 
@@ -387,12 +350,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<ol class="carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		
+		<c:if test="${!empty ldi.laList}">
 		<c:forEach var="i" begin="1" end="${fn:length(ldi.laList)-1}">
 			
 		<li data-target="#myCarousel" data-slide-to="${i}">
 				
 		</c:forEach>
-		
+		</c:if>
 		
 		
 					
@@ -418,8 +382,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		
 		<c:forEach var="la" items="${ldi.laList }">
 		<div class="item"> 
-			<a href="${ contextPath }/resources/lessonImg/${la.cName}" target="_blank">
-			<div style="background:#000;z-index:0;width:840px;height:540px;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/lessonImg/${la.cName}');" ></div>
+			<a href="${ contextPath }/resources/previewImg/${la.cName}" target="_blank">
+			<div style="background:#000;z-index:0;width:840px;height:540px;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/previewImg/${la.cName}');" ></div>
 			</a>
 		</div>
 		</c:forEach>
@@ -541,26 +505,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</div>
 			<!-- /상세단락 네비 -->
 				
-				<c:set var="minPerson" value="9999999"/>
-				<c:set var="maxPerson" value="0"/>
-				
-				
-			<c:forEach var="ltt" items="${lTime}" >
-				<c:if test="${ minPerson > ltt.total   }">
-					<c:set var="minPerson" value="${ltt.total }"/>
-				</c:if>
-				<c:if test="${ maxPerson < ltt.total   }">
-					<c:set var="maxPerson" value="${ltt.total }"/>
-				</c:if>
-			</c:forEach>
-			
-			
-			<c:if test="${ minPerson eq  9999999}">
-			<c:set var="minPerson" value=""/>	
-			</c:if>
-			<c:if test="${ minPerson eq  0}">
-			<c:set var="maxPerson" value=""/>	
-			</c:if>
 			
 			
 			
@@ -593,76 +537,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							
 							$("#won").click(function(){
 								
-								<c:if test="${empty loginUser }">
-								alert("로그인이 필요합니다");
-								return;
-								</c:if>
-								
-
-								
-								if($("#won").css("display")=='block' && $("#woff").css("display")=='none'){
-									
-									<c:if test="${!empty loginUser }">
-									var uno = ${loginUser.user_no};
-									</c:if>
-									
-									var lno = ${ldi.lNo};
-									
-									  $.ajax({
-								            url:"fav.do",
-								            data:{flag:'delete',uno:uno,lno:lno},
-											type:"post",
-								            success:function(data){
-					               
-								            },error:function(){
-								               console.log("ajax 통신 실패");
-								            }
-								            })
-														
-									
-									
-									alert("찜 목록에서 삭제하였습니다");							
-									$("#won").hide();
-									$("#woff").show();
-									
-								}
-								
 
 							});		
 							
 							$("#woff").click(function(){
-								
-								<c:if test="${empty loginUser }">
-								alert("로그인이 필요합니다");
-								return;
-								</c:if>
-								
-								
-								if($("#won").css("display")=='none' && $("#woff").css("display")=='block'){
-									
-									<c:if test="${!empty loginUser }">
-									var uno = ${loginUser.user_no};
-									</c:if>
-									
-									var lno = ${ldi.lNo};
-									
-									  $.ajax({
-								            url:"fav.do",
-								            data:{flag:'insert',uno:uno,lno:lno},
-											type:"post",
-								            success:function(data){
-					               
-								            },error:function(){
-								               console.log("ajax 통신 실패");
-								            }
-								            })
-									
-									
-									
-									alert("찜 목록에서 추가하였습니다");							
-									$("#won").show();
-									$("#woff").hide();
-								}
+						
 								
 							});	
 							
@@ -687,7 +566,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																${ldi.lRegionSub }							</li>							
 							<li class="hu"><font color="#ff005a">1</font>시간/회</li>
 							<li class="gr">
-																인원:<font color="#ff005a">${ minPerson }~${ maxPerson }</font>명
+																인원:<font color="#ff005a"></font>명
 								</li>
 							<li class="ohu">
 																<font color="#ff005a">￦<fmt:formatNumber value="${ldi.lPrice}" maxFractionDigits="3"/></font>/회당
@@ -826,20 +705,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						<ul>
 							<div id="innerReviewDiv">
 																	
-									<c:forEach var="lr" items="${lRList }">
-									<li>
-										<dl>
-											<dt>
-												<p class="profile_img" style="background: #000; z-index: 0; width: 100%; background-size: cover; background-position: center; background-image: url(${contextPath}/resources/user/img/${lr.uCName });"></p>
-												<p class="name">${lr.uName }</p>
-											</dt>
-											<dd>
-												${lr.rContent }
-											</dd>
-											<dd class="date"><fmt:formatDate value="${lr.rDate }" pattern="yyyy-MM-dd HH:mm:ss"/></dd>
-										</dl>
-									</li>	
-									</c:forEach>
+
 									
 									
 								</div>

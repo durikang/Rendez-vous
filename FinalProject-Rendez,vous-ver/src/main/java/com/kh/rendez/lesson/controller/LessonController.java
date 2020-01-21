@@ -440,7 +440,33 @@ public class LessonController {
 		
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		//로그인유저에 대한 처리 해주기
+		if(loginUser == null) {
+			mv.addObject("msg","비정상접근입니다");
+			mv.setViewName("home");
+			return mv;
+		}
+		
+		int uNo = loginUser.getUser_no();
+		//자신의 수업이 아니면 수정할수 없게끔 처리함
+		ArrayList<LessonInfo> liList = lService.selectLIList(uNo);
+		
+		boolean flag =true;
+		
+		for(LessonInfo li : liList) {
+			if(li.getlNo() == lNo) {
+				flag = false;
+			}
+		}
+		
+		if(flag) {
+			mv.addObject("msg","비정상접근입니다(2)");
+			mv.setViewName("home");
+			return mv;
+			
+		}
+		
+		
+		
 		
 		
 		LessonInfo li = lService.selectOneLI(lNo);
@@ -456,18 +482,6 @@ public class LessonController {
 		
 		return mv;
 	}
-	
-	//수업 이미지 정보 관리하는 페이지로 가기
-	@RequestMapping("updateLessonAttachment.do")
-	public ModelAndView updateLessonAttachment(ModelAndView mv,
-			HttpServletRequest request,
-			int lNo) {
-		
-		
-		return null;
-	}
-	
-	
 	
 	
 	//수업 이미지 업데이트 하는 ajax
@@ -545,6 +559,106 @@ public class LessonController {
 	
 	
 	
+	//미리 보기
+	@RequestMapping("insertPreview.do")
+	public ModelAndView insertPreview(ModelAndView mv,
+			HttpServletRequest request,
+			LessonInfo li,
+			@RequestParam(name="covImg", required=false) MultipartFile covImg,
+			@RequestParam(name="extImg", required=false) List<MultipartFile> extImg) {
+		
+		LessonDetailInfo ldi = new LessonDetailInfo();
+		ArrayList<LessonAttachment> laList = new ArrayList<>();
+		
+		
+		Member loginUser = ((Member)request.getSession().getAttribute("loginUser"));
+		int uNo =  loginUser.getUser_no();
+		Tutor loginTutor =  tService.selectTutorInfo(uNo);
+		String tPropic =  tService.selectTutorPic(uNo);
+		
+		//입력한유튜브에서 필요한 유튜브 코드만 DB에 저장하자
+		String url = li.getlYtb();
+		int separator=0;	
+		if(url.contains("=")) {
+			separator = url.lastIndexOf("=");
+		}else {
+			separator =  url.lastIndexOf("/");
+		}
+		String code  = url.substring(separator+1);
+		li.setlYtb(code);
+		
+		//텍스트의 줄바꿈을 처리
+		li.setlIntroduction(li.getlIntroduction().replace("\n", "<br>"));
+		li.setlTarget(li.getlTarget().replace("\n", "<br>"));
+		
+		
+		String ran ="";
+		for(int i=0;i<10;i++) {
+			ran+=(char)((Math.random()*26)+65); 
+		}
+		
+		
+		
+		if(!covImg.getOriginalFilename().equals("")) {
+			String refileName = insertPreviewImg(covImg,request,ran,1);
+			LessonAttachment cov = new LessonAttachment();
+			cov.setcName(refileName);
+			laList.add(cov);
+		}
+		
+		
+		int lNum = 2;
+		for(int i=0;i<extImg.size();i++) {
+			
+			if(!extImg.get(i).getOriginalFilename().equals("")) {
+				
+				String reFileName = insertPreviewImg(extImg.get(i),request,ran,lNum++);  
+				
+					LessonAttachment la = new LessonAttachment();
+					la.setcName(reFileName);
+					laList.add(la);				
+			}
+		}
+		lNum=0;
+		
+		//튜터 경력 처리
+		if(!loginTutor.gettCareer().equals("")) {
+		
+		String[] tutorCerArr = loginTutor.gettCareer().split(","); 
+		ArrayList<String> tutorCer = new ArrayList<>();
+		
+		for(int i=0;i<tutorCerArr.length;i++) {
+			if(!tutorCerArr[i].equals("")) {
+				tutorCer.add(tutorCerArr[i]);
+			}
+		}
+		System.out.println(tutorCer);
+		mv.addObject("tutorCer",tutorCer);
+		
+		}
+		
+		
+		ldi.setLaList(laList);
+		ldi.setlCateMain(li.getlCateMain());
+		ldi.setlCateSub(li.getlCateSub());
+		ldi.setlIntroduction(li.getlIntroduction());
+		ldi.setlPrice(li.getlPrice());
+		ldi.setlRegion(li.getlRegion());
+		ldi.setlRegionSub(li.getlRegionSub());
+		ldi.setlTarget(li.getlTarget());
+		ldi.setlTitle(li.getlTitle());
+		ldi.setlYtb(li.getlYtb());
+		ldi.setTutor(loginTutor);
+		ldi.setUcName(tPropic);
+		ldi.setuName(loginUser.getUser_name());
+		
+		
+
+		
+		mv.addObject("ldi",ldi);
+		mv.setViewName("lesson/preview");
+		return mv;
+	}
 	
 	
 	
@@ -572,6 +686,14 @@ public class LessonController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	/*---------------------------------------------------------------------------------------------------*/
 	
 	//파일전송 메소드
 	public String saveLessonImg(MultipartFile file, HttpServletRequest request,int lno,int lNum) {
@@ -665,7 +787,38 @@ public class LessonController {
 		return reFileName;
 	}
 	
+	// 미리보기 파일 업로드를 위한 메소드
+	public String insertPreviewImg(MultipartFile file, HttpServletRequest request,String ran,int lNum) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\previewImg";
+		
+		File folder = new File(savePath); 
+		
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		int dot = file.getOriginalFilename().lastIndexOf(".");
+		String ext = file.getOriginalFilename().substring(dot).toLowerCase();
+		
+		String reFileName = ran+"_"+lNum+ext;
+		
+		String filePath = folder + "\\" + reFileName;
+		
+		try {
+			file.transferTo(new File(filePath)); // 이 때 파일 저장 된다.
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		} 
+		
+		
+		
+		return reFileName;
+	}
 	
+	
+	/*---------------------------------------------------------------------------------------------------*/
 	
 	
 	

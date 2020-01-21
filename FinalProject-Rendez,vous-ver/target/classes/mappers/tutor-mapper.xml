@@ -48,6 +48,17 @@
 	WHERE USER_NO = #{uno}
 	</select>
 	
+	<select id="selectTutorInfo" parameterType="_int" resultMap="tResultSet">
+	SELECT * 
+	FROM TUTOR
+	WHERE USER_NO = #{uNo}
+	</select>
+	
+	<select id="selectTutorPic" parameterType="_int" resultType="String">
+	SELECT U_C_NAME
+	FROM USERPROPIC
+	WHERE USER_NO = #{uNo}
+	</select>
 	
 	
 	

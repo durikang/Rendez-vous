@@ -733,7 +733,7 @@
 						            var cName = data[0].cName
 						            var laType = data[0].laType
 						           
-						            alert("dfdf");
+						            alert("이미지 추가 성공");
 						            
  						            $("#eiRepeat").append("<div class='certificate' id='cert"+size+"' style='position:relative;'>"
 											+"<div class='verify left10' onclick='cuc2(this)'>이미지 수정</div>"

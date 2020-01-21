@@ -660,6 +660,7 @@ div ul {
 	      </c:forEach>
 	</div>	
 </div>
+</div>
 
 <div class="newYear">
 	<img src="resources/homeImg/배너1.PNG">

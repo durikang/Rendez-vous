@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>Rendez,vous</title>
 
-
 <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
 <script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
 
@@ -596,6 +595,10 @@ div ul {
 	height:;
 }
 
+.layer_popup {
+	margin-top:5%;
+}
+
 </style>
 
 <body>
@@ -640,73 +643,21 @@ div ul {
 		<h2>추천 수업</h2>
 		<a class="trigger2"><img src="https://img.icons8.com/android/24/000000/menu.png"></a> 
 	   <div class="swiper-wrapper">
+		<c:forEach var="l" items="${ list }">
 	      <div class="swiper-slide">
 	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex.PNG">
+	      		<c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>	      			
+	      		<a href="${ goLesson }"><img src="resources/lessonImg/${ l.cName }"></a>
 	      	</div>
 	      	<div id="text-area">
-	      		<h3>■1:1전문■ 고퀄레슨NO.1</h3>
-	      		<p>01월18일 시작 : 지역</p><br>
+	      		<h3>${ l.lTitle }</h3>
+	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
+	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>	
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>	
 	      	</div>	      	
 	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>	
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex3.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[이벤트]에어비앤비 호스트!</h3>
-	      		<p>01월29일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex4.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[원데이/재테크]이 걸로 끝!</h3>
-	      		<p>01월23일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex5.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[원데이]빠르고 쉽게 배우는 금융</h3>
-	      		<p>01월30일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex6.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[원데이]나만의 귀걸이 만들기</h3>
-	      		<p>협의 후 결정 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	   </div>
+	      </c:forEach>
 	</div>	
 </div>
 
@@ -919,7 +870,7 @@ div ul {
 	</div>
 		</div>
 
-	<!-- <script>
+	<script>
 		var slideCount = $(".slideImg").length;
 		var currentIndex = 0;
 		var slidePosition;
@@ -934,7 +885,7 @@ div ul {
 				left : slidePosition
 			}, 400);
 		}, 3000);
-	</script> -->
+	</script>
 
 	<!----------------------------------->
 	
@@ -959,28 +910,24 @@ div ul {
 	</script> -->
 
 	<!--팝업창-->
-	<div class="layer_popup" style="position: absolute; width: 500px; left: 50%; margin-left: -920px; top: 120px; border: 1px solid #333333;" id="layer_pop">
-		<table width="500" border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td><img src="resources/homeImg/pop.png" width="500"
-					height="600" border="0" usemap="#m_pop" />
-				</td>
-			</tr>
-			<tr>
-				<td align="center" height="30" bgcolor="#333333">
-					<table width="95%" border="0" cellpadding="0" cellspacing="0">
-						<tr>
-							<td align="left" class="pop"><input type="checkbox" name="pop_today" id="pop_today"/>
-							<font color="#FFFFFF">오늘 하루 이 창 열지 않음</font>
-							</td>
-							<td align="right" class="pop"><a href="javascript:closeWin();">
-							<font color="white">닫기</font></a></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<div class="layer_popup" style="position:absolute; width:500px; left:50%; 
+    margin-left:-920px; top:40px; z-index:1; border:1px solid #333333;" id="layer_pop">
+        <table width="500" border="0" cellpadding="0" cellspacing="0">
+         <tr>
+          <td><img src="resources/homeImg/pop.png" width="500" height="600" border="0" usemap="#m_pop" /></td>
+         </tr>
+         <tr>
+          <td align="center" height="30" bgcolor="#333333">
+            <table width="95%" border="0" cellpadding="0" cellspacing="0">
+               <tr>
+                <td align="left" class="pop"><input type="checkbox" name="pop_today" id="pop_today" /><font color="#FFFFFF">오늘 하루 이 창 열지 않음</font></td>
+                <td align="right" class="pop"><a href="javascript:closeWin();"><font color="white">닫기</font></a></td>
+               </tr>
+            </table>
+          </td>
+         </tr>
+        </table>
+    </div>
 
 	<script language="Javascript" type="text/javascript">
 		cookiedata = document.cookie;
@@ -994,14 +941,6 @@ div ul {
 			document.getElementById('layer_pop').style.display = "none";
 		}
 	</script>
-
-	<br><br><br><br><br>
-	<br><br><br><br><br>
-	<br><br><br><br><br>
-	<br><br><br><br><br>
-	<br><br><br><br><br>
-	<br><br><br><br><br>
-	<br><br><br><br><br>
 
 	<!-- 버튼 -->
 	<div class="btn"><button class="trigger">광고, 이벤트 받아보기</button></div>

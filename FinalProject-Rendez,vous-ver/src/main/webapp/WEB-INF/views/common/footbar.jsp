@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
-    <script src="https://kit.fontawesome.com/8af8965544.js"></script>
+
+
 </head>
 <style>
     .footer-main-div {

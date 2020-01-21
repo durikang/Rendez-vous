@@ -25,4 +25,6 @@ public interface PaymentService {
 
 	int updateCoupon(int couponNo);
 
+	int updatePoint(int usePoint, int user_no);
+
 }

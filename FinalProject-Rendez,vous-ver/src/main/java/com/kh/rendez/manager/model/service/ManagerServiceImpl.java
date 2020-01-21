@@ -144,6 +144,20 @@ public class ManagerServiceImpl implements ManagerService {
 				
 		return mnDao.sortingSelectMemberList(param,pi);
 	}
+	@Override
+	public ArrayList<AdminMember> selectTopFiveVip() {
+		return mnDao.selectTopFiveVip();
+	}
+	@Override
+	public ArrayList<AdminMember> selectNewJoinList(int currentPage) {
+		
+		int listCount = mnDao.getListCount(6);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		
+		
+		return mnDao.selectNewJoinList(pi);
+	}
 
 
 }

@@ -117,10 +117,10 @@ public class ManagerController {
 		String pageName = request.getParameter("pageName");
 		
 		int currentPage = page != null ? page : 1;
-		
+		/*
 		System.out.println("condition : " + Condition);
 		System.out.println("startDate : " + param1);
-		System.out.println("endDate : " + param2);
+		System.out.println("endDate : " + param2);*/
 		
 		ArrayList<AdminMember> list =null;
 		Map<String,Object> param=null;
@@ -137,7 +137,7 @@ public class ManagerController {
 			param.put("Condition", Condition);
 			param.put("Date", obj);
 			
-			System.out.println("들어간 날자 map ->param : "+param);
+			/*System.out.println("들어간 날자 map ->param : "+param);*/
 			
 			list = mnService.sortingSelectMemberList(param,currentPage);
 		}else if(Condition.equals("2")) {
@@ -152,7 +152,7 @@ public class ManagerController {
 			param.put("Condition",Condition);
 			param.put("Age", obj); 
 			
-			System.out.println("들어간 나이 map ->param : "+param);
+		/*	System.out.println("들어간 나이 map ->param : "+param);*/
 			
 			list = mnService.sortingSelectMemberList(param,currentPage);	
 		}else if(Condition.equals("3")) {
@@ -165,7 +165,7 @@ public class ManagerController {
 			param.put("Condition",Condition);
 			param.put("Gender", obj); // M : 남자  F : 여자
 			
-			System.out.println("들어간 성별 map ->param : "+param);
+			/*System.out.println("들어간 성별 map ->param : "+param);*/
 			
 			list = mnService.sortingSelectMemberList(param,currentPage);
 			
@@ -179,15 +179,24 @@ public class ManagerController {
 			param.put("Condition",Condition);
 			param.put("Type", obj); // 타이빙 N : 일반회원 T : 튜터회원
 			
-			System.out.println("들어간 나이 map ->param : "+param);
+			/*System.out.println("들어간 나이 map ->param : "+param);*/
 			
 			list = mnService.sortingSelectMemberList(param,currentPage);
 			
 		}
 
-		System.out.println("솔팅 완료된 list : "+list);
+/*		System.out.println("솔팅 완료된 list : "+list);*/
 		if (list != null) {
+			
+			System.out.println("리턴하기전");
+			System.out.println(Condition);
+			System.out.println(param1);
+			System.out.println(param2);
+			
 			mv.addObject("list", list);
+			mv.addObject("Condition",Condition); //페이징 처리 할 시 사용될 데이터
+			mv.addObject("param1",param1); //페이징 처리 할 시 사용될 데이터
+			mv.addObject("param2",param2); //페이징 처리 할 시 사용될 데이터
 			mv.addObject("pi", Pagination.getPageInfo());
 			mv.addObject("pageName", pageName);
 
@@ -215,12 +224,6 @@ public class ManagerController {
 			@RequestParam(value = "page", required = false) Integer page) {
 		// System.out.println(search.getSearchCondition());
 		int currentPage = page != null ? page : 1;
-
-		if (search.getSearchValue().equals("일반회원")) {
-			search.setSearchValue("n");
-		} else if (search.getSearchValue().equals("튜터")) {
-			search.setSearchValue("t");
-		}
 
 		ArrayList<AdminMember> searchList = mnService.searchMemberList(search, currentPage);
 
@@ -523,6 +526,48 @@ public class ManagerController {
 		mv.addObject("pi", Pagination.getPageInfo());
 		mv.setViewName("manager/boarder/homeManagement");
 
+		return mv;
+	}
+	@RequestMapping("vip5.do")
+	public ModelAndView top5VIP(ModelAndView mv,
+			HttpServletRequest request) {
+
+		String pageName = request.getParameter("pageName");
+		String condition ="vip";
+		ArrayList<AdminMember> list = mnService.selectTopFiveVip();
+
+		
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("Condition", condition);
+			mv.addObject("pageName", pageName);
+
+			mv.setViewName("manager/boarder/memberBoarderForm2");
+		}
+
+		return mv;
+	}
+	@RequestMapping("newjoin.do")
+	public ModelAndView newJoinMember(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpServletRequest request)
+	{
+		int currentPage = page != null ? page : 1;
+
+		String pageName = request.getParameter("pageName");
+		String condition="join";
+		
+		ArrayList<AdminMember> list = mnService.selectNewJoinList(currentPage);
+		
+		
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", Pagination.getPageInfo());
+			mv.addObject("Condition", condition);
+			
+			mv.addObject("pageName", pageName);
+
+			mv.setViewName("manager/boarder/memberBoarderForm2");
+		}
 		return mv;
 	}
 

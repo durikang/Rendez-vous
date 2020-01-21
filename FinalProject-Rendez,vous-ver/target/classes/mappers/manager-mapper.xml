@@ -21,6 +21,16 @@
 		
 	</resultMap>
 	
+<!--  -->
+	 <resultMap id="AdminMemJoinPayResultSet" type="AdminMemJoinPay">
+		<id property="uNo" column="USER_NO" />
+		<result property="uId" column="USER_ID" />
+		<result property="uName" column="USER_NAME" />
+		<result property="uGender" column="GENDER" />
+		<result property="total_pay" column="TOTAL_PAY" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+	</resultMap>
+
 
 	
 
@@ -117,6 +127,11 @@
 			from qna
 			where a_status='N'
 		</if>
+		<if test="value == 6">
+			from member
+			where to_date(enroll_date,'YYYY/MM/DD')=to_date(sysdate,'YYYY/MM/DD')
+		</if>
+		
 		
 		
 	</select>
@@ -130,9 +145,6 @@
 			<choose>
 				<when test="searchCondition == 'mName'">
 					AND USER_NAME LIKE #{sv}
-				</when>
-				<when test="searchCondition == 'mType'">
-					AND USER_TYPE LIKE #{sv}
 				</when>
 				<otherwise>
 					AND (USER_NAME LIKE #{sv} OR USER_TYPE LIKE #{sv})
@@ -177,9 +189,6 @@
 			<choose>
 				<when test="searchCondition == 'mName'">
 					AND USER_NAME LIKE #{sv}
-				</when>
-				<when test="searchCondition == 'mType'">
-					AND USER_TYPE LIKE #{sv}
 				</when>
 				<otherwise>
 					AND (USER_NAME LIKE #{sv} OR USER_TYPE LIKE #{sv})
@@ -373,19 +382,19 @@
 		select count(*)
 		from member
 		<where>
-		<if test="Condition.equals('1')">
-			and enroll_date between to_date(#{Date.date[0]}, 'YYYY/MM/DD') and to_date(#{Date.date[1]}, 'YYYY/MM/DD') 
-     		and u_status='Y'
+		<if test='Condition == 1'>
+			and enroll_date between to_date(#{Date[0]}, 'YYYY/MM/DD') and to_date(#{Date[1]}, 'YYYY/MM/DD')
 		</if>
-		<if test="Condition.equals('2')">
-		
+ 		<if test="Condition == 2">
+			and age between #{Age[0]} and #{Age[1]}
 		</if>
-		<if test="Condition.equals('3')">
-		
+		<if test="Condition == 3">
+			and gender =#{Gender[0]}
 		</if>
-		<if test="Condition.equals('4')">
-		
-		</if>	
+		<if test="Condition == 4">
+			and user_type =#{Type[0]}
+		</if>
+		and u_status='Y'	
 		</where>	
 		
 	</select>
@@ -406,10 +415,38 @@
 		<if test="Condition == 4">
 			and user_type =#{Type[0]}
 		</if>
-		and u_status='Y'	
+		and u_status='Y'
+			
 		</where>		
-		
+		<if test='Condition == 1'>
+			order by enroll_date
+		</if>
+ 		<if test="Condition == 2">
+			order by age
+		</if>
+		<if test="Condition == 3">
+			order by gender
+		</if>
+		<if test="Condition == 4">
+			order by user_type
+		</if>
 	</select>
 	
-	
+	<select id="selectTopFiveVip" resultMap="AdminMemJoinPayResultSet">
+		SELECT *
+		FROM (SELECT M.USER_NO, M.USER_ID, M.USER_NAME,M.GENDER,SUM(P.PAYMENT_COST) TOTAL_PAY,M.ENROLL_DATE
+		      FROM MEMBER M
+		      JOIN PAYMENT P ON(M.USER_NO=P.USER_NO)
+		      WHERE M.USER_TYPE !='A' AND M.U_STATUS !='N'
+		      GROUP BY M.USER_NO, M.USER_ID, M.USER_NAME,M.GENDER,M.ENROLL_DATE
+		      ORDER BY 5 DESC)
+		WHERE ROWNUM <![CDATA[ <= ]]> 5  
+	</select>
+	<select id="selectNewJoinList" resultMap="AdminMemberResultSet">
+		select *
+		from member
+		left join coupon using(user_no)
+		where to_date(enroll_date,'YYYY/MM/DD')=to_date(sysdate,'YYYY/MM/DD')
+		and u_status='Y' and user_type != 'A' and coupon_no is null
+	</select>
 </mapper>

@@ -52,6 +52,11 @@
 
   } 
   
+  #kakao {
+  	color:black;
+  	font-size: 15px;
+  }
+  
   #kakao:hover {
   	font-size:20px;
   	color:black;

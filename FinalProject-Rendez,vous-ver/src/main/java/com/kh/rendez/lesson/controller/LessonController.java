@@ -585,7 +585,7 @@ public class LessonController {
 	
 	
 	
-	//미리 보기
+	//수업 인서트 전 미리 보기
 	@RequestMapping("insertPreview.do")
 	public ModelAndView insertPreview(ModelAndView mv,
 			HttpServletRequest request,
@@ -680,7 +680,77 @@ public class LessonController {
 		
 		
 
+		mv.addObject("flag","I");
+		mv.addObject("ldi",ldi);
+		mv.setViewName("lesson/preview");
+		return mv;
+	}
+	
+	// 수업 수정 미리보기
+	@RequestMapping("updatePreview.do")
+	public ModelAndView updatePreview(ModelAndView mv,
+			HttpServletRequest request,
+			LessonInfo li) {
 		
+		LessonDetailInfo ldi = new LessonDetailInfo();
+		ArrayList<LessonAttachment> laList = lService.selectLAofLI(li.getlNo());
+		ldi.setLaList(laList);
+		
+		Member loginUser = ((Member)request.getSession().getAttribute("loginUser"));
+		int uNo =  loginUser.getUser_no();
+		Tutor loginTutor =  tService.selectTutorInfo(uNo);
+		String tPropic =  tService.selectTutorPic(uNo);
+		
+		System.out.println(li.getlYtb());
+		//입력한유튜브에서 필요한 유튜브 코드만 DB에 저장하자
+		String url = li.getlYtb();
+		int separator=0;	
+		if(url.contains("=")) {
+			separator = url.lastIndexOf("=");
+		}else {
+			separator =  url.lastIndexOf("/");
+		}
+		String code  = url.substring(separator+1);
+		li.setlYtb(code);
+		
+		//텍스트의 줄바꿈을 처리
+		li.setlIntroduction(li.getlIntroduction().replace("\n", "<br>"));
+		li.setlTarget(li.getlTarget().replace("\n", "<br>"));
+
+		
+		//튜터 경력 처리
+		if(!loginTutor.gettCareer().equals("")) {
+		
+		String[] tutorCerArr = loginTutor.gettCareer().split(","); 
+		ArrayList<String> tutorCer = new ArrayList<>();
+		
+		for(int i=0;i<tutorCerArr.length;i++) {
+			if(!tutorCerArr[i].equals("")) {
+				tutorCer.add(tutorCerArr[i]);
+			}
+		}
+		System.out.println(tutorCer);
+		mv.addObject("tutorCer",tutorCer);
+		
+		}
+		
+		
+		ldi.setlCateMain(li.getlCateMain());
+		ldi.setlCateSub(li.getlCateSub());
+		ldi.setlIntroduction(li.getlIntroduction());
+		ldi.setlPrice(li.getlPrice());
+		ldi.setlRegion(li.getlRegion());
+		ldi.setlRegionSub(li.getlRegionSub());
+		ldi.setlTarget(li.getlTarget());
+		ldi.setlTitle(li.getlTitle());
+		ldi.setlYtb(li.getlYtb());
+		ldi.setTutor(loginTutor);
+		ldi.setUcName(tPropic);
+		ldi.setuName(loginUser.getUser_name());
+		
+		
+
+		mv.addObject("flag","U");
 		mv.addObject("ldi",ldi);
 		mv.setViewName("lesson/preview");
 		return mv;

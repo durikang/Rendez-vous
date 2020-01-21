@@ -160,7 +160,7 @@
 	
 	
 	<!-- page1 -->
-	<form action="lupdate.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
+	<form id="form1" name="form1" action="lupdate.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
 	<input type="text" hidden="" name="lNo" value="${li.lNo }">
 	<div id="page1" class="tab">
 	
@@ -959,7 +959,7 @@
 		</div>
 	</div>
 	<div class="button_box">
-		<a href="*" target="_blank"><div class="next button prev">미리보기</div></a>
+		<a onclick="openPop();" target="_blank"><div class="next button prev">미리보기</div></a>
 		<button class="next button on" style="border: none;">등록하기</button>
 	</div>
 
@@ -1009,6 +1009,32 @@
  			
 			
 		}
+		
+	    function openPop(){
+
+	    	
+	    	
+			var pop_title = "프리뷰" ;
+	         
+	        window.open("updatePreview.do", pop_title) ;
+	         
+	        var form1 = document.form1;
+	        form1.target = pop_title ;
+	        form1.action = "updatePreview.do" ;
+	         
+	        form1.submit();
+	         
+	        
+	        form1.action = "lupdate.do" ;
+	         
+	    }
+		
+		
+		
+		
+		
+		
+		
 	
 	
 	

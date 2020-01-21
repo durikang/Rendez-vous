@@ -19,15 +19,15 @@
 	<meta property="og:image" content="https://taling.me/Content/Images/ogimage2.png" />
 	<meta property="og:description" content="내 상황을 딱! 이해하는 튜터들에게 1:1로 수업을 받아보세요. 중국어, 코딩, 미술 등">	
 	<meta name="p:domain_verify" content="1dd028b45d9d85306bb74db3d9911bbb"/>
-    <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/my_header_style.css?ver=1909272" />
-	<link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/publy2.css" />
-    <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/main15.css?ver=19121" />
-	<link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/main16.css" />
-    <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/main18.css" />
-	<link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/style_sub23.css" />
+    <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=1909272" />
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/publy2.css" />
+    <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main15.css?ver=19121" />
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main16.css" />
+    <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main18.css" />
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/style_sub23.css" />
 
-	<link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/style.css" />
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/default.css">
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/style.css" />
+	<link rel="stylesheet" href="${contextPath}/resources/h1/css/default.css">
 
 
 	<link rel="canonical" href="https://taling.me">
@@ -165,24 +165,10 @@
 
 
 
-<input type="hidden" id="Id" name="Id" value="19200">
+
 <div class="tutor_cont">
-	<div class="dim" id="dim"></div>
-<div class="phone_box" id="phone_box" style="display:none;">
-	<div class="head">
-		전화번호 인증 <span class="button" id="phoneCls">X</span>
-	</div>
-	<div class="box gray5">
-		인증번호
-		<div style="overflow:hidden;margin:10px 0">
-			<input type="text" placeholder="인증번호 입력" id="code" class="basic" style="width:351px">
-			<div class="verify button left10" onclick="confirm();">
-				확인
-			</div>
-		</div>		
-		<font class="pink"><span id="time"></span></font>
-	</div>
-</div>
+	
+
 
 
 
@@ -248,9 +234,9 @@
 				<div class="gray5 title">증명<font class="gray8">학력/날짜/자격증/주관사 공인 확인 가능한 자격증 사본(최대 10개)</font></div>
 				<input type="hidden" name="deleteCert" id="deleteCert" value="">
 								<div class="certificate" style="position:relative;">
-					<input type="text" class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요">
+					<input type="text" required class="basic len652" name="certName" placeholder="예) 졸업증명서,토익900,HSK 6급,GTQ1급, 임상경력 등의 자격명칭을 기재 해주세요">
 					<div class="verify left10">자격증 업로드</div>					
-					<input type="file" name="certImg" input-file="img-Cert0" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
+					<input type="file" required name="certImg" input-file="img-Cert0" style="width:80px;height:50px;position:absolute;top:0;left:668px;opacity:0;cursor:pointer;"/>
 					<div style="padding-top:10px;"><img alt="" id="img-Cert0" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
 								<script>

@@ -380,6 +380,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</div> --%>
 
 		
+		<c:if test="${flag eq 'I' }">
 		<c:forEach var="la" items="${ldi.laList }">
 		<div class="item"> 
 			<a href="${ contextPath }/resources/previewImg/${la.cName}" target="_blank">
@@ -387,7 +388,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</a>
 		</div>
 		</c:forEach>
+		</c:if>
 		
+		<c:if test="${flag eq 'U' }">
+		<c:forEach var="la" items="${ldi.laList }">
+		<div class="item"> 
+			<a href="${ contextPath }/resources/previewImg/${la.cName}" target="_blank">
+			<div style="background:#000;z-index:0;width:840px;height:540px;background-size:cover;background-position:center;background-image: url('${ contextPath }/resources/lessonImg/${la.cName}');" ></div>
+			</a>
+		</div>
+		</c:forEach>
+		</c:if>
 
 		
 		
@@ -932,8 +943,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<p style="padding-top:10px;"></p>
 					<a href="https://itunes.apple.com/kr/app/탈잉-taling/id1153218962?l=en&amp;mt=8" target="_blank"><img src="https://taling.me/Content/Images/ios.png" width="50%"></a><a href="https://play.google.com/store/apps/details?id=com.taling" target="_blank"><img src="https://taling.me/Content/Images/and.png" width="50%"></a>
 						
-						<a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="btn_st">실시간 톡하기</a>						
-										
+						<a onclick="" class="btn_st">실시간 톡하기</a>						
+						<!-- <a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="btn_st">실시간 톡하기</a> -->				
 					<div class="review_list" id="bookmarkQna">
 						<ul>
 							<div id="innerQnaDiv">

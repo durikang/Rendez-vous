@@ -958,7 +958,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	    	
 	    	
-			var pop_title = "프리뷰뷰뷰" ;
+			var pop_title = "프리뷰" ;
 	         
 	        window.open("insertPreview.do", pop_title) ;
 	         
@@ -969,7 +969,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	        form1.submit();
 	         
 	         
-	         
+	        form1.action = "linsert.do" ; 
 	    }
 		
 		

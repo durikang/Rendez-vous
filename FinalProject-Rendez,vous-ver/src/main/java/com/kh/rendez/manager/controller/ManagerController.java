@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -33,367 +34,506 @@ import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.Search;
 import com.kh.rendez.support.model.vo.Qna;
 
-
 @Controller
 public class ManagerController {
-	
+
 	@Autowired
 	private ManagerService mnService;
 	@Autowired
 	JavaMailSender mailSender;
-	
-	@RequestMapping("managerHome.do")
-	public ModelAndView ManagerHome(HttpServletRequest request,ModelAndView mv) {
+
+	@RequestMapping("adminHome.do")
+	public ModelAndView ManagerHome(HttpServletRequest request,
+			@RequestParam(value = "pageName", required = false) String pageName, ModelAndView mv) {
 
 		mv.setViewName("manager/AdminHome");
-		if(request.getSession().getAttribute("loginUser") ==null) {
-			mv.addObject("msg","회원 전용입니다. 로그인 해주세요");
+		mv.addObject("pageName", pageName);
+
+		if (request.getSession().getAttribute("loginUser") == null) {
+			mv.addObject("msg", "회원 전용입니다. 로그인 해주세요");
 			mv.setViewName("redirect:home.do");
 		}
+
 		return mv;
-		
+
 	}
+
 //	홈페이지 관리
 	@RequestMapping("manageHo.do")
-	public ModelAndView HomeManageMent(ModelAndView mv,
-			@RequestParam(value="page", required=false) Integer page ) {
-		
-		int currentPage = page !=null ? page : 1;
-		
-		int qnaCount=mnService.selectQnaResponseCount(5);
+	public ModelAndView HomeManageMent(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpServletRequest request) {
+
+		String pageName = request.getParameter("pageName");
+
+		int currentPage = page != null ? page : 1;
+
+		int qnaCount = mnService.selectQnaResponseCount(5);
 		int allQnaCount = mnService.selectQnaResponseCount(4);
 		List<Integer> qnaCountlist = new ArrayList<>();
-		
+
 		qnaCountlist.add(qnaCount);
 		qnaCountlist.add(allQnaCount);
-		
-		ArrayList<Qna> qnaList=mnService.selectQna(currentPage);
-		
-		mv.addObject("qnaCountlist",qnaCountlist);
-		mv.addObject("qnaList",qnaList);
-		mv.addObject("pi",Pagination.getPageInfo());
+
+		ArrayList<Qna> qnaList = mnService.selectQna(currentPage);
+
+		mv.addObject("qnaCountlist", qnaCountlist);
+		mv.addObject("qnaList", qnaList);
+		mv.addObject("pi", Pagination.getPageInfo());
+		mv.addObject("pageName", pageName);
 		mv.setViewName("manager/boarder/homeManagement");
-		
+
 		return mv;
 	}
-		
+
 	@RequestMapping("mn.do")
-	public ModelAndView memberList(ModelAndView mv,
-				@RequestParam(value="page", required=false) Integer page) {
-		// 페이징 처리를 위해 마이바티스 프로젝트에서 PageInfo, Pagination 복사
+	public ModelAndView memberList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpServletRequest request) {
+
 		int currentPage = page != null ? page : 1;
-		
-		
-		
-		ArrayList<AdminMember> list = mnService.selectList(currentPage);	
-		
-		
-		if(list != null) {
+
+		String pageName = request.getParameter("pageName");
+
+		ArrayList<AdminMember> list = mnService.selectList(currentPage);
+
+		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", Pagination.getPageInfo());
+			mv.addObject("pageName", pageName);
+
 			mv.setViewName("manager/boarder/memberBoarderForm");
-		}else {
+
+		} else {
+			throw new ManagerException("게시글 전체 조회 실패!");
+		}
+
+		return mv;
+	}
+	@RequestMapping("mnSort.do")
+	public ModelAndView memberSortList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			@RequestParam("Condition") String Condition,
+			@RequestParam(value="param1",required=false) String param1,
+			@RequestParam(value="param2",required=false) String param2,
+			HttpServletRequest request) {
+		String pageName = request.getParameter("pageName");
+		
+		int currentPage = page != null ? page : 1;
+		
+		System.out.println("condition : " + Condition);
+		System.out.println("startDate : " + param1);
+		System.out.println("endDate : " + param2);
+		
+		ArrayList<AdminMember> list =null;
+		Map<String,Object> param=null;
+		ArrayList<String> obj=null;
+		if(Condition.equals("1")) {
+			obj= new ArrayList<>();
+			String startDate = param1;
+			String endDate = param2;
+			obj.add(startDate);
+			obj.add(endDate);
+			
+			param=new HashMap<>();
+			
+			param.put("Condition", Condition);
+			param.put("Date", obj);
+			
+			System.out.println("들어간 날자 map ->param : "+param);
+			
+			list = mnService.sortingSelectMemberList(param,currentPage);
+		}else if(Condition.equals("2")) {
+			obj=new ArrayList<>();
+			String num1=param1;
+			String num2=param2;
+			obj.add(num1);
+			obj.add(num2);
+			
+			param=new HashMap<>();
+			
+			param.put("Condition",Condition);
+			param.put("Age", obj); 
+			
+			System.out.println("들어간 나이 map ->param : "+param);
+			
+			list = mnService.sortingSelectMemberList(param,currentPage);	
+		}else if(Condition.equals("3")) {
+			obj=new ArrayList<>();
+			String gender=param1;
+			obj.add(gender);
+			
+			param=new HashMap<>();
+			
+			param.put("Condition",Condition);
+			param.put("Gender", obj); // M : 남자  F : 여자
+			
+			System.out.println("들어간 성별 map ->param : "+param);
+			
+			list = mnService.sortingSelectMemberList(param,currentPage);
+			
+		}else if(Condition.equals("4")) {
+			obj=new ArrayList<>();
+			String type=param1;
+			obj.add(type);
+			
+			param=new HashMap<>();
+			
+			param.put("Condition",Condition);
+			param.put("Type", obj); // 타이빙 N : 일반회원 T : 튜터회원
+			
+			System.out.println("들어간 나이 map ->param : "+param);
+			
+			list = mnService.sortingSelectMemberList(param,currentPage);
+			
+		}
+
+		System.out.println("솔팅 완료된 list : "+list);
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", Pagination.getPageInfo());
+			mv.addObject("pageName", pageName);
+
+			mv.setViewName("manager/boarder/memberBoarderForm");
+
+		} else {
 			throw new ManagerException("게시글 전체 조회 실패!");
 		}
 		
 		return mv;
 	}
 	
+
 	@RequestMapping("cuponEnroll.do")
-	public ModelAndView cuponEnroll(ModelAndView mv,@RequestParam("uNo") String uNo) {
-		
-		mv.addObject("uNo",uNo);
+	public ModelAndView cuponEnroll(ModelAndView mv, @RequestParam("uNo") String uNo) {
+
+		mv.addObject("uNo", uNo);
 		mv.setViewName("manager/boarder/cuponInputForm");
 		return mv;
 	}
+
 //	검색 영역 
 	@RequestMapping("mnsearch.do")
 	public ModelAndView memberSearch(Search search, ModelAndView mv,
-			@RequestParam(value="page",required=false) Integer page) {
-		//System.out.println(search.getSearchCondition());
+			@RequestParam(value = "page", required = false) Integer page) {
+		// System.out.println(search.getSearchCondition());
 		int currentPage = page != null ? page : 1;
-		
-		if(search.getSearchValue().equals("일반회원")) {
+
+		if (search.getSearchValue().equals("일반회원")) {
 			search.setSearchValue("n");
-		}else if(search.getSearchValue().equals("튜터")) {
+		} else if (search.getSearchValue().equals("튜터")) {
 			search.setSearchValue("t");
 		}
-		
-		
-		ArrayList<AdminMember> searchList = mnService.searchMemberList(search,currentPage);
-		
-		/*System.out.println("searchList : "+searchList);
-		System.out.println("pi : "+Pagination.getPageInfo());
-		System.out.println("search : "+search);*/
-		
-		if(searchList !=null) {
-			mv.addObject("list", searchList).
-			addObject("pi", Pagination.getPageInfo()).
-			addObject("search", search).setViewName("manager/boarder/memberBoarderForm");
-		}else {
-			mv.addObject("msg","찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.");
+
+		ArrayList<AdminMember> searchList = mnService.searchMemberList(search, currentPage);
+
+		if (searchList != null) {
+			mv.addObject("list", searchList).addObject("pi", Pagination.getPageInfo()).addObject("search", search)
+					.setViewName("manager/boarder/memberBoarderForm");
+		} else {
+			mv.addObject("msg", "찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.");
 		}
-		
+
 		return mv;
 	}
-	@RequestMapping("supSearch.do")
-	public ModelAndView supportSearch(Search search, ModelAndView mv,
-			@RequestParam(value="page",required=false) Integer page) {
-		int currentPage = page != null ? page : 1;
-		
 
-		
-		ArrayList<Qna> searchList = mnService.searchQnaList(search,currentPage);
-		int qnaCount=mnService.selectQnaResponseCount(5);
+	@RequestMapping("supSearch.do")
+	public ModelAndView supportSearch(Search search, ModelAndView mv, HttpServletRequest request,
+			@RequestParam(value = "page", required = false) Integer page) {
+		int currentPage = page != null ? page : 1;
+		String pageName = request.getParameter("pageName");
+
+		ArrayList<Qna> searchList = mnService.searchQnaList(search, currentPage);
+		int qnaCount = mnService.selectQnaResponseCount(5);
 		int allQnaCount = mnService.selectQnaResponseCount(4);
 		List<Integer> qnaCountlist = new ArrayList<>();
-		
+
 		qnaCountlist.add(qnaCount);
 		qnaCountlist.add(allQnaCount);
-		
-		if(searchList !=null) {
-			mv.addObject("qnaList", searchList).
-			addObject("qnaCountlist",qnaCountlist).
-			addObject("pi", Pagination.getPageInfo()).
-			addObject("search", search).setViewName("manager/boarder/homeManagement");
-		}else {
-			mv.addObject("msg","찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.");
+
+		if (searchList != null) {
+			mv.addObject("qnaList", searchList).addObject("qnaCountlist", qnaCountlist)
+					.addObject("pi", Pagination.getPageInfo()).addObject("search", search)
+					.addObject("pageName", pageName).setViewName("manager/boarder/homeManagement");
+		} else {
+			mv.addObject("msg", "찾고자하는 검색어가 잘못 되었습니다. 다시 시도해 주세요.").addObject("pageName", pageName)
+					.setViewName("manager/boarder/homeManagement");
 		}
-		
+
 		return mv;
 	}
-	
-	
+
 //	Gmail 용도 
 	@RequestMapping("couSend.do")
-	public ModelAndView couponSend(ModelAndView mv,@RequestParam("arrayUno") String arrayUno,Coupon coupon) {
+	public ModelAndView couponSend(ModelAndView mv, @RequestParam("arrayUno") String arrayUno, Coupon coupon) {
 
-		
 		List<Integer> unolist = new ArrayList<>();
-		
-		for(int i=0;i<arrayUno.split(",").length;i++) {
+
+		for (int i = 0; i < arrayUno.split(",").length; i++) {
 			unolist.add(Integer.parseInt(arrayUno.split(",")[i]));
 		}
-		//멤버 id 리턴해야함.
+		// 멤버 id 리턴해야함.
 		ArrayList<AdminMember> mlist = mnService.selectMemberList(unolist);
-		
 
-		ArrayList<Coupon> clist =new ArrayList<>();
-		
-		//쿠폰 코드 생성
-		String[] Arraycode=new String[mlist.size()];		
-		
+		ArrayList<Coupon> clist = new ArrayList<>();
+
+		// 쿠폰 코드 생성
+		String[] Arraycode = new String[mlist.size()];
+
 		String msg;
-		
+
 //		DB에 등록하기전 vo 저장
-		
-		for(int i=0;i<Arraycode.length;i++) {
+
+		for (int i = 0; i < Arraycode.length; i++) {
 			Coupon c = new Coupon();
-			
-			String code=new RandomCode().rancode().toString();
-			Arraycode[i]=code;
-		
+
+			String code = new RandomCode().rancode().toString();
+			Arraycode[i] = code;
+
 			c.setcName(coupon.getcName());
 			c.setcCode(Arraycode[i]);
 			c.setDisRate(coupon.getDisRate());
 			c.setStartDate(coupon.getStartDate());
 			c.setEndDate(coupon.getEndDate());
 			c.setuNo(unolist.get(i));
-			
-		
+
 			clist.add(c);
-			
+
 		}
-		
-		
-		if(MailSend(mlist,Arraycode)) {
-			
-			msg=mnService.insertCoupon(clist) != 0 ? "성공적으로 쿠폰 생성 및 이메일을 보냈습니다! " : "쿠폰 생성에 실패 하였습니다.";
+
+		if (MailSend(mlist, Arraycode)) {
+
+			msg = mnService.insertCoupon(clist) != 0 ? "성공적으로 쿠폰 생성 및 이메일을 보냈습니다! " : "쿠폰 생성에 실패 하였습니다.";
 			mv.addObject("msg", msg);
 			mv.setViewName("redirect:mn.do");
-		}else {
-			msg="메일 보내기에 실패 하였습니다.";
+		} else {
+			msg = "메일 보내기에 실패 하였습니다.";
 		}
-		
-		return mv;
-		
-	}
-	
-	public boolean MailSend(ArrayList<AdminMember> mlist,String[] arraycode) {
-		boolean success=false;
-		String setfrom ="kooda21@naver.com";
-		String[] toMail=new String[mlist.size()];
-		int cnt=toMail.length;
-		for(int i=0;i<cnt;i++) {
-			toMail[i]=mlist.get(i).getuId();
-		}
-		
-		String title="쿠폰 코드 보내드립니다.";
-		
-		
-        String[] content =new String[cnt];
-        
-        for(int i=0;i<cnt;i++) {
-        	content[i]=                
-        	        System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
-        	        
-        	        System.getProperty("line.separator")+
-        	                
-        	        "안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
-        	        
-        	        +System.getProperty("line.separator")+
-        	        
-        	        System.getProperty("line.separator")+
 
-        	        " 쿠폰번호는 [ " +arraycode[i]+ " ] 입니다. "
-        	        
-        	        +System.getProperty("line.separator")+
-        	        
-        	        System.getProperty("line.separator")+
-        	        
-        	        "받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다.";
-        	
-        }
-        
-        try {
-        	MimeMessage message = mailSender.createMimeMessage();
-        	MimeMessageHelper messageHelper = new MimeMessageHelper(message,
-					true,"UTF-8");
-        	for(int i=0;i<cnt;i++) {
-        	 messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
-             messageHelper.setTo(toMail[i]); // 받는사람 이메일
-             messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-             messageHelper.setText(content[i]); // 메일 내용
-             
-             mailSender.send(message);
-        	}
-        	success=true;
-             
+		return mv;
+
+	}
+
+	public boolean MailSend(ArrayList<AdminMember> mlist, String[] arraycode) {
+		boolean success = false;
+		String setfrom = "kooda21@naver.com";
+		String[] toMail = new String[mlist.size()];
+		int cnt = toMail.length;
+		for (int i = 0; i < cnt; i++) {
+			toMail[i] = mlist.get(i).getuId();
+		}
+
+		String title = "쿠폰 코드 보내드립니다.";
+
+		String[] content = new String[cnt];
+
+		for (int i = 0; i < cnt; i++) {
+			content[i] = System.getProperty("line.separator") + // 한줄씩 줄간격을 두기위해 작성
+
+					System.getProperty("line.separator") +
+
+					"안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
+
+					+ System.getProperty("line.separator") +
+
+					System.getProperty("line.separator") +
+
+					" 쿠폰번호는 [ " + arraycode[i] + " ] 입니다. "
+
+					+ System.getProperty("line.separator") +
+
+					System.getProperty("line.separator") +
+
+					"받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다.";
+
+		}
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			for (int i = 0; i < cnt; i++) {
+				messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setTo(toMail[i]); // 받는사람 이메일
+				messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+				messageHelper.setText(content[i]); // 메일 내용
+
+				mailSender.send(message);
+			}
+			success = true;
+
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-        return success;
+		return success;
 	}
+
 //	
 	@RequestMapping("mnRequest.do")
-	public ModelAndView RequestTutorView(ModelAndView mv,@RequestParam(value="page",required=false) Integer page) {
-		// 페이징 처리를 위해 마이바티스 프로젝트에서 PageInfo, Pagination 복사
+	public ModelAndView RequestTutorView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpServletRequest request,@RequestParam(value="msg",required=false) String msg) {
+		String pageName = request.getParameter("pageName");
+
+		int currentPage = page != null ? page : 1;
+
+		ArrayList<MemberJoinTutor> RequestTutorlist = mnService.selectTutorList(currentPage, 2);
+		
+		int currentRequest=RequestTutorlist.size();
+		
+		
+		
+		mv.addObject("RequestTutorlist", RequestTutorlist);
+		mv.addObject("currentRequest",currentRequest);
+		mv.addObject("msg", msg);
+		mv.addObject("pi", Pagination.getPageInfo()).addObject("pageName", pageName);
+		mv.setViewName("manager/boarder/RequestTutorForm");
+
+		return mv;
+	}
+	
+	@RequestMapping("grantTutor.do")
+	public ModelAndView GrantTutorView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpServletRequest request,@RequestParam(value="msg",required=false) String msg,@RequestParam(value="currentRequest",required=false) Integer currentRequest) {
+		String pageName = request.getParameter("pageName");
+		
 		int currentPage = page != null ? page : 1;
 		
+		ArrayList<MemberJoinTutor> AllTutorlist = mnService.selectTutorList(currentPage, 1);
 		
 		
-		ArrayList<MemberJoinTutor> list = mnService.selectTutorList(currentPage);	
 		
-		/*System.out.println(list);*/
-		
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.addObject("pi", Pagination.getPageInfo());
-			mv.setViewName("manager/boarder/RequestTutorForm");
-		}else {
-			throw new ManagerException("게시글 전체 조회 실패!");
-		}
+		mv.addObject("AllTutorlist", AllTutorlist);
+		mv.addObject("currentRequest", currentRequest);
+		mv.addObject("msg", msg);
+		mv.addObject("pi", Pagination.getPageInfo()).addObject("pageName", pageName);
+		mv.setViewName("manager/boarder/RequestTutorForm");
 		
 		return mv;
 	}
-	@RequestMapping(value="newMemList.do", produces="appllication/json; charset=utf-8")
-	@ResponseBody
-	public String realTimeMemberList(HttpServletResponse response) throws JsonIOException, IOException{
-		ArrayList<AdminMember> mlist =mnService.selectMemberList();
 	
+	
+
+//	실시간 회원 조회하는 ajax 메소드
+	@RequestMapping(value = "newMemList.do", produces = "appllication/json; charset=utf-8")
+	@ResponseBody
+	public String realTimeMemberList(HttpServletResponse response) throws JsonIOException, IOException {
+		ArrayList<AdminMember> mlist = mnService.selectMemberList();
+		
 		
 		Gson gson = new GsonBuilder().create();
 		
+
 		return gson.toJson(mlist);
-			
+
 	}
-	
-	@RequestMapping(value="realTimeCount.do", produces="appllication/json; charset=utf-8")
+
+//	실시간 챗
+	@RequestMapping(value = "realTimeCount.do", produces = "appllication/json; charset=utf-8")
 	@ResponseBody
-	public String realTimeMemberCount(HttpServletResponse response) throws JsonIOException, IOException{
+	public String realTimeMemberCount(HttpServletResponse response) throws JsonIOException, IOException {
 		AdminStatic as = new AdminStatic();
-		
+
 		as.setTodayMember(mnService.countMember(1));
 		as.setThisMonthMember(mnService.countMember(2));
-		
+
 		as.setTodayPay(mnService.sumPay(1));
 		as.setThisMonthPay(mnService.sumPay(2));
 		
 		
 		Gson gson = new GsonBuilder().create();
-		
+
 		return gson.toJson(as);
 	}
-	
+
 	// 실시간 수업 순위
-	@RequestMapping(value="realTimeLessonList.do", produces="appllication/json; charset=utf-8")
+	@RequestMapping(value = "realTimeLessonList.do", produces = "appllication/json; charset=utf-8")
 	@ResponseBody
-	public String realTimeLessonList(HttpServletResponse response) throws JsonIOException, IOException{
-		ArrayList<AdminLesson> Lessonlist =  mnService.selectRealTimeLessonList();
-		
-		
+	public String realTimeLessonList(HttpServletResponse response) throws JsonIOException, IOException {
+		ArrayList<AdminLesson> Lessonlist = mnService.selectRealTimeLessonList();
+
 		Gson gson = new GsonBuilder().create();
-		
+
 		return gson.toJson(Lessonlist);
-		
+
 	}
+
 	@RequestMapping("changeTutor.do")
-	public ModelAndView changeTutor(ModelAndView mv,@RequestParam("cStr") String cStr,@RequestParam("uNo") List<Integer> uNo,
-			@RequestParam("page") Integer page){
-		
-		HashMap<String, Object> map= new HashMap<>();
-		
+	public ModelAndView changeTutor(ModelAndView mv, @RequestParam("cStr") String cStr,
+			@RequestParam(value = "uNo", required = false) List<Integer> uNo, @RequestParam("page") Integer page) {
+
+		if (uNo == null) {
+			mv.addObject("msg", "회원을 선택하지 않았습니다 회원을 선택해주세요.");
+			mv.setViewName("common/errorPage");
+			return mv;
+		}
+
+		HashMap<String, Object> map = new HashMap<>();
+
 		map.put("cStr", cStr);
 		map.put("uNo", uNo);
-		
-		String msg = mnService.changeTutorStatus(map) !=0 ? "성공적으로 변경 하였습니다.":"실패 하였습니다.";	
-		mv.addObject("msg",msg);
-		mv.addObject("page",page);
-		mv.setViewName("redirect:mnRequest.do");
+
+		String msg = mnService.changeTutorStatus(map) != 0 ? "성공적으로 변경 하였습니다." : "실패 하였습니다.";
+		mv.addObject("msg", msg);
+		mv.addObject("page", page);
+		mv.addObject("pageName", "request"); // 사이드 바와 점보트론에 현제 페이지가 어딘지 표시하기 위함.
+		if(cStr.equals("R"))
+			mv.setViewName("redirect:mnRequest.do");
+		if(cStr.equals("Y"))
+			mv.setViewName("redirect:grantTutor.do");
 		
 		return mv;
 	}
 	
-	@RequestMapping("rearrangement.do")
-	public ModelAndView rearrangement(ModelAndView mv,@RequestParam("type") String type, @RequestParam("page") Integer page) {
+	@RequestMapping("tutorSearch.do")
+	public ModelAndView tutorSearch(Search search, ModelAndView mv,
+			@RequestParam(value = "page", required = false) Integer page) {
 		
-		int currentPage = page !=null ? page : 1;
-		int qnaCount=mnService.selectQnaResponseCount(5);
+		int currentPage = page != null ? page : 1;
+		
+		ArrayList<MemberJoinTutor> AllTutorlist = mnService.searchTutor(search,currentPage);
+		
+		mv.addObject("AllTutorlist",AllTutorlist);
+		mv.addObject("pi", Pagination.getPageInfo()).addObject("pageName", "request").addObject("search",search);
+		mv.setViewName("manager/boarder/RequestTutorForm");		
+		return mv;
+	}
+	
+
+//	재 배열
+	@RequestMapping("rearrangement.do")
+	public ModelAndView rearrangement(ModelAndView mv, @RequestParam("type") String type,
+			@RequestParam("page") Integer page) {
+
+		int currentPage = page != null ? page : 1;
+		int qnaCount = mnService.selectQnaResponseCount(5);
 		int allQnaCount = mnService.selectQnaResponseCount(4);
 		List<Integer> qnaCountlist = new ArrayList<>();
-		
+
 		qnaCountlist.add(qnaCount);
 		qnaCountlist.add(allQnaCount);
-		ArrayList<Qna> qnaList=new ArrayList<>();
-		if(type.equals("allQna")) {
-			qnaList = mnService.selectQna(currentPage);	
+		ArrayList<Qna> qnaList = new ArrayList<>();
+		if (type.equals("allQna")) {
+			qnaList = mnService.selectQna(currentPage);
 		}
-		
-		if(type.equals("noQna")) {
-			
-			qnaList = mnService.selectQna(5,currentPage);	
+
+		if (type.equals("noQna")) {
+
+			qnaList = mnService.selectQna(5, currentPage);
 		}
-		
-		
-		mv.addObject("qnaCountlist",qnaCountlist);
-		mv.addObject("qnaList",qnaList);
-		
-		mv.addObject("pi",Pagination.getPageInfo());
+
+		mv.addObject("qnaCountlist", qnaCountlist);
+		mv.addObject("qnaList", qnaList);
+
+		mv.addObject("pi", Pagination.getPageInfo());
 		mv.setViewName("manager/boarder/homeManagement");
-		
-		
-		
+
 		return mv;
 	}
-	
+
+//	통계
 	@RequestMapping("static.do")
-	public ModelAndView EnrollArea(ModelAndView mv) {
+	public ModelAndView EnrollArea(ModelAndView mv,
+			@RequestParam(value = "pageName", required = false) String pageName) {
+
+		mv.addObject("pageName", pageName);
 		mv.setViewName("manager/boarder/statisticsBoarder");
 		return mv;
 	}
 
-	
-	
-	
-	
 }

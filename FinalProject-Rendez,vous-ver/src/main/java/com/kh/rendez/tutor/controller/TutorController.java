@@ -4,18 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.rendez.lesson.model.service.LessonService;
+import com.kh.rendez.manager.common.Pagination;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.tutor.model.service.TutorService;
 import com.kh.rendez.tutor.model.vo.Certification;
@@ -110,8 +107,9 @@ public class TutorController {
 	
 	@RequestMapping("tutorCert.do")
 	public ModelAndView tutorCert(HttpServletRequest request,ModelAndView mv,
-			int uNo) {
-		
+			int uNo,@RequestParam(value="page",required=false) Integer page,
+			@RequestParam(value="pageName",required=false) String pageName) {
+		int currentPage = page != null ? page : 1;
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
@@ -121,11 +119,11 @@ public class TutorController {
 		}
 		
 		
-		
-		
-		ArrayList<Certification> tCertArr = tService.selectTCert(uNo);
+		ArrayList<Certification> tCertArr = tService.selectTCert(uNo,currentPage);
 
 		mv.addObject("tCertArr",tCertArr);
+		mv.addObject("pageName",pageName);
+		mv.addObject("pi",Pagination.getPageInfo());
 		mv.setViewName("tutor/tutorCert");
 		return mv;
 	}

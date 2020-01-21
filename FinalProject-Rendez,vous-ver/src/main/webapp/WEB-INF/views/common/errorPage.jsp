@@ -13,7 +13,7 @@
 
 		<%-- <h2 style="color:red;"><%=request.getAttribute("javax.servlet.error.message") %></h2> --%>
 
-		<a href="home.do">시작페이지로 돌아가기</a>
+		<button onclick="history.back();">돌아가기</button>
 	</div>
 
 </body>

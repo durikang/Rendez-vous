@@ -6,12 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
+	
 	<script>
 		window.onload=function(){
 			location.href='home.do';
 		}
-		/* 수정1  */
+		/* 수정  */
 	</script>
 </body>
 </html>

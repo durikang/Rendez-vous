@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.rendez.manager.common.Pagination;
+import com.kh.rendez.manager.model.vo.PageInfo;
 import com.kh.rendez.tutor.model.dao.TutorDao;
 import com.kh.rendez.tutor.model.vo.Certification;
 import com.kh.rendez.tutor.model.vo.Tutor;
@@ -42,8 +44,12 @@ public class TuTorServiceImpl implements TutorService {
 	}
 
 	@Override
-	public ArrayList<Certification> selectTCert(int uNo) {
-		return tDao.selectTCert(uNo);
+	public ArrayList<Certification> selectTCert(int uNo, int currentPage) {
+		int listCount = tDao.getListCount();
+		// 페이지 정보 저장
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				
+		return tDao.selectTCert(uNo,pi);
 	}
 
 	@Override

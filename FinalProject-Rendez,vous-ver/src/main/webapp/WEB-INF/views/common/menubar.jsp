@@ -95,7 +95,7 @@
     font-size: 16px;
     color: black;
 }
-menu_body a {
+.menu_body a {
 	font-weight: 500;
     font-size: 16px;
     color: black;
@@ -124,6 +124,7 @@ menu_body a {
 </style>
 <body class="menu_body">
 
+
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
     <header class="header">
@@ -148,7 +149,7 @@ menu_body a {
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
-					<a href="managerHome.do">관리자 페이지</a>
+					<a href="adminHome.do?pageName=adminHome">관리자 페이지</a>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser }">

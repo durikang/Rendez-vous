@@ -9,28 +9,26 @@
 <meta charset="UTF-8">
 <title>Document</title>
 <script src="https://kit.fontawesome.com/8af8965544.js"></script>
-<script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
-	
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    
 </head>
 <style>
 .header {
-	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	padding: 0 10%;
+	padding: 0 5%;
+}
+
+.header .menuFontSize {
+	font-size: 17px;
 }
 
 .logo {
 	width: 100px;
 	height: 100px;
 	cursor: pointer;
-	margin-right: auto;
+	margin:0 90px;
 }
 
 .nav_links {
@@ -51,7 +49,6 @@
 }
 
 .nav_links li, a {
-	font-family: "Montserrat", sans-serif;
 	font-weight: 500;
 	font-size: 16px;
 	color: black;
@@ -60,6 +57,7 @@
 .nav_links li a:hover {
 	color: #c9c0b1;
 }
+
 
 .button {
 	margin-left: 20px;
@@ -85,40 +83,42 @@
 	text-decoration: none;
 }
 
-.container {
-	font-family: 'Do Hyeon', sans-serif;
-}
-
 .board_box {
 	width: 100%;
 	height: 100vh;
 }
 
-.wrapper {
-	float: left;
-	width: 15%;
-	height: 100vh;
-	display: flex;
-	position: relative;
+.menuInfo {
+	float: right;
 }
+
+.login-info {
+	float: right;
+	
+}
+.login-info ul li,a{
+	font-size: 12px;
+	
+}
+ 
+
 </style>
 
-<body class="menu_body">
+<body>
 
 	<c:if test="${ !empty msg}">
+		<c:set var ="m" value="${msg}"/>
 		<script>
-			alert("${msg}");
+			alert("${m}");
 		</script>
-		<c:remove var="msg" />
+		<c:remove var="m" />
 	</c:if>
 
-	<c:set var="contextPath"
-		value="${ pageContext.servletContext.contextPath }"
-		scope="application" />
+	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 	<header class="header">
 
-		<nav>
-			<ul class="nav_links">
+		<nav class="login-info">
+			<ul class="nav_links logInfo">
 				<li><a href="home.do">랑데뷰 홈으로</a></li>
 				<li>|</li>
 				<li>${loginUser.user_name }님환영합니다</li>
@@ -127,30 +127,40 @@
 			</ul>
 		</nav>
 	</header>
-	<header class="header">
+	<br>
+
+	<header class="header mainmenu">
+		
 		<img class="logo"
 			src="${ contextPath }/resources/managerResources/Img/logo.png"
 			alt="logo">
-
-		<ul class="nav_links">
-
-			<li><a href="manageHo.do">홈페이지 관리</a></li>
-			<li><a href="mn.do">회원 / 튜터 관리</a></li>
-			<li><a href="mnRequest.do">튜터 신청 관리</a></li>
-			<li><a href="static.do">통계</a></li>
+		<div class="container green borderXwidth">
+		
+		<ul class="nav_links d-flex justify-content-center">
+			<li><a class="menuFontSize" href="manageHo.do?pageName=managerHome">홈페이지 관리</a></li>
+			<li><a class="menuFontSize" href="mn.do?pageName=memNTut" onclick="pageSubmitFn('memNTut');">회원 / 튜터 관리</a></li>
+			<li><a class="menuFontSize" href="mnRequest.do?pageName=request" onclick="pageSubmitFn('request');">튜터 신청 관리</a></li>
+			<li><a class="menuFontSize" href="static.do?pageName=static" onclick="pageSubmitFn('static');">통계</a></li>
 		</ul>
+		</div>
 
 	</header>
+
 	<script>
 		var newWindow;
-		$(function(){
-			
+		$(function() {
 			$(".logo").on("click", function() {
-				location.href = 'managerHome.do';
+				location.href = 'adminHome.do?pageName=adminHome';
 			});
 			
 		});
-	</script>
+		
 
+
+		
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	
 </body>
 </html>

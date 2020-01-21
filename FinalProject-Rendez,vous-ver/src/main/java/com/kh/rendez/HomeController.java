@@ -42,7 +42,6 @@ public class HomeController {
 		if(list != null) {
 			mv.addObject("msg",msg);
 			mv.addObject("list", list);
-			System.out.println(list);
 			return mv;			
 		} else {
 			mv.addObject("msg","게시물 불러오기 실패!");

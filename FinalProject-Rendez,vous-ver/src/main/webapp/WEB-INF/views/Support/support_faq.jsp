@@ -261,7 +261,7 @@
 			<div class="que">
 				<span class="rule_bold_text3"><span class="pink">4&nbsp;&nbsp;</span> 세금계산서 / 현금영수증은 어떻게 발급받을 수 있나요?</span>
 				<br />
-				전체수업료를 Rendez,vous으로 결제하신 다음 help@taling.me 로 말씀해주시면 발급해드립니다.
+				전체수업료를 Rendez,vous으로 결제하신 다음 help@rendezvous.me 로 말씀해주시면 발급해드립니다.
 			</div>
 			<div class="que">
 				<span class="rule_bold_text3"><span class="pink">5&nbsp;&nbsp;</span>  수업장소와 시간은 어떻게 되나요?</span>

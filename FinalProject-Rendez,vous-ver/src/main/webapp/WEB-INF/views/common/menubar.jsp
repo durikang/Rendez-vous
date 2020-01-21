@@ -124,14 +124,8 @@ menu_body a {
 </style>
 <body class="menu_body">
 
-<c:if test="${ !empty msg}">
-      <script>
-         alert("${msg}");
-      </script>
-      <c:remove var="msg" />
-   </c:if>
+	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
-<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>	
     <header class="header">
 		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">

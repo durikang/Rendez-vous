@@ -3,6 +3,7 @@ package com.kh.rendez.manager.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.kh.rendez.manager.model.vo.AdminLesson;
 import com.kh.rendez.manager.model.vo.AdminMember;
@@ -20,7 +21,7 @@ public interface ManagerService {
 //	쿠폰 저장
 	public int insertCoupon(ArrayList<Coupon> clist);
 	
-	public ArrayList<MemberJoinTutor> selectTutorList(int currentPage);
+	public ArrayList<MemberJoinTutor> selectTutorList(int currentPage, int n);
 
 	public int countMember(int i);
 
@@ -41,6 +42,10 @@ public interface ManagerService {
 	public ArrayList<Qna> selectQna(int i, int currentPage);
 //	qna검색바
 	public ArrayList<Qna> searchQnaList(Search search, int currentPage);
+// 튜터 검색
+	public ArrayList<MemberJoinTutor> searchTutor(Search search, int currentPage);
+
+	public ArrayList<AdminMember> sortingSelectMemberList(Map<String, Object> param, int currentPage);
 
 
 

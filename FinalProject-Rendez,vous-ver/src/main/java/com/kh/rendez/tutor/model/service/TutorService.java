@@ -16,7 +16,7 @@ public interface TutorService {
 
 	String selectTutorName(int lNo);
 
-	ArrayList<Certification> selectTCert(int uNo);
+	ArrayList<Certification> selectTCert(int uNo, int currentPage);
 
 	int updateMemberType(int uno);
 

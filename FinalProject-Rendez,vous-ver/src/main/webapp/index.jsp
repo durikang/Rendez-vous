@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
+	
 	<script>
 		window.onload=function(){
 			location.href='home.do';

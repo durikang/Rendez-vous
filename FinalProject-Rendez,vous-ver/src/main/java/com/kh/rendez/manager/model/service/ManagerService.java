@@ -47,8 +47,8 @@ public interface ManagerService {
 
 	public ArrayList<AdminMember> sortingSelectMemberList(Map<String, Object> param, int currentPage);
 
+	public ArrayList<AdminMember> selectTopFiveVip();
 
+	public ArrayList<AdminMember> selectNewJoinList(int currentPage);
 
-
-	
 }

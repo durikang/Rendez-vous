@@ -106,6 +106,13 @@ $(function(){
  	 
 	<br>
 	<br>
+	<script>
+	if(${Condition ne null}){
+		console.log(${Condition});
+		console.log(${param1});
+		console.log(${param2});
+	}
+	</script>
 
 	
 	<c:import url="../mnCommon/sidebar.jsp" >
@@ -122,13 +129,13 @@ $(function(){
 			<div class="col">
 			  	<ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#qwe">전체</a>
+                        <a class="nav-link active" href="mn.do">전체</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#asd">TOP5 VIP</a>
+                        <a class="nav-link" href="vip5.do?pageName=memNTut">TOP5 VIP</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#qwe">신규 가입자</a>
+                        <a class="nav-link" href="newjoin.do?pageName=memNTut">신규 가입자</a>
                     </li>
                 </ul>
                 <table class="position-left">
@@ -205,11 +212,8 @@ $(function(){
 										전체</option>
 									<option value="mName"
 										<c:if test="${ search.searchCondition == 'mName' }">selected</c:if>>
-										회원명</option>
-									<option value="mType"
-										<c:if test="${ search.searchCondition == 'mType' }">selected</c:if>>
-										타입
-									</option>
+										회원명
+										</option>
 								</select>
 							</div>
 							<input type="search" placeholder="회원을 검색하세요" name="searchValue"
@@ -235,7 +239,7 @@ $(function(){
 								</li>
 							</c:if>
 						
-						<c:if test="${ search eq null }">
+						<c:if test="${ search eq null and Condition eq null}">
 							<c:if test="${ pi.currentPage > 1 }">
 								<c:url var="before" value="mn.do">
 									<c:param name="page" value="${ pi.currentPage -1 }" />
@@ -258,7 +262,68 @@ $(function(){
 							</c:if>
 						</c:if>
 						
-						<c:if test="${ search eq null }">	
+						<!-- Sort했을대 페이징 처리  -->
+						<!--1.Sort 날짜  -->
+						<c:if test="${ Condition eq 1}">
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="before" value="mnSort.do">
+									<c:param name="page" value="${ pi.currentPage -1 }" />
+									<c:param name="Condition" value="${ Condition }"/>
+									<c:param name="param1" value="${ param1 }"/>
+									<c:param name="param2" value="${ param2 }"/>
+								</c:url>
+								<li class="page-item">
+									<a class="page-link" href="${ before }" tabindex="-1">이전</a>
+								</li>
+							</c:if>
+						</c:if>
+						<!--2.Sort 나이  -->
+						<c:if test="${Condition eq 2}">
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="before" value="mnSort.do">
+									<c:param name="page" value="${ pi.currentPage -1 }" />
+									<c:param name="Condition" value="${ Condition }"/>
+									<c:param name="param1" value="${ param1 }"/>
+									<c:param name="param2" value="${ param2 }"/>
+								</c:url>
+								<li class="page-item">
+									<a class="page-link" href="${ before }" tabindex="-1">이전</a>
+								</li>
+							</c:if>
+						</c:if>
+						<!--3.Sort 성별 -->
+						<c:if test="${Condition eq 3}">
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="before" value="mnSort.do">
+									<c:param name="page" value="${ pi.currentPage -1 }" />
+									<c:param name="Condition" value="${ Condition }"/>
+									<c:param name="param1" value="${ param1 }"/>
+									<c:param name="param2" value="${ param2 }"/>
+								</c:url>
+								<li class="page-item">
+									<a class="page-link" href="${ before }" tabindex="-1">이전</a>
+								</li>
+							</c:if>
+						</c:if>
+						<!--4.Sort 성별 -->
+						<c:if test="${Condition eq 4}">
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="before" value="mnSort.do">
+									<c:param name="page" value="${ pi.currentPage -1 }" />
+									<c:param name="Condition" value="${ Condition }"/>
+									<c:param name="param1" value="${ param1 }"/>
+									<c:param name="param2" value="${ param2 }"/>
+								</c:url>
+								<li class="page-item">
+									<a class="page-link" href="${ before }" tabindex="-1">이전</a>
+								</li>
+							</c:if>
+						</c:if>
+						
+						
+						
+						
+						<c:if test="${ search eq null and Condition eq null }">	
 							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 								<c:choose>
 									<c:when test="${ p eq pi.currentPage }">
@@ -307,9 +372,118 @@ $(function(){
 								</c:choose>
 							</c:forEach>
 						</c:if>
+						<!--Sort 페이징 처리  -->
+						<!--1. 날자 Sort  -->
+						<c:if test="${Condition eq 1}">
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:choose>
+									<c:when test="${ p eq pi.currentPage }">
+										<li class="page-item active">
+											<a class="page-link" href="#">
+												${ p } <span class="sr-only"></span>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:url var="pagination" value="mnSort.do">
+											<c:param name="page" value="${ p }" />
+											<c:param name="Condition" value="${ Condition }"/>
+											<c:param name="param1" value="${ param1 }"/>
+											<c:param name="param2" value="${ param2 }"/>
+										</c:url>
+										<li class="page-item">
+											<a class="page-link" href="${ pagination }">${ p } 
+												<span class="sr-only"></span>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:if>
+						<!--2. 나이 Sort  -->
+						<c:if test="${Condition eq 2}">
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:choose>
+									<c:when test="${ p eq pi.currentPage }">
+										<li class="page-item active">
+											<a class="page-link" href="#">
+												${ p } <span class="sr-only"></span>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:url var="pagination" value="mnSort.do">
+											<c:param name="page" value="${ p }" />
+											<c:param name="Condition" value="${ Condition }"/>
+											<c:param name="param1" value="${ param1 }"/>
+											<c:param name="param2" value="${ param2 }"/>
+										</c:url>
+										<li class="page-item">
+											<a class="page-link" href="${ pagination }">${ p } 
+												<span class="sr-only"></span>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:if>
+						<!--3. 성별 Sort  -->
+						<c:if test="${Condition eq 3}">
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:choose>
+									<c:when test="${ p eq pi.currentPage }">
+										<li class="page-item active">
+											<a class="page-link" href="#">
+												${ p } <span class="sr-only"></span>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:url var="pagination" value="mnSort.do">
+											<c:param name="page" value="${ p }" />
+											<c:param name="Condition" value="${ Condition }"/>
+											<c:param name="param1" value="${ param1 }"/>
+											<c:param name="param2" value="${ param2 }"/>
+										</c:url>
+										<li class="page-item">
+											<a class="page-link" href="${ pagination }">${ p } 
+												<span class="sr-only"></span>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:if>
+						<!--4. 타입 Sort  -->
+						<c:if test="${Condition eq 4}">
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:choose>
+									<c:when test="${ p eq pi.currentPage }">
+										<li class="page-item active">
+											<a class="page-link" href="#">
+												${ p } <span class="sr-only"></span>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:url var="pagination" value="mnSort.do">
+											<c:param name="page" value="${ p }" />
+											<c:param name="Condition" value="${ Condition }"/>
+											<c:param name="param1" value="${ param1 }"/>
+											<c:param name="param2" value="${ param2 }"/>
+										</c:url>
+										<li class="page-item">
+											<a class="page-link" href="${ pagination }">${ p } 
+												<span class="sr-only"></span>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:if>
 						
 						<!-- 다음  -->
-						<c:if test="${ search eq null}">
+						<c:if test="${ search eq null and Condition eq null}">
 						
 						<c:if test="${ pi.currentPage >= pi.maxPage }">
 							<li class="page-item disabled"><a class="page-link disabled"
@@ -324,8 +498,8 @@ $(function(){
 								href="${ after }">다음</a></li>
 						</c:if>
 						</c:if>
-						
-						<c:if test="${ search ne null}">
+						<!-- 검색했을 시 페이징 처리 -->
+						<c:if test="${search ne null}">
 						
 						<c:if test="${ pi.currentPage >= pi.maxPage }">
 							<li class="page-item disabled"><a class="page-link disabled"
@@ -341,6 +515,83 @@ $(function(){
 							<li class="page-item "><a class="page-link"
 								href="${ after }">다음</a></li>
 						</c:if>
+						</c:if>
+						<!-- Sort했을 시 페이징 처리  -->
+						<!-- 1.날자 Sort -->
+						<c:if test="${Condition eq 1}">
+						
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link disabled"
+									href="#">Next</a></li>
+							</c:if>
+							
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+									<c:url var="after" value="mnSort.do">
+										<c:param name="page" value="${ pi.currentPage + 1 }" />
+										<c:param name="Condition" value="${ Condition }"/>
+										<c:param name="param1" value="${ param1 }"/>
+										<c:param name="param2" value="${ param2 }"/>
+									</c:url>
+								<li class="page-item "><a class="page-link"
+									href="${ after }">다음</a></li>
+							</c:if>
+						</c:if>
+						<!-- 2.날자 Sort -->
+						<c:if test="${Condition eq 2}">
+						
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link disabled"
+									href="#">Next</a></li>
+							</c:if>
+							
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+									<c:url var="after" value="mnSort.do">
+										<c:param name="page" value="${ pi.currentPage + 1 }" />
+										<c:param name="Condition" value="${ Condition }"/>
+										<c:param name="param1" value="${ param1 }"/>
+										<c:param name="param2" value="${ param2 }"/>
+									</c:url>
+								<li class="page-item "><a class="page-link"
+									href="${ after }">다음</a></li>
+							</c:if>
+						</c:if>
+						<!-- 3.성별 Sort -->
+						<c:if test="${Condition eq 3}">
+						
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link disabled"
+									href="#">Next</a></li>
+							</c:if>
+							
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+									<c:url var="after" value="mnSort.do">
+										<c:param name="page" value="${ pi.currentPage + 1 }" />
+										<c:param name="Condition" value="${ Condition }"/>
+										<c:param name="param1" value="${ param1 }"/>
+										<c:param name="param2" value="${ param2 }"/>
+									</c:url>
+								<li class="page-item "><a class="page-link"
+									href="${ after }">다음</a></li>
+							</c:if>
+						</c:if>
+						<!-- 4.타입 Sort -->
+						<c:if test="${Condition eq 4}">
+						
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link disabled"
+									href="#">Next</a></li>
+							</c:if>
+							
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+									<c:url var="after" value="mnSort.do">
+										<c:param name="page" value="${ pi.currentPage + 1 }" />
+										<c:param name="Condition" value="${ Condition }"/>
+										<c:param name="param1" value="${ param1 }"/>
+										<c:param name="param2" value="${ param2 }"/>
+									</c:url>
+								<li class="page-item "><a class="page-link"
+									href="${ after }">다음</a></li>
+							</c:if>
 						</c:if>
 						
 					</ul>
@@ -401,10 +652,10 @@ $(function(){
 			      <div class="modal-body">			        
 					
 					<input type="hidden" value="3" name="Condition">
-					<select name="param">
+					<select name="param1">
 						<option>선택</option>
 						<option value="M">남</option>
-						<option VALUE="F">여</option>
+						<option value="F">여</option>
 					</select>
 					
 			      </div>
@@ -417,10 +668,10 @@ $(function(){
    		      <form action="mnSort.do" method="post" class="typeForm">
 			      <div class="modal-body">			        
 					<input type="hidden" value="4" name="Condition">
-					<select name="param">
+					<select name="param1">
 						<option>선택</option>
 						<option value="N">일반회원</option>
-						<option VALUE="T">튜터회원</option>
+						<option value="T">튜터회원</option>
 					</select>
 			      </div>
 			      <div class="modal-footer">

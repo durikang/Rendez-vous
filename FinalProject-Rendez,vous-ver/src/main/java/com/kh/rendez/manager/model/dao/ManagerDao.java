@@ -144,5 +144,16 @@ public class ManagerDao {
 		return (ArrayList)sqlSession.selectList("managerMapper.sortingSelectMemberList",param,rowBounds);
 
 	}
+
+	public ArrayList<AdminMember> selectTopFiveVip() {
+		return (ArrayList)sqlSession.selectList("managerMapper.selectTopFiveVip");
+	}
+
+	public ArrayList<AdminMember> selectNewJoinList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.selectNewJoinList",null,rowBounds);
+	}
 	
 }

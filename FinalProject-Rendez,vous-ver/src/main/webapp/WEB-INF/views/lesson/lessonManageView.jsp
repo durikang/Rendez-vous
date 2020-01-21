@@ -131,6 +131,7 @@
 	<div class="hcont">
 		<c:import url="../common/menubar.jsp"/>
 	</div>
+	<c:import url="../common/hyunsidebar.jsp"/>
 <!-- //HEADER -->
 
 	<!--container-->
@@ -174,7 +175,7 @@
 				
 				
 				<c:if test="${ la.laType eq 1 and la.lNo eq li.lNo }">
-				<div class="image" style="background-image:url(${ contextPath}/resources/lessonImg/${la.cName });" onclick="location.href='/Talent/Detail/19200'"></div>
+				<div class="image" style="background-image:url(${ contextPath}/resources/lessonImg/${la.cName });" ></div>
 				</c:if>
 
 				
@@ -190,7 +191,7 @@
 							&nbsp;
 							<div class="button_gray cursor" onclick="updateLesson(this);" style="width: 180px">수업 정보 수정하기</div>
 							&nbsp;	
-							<div class="button_white cursor" onclick="fnStatusChange('CS01','19200');">등록완료하기</div>				
+							<!-- <div class="button_white cursor" onclick="fnStatusChange('CS01','19200');">등록완료하기</div> -->				
 					</div>
 							
 				</div>
@@ -210,6 +211,7 @@
 					<th>끝나는시각</th>
 					<th>잔여인원</th>
 					<th>총원</th>
+					<th>시간</th>
 					</tr>
 
 					<c:forEach var="l" items="${lList}">
@@ -221,6 +223,7 @@
 					<td><fmt:formatDate value="${l.eTime}" pattern="HH:mm"/></td>
 					<td>${l.remain }</td>
 					<td>${l.total }</td>
+					<td></td>
 					</tr>
 					</c:if>		
 					</c:forEach>			
@@ -267,9 +270,10 @@
 			}
 			
 			function updateLesson(value){
-				var lno = $(value).parent().children().eq(0).val();
-				alert(lno);
-				
+				var lNo = $(value).parent().children().eq(0).val();
+				if(confirm("수정하시겠습니까?")){
+				location.href="updateLessonInfo.do?lNo="+lNo;
+				}
 			}	
 				
 	
@@ -295,17 +299,16 @@
     <div id="myModal" class="modal">
  
       <!-- Modal content -->
-      <div class="modal-content">
-        <button class="close">close</button>                                                               
-        <p>Some text in the Modal..</p>
+      <div class="modal-content" align="center">
         <form action="lessonTimeInsert.do">
-                 <input id="adlno" type="text" name="lno" hidden> <br>
-                   가격 : <input id="adprice" name="price" type="number"> <br>          
-		날짜: <input type="date" name="dday"> <br>
-		시작 시간 : <input type="time" name="stime"> <br>
-		종료 시간 : <input type="time" name="etime"><br>
-		모집 인원 : <input type="number" name="total"><br>
-		<button>넣기</button>
+        <input id="adlno" type="text" name="lno" hidden> <br>
+        <input id="adprice" name="price" type="number" hidden=""> <br>          
+		날짜: <input type="date" name="dday" required> <br>
+		시작 시간 : <input type="time" name="stime" required> <br>
+		종료 시간 : <input type="time" name="etime" required><br>
+		모집 인원 : <input type="number" name="total" required><br>
+		<button type="submit" class="btn btn-primary ">등록하기</button>
+		<button type="button" id="close" class="btn btn-default ">닫기</button>
 		</form>
       </div>
  
@@ -323,7 +326,7 @@
     var btn = document.getElementById("myBtn");
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];                                          
+    var span = document.getElementById("close");                                          
 
     // When the user clicks on the button, open the modal 
     /* btn.onclick = function() {

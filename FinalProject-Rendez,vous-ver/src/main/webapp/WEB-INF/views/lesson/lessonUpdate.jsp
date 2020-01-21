@@ -1,24 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>	
-	<title>수업 등록하기</title>
+	<title>수업 정보 수정</title>
 
-	
 	<meta charset="UTF-8">   
 
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="내 상황을 딱! 이해하는 튜터들에게 1:1로 수업을 받아보세요. 중국어, 코딩, 미술 등">
-	<meta property="og:title" content="탈잉 - 나만의 튜터를 만나보세요">
-	<meta property="og:url" content="https://taling.me/">
-	<meta property="og:image" content="https://taling.me/Content/Images/ogimage2.png" />
-	<meta property="og:description" content="내 상황을 딱! 이해하는 튜터들에게 1:1로 수업을 받아보세요. 중국어, 코딩, 미술 등">	
-	<meta name="p:domain_verify" content="1dd028b45d9d85306bb74db3d9911bbb"/>
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=1909272" />
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/publy2.css" />
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main15.css?ver=19121" />
@@ -55,15 +49,9 @@
 	
     <meta property="fb:app_id" content="1488135204822133" />
 
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-MTJJTC6');</script>
-	<!-- End Google Tag Manager -->
 
-	<!-- Global site tag (gtag.js) - AdWords: 876466920 -->
+
+
 	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-876466920"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
@@ -73,7 +61,6 @@
 	  gtag('config', 'AW-876466920');
 	</script>
     
-	<!-- Page-hiding snippet (recommended)  -->
 	<style>
 		.async-hide { 
 			opacity: 0 !important
@@ -91,94 +78,11 @@
 
 	
 	</style>
-	<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-	h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-	(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-	})(window,document.documentElement,'async-hide','dataLayer',4000,
-	{'GTM-NBPXJKP':true});</script>
 
-    <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-77451578-1', 'auto', {allowLinker: true});
-	  ga('require', 'GTM-NBPXJKP');
-	  ga('send', 'pageview');
-
-	</script>
-	<!-- Facebook Pixel Code -->
-	<script>
-	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-	document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '666003960220481');
-	fbq('track', "PageView");
-	</script>
-	<noscript><img height="1" width="1" style="display:none"
-	src="https://www.facebook.com/tr?id=666003960220481&ev=PageView&noscript=1"
-	/></noscript>
-	<!-- End Facebook Pixel Code -->
-	<!-- Naver --> 
-	<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script> 
-	<script type="text/javascript"> 
-	if (!wcs_add) var wcs_add={};
-	wcs_add["wa"] = "s_568925707495";
-	if (!_nasa) var _nasa={};
-	wcs.inflow();
-	wcs_do(_nasa);
-	</script>
-	<!-- Naver -->
-	<script>
-		window.fbAsyncInit = function () {
-			FB.init({
-				appId: '1488135204822133',
-				xfbml: true,
-				version: 'v2.8'
-			});
-		};
-
-		(function (d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) { return; }
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/ko_KR/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-
-		$(document).mouseup(function (e){
-			if($(e.target).attr('datasearch') != 'yes'){	
-				$('.weekly_best').hide();
-				$('.inner_area','.weekly_best').hide();
-				$('div','.weekly_best').removeClass("inner_area");	
-			}
-		});
-	</script>
-	<script>
-		function mySub(){
-			if($('#mySub').css('display')!='block'){
-				$('#mySub').show();
-			}else{
-				$('#mySub').hide();
-			}
-		}
-
-		function couponPop()
-		{
-			popupWindow = window.open('/Talent/coupon.php', '_blank', 'height=800,width=550,scrollbars=no,status=no');
-		}
-	</script>
 
 </head>
 <body style="">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTJJTC6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
 <div id="wrap">
 <!--HEADER -->
 	<div class="hcont">
@@ -192,21 +96,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 	<div class="title_box">
-		<h3>수업 등록</h3>
+		<h3>수업 수정하기</h3>
 		<div class="steps">
 			<li id="pg1"><b>01</b>제목/상세 내용</li>
 			<img src="${contextPath}/resources/h1/Images/icon_next.png">
-			<!-- <a href="/tutor/regiTitle/19200"> -->
+
 			
 			<li id="pg2"><b>02</b>이미지/영상</li></a>
 			<img src="${contextPath}/resources/h1/Images/icon_next.png">
-			<!-- <a href="/tutor/regiPrice/19200"> -->
+
 			
 			<li id="pg3"><b>03</b>가격</li></a>
-			<%-- <img src="${contextPath}/resources/h1/Images/icon_next.png"> --%>
-			<!-- <a href="/tutor/regiClass/19200"> -->
-			
-			<!-- <li id="pg4"><b>04</b>수업</li></a> -->
 		</div>
 	</div>
 	
@@ -260,7 +160,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 	
 	<!-- page1 -->
-	<form id="form1" name="form1" action="linsert.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
+	<form id="form1" name="form1" action="lupdate.do" method="post" enctype="multipart/form-data" onsubmit="return onsub();">
+	<input type="text" hidden="" name="lNo" value="${li.lNo }">
 	<div id="page1" class="tab">
 	
 	<div class="box">
@@ -275,7 +176,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<ul>
 			</div>
 			<div class="inner1">
-				<input type="text" class="basic nick" id="lTitle" name="lTitle" value="" placeholder="수강생을 끌어당길 수 있는 개성넘치는 제목을 만들어 보세요.">
+				<input type="text" class="basic nick" id="lTitle" name="lTitle" value="${li.lTitle }" placeholder="수강생을 끌어당길 수 있는 개성넘치는 제목을 만들어 보세요.">
 			</div>
 		</div>
 	</div>
@@ -297,7 +198,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				</ul>
 			</div>
 			<div class="inner1">
-				<textarea class="basic len980 hei190" placeholder="수업소개는 수강생이 가장 주의깊게 살펴보는 부분입니다. 수강생들이 수업에 대해 알 수 있도록 TIP의 질문을 반드시 포함하여 작성해주세요." id="lIntroduction" name="lIntroduction"></textarea>
+				<textarea class="basic len980 hei190" placeholder="수업소개는 수강생이 가장 주의깊게 살펴보는 부분입니다. 수강생들이 수업에 대해 알 수 있도록 TIP의 질문을 반드시 포함하여 작성해주세요." id="lIntroduction" name="lIntroduction">${li.lIntroduction }</textarea>
 			</div>
 			<div class="inner1">
 				
@@ -326,7 +227,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				</ul>
 			</div>
 			<div class="inner1">
-				<textarea class="basic len980 hei190" placeholder="TIP의 내용을 참고하여 튜터님의 수업을 수강하기에 적합한 수업대상에 대해 알려주세요. " id="lTarget" name="lTarget"></textarea>
+				<textarea class="basic len980 hei190" placeholder="TIP의 내용을 참고하여 튜터님의 수업을 수강하기에 적합한 수업대상에 대해 알려주세요. " id="lTarget" name="lTarget">${li.lTarget }</textarea>
 			</div>
 		</div>
 	</div>
@@ -335,8 +236,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<div class="title">수업등록지역<b class="pink">*</b></div>
 		<div class="cont">
 			<select class="basic len320" id="lRegion" name=lRegion onchange="regionSelect(this.value)">
-				<option>수업 대표 지역을 선택해 주세요</option>
-										<option value="서울" >서울</option>
+										<option value="">수업 대표 지역을 선택해 주세요</option>
+												<option value="서울" >서울</option>
 												<option value="경기" >경기</option>
 												<option value="인천" >인천</option>
 												<option value="부산" >부산</option>
@@ -354,7 +255,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="box">
 		<div class="title">수업카테고리<b class="pink">*</b></div>
 		<div class="cont">
-			<select class="basic len320" id="lCateMain" name="lCateMain" onchange="categorySelect(this.value)">
+			<select class="basic len320" id="lCateMain" name="lCateMain" onchange="categorySelect(this.value) ">
 				<option>수업카테고리를 선택해 주세요</option>
 										<option value="디자인" >디자인</option>
 												<option value="실무역량" >실무역량</option>
@@ -567,6 +468,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		}
 	</script>
 	
+	<script>
+	
+	
+	$(function(){
+
+
+		
+		$("option[value = ${li.lRegion}]").prop("selected",true);
+		$('#lRegion').change();	
+		$("option[value = ${li.lRegionSub}]").prop("selected",true);
+		
+		$("option[value = ${li.lCateMain}]").prop("selected",true);
+		$('#lCateMain').change();
+		
+		var lcsC = $("#lCateSub").children();
+		var lCateSub = '${li.lCateSub}';
+		
+		for(var i=0;i<lcsC.length;i++){
+			if(lcsC.eq(i).val() == lCateSub){
+				lcsC.eq(i).prop("selected",true);
+			} 
+			
+		}
+		
+		
+		
+	});
+	
+	
+	
+	</script>
+	
 	
 	
 	
@@ -614,24 +547,94 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<li>- 10MB 이하의 jpg,jpeg,png 파일로 올려주세요</li>
 				</ul>
 			</div>
-			<div class="inner1" style="position:relative;">
+			<div id="covCov" class="inner1" style="position:relative;">
 				<div class="gray5 title"><b class="pink">커버 이미지</b></div>
-									<span class="verify">업로드</span>
-					<input type="file" id="Idcard" name="covImg" input-file="img-cover" style="width:80px;height:50px;position:absolute;top:30px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-cover" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
+					<span class="verify" onclick="cuc	()">이미지 수정</span>
+					<input type="text" hidden value="${laList[0].laNo }">
+					<input type="text" hidden value="${laList[0].cName }">
+					<input hidden type="file" id="Idcard" onchange="updateCovImg(this)" name="covImg" input-file="img-cover" style="width:80px;height:50px;position:absolute;top:30px;opacity:0;cursor:pointer;"/>
+					<div style="padding-top:10px;"><img alt=""  src="${contextPath }/resources/lessonImg/${ laList[0].cName}?after" id="img-cover" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 								
 			</div>
+			
+			<script>
+			
+			$(function(){
+				
+			});
+			
+			
+			function cuc(){
+				if(confirm("커버 이미지를 수정하시겠습니까?")){
+					$("#Idcard").click();
+				}
+			}
+			
+			
+			
+			function updateCovImg(value){
+				
+				   var laNo = $(value).parent().children().eq(2).val();
+				   var cName = $(value).parent().children().eq(3).val();
+					
+			       var file = $("#Idcard")[0].files[0];
+			       var formData = new FormData();
+			       formData.append("file",file);
+			       formData.append("laNo",laNo);
+			       formData.append("cName",cName);
+			       
+					  $.ajax({
+						  url : "updateLessonImg.do",
+				            data:formData,
+							type:"post",
+							processData: false, 
+							contentType: false,
+				            success:function(data){
+	               			alert(data);
+				            },error:function(){
+				               console.log("ajax 통신 실패");
+				            }
+				            })       
+				
+			}
+			
+			
+			
+			
+			
+			</script>
 
 			<div class="inner1">
-				<div class="gray5 title">추가 이미지 (최대 10개)</div>
+				<div class="gray5 title"><b class="pink">추가 이미지 (최대 10개)</b></div>
+				<hr>
 				<input type="hidden" name="deleteCert" id="deleteCert" value="">
-				<div class="certificate" style="position:relative;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>					
-					<input type="file" name="extImg" input-file="img-Cert0" style="width:80px;height:50px;position:absolute;top:0;left:0;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert0" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
+				
+				<div id="eiRepeat">
+				<c:forEach var="la" begin="1"  end="${laList.size()}" varStatus="var"  items="${laList }">
+				<div class="certificate" id="cert${ var.index }" style="position:relative;display:none;">
+					<div class="verify left10" onclick="cuc2(this)">이미지 수정</div>
+					<div class="verify left10" onclick="delEImg(this)">삭제</div>
+					<input type="text" hidden value="${laList[var.index].laNo }">
+					<input type="text" hidden value="${laList[var.index].cName }">
+					<input type="file" hidden="" onchange="updateExtImg(this);" name="extImg" input-file="img-Cert${ var.index }" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
+					<div style="padding-top:10px;"><img alt="" src="${contextPath }/resources/lessonImg/${ laList[var.index].cName}?after" id="img-Cert${ var.index }" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
 				</div>
-								<script>
+				<hr>
+				</c:forEach>
+				</div>
+				<div hidden class="plus button" id="pb1" onclick="add_certificate()">
+					 가짜이미지추가
+				</div>
+				<input type="file" id="addImgp" onchange="addImg()" hidden>
+				<div class="verify left10" onclick="addAlert()">이미지 추가</div>
+				
+			</div>
+
+		</div>
+	</div>
+	
+	
+					<script>
 					function deleteCert(val)
 					{
 						if($('#deleteCert').val()=='')
@@ -643,78 +646,126 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							$('#deleteCert').val($('#deleteCert').val()+","+val);
 						}
 					}
-				</script>
-				<!--innerHTML로 엘리멘트를 생성해서 넣으면 change 이벤트를 받지 못해서 미리 여러개를 생성해놓고 show하는 방안으로 임시 처리함-->
-								<div class="certificate" id="cert1" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert1" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert1" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert2" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert2" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert2" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert3" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert3" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert3" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert4" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert4" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert4" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert5" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert5" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert5" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert6" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert6" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert6" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert7" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert7" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert7" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert8" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert8" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert8" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-								<div class="certificate" id="cert9" style="position:relative;display:none;">
-					<input type="text" class="basic len652" name="disImg" placeholder="추가 이미지" style="display: none;">
-					<div class="verify left10">업로드</div>
-					<!--div class="verify left10" onclick="$(this).parent().remove();"><img src="/tutor/Content/Images/icon_del_bk.png"> 삭제</div-->
-					<input type="file" name="extImg" input-file="img-Cert9" style="width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;"/>
-					<div style="padding-top:10px;"><img alt="" id="img-Cert9" style="float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;" /></div>
-				</div>
-				<div class="plus button" onclick="add_certificate()">
-					 이미지추가
-				</div>
-			</div>
+					
+					
+					function cuc2(value){
+						
+						if(confirm("이미지를 수정하시겠습니까?")){
+							$(value).parent().children().eq(4).click();
+						} 	
+					}
+					
+					function updateExtImg(value){
+						
+						   var laNo = $(value).parent().children().eq(2).val();
+						   var cName = $(value).parent().children().eq(3).val();
+							
+					       var file = $(value).parent().children().eq(4)[0].files[0];
+					       var formData = new FormData();
+					       formData.append("file",file);
+					       formData.append("laNo",laNo);
+					       formData.append("cName",cName);
+					       
+							  $.ajax({
+								  url : "updateLessonImg.do",
+						            data:formData,
+									type:"post",
+									processData: false, 
+									contentType: false,
+						            success:function(data){
+			               			alert(data);
+						            },error:function(){
+						               console.log("ajax 통신 실패");
+						            }
+						            })       
+						
+					}
+					
+					
+					function delEImg(value){
+						
+						var laNo = $(value).parent().children().eq(2).val();
+						var lNo = '${li.lNo}';
+						
+						if(confirm("삭제하하시겟습니까?")){
+							
+							  $.ajax({
+								  url : "deleteLessonImg.do",
+						            data:{laNo:laNo,lNo:lNo},
+									type:"post",
+						            success:function(data){
+			               			alert(data);
+			               			$(value).parent().remove();
+						            },error:function(){
+						               console.log("ajax 통신 실패");
+						            }
+						            }) 							
+						}	
+					}
+					
+					function addAlert(){
+						if(confirm("이미지를 추가하시겠습니까?")){
+							$("#addImgp").click();
+						}
+					}
+					
+					function addImg(){
+						
+						var lNo = '${li.lNo}';
+						var size = $("#eiRepeat").children().length + 1;
+						  
+						   
+					       var file = $("#addImgp")[0].files[0];
+					       var formData = new FormData();
+					       formData.append("file",file);
+					       formData.append("lNo",lNo);
+					       
+							  $.ajax({
+								  url :"addLessonImg.do",
+						            data:formData,
+									type:"post",
+									dataType:"json",
+									processData: false, 
+									contentType: false,
+						            success:function(data){
+						            console.log(data);
+						            var laNo = data[0].laNo
+						            var oName = data[0].oName
+						            var cName = data[0].cName
+						            var laType = data[0].laType
+						           
+						            alert("이미지 추가 성공");
+						            
+ 						            $("#eiRepeat").append("<div class='certificate' id='cert"+size+"' style='position:relative;'>"
+											+"<div class='verify left10' onclick='cuc2(this)'>이미지 수정</div>"
+											+"<div class='verify left10' onclick='delEImg(this)'>삭제</div>"
+											+"<input type='text' hidden value='"+laNo+"'>"
+											+"<input type='text' hidden value='"+cName+"'>"
+											+"<input type='file' hidden='' onchange='updateExtImg(this);' name='extImg' input-file='img-Cert"+size+"' style='width:80px;height:50px;position:absolute;top:0;left:0px;opacity:0;cursor:pointer;'/>"
+											+"<div style='padding-top:10px;'><img alt='' src='${contextPath }/resources/lessonImg/"+cName+"?after' id='img-Cert"+size+"' style='float: none; margin: 0 auto; position: relative; overflow: hidden; max-width:400px;' /></div>"
+										+"</div>")
+						            
 
-		</div>
-	</div>
+						            },error:function()	{
+						               console.log("ajax 통신 실패");
+						            }
+						            }) 
+						
+						
+						
+					}
+					
+					
+
+				</script>
+	
+	
+	
+	
+	
+	
+	
+	
 	<script>
 		$('[input-file]').change(function (e) {			
 			var file = (e.target || window.event.srcElement).files[0];
@@ -735,9 +786,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			$('#cert'+certNum).show();
 			certNum++;
 		}
+		
+		
+		$(function(){
+			var addClickNum = ${fn:length(laList)};
+			for(var i=0;i<addClickNum-1;i++){
+				$("#pb1").click();
+			}
+			
+		});
+		
+		
 
 		
 	</script>	
+	
+	
 
 
 	<div class="box">
@@ -755,7 +819,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</div>
 			</div>
 			<div class="inner1">	
-				<div class="vdo"><input type="text" name="lYtb" class="basic len786" placeholder="예) https://youtu.be/1sboNBkTMuU" style="margin-bottom:10px"></div>									
+				<div class="vdo"><input type="text" name="lYtb" class="basic len786" value="https://www.youtube.com/watch?v=${li.lYtb }" placeholder="예) https://youtu.be/1sboNBkTMuU" style="margin-bottom:10px"></div>									
 			</div>
 			<script>
 				function addvdo(){					
@@ -833,7 +897,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<div class="title">한 회당 가격<b class="pink">*</b></div>
 		<div class="cont">
 			<div class="inner1" style="margin:0">
-				<input type="text" id="lPrice" name="lPrice" value="" class="basic phone" placeholder="한 회당 가격을 입력하세요"> 원
+				<input type="text" id="lPrice" name="lPrice" value="${li.lPrice }" class="basic phone" placeholder="한 회당 가격을 입력하세요"> 원
 			</div>
 			<script>
 				$('#UnitPrice').change(function(){updateCalculation()});
@@ -930,12 +994,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				return false;
 			}
  			
- 			if($("#Idcard").val().length<1){
-				alert("대표 사진은 반드시 등록해야 합니다");
-				$("#pg2").click();
-				return false;
-			}
-
  						
  			
  			if($("#lPrice").val().length<1){
@@ -943,34 +1001,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				$("#lPrice").focus();
 				return false;
 			}
+ 			
+ 			
+ 			
 
  			
- 			if($("#Idcard").val().length<1){
-				alert("커버 이미지는 반드시 등록해야 합니다");
-				$("#pg2").click();
-				return false;
- 			}
  			
 			
 		}
-				
+		
 	    function openPop(){
 
 	    	
 	    	
 			var pop_title = "프리뷰" ;
 	         
-	        window.open("insertPreview.do", pop_title) ;
+	        window.open("updatePreview.do", pop_title) ;
 	         
 	        var form1 = document.form1;
 	        form1.target = pop_title ;
-	        form1.action = "insertPreview.do" ;
+	        form1.action = "updatePreview.do" ;
 	         
 	        form1.submit();
 	         
+	        
+	        form1.action = "lupdate.do" ;
 	         
-	        form1.action = "linsert.do" ; 
 	    }
+		
+		
 		
 		
 		

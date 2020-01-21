@@ -48,6 +48,17 @@
 	WHERE USER_NO = #{uno}
 	</select>
 	
+	<select id="selectTutorInfo" parameterType="_int" resultMap="tResultSet">
+	SELECT * 
+	FROM TUTOR
+	WHERE USER_NO = #{uNo}
+	</select>
+	
+	<select id="selectTutorPic" parameterType="_int" resultType="String">
+	SELECT U_C_NAME
+	FROM USERPROPIC
+	WHERE USER_NO = #{uNo}
+	</select>
 	
 	
 	
@@ -59,7 +70,6 @@
 	
 	
 	<!-- 인증 -->
-	
 	
 	<resultMap id="cResultSet" type="Certification2">
 		<id property="cNo" column="C_NO"/>
@@ -73,12 +83,7 @@
 	<insert id="insertCertification" parameterType="Certification2">
 	INSERT INTO CERTIFICATION VALUES(SEQ_CNO.NEXTVAL,#{uNo},#{cTitle},#{oFile},#{cFile})
 	</insert>
-	<!-- 두리  -->
-	<select id="getListCount" resultType="_int">
-		select count(*)
-		from certification
-	</select>
-	<!-- 두리 -->
+	
 	<select id="selectTCert" parameterType="_int" resultMap="cResultSet">
 	SELECT * 
 	FROM CERTIFICATION

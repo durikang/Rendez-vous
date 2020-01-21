@@ -4,26 +4,53 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.rendez.manager.common.Pagination;
+import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.tutor.model.service.TutorService;
 import com.kh.rendez.tutor.model.vo.Certification;
 import com.kh.rendez.tutor.model.vo.Tutor;
 
-
+@SessionAttributes("loginUser")
 @Controller
 public class TutorController {
 	
 	@Autowired
 	private TutorService tService;
+	
+	@RequestMapping("tutorMain.do")
+	public ModelAndView tutorMainGo(ModelAndView mv,
+			HttpServletRequest request) {
+		
+		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		String tStatus = tService.selectTutorStatus(loginUser.getUser_no());
+		
+		mv.addObject("tStatus",tStatus);
+		mv.setViewName("lesson/tutorMainView");
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("tutorInsertPage.do")
@@ -32,6 +59,7 @@ public class TutorController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		if(loginUser == null || loginUser.getUser_type().equals("T")) {
+			mv.addObject("msg","잘못된 접근입니다");
 			mv.setViewName("home");
 			return mv;
 		}
@@ -43,7 +71,7 @@ public class TutorController {
 	
 	@RequestMapping("tutorInsert.do")
 	public ModelAndView tutorInsert(
-		ModelAndView mv,
+		ModelAndView mv,SessionStatus status,
 		HttpServletRequest request,
 		String tNick,
 		String tInfo,
@@ -96,6 +124,7 @@ public class TutorController {
 			}
 			
 			if(result3>0) {
+				status.setComplete();
 				mv.addObject("msg","튜터 신청이 완료되있습니다  승인 완료 후 수업 등록이 가능합니다.");
 				mv.setViewName("home");
 			}
@@ -107,9 +136,8 @@ public class TutorController {
 	
 	@RequestMapping("tutorCert.do")
 	public ModelAndView tutorCert(HttpServletRequest request,ModelAndView mv,
-			int uNo,@RequestParam(value="page",required=false) Integer page,
-			@RequestParam(value="pageName",required=false) String pageName) {
-		int currentPage = page != null ? page : 1;
+			int uNo) {
+		
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
@@ -119,11 +147,11 @@ public class TutorController {
 		}
 		
 		
-		ArrayList<Certification> tCertArr = tService.selectTCert(uNo,currentPage);
+		
+		
+		ArrayList<Certification> tCertArr = tService.selectTCert(uNo);
 
 		mv.addObject("tCertArr",tCertArr);
-		mv.addObject("pageName",pageName);
-		mv.addObject("pi",Pagination.getPageInfo());
 		mv.setViewName("tutor/tutorCert");
 		return mv;
 	}

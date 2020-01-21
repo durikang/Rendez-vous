@@ -16,11 +16,15 @@ public interface TutorService {
 
 	String selectTutorName(int lNo);
 
-	ArrayList<Certification> selectTCert(int uNo, int currentPage);
+	ArrayList<Certification> selectTCert(int uNo);
 
 	int updateMemberType(int uno);
 
 	String selectTutorStatus(int uno);
+
+	Tutor selectTutorInfo(int uNo);
+
+	String selectTutorPic(int uNo);
 
 	
 

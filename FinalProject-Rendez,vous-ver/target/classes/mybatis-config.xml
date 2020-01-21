@@ -1,5 +1,3 @@
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
@@ -27,7 +25,7 @@
       <typeAlias alias="Certification2" type="com.kh.rendez.tutor.model.vo.Certification"/>
       <typeAlias alias="Review" type="com.kh.rendez.review.model.vo.Review"/>
       <typeAlias alias="LessonReview" type="com.kh.rendez.lesson.model.vo.LessonReview"/>
-      
+      <typeAlias alias="LessonDetailInfo" type="com.kh.rendez.lesson.model.vo.LessonDetailInfo"/>
       <!-- 두리 별칭  -->
       <typeAlias type="com.kh.rendez.manager.model.vo.LessonJoin" alias="LessonJoin"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.Coupon" alias="Coupon"/>
@@ -43,11 +41,9 @@
       <!-- 준섭  -->
       <typeAlias type="com.kh.rendez.support.model.vo.Qna" alias="Qna"/>
       <typeAlias type="com.kh.rendez.support.model.vo.Answer" alias="Answer"/>
-
    	
    	  <!-- 혜원 -->
       <typeAlias type="com.kh.rendez.home.model.vo.HomeList" alias="HomeList"/>
-
    </typeAliases>
    
    <mappers>
@@ -64,10 +60,8 @@
          <mapper resource="mappers/member-mapper.xml"/>
       <!-- 준섭  -->
       <mapper resource="mappers/support-mapper.xml"/>
-
       <!-- 혜원 -->
       <mapper resource="mappers/home-mapper.xml"/>
-
    
    </mappers>
 

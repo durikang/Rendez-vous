@@ -45,6 +45,8 @@ public class SearchController {
 		
 		cCListination.setcCList(cCList);
 		
+		System.out.println(sList);
+		
 		mv.addObject("sList", sList);
 		mv.addObject("cCList",cCList);
 		mv.addObject("pi", Pagination.getPageInfo());

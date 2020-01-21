@@ -1,6 +1,7 @@
 package com.kh.rendez.baesung.payment.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,14 @@ public class PaymentDao {
 
 	public int updateCoupon(int couponNo) {
 		return sqlSession.update("paymentMapper.expirationCoupon",couponNo);
+	}
+
+	public int updatePoint(int usePoint, int uNo) {
+		HashMap map = new HashMap();
+		map.put("usePoint", usePoint);
+		map.put("uNo", uNo);
+		
+		return sqlSession.update("paymentMapper.updatePoint",map);
 	}
 
 	

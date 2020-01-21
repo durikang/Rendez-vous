@@ -141,7 +141,7 @@ div {
     box-sizing: border-box;
 }
 .tutor_cont .title_box .steps .on {
-    color: #ff005a;
+    color: rgb(184,145,105);
 }
 .tutor_cont .title_box .steps li {
     margin: 0 15px;
@@ -243,7 +243,7 @@ img {
     margin-top: 20px;
     padding-left: 10px;
     text-align: center;
-    color: #ff005b;
+    color: rgb(184,145,105);
 }
 .appcont .call .center4 a {
     color: #ff005b;
@@ -287,6 +287,7 @@ a {
 <body>
     <c:import url="../../common/menubar.jsp"/>
 
+	<div style="border-top: 1px solid #c9c9c9;"></div>
     <div class="tutor_cont">
         <div class="title_box">
             <h3>수업신청</h3>
@@ -315,7 +316,7 @@ a {
         </script>
         <div class="apply">
             <div class="pf_box">
-                <div class="pf" style="background-image:url(resources/baesung/images/${tClass.uCName})"></div>
+                <div class="pf" style="background-image:url(resources/user/img/${tClass.uCName})"></div>
                 <p class="triangle-border top gray" style="margin-top:50px; margin-bottom: 46px;">
                     결제/환불 방식은 바쁘시더라도 꼭 읽어보세요.
             </p></div>

@@ -15,6 +15,7 @@ import com.kh.rendez.baesung.payment.model.vo.Coupon;
 import com.kh.rendez.baesung.payment.model.vo.InsertCouponInfo;
 import com.kh.rendez.baesung.payment.model.vo.LessonTime;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
+import com.kh.rendez.baesung.point.model.service.PointService;
 import com.kh.rendez.baesung.search.model.vo.tClass;
 import com.kh.rendez.member.model.vo.Member;
 
@@ -23,6 +24,9 @@ public class PaymentController {
 
 	@Autowired
 	PaymentService jpService;
+	
+	@Autowired
+	PointService pointService;
 	
 	@RequestMapping("detail.do")
 	public ModelAndView detailClass(int lNo, ModelAndView mv, HttpServletRequest request) {
@@ -60,8 +64,13 @@ public class PaymentController {
 	}
 	
 	@RequestMapping("payment.do")
-	public ModelAndView paymentClass(ModelAndView mv) {
+	public ModelAndView paymentClass(ModelAndView mv,HttpServletRequest request) {
 		
+		HttpSession session = request.getSession();
+		Member m = (Member) session.getAttribute("loginUser");
+		int point = pointService.selectPoint(m.getUser_no());
+		
+		mv.addObject("point",point);
 		mv.setViewName("baesung/payment/Payment");
 		return mv;
 	}
@@ -72,9 +81,10 @@ public class PaymentController {
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("loginUser");
 		
+		
 		ArrayList<Coupon> CouponList = jpService.selectCouponList(m.getUser_no());
 		
-		System.out.println(CouponList);
+		//System.out.println(CouponList);
 		mv.addObject("CouponList", CouponList);
 		mv.setViewName("baesung/payment/coupon");
 		return mv;
@@ -102,7 +112,7 @@ public class PaymentController {
 	
 	@RequestMapping("payComplete.do")
 	public ModelAndView payComplete(ModelAndView mv,HttpServletRequest request,Payment pm, String payMethod,
-			Integer couponNo, Integer Price) {
+			Integer couponNo, Integer Price, Integer usePoint) {
 		
 		HttpSession session = request.getSession();
 		tClass tClass = (com.kh.rendez.baesung.search.model.vo.tClass) session.getAttribute("tClass");
@@ -120,6 +130,11 @@ public class PaymentController {
 		if(couponNo != 0) {
 			int result3 = jpService.updateCoupon(couponNo);
 		}
+		
+		if(usePoint != 0) {
+			int result4 = jpService.updatePoint(usePoint, m.getUser_no());
+		}
+		
 		
 		
 		int result1 = jpService.insertPayment(pm);

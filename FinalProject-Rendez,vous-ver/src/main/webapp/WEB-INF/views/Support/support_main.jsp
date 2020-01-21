@@ -221,7 +221,7 @@
 			</div>
 		</div>
 	</section>
-	
+	<!-- commint test -->
 	<span id="remoCon">
 		<a href="#" onClick="window.open('chatbot.do', '', 'width=500,height=700, left=1400, top=250')">
 		<img src="resources/support/img/KakaoTalk.png" style="width:80px; height:80px;">
@@ -233,8 +233,7 @@
   	<script src="support/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 	<script src="<c:url value="/resources/support/vendor/jquery/jquery.min.js"/>"></script>
-	<script
-		src="<c:url value="/resources/support/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
+	<script src="<c:url value="/resources/support/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 
 	<c:import url="../common/footbar.jsp"/>
 	

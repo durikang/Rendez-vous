@@ -41,9 +41,11 @@
       <!-- 준섭  -->
       <typeAlias type="com.kh.rendez.support.model.vo.Qna" alias="Qna"/>
       <typeAlias type="com.kh.rendez.support.model.vo.Answer" alias="Answer"/>
+
    	
    	  <!-- 혜원 -->
       <typeAlias type="com.kh.rendez.home.model.vo.HomeList" alias="HomeList"/>
+
    </typeAliases>
    
    <mappers>
@@ -60,8 +62,10 @@
          <mapper resource="mappers/member-mapper.xml"/>
       <!-- 준섭  -->
       <mapper resource="mappers/support-mapper.xml"/>
+
       <!-- 혜원 -->
       <mapper resource="mappers/home-mapper.xml"/>
+
    
    </mappers>
 

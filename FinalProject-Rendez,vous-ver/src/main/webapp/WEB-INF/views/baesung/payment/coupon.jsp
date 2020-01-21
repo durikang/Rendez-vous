@@ -172,7 +172,7 @@ body {
         height: 100%;
         margin: 0px;
        float: left;
-       background: rgb(246, 92, 82);
+       background: rgb(184, 145, 105);
        box-sizing: border-box;
        border-top: 1px #dadada solid;
        border-right: 1px #dadada solid;
@@ -192,13 +192,13 @@ body {
     	box-sizing: border-box;
     	  margin: 0px auto;
     	  margin-top: 22px;
-    	  background: rgb(247, 146, 139);
+    	  background: rgb(207, 181, 154);
     	  border-radius: 50px;
 		font-family: 'Noto Sans', sans-serif;	
     }
 
 	#wordCoupon{
-		color: rgb(255, 181, 176);
+		color: rgb(207, 181, 154);
 		font-weight: bold;
 		margin-top: 35px;
 		margin-left: 0px;
@@ -235,8 +235,8 @@ body {
 			
 			
 			<div id="left">
-            <p style="font-size: 80px; color: rgb(246, 92, 82); margin: 0px; margin-left: 15px; font-weight: bold; float: left;">${CouponList.discountRate}</p>
-            <p style="font-size: 60px; color: rgb(246, 92, 82); margin: 7px 0px 0px 0px; font-weight: bold; float: left;">%</p>
+            <p style="font-size: 80px; color: rgb(184, 145, 105); margin: 0px; margin-left: 15px; font-weight: bold; float: left;">${CouponList.discountRate}</p>
+            <p style="font-size: 60px; color: rgb(184, 145, 105); margin: 7px 0px 0px 0px; font-weight: bold; float: left;">%</p>
             <p style="font-size: 20px; color: rgb(68, 68, 68); margin: 0px; margin-left: 15px; font-weight: bold; clear: both;">${CouponList.couponName }</p>    
             <p style="font-size: 15px; color: rgb(143, 143, 143); margin: 8px 0px 0px 0px; margin-left: 15px; font-weight: bold;">만료일 : ${CouponList.endDate}일까지</p>
             </div>

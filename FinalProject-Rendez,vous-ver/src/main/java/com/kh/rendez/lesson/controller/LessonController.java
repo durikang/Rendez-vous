@@ -1,4 +1,4 @@
-﻿package com.kh.rendez.lesson.controller;
+package com.kh.rendez.lesson.controller;
 
 import java.io.File;
 import java.sql.Date;
@@ -489,6 +489,25 @@ public class LessonController {
 			RedirectAttributes ra,
 			LessonInfo li
 			) {
+		
+		String url = li.getlYtb();
+		int separator=0;	
+		if(url.contains("=")) {
+			separator = url.lastIndexOf("=");
+		}else {
+			separator =  url.lastIndexOf("/");
+		}
+		String code  = url.substring(separator+1);
+		li.setlYtb(code);
+		
+		
+		li.setlIntroduction(li.getlIntroduction().replace("\n", "<br>"));
+		li.setlTarget(li.getlTarget().replace("\n", "<br>"));
+		
+		
+		
+		
+		
 		
 		int result = lService.lessonInfoUpdate(li);
 		

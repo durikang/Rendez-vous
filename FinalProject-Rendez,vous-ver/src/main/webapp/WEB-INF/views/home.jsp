@@ -544,8 +544,9 @@ div ul {
    align-items:center; /* 위아래 기준 중앙정렬 */
    justify-content:center; /* 좌우 기준 중앙정렬 */
 }
-.swiper-slide img {
-   max-width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+#slide-img {
+   width:90%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+   height:90%;
    border-radius:20px;
    /* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
 }
@@ -648,7 +649,7 @@ div ul {
 	      <div class="swiper-slide">
 	      	<div id="img-area">
 	      		<c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>	      			
-	      		<a href="${ goLesson }"><img src="resources/lessonImg/${ l.cName }"></a>
+	      		<a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
 	      	</div>
 	      	<div id="text-area">
 	      		<h3>${ l.lTitle }</h3>
@@ -659,9 +660,10 @@ div ul {
 	      	</div>	      	
 	      </div>
 	      </c:forEach>
+	     </div>
 	</div>	
 </div>
-
+<br><br>
 <div class="newYear">
 	<img src="resources/homeImg/배너1.PNG">
 </div>

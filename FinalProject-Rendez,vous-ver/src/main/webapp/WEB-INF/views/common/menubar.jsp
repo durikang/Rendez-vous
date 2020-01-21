@@ -95,7 +95,7 @@
     font-size: 16px;
     color: black;
 }
-menu_body a {
+.menu_body a {
 	font-weight: 500;
     font-size: 16px;
     color: black;

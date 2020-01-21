@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC
 "-//myvatis.org//DTD Mapper 3.0//EN"
@@ -27,19 +28,15 @@
 		SELECT *
 		FROM MEMBER
 		WHERE USER_ID = #{user_id}
-		AND USER_PWD = #{user_pwd}
 		AND U_STATUS = 'Y'
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
-
-      INSERT
-         INTO
-         MEMBER 
-         VALUES (SEQ_MNO.NEXTVAL, #{user_id}, #{user_pwd}, #{user_name}, #{gender}, 
-         #{age}, #{phone}, #{address}, SYSDATE, SYSDATE, DEFAULT, DEFAULT)
-   </insert>
-
+		INSERT
+      	INTO
+      	MEMBER 
+      	VALUES (SEQ_MNO.NEXTVAL, #{user_id}, #{user_pwd}, #{user_name}, #{gender}, #{age}, #{phone}, #{address}, SYSDATE, SYSDATE, DEFAULT, DEFAULT)
+	</insert>
 	
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
@@ -55,12 +52,13 @@
 	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
-		SET USER_PWD = #{user_pwd},
-			UESR_NAME = #{user_name},
+		SET USER_NAME = #{user_name},
 			GENDER = #{gender},
 			AGE = #{age},
 			PHONE = #{phone},
 			ADDRESS = #{address},
-			UPDATE_DATE = #{update_date}
+			UPDATE_DATE = SYSDATE
+		WHERE USER_ID = #{user_id}
 	</update>
+
 </mapper>

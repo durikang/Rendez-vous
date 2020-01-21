@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +39,10 @@ import com.kh.rendez.member.model.exception.MemberException;
 @SessionAttributes("loginUser")
 @Controller
 public class MemberController {
+	// 암호화 처리 시 작성
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
 	@Autowired
 	private MemberService mService;
 	private SupportService sService;
@@ -51,15 +56,17 @@ public class MemberController {
 	      String pwd = request.getParameter("pwd");
 	      
 	      m.setUser_id(id);
-	      m.setUser_pwd(pwd);
+	      
 	      
 	      Member loginUser = mService.loginMember(m);
-	      if(loginUser != null) {
+	      
+	      
+	      if(loginUser != null && bcryptPasswordEncoder.matches(pwd, loginUser.getUser_pwd())) {
 	         session.setAttribute("loginUser", loginUser);
 	         return "home";
 	      } else {
 	         model.addAttribute("msg", "로그인 실패");
-	         return "common/errorPage";
+	         return "member/loginPage";
 	      }
 	   }
 	
@@ -68,6 +75,22 @@ public class MemberController {
 		status.setComplete();
 		return "home";
 	}
+	
+	// 회원정보 수정 시 입력하는 비밀번호 확인용
+	@RequestMapping("pwdCheck.do")
+	public String pwdCheck(Member m, Model model, HttpServletRequest request) {
+		
+		Member loginUser = mService.loginMember(m);
+		 
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
+			model.addAttribute("msg3", "비밀번호 일치");
+			return "member/myPage";
+		}else {
+			model.addAttribute("msg", "비밀번호 불일치");
+			return null;
+		}
+	}
+
 	
 	@RequestMapping("mypage.do")
 	public ModelAndView myPageView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page, HttpSession session) {
@@ -102,6 +125,11 @@ public class MemberController {
 		return "member/join";
 	}
 	
+	@RequestMapping("pwdCheckPage.do")
+		public String pwdCheckPageView() {
+			return "member/pwdCheckPage";
+	}
+	
 	@RequestMapping("dupid.do")
 	public ModelAndView idDuplicateCheck(String user_id, ModelAndView mv) {
 		
@@ -112,14 +140,16 @@ public class MemberController {
 		mv.addAllObjects(map);
 		mv.setViewName("jsonView");
 		
+		System.out.println(user_id);
+		
 		return mv;
 	}
 	
-	@RequestMapping("minsert.do")
+	@RequestMapping(value="minsert.do", method=RequestMethod.POST)
 	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
 								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
-								@RequestParam("address2") String address2, 
+								@RequestParam("address2") String address2,
 								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
 		
 		/*if(!file.getuOriginName().equals("")) {
@@ -131,12 +161,25 @@ public class MemberController {
 				m.setuOriginName(file.getuOriginName());
 				m.setuChangeName(uChangeName);
 			}			
-		}*/		
-		
+		}*/	
+/*		      
+		      if(!file.getOriginalFilename().equals("")) {
+		         String renameFileName = saveFile(file, request);
+		         
+		         if(renameFileName != null) {
+		            vo.setMem_photo(file.getOriginalFilename());
+		            vo.setMem_uphoto(renameFileName);
+		         }
+		      }*/
+		         
 		m.setAddress(post + "," + address1 + ", " + address2);
+		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
+		
+		m.setUser_pwd(encPwd);
 		
 		int result = mService.insertMember(m);
 		
+		/*if(result > 0 || m.getMem_photo() == null || m.getMem_uphoto() != null || m.getMem_photo() != null || m.getMem_uphoto() == null) {*/
 		if(result > 0) {
 			model.addAttribute("msg", "회원가입이 완료 되었습니다.");
 			return "home";
@@ -183,13 +226,15 @@ public class MemberController {
 			int result = mService.updateMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg", "회원 정보 수정이 되었습니다.");
+				model.addAttribute("msg2", "회원 정보 수정 성공");
 				model.addAttribute("loginUser", m);
 			} else {
 				throw new MemberException("회원 정보 수정 실패");
 			}
-			return "home";
+			return "member/myPage";
 		}
+		
+		
 		
 		@RequestMapping("mdelete.do")
 		public String memberDelete(Member m, Model model) {
@@ -197,13 +242,13 @@ public class MemberController {
 			int result = mService.deleteMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg", "msg");
+				model.addAttribute("msg", "회원탈퇴 성공");
 				
 			} else {
 				throw new MemberException("회원 탈퇴 실패");
 			}
 			
-			return "member/myInfo";
+			return "member/myPage";
 		}
 		
 		

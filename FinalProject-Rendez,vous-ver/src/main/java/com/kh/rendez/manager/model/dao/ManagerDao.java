@@ -79,7 +79,7 @@ public class ManagerDao {
 	}
 //	답변과 미답변 구분하여 리턴
 	public int selectQnaResponseCount(int i) {
-		return sqlSession.selectOne("managerMapper.getListCount",i) == null ? 0 : sqlSession.selectOne("managerMapper.getListCount",i);
+		return sqlSession.selectOne("managerMapper.getListCount",i);
 	}
 //	전체 qan 리턴
 	public ArrayList<Qna> selectQna(PageInfo pi) {

@@ -3,6 +3,7 @@ package com.kh.rendez.manager.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -51,12 +52,12 @@ public class ManagerDao {
 		
 		
 	}
-	public ArrayList<MemberJoinTutor> selectTutorList(PageInfo pi) {
+	public ArrayList<MemberJoinTutor> selectTutorList(PageInfo pi, int n) {
 
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("managerMapper.selectTutorList",null,rowBounds);
+
+		return (ArrayList)sqlSession.selectList("managerMapper.selectTutorList",n,rowBounds);
 
 	}
 	
@@ -115,6 +116,33 @@ public class ManagerDao {
 	public ArrayList<AdminMember> selectMuIdList(List<Integer> unolist) {
 		
 		return (ArrayList)sqlSession.selectList("managerMapper.selectMuIdList",unolist);
+	}
+
+	public int getListTutorSearchCount(Search search) {
+		
+		return sqlSession.selectOne("managerMapper.getListTutorSearchCount",search);
+	}
+
+	public ArrayList<MemberJoinTutor> searchTutorList(Search search, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.searchTutorList",search,rowBounds);
+	}
+
+	public int getSortMemberList(Map<String, Object> param) {
+		
+		return sqlSession.selectOne("managerMapper.getSortMemberList",param);
+	}
+
+	public ArrayList<AdminMember> sortingSelectMemberList(Map<String, Object> param, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+
+		return (ArrayList)sqlSession.selectList("managerMapper.sortingSelectMemberList",param,rowBounds);
+
 	}
 	
 }

@@ -259,22 +259,6 @@
 					</tbody>
 		    	</table>
 		    	</div>		    	
-		    	<div class="banner">
-			    	<button id="menu_btn" onclick="location.href='support_main.do'">메인으로</button>
-		    		<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="resources/homeImg/slide1.PNG" class="d-block w-100" style="height:35vh; margin:1% auto;">
-							</div>
-							<div class="carousel-item">
-								<img src="resources/homeImg/slide2.PNG" class="d-block w-100" style="height:35vh; margin:1% auto;">
-							</div>
-							<div class="carousel-item">
-								<img src="resources/homeImg/slide3.PNG" class="d-block w-100" style="height:35vh; margin:1% auto;">
-							</div>
-						</div>
-					</div>
-		    	</div>
 		    </div>
             </c:if>
         </div>

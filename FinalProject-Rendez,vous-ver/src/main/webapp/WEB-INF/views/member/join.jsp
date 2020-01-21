@@ -29,6 +29,7 @@
    .error {
       color:red;
    } 
+
    
     #wrapper {
     	margin-top :10%;
@@ -39,6 +40,7 @@
 <body>
 <c:import url="../common/menubar.jsp"/>
 <div id="wrapper">
+
    <h1 align="center">회원 가입</h1>
    <br>
    <br>
@@ -48,11 +50,13 @@
             <tr>
                <td width="150">* 아이디</td>
                <td width="450">
+
                
             <input type="text" name="user_id" id="user_id">
                   <label id="gol">@</label>
 			<input type="text" name="net" id="net">
              <br>
+
                   <!-- ajax 이후 적용 -->
                   <span class="guide ok">이 아이디는 사용 가능합니다.</span>
                   <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
@@ -72,22 +76,28 @@
                <td><input type="password" name="user_pwd2"></td>
             </tr>
             <tr>
+
                <td>* 성별</td>
+
                <td>
                   <input type="radio" name="gender" value="M">남
                   <input type="radio" name="gender" value="F">여
                </td>
             </tr>
             <tr>
+
                <td>* 나이</td>
+
                <td>
                   <input type="number" min="20" max="100" name="age">
                </td>
             </tr>
             <tr>
+
                <td>* 전화번호</td>
                <td>
                    <input type="tel" name="phone" class="phone-number-check">
+
                </td>
             </tr>            
             <tr>
@@ -132,12 +142,14 @@
    
    <script>
       $(function(){
+
          $("#net").on("keyup", function(){
              var user_id = $("#user_id").val()+$("#gol").html()+$(this).val();
              console.log(user_id);
             if(user_id.length < 4) {
                $(".guide").hide(); // 나타났던 span 태그 숨기기
                
+
                $("#idDuplicateCheck").val(0); // 중복 여부 확인 값 리셋
                
                return;
@@ -225,5 +237,6 @@
 	});
    </script>
    <c:import url="../common/footbar.jsp"/>
+
 </body>
 </html>

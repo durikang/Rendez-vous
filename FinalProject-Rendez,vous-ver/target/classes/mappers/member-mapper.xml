@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC
 "-//myvatis.org//DTD Mapper 3.0//EN"
@@ -59,4 +60,5 @@
 			UPDATE_DATE = SYSDATE
 		WHERE USER_ID = #{user_id}
 	</update>
+
 </mapper>

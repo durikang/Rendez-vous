@@ -66,5 +66,10 @@ public class PaymentImpl implements PaymentService{
 		return jpDao.updateCoupon(couponNo);
 	}
 
+	@Override
+	public int updatePoint(int usePoint, int uNo) {
+		return jpDao.updatePoint(usePoint,uNo);
+	}
+
 	
 }

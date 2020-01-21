@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -29,7 +28,7 @@
 
 .icon {
 	float: left;
-	font-size: 50px;
+	font-size: 25px;
 	font-family: "Montserrat", sans-serif;
 }
 
@@ -41,6 +40,38 @@
 	background: center / contain no-repeat url("${contextPath}/resources/managerResources/Img/build.png");
 	background-size: cover;
 	color:white;
+}
+.cont{
+	align:right;
+}
+
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 940px;
+  }
+}
+
+.content{
+	margin:0 30%;
+	width:770px;
+}
+.table thead tr th{
+	font-size: 12px;
+}
+.target{
+display: inline-block; 
+width: 75px; 
+white-space: nowrap; 
+overflow: hidden;
+ text-overflow: ellipsis;
+
 }
 
 
@@ -71,7 +102,7 @@
 					for(var i in data){
 						var $tr = $("<tr>");
 						var $uNo = $("<td>").text(data[i].uNo);
-						var $uId= $("<td>").text(data[i].uId);
+						var $uId= $("<td class='target'>").text(data[i].uId);
 						//var $bTitle = $("<td>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
 						var $uGender="";
 						if( data[i].gender =='M'){
@@ -79,7 +110,7 @@
 						}else{
 							$uGender = $("<td>").text("여자");	
 						}
-						var $uAge = $("<td>").text(data[i].Age);
+						var $uAge = $("<td>").text(data[i].uAge);
 						
 						var $uType = "";
 						if( data[i].userType =='N'){
@@ -142,7 +173,7 @@
 					for(var i in data){
 						var $tr1 = $("<tr>");
 						var $No1 = $("<td>").text(data[i].no);
-						var $Title1= $("<td>").text(data[i].title);
+						var $Title1= $("<td class='target'>").text(data[i].title);
 						//var $bTitle = $("<td>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
 						var $Introdction1=$("<td>").text(data[i].introduction);
 						var $Target1 = $("<td>").text(data[i].target);
@@ -168,51 +199,61 @@
 	</script>
  </head>
 <body>
-	<c:import url="mnCommon/menubar.jsp" />
-	<br>
-	<c:import url="mnCommon/sidebar.jsp"/>
-	<div class="container">
-	<c:import url="mnCommon/jumbotron.jsp"/>
-		<hr>
 
-		<div class="container div-color">
+
+	<c:import url="mnCommon/menubar.jsp" />
+	<br><br>
+	
+	<c:import url="mnCommon/sidebar.jsp" >
+		<c:param name="pageName" value="${ pageName }"/>
+	</c:import>
+	
+	
+	<div class="content">
+	<c:import url="mnCommon/jumbotron.jsp" >
+		<c:param name="pageName" value="${ pageName }"/>
+	</c:import>
+	
+		<hr>
+		
+		<div class="container div-color mainContent">
 			<div class="row align-items-start">
 
 				<div class="col">
-					<i class="far fa-id-card icon"></i>
-					<h3 align="center" class="kor">이달 신규 가입자 수</h3>
-					<h3 align="center" class="thisMonthMem"> 0명</h3>
+					<i class="far fa-id-card icon" style="color:#c9c0b1;"></i>
+					<h5 align="center" class="kor">이달 신규 가입자 수</h5>
+					<h5 align="center" class="thisMonthMem"> 0명</h5>
 				</div>
 				<div class="col">
-					<i class="far fa-newspaper icon"></i>
-					<h3 align="center" class="kor">오늘 신규 가입자 수</h3>
+					<i class="far fa-newspaper icon" style="color:#c9c0b1;"></i>
+					<h5 align="center" class="kor">오늘 신규 가입자 수</h5>
 					
 					
-					<h3 align="center" class="todayMem">0명</h3>
+					<h5 align="center" class="todayMem">0명</h5>
 					
 				</div>
 				<div class="col">
-					<i class="fas fa-dollar-sign icon"></i>
-					<h3 align="center" class="kor">이달 결제 총 금액</h3>
-					<h3 align="center" class="thisMonthPay">0 원</h3>
+					<i class="fas fa-dollar-sign icon"style="color:#c9c0b1;"></i>
+					<h5 align="center" class="kor">이달 결제 총 금액</h5>
+					<h5 align="center" class="thisMonthPay">0 원</h5>
 				</div>
 				<div class="col">
-					<i class="fas fa-dollar-sign icon"></i>
-					<h3 align="center" class="kor">오늘 결제 총 금액</h3>
-					<h3 align="center" class="todayPay">0 원</h3>
+					<i class="fas fa-dollar-sign icon"style="color:#c9c0b1;"></i>
+					<h5 align="center" class="kor">오늘 결제 총 금액</h5>
+					<h5 align="center" class="todayPay">0 원</h5>
 				</div>
 			</div>
 		</div>
-		<hr>
+		<br>
 		<div class="row">
 			<div class="col">
-				<h3 align="center">신규 가입자 현황</h3>
+				<h5 align="center">신규 가입자 현황</h5>
 				<!-- 신규 가입자 Top 5  -->
 				<table class="table newMemberlistArea">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" width='100px'>번호</th>
-							<th scope="col">회원 이메일</th>
+							<th scope="col" width='200px'>이메일</th>
 							<th scope="col" width='100px'>성별</th>
 							<th scope="col" width='100px'>나이</th>
 							<th scope="col" width='100px'>타입</th>
@@ -224,17 +265,17 @@
 				</table>
 			</div>
 			<div class="col">
-			<h3 align="center">실시간 수업 Top 5 현황</h3>
+			<h5 align="center">실시간 수업 Top 5 현황</h5>
 				<!-- 실시간 수업 Top 5  -->
 				<table class="table newLessonListArea">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">수업번호</th>
-							<th scope="col">수업제목</th>
-							<th scope="col">수업소개</th>
-							<th scope="col">수업대상</th>
-							<th scope="col">가격</th>
-							<th scope="col">평점</th>
+							<th scope="col" width="100px">번호</th>
+							<th scope="col" width='200px'>제목</th>
+							<th scope="col" width='100px'>소개</th>
+							<th scope="col" width='200px'>수업대상</th>
+							<th scope="col" width='100px'>가격</th>
+							<th scope="col" width='100px'>평점</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -242,7 +283,9 @@
 				</table>
 			</div>
 		</div>
+		
 	</div>
+	<br><br><br><br><br>
 	<br><br><br><br><br>
 	<c:import url="mnCommon/footbar.jsp"/>
 </body>

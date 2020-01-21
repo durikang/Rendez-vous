@@ -99,13 +99,16 @@
 			from member
 		</if>
 		<if test="value == 2">
-			from coupon
+			from member m
+			left join tutor using(user_no)
+			left join certification using(user_no)
+			where user_type='T' AND U_STATUS='Y' and tstatus='R'
 		</if>
 		<if test="value == 3">
 			from member m
 			left join tutor using(user_no)
 			left join certification using(user_no)
-			where user_type='T'
+			where user_type ='T' AND U_STATUS='Y' and tstatus='Y'
 		</if>
 		<if test="value == 4">
 			from qna
@@ -114,6 +117,7 @@
 			from qna
 			where a_status='N'
 		</if>
+		
 		
 	</select>
 	<!-- 회원수를 검색하여 리턴하는 구문  -->
@@ -144,12 +148,22 @@
 		where user_type !='A'
 		
 	</select>
-	<!-- 튜터 신청 멤버들만 셀렉  -->
-	<select id="selectTutorList" resultMap="mAndtuJoinResultSet">
+	<!-- 튜터 인증신청 멤버와 튜터 인증완료된 멤버  셀렉  -->
+	<select id="selectTutorList" resultMap="mAndtuJoinResultSet" parameterType="_int">
 		select *
 		from member m
 		left join tutor using(user_no)
-		where user_type='T'
+		
+		<where>
+		<if test='value == 1 '>
+			user_type='T' AND U_STATUS='Y' and tstatus='Y'
+		</if>
+		
+		<if test="value == 2">
+		 	user_type='T' AND U_STATUS='Y' and tstatus='R'
+		</if>
+			
+		</where>
 	</select>
 	
 	<!-- 멤버 검색용 쿼리 (마이바티스 동적 쿼리 활용) -->
@@ -226,7 +240,7 @@
 		SELECT *
 		FROM(SELECT *
 			FROM member
-			WHERE u_STATUS = 'Y' and user_type='N' and to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') 
+			WHERE u_STATUS = 'Y' and to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') 
 			ORDER BY enroll_date DESC)
 		WHERE ROWNUM <![CDATA[ <= ]]> 5  
 	</select>
@@ -319,5 +333,83 @@
 		</where>
 	
 	</select>
+	
+	<select id="getListTutorSearchCount" resultType="_int">
+	<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+	
+		select count(*)
+		from member m
+		left join tutor using(user_no)
+		left join certification using(user_no)
+		<where>
+			<choose>
+				<when test="searchCondition == 'mName'">
+					AND t_nick LIKE #{sv}
+				</when>
+			</choose>
+			and user_type ='T' AND U_STATUS='Y' and tstatus='Y'
+		</where>
+	</select>
+	<select id="searchTutorList" parameterType="Search"
+	resultMap="mAndtuJoinResultSet">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
+		select *
+		from member m
+		left join tutor using(user_no)
+		left join certification using(user_no)
+		<where>
+			<choose>
+				<when test="searchCondition == 'mName'">
+					AND t_nick LIKE #{sv}
+				</when>
+			</choose>
+			and user_type ='T' AND U_STATUS='Y' and tstatus='Y'
+		</where>
+	
+	</select>
+	
+	<select id="getSortMemberList" resultType="_int" parameterType="hashmap">
+		
+		select count(*)
+		from member
+		<where>
+		<if test="Condition.equals('1')">
+			and enroll_date between to_date(#{Date.date[0]}, 'YYYY/MM/DD') and to_date(#{Date.date[1]}, 'YYYY/MM/DD') 
+     		and u_status='Y'
+		</if>
+		<if test="Condition.equals('2')">
+		
+		</if>
+		<if test="Condition.equals('3')">
+		
+		</if>
+		<if test="Condition.equals('4')">
+		
+		</if>	
+		</where>	
+		
+	</select>
+	<select id="sortingSelectMemberList" resultMap="AdminMemberResultSet" parameterType="hashmap">
+		
+		select user_no,user_id,user_name,gender,age,user_type,enroll_date
+		from member
+		<where>
+		<if test='Condition == 1'>
+			and enroll_date between to_date(#{Date[0]}, 'YYYY/MM/DD') and to_date(#{Date[1]}, 'YYYY/MM/DD')
+		</if>
+ 		<if test="Condition == 2">
+			and age between #{Age[0]} and #{Age[1]}
+		</if>
+		<if test="Condition == 3">
+			and gender =#{Gender[0]}
+		</if>
+		<if test="Condition == 4">
+			and user_type =#{Type[0]}
+		</if>
+		and u_status='Y'	
+		</where>		
+		
+	</select>
+	
 	
 </mapper>

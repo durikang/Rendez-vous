@@ -34,6 +34,10 @@
 .ft-clear{
 	clear: both;
 }
+.content{
+	margin:0 30%;
+	width:770px;
+}
 		
 
 </style>
@@ -58,10 +62,13 @@
 	
 	<br><br>
 
-	
-	<c:import url="../mnCommon/sidebar.jsp"/>
-	<div class="container">
-	<c:import url="../mnCommon/jumbotron.jsp"/>
+	<c:import url="../mnCommon/sidebar.jsp" >
+		<c:param name="pageName" value="${ pageName }"/>
+	</c:import>
+	<div class="content">
+	<c:import url="../mnCommon/jumbotron.jsp">
+		<c:param name="pageName" value="${ pageName }"/>
+	</c:import>
 		<hr>
 		<div class="row">
 			<div class="col">
@@ -99,7 +106,7 @@
 								<td>${ q.qTitle }</td>
 								<td>${ q.qWriter }</td>
 								<td>${ q.qDate }</td>
-								<td>${ q.aStatus }</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp; ${ q.aStatus }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

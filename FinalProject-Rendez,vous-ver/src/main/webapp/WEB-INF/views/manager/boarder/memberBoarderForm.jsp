@@ -10,7 +10,7 @@
 <head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-	
+
  
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -30,27 +30,121 @@
 .td-hidden{
 	display: none;
 }
+.goTobtn{
+
+	margin-bottom: 10px;
+}
+.content{
+	margin:0 30%;
+	width:770px;
+}
+
+.position-left{
+	float: left;
+}
+.position-right{
+	float: right;
+}
+.quickBtn{
+line-height: 50px;
+}
+.link:hover{
+	color:orange;
+	cursor:pointer;
+}
+
 
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+$(function(){
+	if( ${ AllTutorlist ne null } )
+	{
+		$(".RequestTutor").removeClass("active");
+		$(".TutorMember").addClass("active");
+		
+	}
+})
+
+	 function ok(str){
+		if(str == 'date'){
+			$(".ageForm").hide();
+			$(".genderForm").hide();
+			$(".typeForm").hide();
+			$(".dateForm").show();
+			
+		}else if(str =='age'){
+			$(".dateForm").hide();
+			$(".genderForm").hide();
+			$(".typeForm").hide();
+			$(".ageForm").show();
+			
+		}else if(str =='gender'){
+			$(".ageForm").hide();
+			$(".dateForm").hide();
+			$(".typeForm").hide();
+			$(".genderForm").show();
+			
+		}else if(str =='type'){
+			$(".ageForm").hide();
+			$(".genderForm").hide();
+			$(".dateForm").hide();
+			$(".typeForm").show();
+		}
+		
+	} 
+
+</script>
 
 
 </head>
 <body>
 	<c:import url="../mnCommon/menubar.jsp" />
- 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	 
+ 	 
 	<br>
 	<br>
 
 	
-	<c:import url="../mnCommon/sidebar.jsp"/>
-	<div class="container">
-	<c:import url="../mnCommon/jumbotron.jsp"/>
+	<c:import url="../mnCommon/sidebar.jsp" >
+		<c:param name="pageName" value="${ pageName }"/>
+	</c:import>
+	
+	
+	<div class="content">
+	<c:import url="../mnCommon/jumbotron.jsp">
+		<c:param name="pageName" value="${ pageName }"/>
+	</c:import>
 		<hr>
 		<div class="row">
 			<div class="col">
-				<label for="all">전체</label>
-				<input type="checkbox" id="all">	
+			  	<ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#qwe">전체</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#asd">TOP5 VIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#qwe">신규 가입자</a>
+                    </li>
+                </ul>
+                <table class="position-left">
+                	<tr>
+                		<td class="quickBtn">
+                			<label for="all">전체</label>
+							<input type="checkbox" id="all"> &nbsp;
+						</td>
+                	</tr>
+                </table>	
+                <div class="position-right">
+	       			<label><span onclick="ok('date');" class="link" data-toggle="modal" data-target="#exampleModal">날자</span></label>
+					<label><span onclick="ok('age');" class="link" data-toggle="modal" data-target="#exampleModal">나이</span></label>
+					<label><span onclick="ok('gender');" class="link" data-toggle="modal" data-target="#exampleModal">성별</span></label>
+					<label><span onclick="ok('type');" class="link" data-toggle="modal" data-target="#exampleModal">타입</span></label>
+                </div>	
 				<table class="table listArea">
 					<thead class="thead-dark">
 						<tr>
@@ -59,6 +153,7 @@
 							<th scope="col">회원명</th>
 							<th scope="col">성별</th>
 							<th scope="col">나이</th>
+							<th scope="col">가입일</th>
 							<th scope="col">타입</th>
 						</tr>
 					</thead>
@@ -70,13 +165,14 @@
 								<td>${ m.uName }</td>
 								<td>
 									<c:if test="${ m.uGender eq 'M'}">
-										남자
+										남
 									</c:if>
-									<c:if test="${ m.uGender eq 'W'}">
-										여자
+									<c:if test="${ m.uGender eq 'F' or 'W'}">
+										여
 									</c:if>
 								</td>
 								<td>${ m.uAge }</td>
+								<td>${ m.enrollDate }</td>
 								<td>
 									<c:if test="${ m.uType eq 'N' }">
 										일반회원
@@ -93,7 +189,8 @@
 				<br>
 					
 					
-				<input type="button" value="자식창 열기" class="btn">
+				<input type="button" value="쿠폰 생성하기" class="btn btn-primary btn-sm goTobtn">
+				<br>
 				<!-- 검색바   -->
 				
 				<div class="searchArea" align="center">
@@ -251,61 +348,98 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	<!-- 모달 영역  -->
-	<div class="modal fade" tabindex="-1" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">쿠폰 보내기</h5>
-		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		            <span aria-hidden="true">&times;</span>
-		          </button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-6">
-							<img src="" class="img-thumbnail" alt="Cinque Terre"
-								width="304" height="236" id="pic"><br>
-						</div>
-						<div class="col-6">
-							아이디 : <span id="id"></span><br>
-							사는곳 : <span id="area"></span><br>
-							나이 : <span id="age"></span><br>
-							회원 타입 : <span id="type"></span><br>
-						</div>
-					</div>
-					<br>
-					<form action="couSend.do" method="get">
-						<input type="hidden" name="uNo" id="uNo"><br>						
-						<input type="hidden" name="uId" id="uId"><br>						
-						<input type="text" name="cName" id="cName" placeholder="쿠폰 이름"><br><br>
-						<!-- <input type="text" name="disRate" class="data_col9 w100p" onkeypress="return isNumberKey(event)" onkeyup="return delHangle(event)"><br> --> 
+	<!-- 모달  -->
+	  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="dateForm">
+		        <h5 class="modal-title" id="exampleModalLabel">날자 선택</h5>
+		        </div>
+		      	<div class="ageForm">
+		        <h5 class="modal-title" id="exampleModalLabel">나이 선택</h5>
+		        </div>
+		      	<div class="genderForm">
+		        <h5 class="modal-title" id="exampleModalLabel">성별 선택</h5>
+		        </div>
+		      	<div class="typeForm">
+		        <h5 class="modal-title" id="exampleModalLabel">타입 선택</h5>
+		        </div>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <!-- 날자 선택  -->
+		      <form action="mnSort.do" method="post" class="dateForm">
+			      <div class="modal-body">			        
 					
-							<select name="disRate"class="selectpicker">
-						      <c:forEach var="i" begin="1" end="9">					         
-								  <option value="${10 * i }">${ i*10 }%할인</option>        
-						      </c:forEach>
-							</select><br><br>
-					    <p><input type="text" id="from" placeholder="시작일을 선택하세요" name="startDate"> ~ <input type="text" id="to" name="endDate" placeholder="종료일을 선택하세요."></p>
-						<button type="submit" class="btn btn-success" onclick="sendCoupon">쿠폰 보내기</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-			<!--  -->
-			
-		</div>
-	</div>
+						<input type="hidden" value="1" name="Condition">
+						<label>시작 일</label> <input type="date" name="param1">
+						<label>마지막 일</label> <input type="date" name="param2">
+					
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">정렬하기</button>
+			      </div>
+		      </form>
+		      <!-- 나이 선택  -->
+   		      <form action="mnSort.do" method="post" class="ageForm">
+			      <div class="modal-body">		
+					<input type="hidden" value="2" name="Condition">
+					<input type="text" name="param1" placeholder="나이의 시작 시점 입력하세요"> ~
+			      	<input type="text" name="param2" placeholder="나이의 종료 시점입력하세요">
+			      
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">정렬하기</button>
+			      </div>
+		      </form>
+		      <!-- 성별 선택  -->
+   		      <form action="mnSort.do" method="post" class="genderForm">
+			      <div class="modal-body">			        
+					
+					<input type="hidden" value="3" name="Condition">
+					<select name="param">
+						<option>선택</option>
+						<option value="M">남</option>
+						<option VALUE="F">여</option>
+					</select>
+					
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">정렬하기</button>
+			      </div>
+		      </form>
+		      <!-- 타입 선택  -->
+   		      <form action="mnSort.do" method="post" class="typeForm">
+			      <div class="modal-body">			        
+					<input type="hidden" value="4" name="Condition">
+					<select name="param">
+						<option>선택</option>
+						<option value="N">일반회원</option>
+						<option VALUE="T">튜터회원</option>
+					</select>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">정렬하기</button>
+			      </div>
+		      </form>
+		    
+		    </div>
+		  </div>
+	  </div>
+	<!-- 모달  -->
+	
+   
 	
  	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 	<script>
+	  var newWindow;
 		// 3. 회원 상세보기 기능
 		$(function() {
 
@@ -321,38 +455,35 @@
 		        console.log($(this).parent().children().eq(1).html());
 				
 			});
+			
+			 $("#all").change(function(){            //id전체 체크박스에 변화가 있을떄 
+			        if($("#all").prop("checked")){      //id전체 체크박스에 체크가 되면
+			            $(".mNum").prop("checked",true);         //일반사용자에 체크
+			        }else{                              //전체 체크박스에 체크가 해제 되면
+			            $(".mNum").prop("checked",false);       //일반사용자에 체크 해제
+			        }
+			    });
+			    $(".mNum").change(function(){         //전문사용자 체크박스에 변화가 있을때
+			        if($(".mNum").prop("checked")){   //전문사용자 체크박스와 유저 체크박스 둘다에 체크가 되면
+			            $("#all").prop("checked",true);                               //id전체 체크박스에 체크
+			        }else{                                                            //전문사용자 체크박스와 유저 체크박스 둘중 하나라도 체크 되어 있지 않으면  
+			            $("#all").prop("checked",false);                              //id전체 체크박스에 체크해제
+			        }
+			    });
+			    
+			     $(".goTobtn").click(function(){
+		            var uNo=new Array();
+		            $($(".mNum")).each(function(){
+		                if($(this).prop("checked") == true){
+		                    uNo.push($(this).val());
+		                }
+		            });
+		            
+		            window.open("cuponEnroll.do?uNo="+uNo, "newWindow", "width=700, height=700, scrollbar=no");
+		        });
 		});
-		/* 다시 설계  */
-        var newWindow;
+      
 
-		$(function(){
-		    $("#all").change(function(){            //id전체 체크박스에 변화가 있을떄 
-		        if($("#all").prop("checked")){      //id전체 체크박스에 체크가 되면
-		            $(".mNum").prop("checked",true);         //일반사용자에 체크
-		        }else{                              //전체 체크박스에 체크가 해제 되면
-		            $(".mNum").prop("checked",false);       //일반사용자에 체크 해제
-		        }
-		    });
-		    $(".mNum").change(function(){         //전문사용자 체크박스에 변화가 있을때
-		        if($(".mNum").prop("checked")){   //전문사용자 체크박스와 유저 체크박스 둘다에 체크가 되면
-		            $("#all").prop("checked",true);                               //id전체 체크박스에 체크
-		        }else{                                                            //전문사용자 체크박스와 유저 체크박스 둘중 하나라도 체크 되어 있지 않으면  
-		            $("#all").prop("checked",false);                              //id전체 체크박스에 체크해제
-		        }
-		    });
-		    
-		     $(".btn").click(function(){
-	            var uNo=new Array();
-	            $($(".mNum")).each(function(){
-	                if($(this).prop("checked") == true){
-	                    uNo.push($(this).val());
-	                }
-	            });
-	            
-	            window.open("cuponEnroll.do?uNo="+uNo, "newWindow", "width=700, height=700, scrollbar=no");
-	        }); 
-		    
-		});
 		
 		
 </script>

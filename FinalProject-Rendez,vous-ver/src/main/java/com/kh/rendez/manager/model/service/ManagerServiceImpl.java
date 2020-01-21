@@ -3,6 +3,7 @@ package com.kh.rendez.manager.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ public class ManagerServiceImpl implements ManagerService {
 //		회원 검색
 	@Override
 	public ArrayList<AdminMember> searchMemberList(Search search,int currentPage) {
+		
 		int listCount = mnDao.getListMemberSearchCount(search);
 		
 		// 페이지 정보 저장
@@ -50,14 +52,20 @@ public class ManagerServiceImpl implements ManagerService {
 		return mnDao.insertCoupon(clist);
 	}
 	@Override
-	public ArrayList<MemberJoinTutor> selectTutorList(int currentPage) {
-		int listCount = mnDao.getListCount(3);
+	public ArrayList<MemberJoinTutor> selectTutorList(int currentPage,int n) {
+		int listCount=0;
+//		튜터 인증까지 받은 튜터 회원
+		if(n ==1) {
+			listCount = mnDao.getListCount(3);	
+		}
+		// 튜터 인증 신청을 한  튜터 회원
+		if(n==2) {
+			listCount = mnDao.getListCount(2);
+		}
 		
-		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-				
 		
-		return mnDao.selectTutorList(pi);
+		return mnDao.selectTutorList(pi,n);
 	}
 //	이달 & 오늘 회원 가입자 수 리턴
 	@Override
@@ -117,6 +125,24 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public ArrayList<AdminMember> selectMemberList(List<Integer> unolist) {
 		return mnDao.selectMuIdList(unolist);
+	}
+	@Override
+	public ArrayList<MemberJoinTutor> searchTutor(Search search, int currentPage) {
+		int listCount =mnDao.getListTutorSearchCount(search);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		
+		return mnDao.searchTutorList(search,pi);
+	}
+	@Override
+	public ArrayList<AdminMember> sortingSelectMemberList(Map<String, Object> param, int currentPage) {
+		
+		int listCount =mnDao.getSortMemberList(param);
+		// 페이지 정보 저장
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				
+		return mnDao.sortingSelectMemberList(param,pi);
 	}
 
 

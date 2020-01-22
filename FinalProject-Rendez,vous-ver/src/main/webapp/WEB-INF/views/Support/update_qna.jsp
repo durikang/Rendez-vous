@@ -238,8 +238,6 @@
 						</tr>
 						<tr>
 							<td height="100">작성자</td>
-							<%-- <td><input type="text" name="qWriter" value="${ loginUser.id }" size="80%" readonly></td> --%>
-							<!-- 로그인 기능 완성되면 수정하기 -->
 							<td><input type="text" name="qWriter" size="80%" value="${q.qWriter}" readonly></td>
 						</tr>
 						<tr>

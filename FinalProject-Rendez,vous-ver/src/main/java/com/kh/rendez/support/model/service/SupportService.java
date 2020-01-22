@@ -23,7 +23,7 @@ public interface SupportService {
 
 	ArrayList<Answer> selectAnswerList(int qNo);
 
-	ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
+	ArrayList<Qna> selectMyQnaList(int currentPage, int writer);
 
 	int updateAnswerStatus(int refQno);
 

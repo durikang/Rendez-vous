@@ -6,6 +6,7 @@
 
    <resultMap id="qnaResultSet" type="Qna">
       <id property="qNo" column="Q_NO"/>
+      <result property="userNo" column="USER_NO"/>
       <result property="qTitle" column="Q_TITLE"/>
       <result property="qWriter" column="Q_WRITER"/>
       <result property="qContent" column="Q_CONTENT"/>
@@ -37,7 +38,7 @@
    <select id="getMyQnaListCount" resultType="_int">
       SELECT COUNT(*)
       FROM QNA
-      WHERE Q_WRITER = #{writer}
+      WHERE USER_NO = #{userNo}
       AND Q_STATUS = 'Y'
    </select>
    
@@ -51,7 +52,7 @@
    <select id="selectMyQnaList" resultMap="qnaResultSet">
       SELECT *
       FROM QNA
-      WHERE Q_WRITER = #{writer}
+      WHERE USER_NO = #{userNo}
       AND Q_STATUS = 'Y'
       ORDER BY Q_NO DESC
    </select>
@@ -73,7 +74,7 @@
    
    <insert id="insertQna" parameterType="Qna">
       INSERT INTO QNA
-      VALUES(SEQ_QNO.NEXTVAL, #{qTitle}, #{qWriter}, #{qContent}, SYSDATE, DEFAULT, DEFAULT)
+      VALUES(SEQ_QNO.NEXTVAL, #{userNo}, #{qTitle}, #{qWriter}, #{qContent}, SYSDATE, DEFAULT, DEFAULT)
    </insert>
    
    <update id="deleteQna" parameterType="Qna">

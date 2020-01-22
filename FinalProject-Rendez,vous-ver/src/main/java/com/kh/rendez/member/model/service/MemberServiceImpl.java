@@ -43,17 +43,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer) {
-		int listCount = mDao.getMyQnaListCount(currentPage, writer);
-		System.out.println(listCount);
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
-		return mDao.selectMyQnaList(pi, writer);
+	public int deleteMember(Member m) {
+		return mDao.deleteMember(m);
 	}
 
 	@Override
-	public int deleteMember(Member m) {
-		return mDao.deleteMember(m);
+	public ArrayList<Qna> selectMyQnaList(int currentPage, int writer) {
+		int listCount = mDao.getMyQnaListCount(currentPage, writer);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		return mDao.selectMyQnaList(pi, writer);
 	}
 
 }

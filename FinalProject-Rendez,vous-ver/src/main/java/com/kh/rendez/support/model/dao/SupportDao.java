@@ -23,7 +23,7 @@ public class SupportDao {
 		return sqlSession.selectOne("supportMapper.getSearchListCount", keyword);
 	}
 	
-	public int getMyQnaListCount(String writer) {
+	public int getMyQnaListCount(int writer) {
 		return sqlSession.selectOne("supportMapper.getMyQnaListCount", writer);
 	}
 
@@ -34,7 +34,7 @@ public class SupportDao {
 		return (ArrayList)sqlSession.selectList("supportMapper.selectList", null, rowBounds);
 	}
 	
-	public ArrayList<Qna> selecMyQnaList(PageInfo pi, String writer) {
+	public ArrayList<Qna> selecMyQnaList(PageInfo pi, int writer) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("supportMapper.selectMyQnaList", writer, rowBounds);

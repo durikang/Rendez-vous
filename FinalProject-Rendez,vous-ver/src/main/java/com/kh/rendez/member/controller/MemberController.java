@@ -83,10 +83,10 @@ public class MemberController {
 		Member loginUser = mService.loginMember(m);
 		 
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
-			model.addAttribute("msg3", "비밀번호 일치");
+			model.addAttribute("msg", "비밀번호 일치");
 			return "member/myPage";
 		}else {
-			model.addAttribute("msg4", "비밀번호 불일치");
+			model.addAttribute("msg", "비밀번호 불일치");
 			return "member/myPage";
 		}
 	}
@@ -140,7 +140,7 @@ public class MemberController {
 		mv.addAllObjects(map);
 		mv.setViewName("jsonView");
 		
-		/*System.out.println(user_id);*/
+		System.out.println(user_id);
 		
 		return mv;
 	}
@@ -228,10 +228,10 @@ public class MemberController {
 			int result = mService.updateMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg2", "회원 정보 수정 성공");
+				model.addAttribute("msg", "회원 정보 수정 완료");
 				model.addAttribute("loginUser", m);
 			} else {
-				throw new MemberException("회원 정보 수정 실패");
+				model.addAttribute("msg", "회원 정보 수정 실패");
 			}
 			return "member/myPage";
 		}
@@ -244,12 +244,13 @@ public class MemberController {
 			int result = mService.deleteMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg0", "회원탈퇴 성공");
+				model.addAttribute("msg", "회원탈퇴 완료");
 				status.setComplete();
-				return "member/myPage";
+				return "home";
 				
 			} else {
-				throw new MemberException("회원 탈퇴 실패");
+				model.addAttribute("msg", "회원탈퇴 실패");
+				return "member/myPage";
 			}
 
 		}

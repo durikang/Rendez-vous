@@ -211,7 +211,7 @@ public class MemberController {
 			file.transferTo(new File(renamePath));
 		} catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
-		}
+		}l
 		
 		return upphoto;
 	}*/

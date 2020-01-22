@@ -140,11 +140,11 @@
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
         </div>        
-         
-		 <c:if test="${!empty loginUser and  loginUser.user_type eq 'A' }">
+
+		 <c:if test="${!empty sessionScope.loginUser and  sessionScope.loginUser.user_type eq 'N' }">
          <a id="tInsert" class="cta" href="tutorInsertPage.do"><button class="button">튜터 등록</button></a>
        	 </c:if>
-         <c:if test="${!empty loginUser and loginUser.user_type eq 'T' }">
+         <c:if test="${!empty sessionScope.loginUser and  sessionScope.loginUser.user_type eq 'T' }">
          <a id="tMain" class="cta" href="tutorMain.do"><button class="button">튜터 메뉴</button></a>
          </c:if>
         <nav>
@@ -165,7 +165,7 @@
 				
 				<c:if test="${ !empty sessionScope.loginUser }">
 					<li>|</li>
-                	<li><a href="logout.do" onclick="bhide()">로그아웃</a></li>
+                	<li><a href="logout.do" >로그아웃</a></li>
 				</c:if>
             </ul>
         </nav>
@@ -186,7 +186,8 @@
         }
         
         function bhide(){
-        	$(".cta").hide();
+        	$("#tInsert").hide();
+        	$("#tMain").hide();
         }
         	
     	

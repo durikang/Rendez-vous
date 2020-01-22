@@ -867,17 +867,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="box">
 		<div class="caution caution2" style="overflow:hidden;width:1200px">
 			<p class="gray8">
-				<b class="pink">Q.</b>탈잉의 수수료 정책은 어떻게 되나요?
+				<b class="pink">Q.</b>RENDEZ의 수수료 정책은 어떻게 되나요?
 			</p>
 			<p>
 				<b>A.</b>
-				탈잉 연결 수수료는 다회차 수업의 경우 첫 1시간 수업료, 원데이클래스의 경우 전체 수업료의 20% 입니다. 이는 탈잉 운영비와 수업홍보비로 활용합니다.<br>
+				RENDEZ 연결 수수료는 다회차 수업의 경우 첫 1시간 수업료, 원데이클래스의 경우 전체 수업료의 20% 입니다. 이는 RENDEZ 운영비와 수업홍보비로 활용합니다.<br>
 				첫 수업 후 수강생이 생각했던 수업과 맞지 않아 추후 수업 진행 취소하는 경우, 튜터님께 1시간 수업료를 환급해드립니다.<br>
 				(수업 신청 전, 수업이 어떤 방식으로 진행되는지 알 수 있도록 수업소개 페이지에 수업 전 반드시 알아야 할 내용을 충분히 설명해주세요.)
 
 
 				<br><br>
-				<a onclick="pop_pay()" ><font class="pink"><img src="${contextPath}/resources/h1/Images/icon_info.png">&nbsp;탈잉 수수료 정책의 이점에 대해서 더 알아보세요.</font></a>
+				<a onclick="pop_pay()" ><font class="pink"><img src="${contextPath}/resources/h1/Images/icon_info.png">&nbsp;RENDEZ 수수료 정책의 이점에 대해서 더 알아보세요.</font></a>
 				<!--https://taling.me/Tutor/Register_pop.html-->
 				<script>
 					function pop_pay(){

@@ -47,6 +47,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="resources/dist/css/swiper.min.css">
+
 <script src="<c:url value="/resources/myPage/js/blocs-ck.js" />"></script>
 <script src="<c:url value="/resources/myPage/js/blocs.js" />"></script>
 <script src="<c:url value="/resources/myPage/js/bootstrap.js" />"></script>
@@ -193,6 +195,33 @@
 	width: 70%;
 	margin-top: 30%;
 }
+
+ .swiper-container {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        height: 200px;
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -297,68 +326,37 @@
 					</div>
 				</div>
 
-				<div class="row voffset">
-					<div class="col-sm-3">
-						<!-- <script>function wish() {
-                    		window.open("#", '찜목록', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
-                    	}</script> -->
-						<a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-woman-coffee-meeting.jpg"
-							class="img-responsive animated zoomIn" alt="Portfolio" /></a>
-					</div>
+				<!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+            <div class="swiper-slide">Slide 10</div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
 
-					<div class="col-sm-3">
-						<a href="#" data-lightbox="img/people-coffee-notes-tea.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-coffee-notes-tea.jpg"
-							class="img-responsive animated zoomIn" alt="Portfolio" /></a>
-					</div>
-					<div class="col-sm-3">
-						<a href="#" data-lightbox="img/people-coffee-tea-meeting.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-coffee-tea-meeting.jpg"
-							class="img-responsive animated zoomIn" alt="Portfolio" /></a>
-					</div>
-					<div class="col-sm-3">
-						<a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-woman-coffee-meeting.jpg"
-							class="img-responsive animDelay02 animated zoomIn"
-							alt="Portfolio" /></a>
-					</div>
-				</div>
-				<div class="row voffset">
-					<div class="col-sm-3">
-						<a href="#" data-lightbox="img/people-coffee-notes-tea.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-coffee-notes-tea.jpg"
-							class="img-responsive animDelay02 animated zoomIn animDelay04"
-							alt="Portfolio" /></a>
-					</div>
-					<div class="col-sm-3">
-						<a href="#" data-lightbox="img/people-coffee-tea-meeting.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-coffee-tea-meeting.jpg"
-							class="img-responsive animated zoomIn animDelay04"
-							alt="Portfolio" /></a>
-					</div>
-					<div class="col-sm-3">
-						<a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-woman-coffee-meeting.jpg"
-							class="img-responsive animated zoomIn animDelay04"
-							alt="Portfolio" /></a>
-					</div>
-					<div class="col-sm-3">
-						<a href="#" data-lightbox="img/people-coffee-notes-tea.jpg"
-							data-caption="Image description"><img
-							src="resources/myPage/img/people-coffee-notes-tea.jpg"
-							class="img-responsive animated zoomIn animDelay04"
-							alt="Portfolio" /></a>
-					</div>
-				</div>
-			</div>
+    <!-- Swiper JS -->
+    <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 3,
+        slidesPerColumn: 2,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+    </script>
 		</div>
 		<!-- portfolio END -->
 
@@ -704,6 +702,7 @@
 			</c:if>
 		</div>
 	</div>
+	
 	<c:import url="../common/footbar.jsp" />
 </body>
 </html>

@@ -140,7 +140,7 @@ public class MemberController {
 		mv.addAllObjects(map);
 		mv.setViewName("jsonView");
 		
-		System.out.println(user_id);
+		/*System.out.println(user_id);*/
 		
 		return mv;
 	}

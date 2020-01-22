@@ -2,7 +2,7 @@ package com.kh.rendez.Wish.model.vo;
 
 import java.sql.Date;
 
-public class WishList {
+public class Wish {
 	private int userNo;
 	private String lTitle;
 	private String lRegion;
@@ -15,9 +15,9 @@ public class WishList {
 	private String lStatus;
 	private int remain;
 	
-	public WishList() {}
+	public Wish() {}
 
-	public WishList(int userNo, String lTitle, String lRegion, String lRegionSub, Date lDay, int total, int price,
+	public Wish(int userNo, String lTitle, String lRegion, String lRegionSub, Date lDay, int total, int price,
 			String oName, String cName, String lStatus, int remain) {
 		super();
 		this.userNo = userNo;

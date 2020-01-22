@@ -9,6 +9,7 @@
 <meta name="description" content="">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 <!-- -------------수정 전-------------- -->
 <!-- <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -49,7 +50,6 @@
    
 <!-- 위시리스트용 css -->
 <link rel="stylesheet" href="../dist/css/swiper.min.css">
-
 
 <script src="<c:url value="/resources/myPage/js/blocs-ck.js" />"></script>
 <script src="<c:url value="/resources/myPage/js/blocs.js" />"></script>
@@ -199,17 +199,30 @@
 }
 
 /*위시리스트 스타일*/
-.swiper-container {
+	.wishdiv {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
         width: 100%;
-        height: 300px;
-        margin: 20px auto;
+        height: 100%;
+    }
+
+ .swiper-container {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
     .swiper-slide {
         text-align: center;
         font-size: 18px;
         background: #fff;
-        width: 250px;
-
+        height: 200px;
+        margin : 50px;
+        
         /* Center slide text vertically */
         display: -webkit-box;
         display: -ms-flexbox;
@@ -227,13 +240,6 @@
 </style>
 <body>
    <c:import url="../common/menubar.jsp" />
-
-
-
-
-
-
-
    <!-- Main container -->
    <div class="page-container">
       <!-- Navigation Bloc -->
@@ -327,71 +333,56 @@
                   </p>
                </div>
             </div>
+            
+	<div class="wishdiv">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+            <div class="swiper-slide">Slide 10</div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
 
-            <div class="row voffset">
-               <div class="col-sm-3">
-                  <!-- <script>function wish() {
-                          window.open("#", '찜목록', 'width=600, height=600, left=460, top=100, menubar=no, status=no, toolbar=no');  
-                       }</script> -->
-                  <a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-woman-coffee-meeting.jpg"
-                     class="img-responsive animated zoomIn" alt="Portfolio" /></a>
-               </div>
+    <!-- Swiper JS -->
+    <script src="../dist/js/swiper.min.js"></script>
 
-               <div class="col-sm-3">
-                  <a href="#" data-lightbox="img/people-coffee-notes-tea.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-coffee-notes-tea.jpg"
-                     class="img-responsive animated zoomIn" alt="Portfolio" /></a>
-               </div>
-               <div class="col-sm-3">
-                  <a href="#" data-lightbox="img/people-coffee-tea-meeting.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-coffee-tea-meeting.jpg"
-                     class="img-responsive animated zoomIn" alt="Portfolio" /></a>
-               </div>
-               <div class="col-sm-3">
-                  <a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-woman-coffee-meeting.jpg"
-                     class="img-responsive animDelay02 animated zoomIn"
-                     alt="Portfolio" /></a>
-               </div>
-            </div>
-            <div class="row voffset">
-               <div class="col-sm-3">
-                  <a href="#" data-lightbox="img/people-coffee-notes-tea.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-coffee-notes-tea.jpg"
-                     class="img-responsive animDelay02 animated zoomIn animDelay04"
-                     alt="Portfolio" /></a>
-               </div>
-               <div class="col-sm-3">
-                  <a href="#" data-lightbox="img/people-coffee-tea-meeting.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-coffee-tea-meeting.jpg"
-                     class="img-responsive animated zoomIn animDelay04"
-                     alt="Portfolio" /></a>
-               </div>
-               <div class="col-sm-3">
-                  <a href="#" data-lightbox="img/people-woman-coffee-meeting.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-woman-coffee-meeting.jpg"
-                     class="img-responsive animated zoomIn animDelay04"
-                     alt="Portfolio" /></a>
-               </div>
-               <div class="col-sm-3">
-                  <a href="#" data-lightbox="img/people-coffee-notes-tea.jpg"
-                     data-caption="Image description"><img
-                     src="resources/myPage/img/people-coffee-notes-tea.jpg"
-                     class="img-responsive animated zoomIn animDelay04"
-                     alt="Portfolio" /></a>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- portfolio END -->
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 3,
+        slidesPerColumn: 2,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+    </script>
+    </div>
+    </div>
+
+    <script src="../build/js/swiper.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            spaceBetween: 50,
+            slidesPerView: 2,
+            centeredSlides: true,
+            slideToClickedSlide: true,
+            grabCursor: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            scrollbar: '.swiper-scrollbar',
+            pagination: '.swiper-pagination',
+        });
+    </script>
+      <!-- 위시리스트 END -->
 
       <!-- 문의 -->
       <div class="bloc l-bloc bgc-white" id="moon">

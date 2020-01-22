@@ -19,13 +19,14 @@ public interface MemberService {
 	public int updateMember(Member m);
 	
 	// 회원 가입 시 아이디 중복 체크
-	public int checkIdDup(String id);
+	public int checkIdDup(String user_id);
 	
 	// 회원 탈퇴
 	public int deleteMember(Member m);
 	
 	// 내가 쓴 문의내역 리스트
 	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
+
 	
 
 

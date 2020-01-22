@@ -68,6 +68,13 @@ body {
     }
 </style>
 <body>
+		<c:if test="${ !empty msg }">
+		<script>
+        	alert("로그인 실패!");
+        	opener.parent.location.replace("loginPage.do");
+		</script>
+		</c:if>
+
 <c:import url="../common/menubar.jsp"/>
     <div id="wrapper">
     	<div id="loginbox">    
@@ -77,7 +84,7 @@ body {
 			        <h1>LOGIN</h1>
 			        <div id="logintext">
 			            <i class="fas fa-user"></i>
-			            <input name="id" id="text-area" type="text" placeholder="Username" >
+			            <input name="id" id="text-area" type="text" placeholder="Email" >
 			        </div>
 			        <div id="logintext">
 			            <i class="fas fa-lock"></i>

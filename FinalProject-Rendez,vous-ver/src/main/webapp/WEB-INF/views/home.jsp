@@ -656,7 +656,8 @@ div ul {
 	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
 	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>	
+	      		<c:set var="result" value="${ l.total - l.remain }"/>
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ result } 명 남음</p>	
 	      	</div>	      	
 	      </div>
 	      </c:forEach>

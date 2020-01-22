@@ -37,11 +37,13 @@ public class HomeController {
 		/*Member loginUser = (Member)session.getAttribute("loginUser");
 		int uno = loginUser.getUser_no();*/
 		
-		ArrayList<HomeList> list = hService.selectList();
+		ArrayList<HomeList> alist = hService.selectList();
+		ArrayList<HomeList> dlist = hService.selectDateList();
 
-		if(list != null) {
+		if(alist != null && dlist != null) {
 			mv.addObject("msg",msg);
-			mv.addObject("list", list);
+			mv.addObject("alist", alist);
+			mv.addObject("dlist", dlist);
 			return mv;			
 		} else {
 			mv.addObject("msg","게시물 불러오기 실패!");

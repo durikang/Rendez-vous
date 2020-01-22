@@ -83,10 +83,10 @@ public class MemberController {
 		Member loginUser = mService.loginMember(m);
 		 
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
-			model.addAttribute("msg", "비밀번호 일치");
+			model.addAttribute("msg1", "비밀번호 일치");
 			return "member/myPage";
 		}else {
-			model.addAttribute("msg", "비밀번호 불일치");
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 			return "member/myPage";
 		}
 	}

@@ -46,6 +46,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+<!-- 위시리스트용 css -->
+<link rel="stylesheet" href="../dist/css/swiper.min.css">
+
 
 <script src="<c:url value="/resources/myPage/js/blocs-ck.js" />"></script>
 <script src="<c:url value="/resources/myPage/js/blocs.js" />"></script>
@@ -193,9 +197,43 @@
    width: 70%;
    margin-top: 30%;
 }
+
+/*위시리스트 스타일*/
+.swiper-container {
+        width: 100%;
+        height: 300px;
+        margin: 20px auto;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        width: 250px;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
 </style>
 <body>
    <c:import url="../common/menubar.jsp" />
+
+
+
+
+
+
+
    <!-- Main container -->
    <div class="page-container">
       <!-- Navigation Bloc -->
@@ -522,7 +560,7 @@
       </div>
    </div>
 
-   					<script>
+   <script>
                      var modal = document.querySelector(".modal3");
                         var trigger = document.querySelector('#trigger3');
                         var closeButton = document.querySelector(".close-button5");
@@ -561,6 +599,20 @@
                            $("#postcodify_search_button").postcodifyPopUp(); 
                         }); 
                      </script>
+            <c:if test="${ !empty msg0 }">
+               <script>
+                    alert("회원 탈퇴 완료");
+                  location.href='home.do';
+               </script>
+            </c:if>
+
+            <c:if test="${ !empty msg2 }">
+               <script>
+                    alert("회원 수정 완료");
+                    opener.parent.location.replace("mypage.do");
+                    self.close();
+               </script>
+            </c:if>
 
          <div class="w3-content w3-container w3-margin-top">
             <div class="w3-container w3-card-4">
@@ -640,7 +692,9 @@
                      </p>
 
                      <p class="w3-center">
-                        <button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
+                        <button type="submit"
+                           class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보
+                           변경</button>
                      </p>
                      <div class="text-center">
                         <c:url var="mdelete" value="mdelete.do">
@@ -661,12 +715,11 @@
             $('#layer_pop').hide();
          </script>
          
-         <c:if test="${ !empty msg3 }">
+         <c:if test="${ !empty msg1 }">
             <script>
                $('#layer_pop').show(); //회원수정 창 열기
             </script>
          </c:if>
-         
       </div>
    </div>
    <c:import url="../common/footbar.jsp" />

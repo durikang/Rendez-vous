@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Qna {
 	
 	private int qNo;
+	private int userNo;
 	private String qTitle;
 	private String qWriter;
 	private String qContent;
@@ -16,9 +17,11 @@ public class Qna {
 		
 	}
 
-	public Qna(int qNo, String qTitle, String qWriter, String qContent, Date qDate, String aStatus, String qStatus) {
+	public Qna(int qNo, int userNo, String qTitle, String qWriter, String qContent, Date qDate, String aStatus,
+			String qStatus) {
 		super();
 		this.qNo = qNo;
+		this.userNo = userNo;
 		this.qTitle = qTitle;
 		this.qWriter = qWriter;
 		this.qContent = qContent;
@@ -33,6 +36,14 @@ public class Qna {
 
 	public void setqNo(int qNo) {
 		this.qNo = qNo;
+	}
+	
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	public String getqTitle() {
@@ -85,8 +96,8 @@ public class Qna {
 
 	@Override
 	public String toString() {
-		return "Qna [qNo=" + qNo + ", qTitle=" + qTitle + ", qWriter=" + qWriter + ", qContent=" + qContent + ", qDate="
-				+ qDate + ", aStatus=" + aStatus + ", qStatus=" + qStatus + "]";
+		return "Qna [qNo=" + qNo + ", userNo=" + userNo + ", qTitle=" + qTitle + ", qWriter=" + qWriter + ", qContent="
+				+ qContent + ", qDate=" + qDate + ", aStatus=" + aStatus + ", qStatus=" + qStatus + "]";
 	}
 
 	

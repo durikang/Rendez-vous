@@ -3,132 +3,58 @@ package com.kh.rendez.Wish.model.vo;
 import java.sql.Date;
 
 public class Wish {
-	private int userNo;
-	private String lTitle;
-	private String lRegion;
-	private String lRegionSub;
-	private Date lDay;
-	private int total;
-	private int price;
-	private String oName;
-	private String cName;
-	private String lStatus;
-	private int remain;
+	private int user_no;
+	private int l_no;
+	private int w_no;
+	private Date w_date;
 	
 	public Wish() {}
 
-	public Wish(int userNo, String lTitle, String lRegion, String lRegionSub, Date lDay, int total, int price,
-			String oName, String cName, String lStatus, int remain) {
+	public Wish(int user_no, int l_no, int w_no, Date w_date) {
 		super();
-		this.userNo = userNo;
-		this.lTitle = lTitle;
-		this.lRegion = lRegion;
-		this.lRegionSub = lRegionSub;
-		this.lDay = lDay;
-		this.total = total;
-		this.price = price;
-		this.oName = oName;
-		this.cName = cName;
-		this.lStatus = lStatus;
-		this.remain = remain;
+		this.user_no = user_no;
+		this.l_no = l_no;
+		this.w_no = w_no;
+		this.w_date = w_date;
 	}
 
-
-
-	public int getUserNo() {
-		return userNo;
+	public int getUser_no() {
+		return user_no;
 	}
 
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 
-	public String getlTitle() {
-		return lTitle;
+	public int getL_no() {
+		return l_no;
 	}
 
-	public void setlTitle(String lTitle) {
-		this.lTitle = lTitle;
+	public void setL_no(int l_no) {
+		this.l_no = l_no;
 	}
 
-	public String getlRegion() {
-		return lRegion;
+	public int getW_no() {
+		return w_no;
 	}
 
-	public void setlRegion(String lRegion) {
-		this.lRegion = lRegion;
+	public void setW_no(int w_no) {
+		this.w_no = w_no;
 	}
 
-	public String getlRegionSub() {
-		return lRegionSub;
+	public Date getW_date() {
+		return w_date;
 	}
 
-	public void setlRegionSub(String lRegionSub) {
-		this.lRegionSub = lRegionSub;
-	}
-
-	public Date getlDay() {
-		return lDay;
-	}
-
-	public void setlDay(Date lDay) {
-		this.lDay = lDay;
-	}
-
-	public int getTotal() {
-		return total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public String getoName() {
-		return oName;
-	}
-
-	public void setoName(String oName) {
-		this.oName = oName;
-	}
-
-	public String getcName() {
-		return cName;
-	}
-
-	public void setcName(String cName) {
-		this.cName = cName;
-	}
-
-	public String getlStatus() {
-		return lStatus;
-	}
-
-	public void setlStatus(String lStatus) {
-		this.lStatus = lStatus;
-	}
-
-	public int getRemain() {
-		return remain;
-	}
-
-	public void setRemain(int remain) {
-		this.remain = remain;
+	public void setW_date(Date w_date) {
+		this.w_date = w_date;
 	}
 
 	@Override
 	public String toString() {
-		return "WishList [userNo=" + userNo + ", lTitle=" + lTitle + ", lRegion=" + lRegion + ", lRegionSub="
-				+ lRegionSub + ", lDay=" + lDay + ", total=" + total + ", price=" + price + ", oName=" + oName
-				+ ", cName=" + cName + ", lStatus=" + lStatus + ", remain=" + remain + "]";
+		return "Wish [user_no=" + user_no + ", l_no=" + l_no + ", w_no=" + w_no + ", w_date=" + w_date + "]";
 	}
 	
 	
+
 }

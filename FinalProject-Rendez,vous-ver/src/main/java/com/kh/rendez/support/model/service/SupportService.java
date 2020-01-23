@@ -10,8 +10,8 @@ public interface SupportService {
 	ArrayList<Qna> selectList(int currentPage);
 
 	Qna selectQna(int qNo);
-
-	ArrayList<Qna> selectMyQnaList(int currentPage, int writer);
+	
+	ArrayList<Qna> selectSearch(int currentPage, String keyword);
 
 	int insertQna(Qna q);
 
@@ -23,7 +23,7 @@ public interface SupportService {
 
 	ArrayList<Answer> selectAnswerList(int qNo);
 
-	ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
+	ArrayList<Qna> selectMyQnaList(int currentPage, int writer);
 
 	int updateAnswerStatus(int refQno);
 

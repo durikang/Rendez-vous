@@ -155,5 +155,9 @@ public class ManagerDao {
 		
 		return (ArrayList)sqlSession.selectList("managerMapper.selectNewJoinList",null,rowBounds);
 	}
+
+	public int insertCoupon(Coupon c) {
+		return sqlSession.insert("managerMapper.insertCoupon2",c);
+	}
 	
 }

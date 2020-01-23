@@ -179,11 +179,13 @@
 	</c:import>
 		<br>
 		   <div id="Line_Controls_Chart">
+		   
       <!-- 라인 차트 생성할 영역 -->
           <div id="lineChartArea" style="padding:0px 20px 0px 0px;"></div>
       <!-- 컨트롤바를 생성할 영역 -->
           <div id="controlsArea" style="padding:0px 20px 0px 0px;"></div>
-        </div>
+          
+          </div>
 
 		<hr>
 		</div>

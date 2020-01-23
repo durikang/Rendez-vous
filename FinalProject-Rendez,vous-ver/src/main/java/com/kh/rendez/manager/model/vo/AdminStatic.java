@@ -17,7 +17,6 @@ public class AdminStatic implements Serializable {
 	
 	public AdminStatic() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public AdminStatic(int todayMember, int thisMonthMember, int todayPay, int thisMonthPay) {
 		super();

@@ -158,6 +158,11 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return mnDao.selectNewJoinList(pi);
 	}
+	@Override
+	public int insertCoupon(Coupon c) {
+		// TODO Auto-generated method stub
+		return mnDao.insertCoupon(c);
+	}
 
 
 }

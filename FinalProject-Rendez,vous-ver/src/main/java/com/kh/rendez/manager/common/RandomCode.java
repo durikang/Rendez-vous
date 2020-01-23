@@ -1,4 +1,4 @@
-package com.kh.rendez.manager.controller;
+package com.kh.rendez.manager.common;
 
 import java.util.Random;
 

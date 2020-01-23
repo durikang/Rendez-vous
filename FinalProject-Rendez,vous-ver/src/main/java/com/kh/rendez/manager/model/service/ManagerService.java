@@ -51,4 +51,6 @@ public interface ManagerService {
 
 	public ArrayList<AdminMember> selectNewJoinList(int currentPage);
 
+	public int insertCoupon(Coupon c);
+
 }

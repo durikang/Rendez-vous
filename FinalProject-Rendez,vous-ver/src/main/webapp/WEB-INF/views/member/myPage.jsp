@@ -198,7 +198,11 @@
 	<c:import url="../common/menubar.jsp" />
 
 
-
+	         <c:if test="${ !empty msg3 }">
+            <script>
+               $('#layer_pop').show(); //회원수정 창 열기
+            </script>
+         </c:if>
 
 
 
@@ -516,7 +520,7 @@
 	<div class="modal3">
 		<div class="modal-content3">
 			<span class="close-button5">&times;</span>
-			<c:if test="${ !empty msg4 }">
+			<c:if test="${ !empty msg }">
 				<script>
 											alert("비밀번호가 일치하지 않습니다.");
 										</script>
@@ -573,10 +577,11 @@
 						         $("#postcodify_search_button").postcodifyPopUp(); 
 						      }); 
 						   </script>
-				<c:if test="${ !empty msg0 }">
+				<c:if test="${ !empty msg }">
 					<script>
 			        	alert("회원 탈퇴 완료");
-						location.href='home.do';
+			        	opener.parent.location.replace("logout.do");
+			        	self.close();
 					</script>
 				</c:if>
 
@@ -677,21 +682,13 @@
 								<button type="button"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
 									onclick="location.href='${ mdelete }'">탈퇴하기</button>
-								<td align="right" class="pop"><a onclick="closeWin();"><font color="black">닫기</font></a>
+								<td align="right" class="pop"><a href="mypage.do"><font color="black">닫기</font></a>
 								</td> <br>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			<script>
-				function closeWin() {
-					if (document.getElementById("pop_today").checked) {
-						setCookie("ncookie", "done", 24);
-					}
-					document.getElementById('layer_pop').style.display = "none";
-				}
-			</script>
 
 			<script>
 				$('#layer_pop').hide();

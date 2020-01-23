@@ -175,15 +175,11 @@ overflow: hidden;
 						var $No1 = $("<td>").text(data[i].no);
 						var $Title1= $("<td class='target'>").text(data[i].title);
 						//var $bTitle = $("<td>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
-						var $Introdction1=$("<td>").text(data[i].introduction);
-						var $Target1 = $("<td>").text(data[i].target);
 						var $Price1= $("<td>").text(data[i].price);
 						var $Rating1 = $("<td>").text(data[i].rating);
 						
 						$tr1.append($No1);
 						$tr1.append($Title1);
-						$tr1.append($Introdction1);
-						$tr1.append($Target1);
 						$tr1.append($Price1);
 						$tr1.append($Rating1);
 						
@@ -272,8 +268,6 @@ overflow: hidden;
 						<tr>
 							<th scope="col" width="100px">번호</th>
 							<th scope="col" width='200px'>제목</th>
-							<th scope="col" width='100px'>소개</th>
-							<th scope="col" width='200px'>수업대상</th>
 							<th scope="col" width='100px'>가격</th>
 							<th scope="col" width='100px'>평점</th>
 						</tr>

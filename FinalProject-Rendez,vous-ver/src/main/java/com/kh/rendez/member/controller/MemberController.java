@@ -183,6 +183,10 @@ public class MemberController {
 		
 		/*if(result > 0 || m.getMem_photo() == null || m.getMem_uphoto() != null || m.getMem_photo() != null || m.getMem_uphoto() == null) {*/
 		if(result > 0) {
+			
+			
+			
+			
 			model.addAttribute("msg", "회원가입이 완료 되었습니다.");
 			return "home";
 		} else {

@@ -198,7 +198,7 @@
 		ORDER BY USER_NO asc
 	</select>
 	
-	<!-- 쿠폰 생성하기  -->
+	<!-- 쿠폰 여러개 생성하기  -->
 	<insert id="insertCoupon">
 		
 			<foreach collection="list" item="i" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
@@ -214,6 +214,18 @@
              </foreach>
 			
 				
+	</insert>
+	<!-- 쿠폰 한개 생성하기  -->
+	<insert id="insertCoupon2">
+               insert  INTO coupon VALUES(
+                 get_seq('coupon_seq'),
+                 #{i.cName},
+                 #{i.cCode},
+                 #{i.disRate},
+                 #{i.startDate},
+                 #{i.endDate},
+                 'R',
+                 seq_mno.currval)
 	</insert>
 	
 	<!-- 회원 가입자 오늘 & 이번달 수 조회 -->

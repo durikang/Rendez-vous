@@ -11,7 +11,7 @@ public interface SupportService {
 
 	Qna selectQna(int qNo);
 
-	ArrayList<Qna> selectSearch(int currentPage, String keyword);
+	ArrayList<Qna> selectMyQnaList(int currentPage, int writer);
 
 	int insertQna(Qna q);
 

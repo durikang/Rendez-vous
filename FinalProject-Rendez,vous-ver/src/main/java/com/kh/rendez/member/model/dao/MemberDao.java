@@ -38,11 +38,11 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.idCheck", user_id);
 	}
 	
-	public int getMyQnaListCount(int currentPage, String writer) {
+	public int getMyQnaListCount(int currentPage, int writer) {
 		return sqlSession.selectOne("supportMapper.getMyQnaListCount", writer);
 	}
 
-	public ArrayList<Qna> selectMyQnaList(PageInfo pi, String writer) {
+	public ArrayList<Qna> selectMyQnaList(PageInfo pi, int writer) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		

@@ -116,7 +116,7 @@
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/style_sub17.css?after" />
 	
 
-    <link rel="shortcut icon" href="${contextPath}/resources/h1//Images/favicon.ico" />
+    <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
     <link rel="apple-touch-icon" href="${contextPath}/resources/h1/Images/mobicon.png"/>    
 
 	<script src="${contextPath}/resources/h1/Scripts/prototype.js"></script>

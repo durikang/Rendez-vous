@@ -1,6 +1,7 @@
 package com.kh.rendez.lesson.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.rendez.Wish.model.vo.Wish;
 import com.kh.rendez.baesung.payment.model.vo.Payment;
@@ -9,6 +10,7 @@ import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
+import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.review.model.vo.Review;
 
 public interface LessonService {
@@ -68,6 +70,10 @@ public interface LessonService {
 	LessonAttachment selectAddedImg(int lNo);
 
 	int lessonInfoUpdate(LessonInfo li);
+
+	int updatePT();
+
+	ArrayList<Member> selectStudents(Map<String, Integer> map);
 
 	
 

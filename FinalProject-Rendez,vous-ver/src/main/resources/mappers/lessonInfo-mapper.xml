@@ -345,14 +345,51 @@
 	
 	
 	
+	<!-- 수업 신청 학생들 조회를 위한 처리 -->
 	
-
+	<resultMap type="Member" id="memberResultSet">
+		<result property="user_no" column="USER_NO"/>
+		<result property="user_id" column="USER_ID"/>
+		<result property="user_pwd" column="USER_PWD"/>
+		<result property="user_name" column="USER_NAME"/>
+		<result property="gender" column="GENDER"/>
+		<result property="age" column="AGE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="enroll_date" column="ENROLL_DATE"/>
+		<result property="update_date" column="UPDATE_DATE"/>
+		<result property="user_type" column="USER_TYPE"/>
+		<result property="uStatus" column="U_STATUS"/>
+	</resultMap>
+	
+	
+	<select id="selectStudents" parameterType="hashmap" resultMap="memberResultSet">
+	SELECT M.*
+	FROM MEMBER M,PAYMENT P
+	WHERE M.USER_NO = P.USER_NO
+	AND P.L_NO = ${lNo}
+	AND P.L_INNING = ${lInning}
+	AND P.PAYMENT_STATUS != 2 
+	</select>
 	
 	
 	
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="updatePT" statementType="CALLABLE">
+	CALL PST()
+	</select>
+	
+	
 
 
 

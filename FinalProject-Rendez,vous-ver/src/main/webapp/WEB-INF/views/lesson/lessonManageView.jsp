@@ -46,7 +46,7 @@
 	
 	
 	
-    <link rel="shortcut icon" href="//taling.me/Content/Images/favicon.ico" />
+    <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
     <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
 	
     <meta property="fb:app_id" content="1488135204822133" />
@@ -104,6 +104,19 @@
   			position: relative;
   			background: white;
   			border: none;
+		}
+		
+		.image:hover {
+			cursor: pointer;
+		}
+		
+		table,tr,th,td{
+		border: 1px solid black;
+		}
+		td,th{
+			width: 100px;
+			text-align: center;
+			height: 50px;
 		}
 	
 	
@@ -175,8 +188,9 @@
 				
 				
 				<c:if test="${ la.laType eq 1 and la.lNo eq li.lNo }">
-				<div class="image" style="background-image:url(${ contextPath}/resources/lessonImg/${la.cName });" ></div>
-				</c:if>
+				<input type="text" value="${la.lNo }" hidden>
+				<div class="image" onclick="goSuup(this)" style="background-image:url(${ contextPath}/resources/lessonImg/${la.cName });" ></div>
+				</c:if>	
 
 				
 				
@@ -199,6 +213,14 @@
 		</div>
 		</c:forEach>
 		
+		<script>
+		function goSuup(value){
+			var lNo = $(value).parent().children().eq(0).val();
+			location.href="lessonDetail.do?lNo="+lNo
+		}
+		
+		</script>
+		
 		
 		
 		<c:forEach var="li" items="${liList }">
@@ -211,7 +233,8 @@
 					<th>끝나는시각</th>
 					<th>잔여인원</th>
 					<th>총원</th>
-					<th>시간</th>
+					<th>상태</th>
+					<th>신청인</th>
 					</tr>
 
 					<c:forEach var="l" items="${lList}">
@@ -223,7 +246,25 @@
 					<td><fmt:formatDate value="${l.eTime}" pattern="HH:mm"/></td>
 					<td>${l.remain }</td>
 					<td>${l.total }</td>
-					<td></td>
+					
+					<td>
+					<c:if test="${ l.sTime gt currTime }">
+					시작 전
+					</c:if>
+					<c:if test="${ l.eTime lt currTime }">
+					완료
+					</c:if>
+					<c:if test="${ l.sTime le currTime and currTime lt l.eTime}">
+					수업중
+					</c:if>
+					</td>
+					
+					<td>
+					<input type="text" hidden value="${li.lNo }">
+					<input type="text" hidden value="${l.lInning }">
+					<button onclick="checkStudent(this)">조회</button>
+					</td>
+					
 					</tr>
 					</c:if>		
 					</c:forEach>			
@@ -289,9 +330,9 @@
 					
 		
 			});
-		</c:if>
+
 		</script>	
-		
+		</c:if>
 		
     
  
@@ -303,9 +344,9 @@
         <form action="lessonTimeInsert.do">
         <input id="adlno" type="text" name="lno" hidden> <br>
         <input id="adprice" name="price" type="number" hidden=""> <br>          
-		날짜: <input type="date" name="dday" required> <br>
-		시작 시간 : <input type="time" name="stime" required> <br>
-		종료 시간 : <input type="time" name="etime" required><br>
+		날짜: <input type="date" id="dday" name="dday" onchange="asd(this);"  required> <br>
+		시작 시간 : <input type="time" id="stime" name="stime" step="300" required> <br>
+		종료 시간 : <input type="time" id="etime" name="etime" step="300" required><br>
 		모집 인원 : <input type="number" name="total" required><br>
 		<button type="submit" class="btn btn-primary ">등록하기</button>
 		<button type="button" id="close" class="btn btn-default ">닫기</button>
@@ -338,6 +379,58 @@
         modal.style.display = "none";
     }
 
+    
+    
+    </script>
+    
+    
+    <script>
+    
+    function asd(value){
+    	var curTime = new Date();
+    	var val = $(value).val();
+    	var valTime = new Date(val);
+    	
+    	if(curTime.getTime()-valTime.getTime()>60*60*24*1000){
+    		alert("경고");
+    	}
+    	
+    	
+    }
+    
+    function checkStudent(value){
+    	var lNo = $(value).parent().children().eq(0).val();
+    	var lInning = $(value).parent().children().eq(1).val();
+
+    	
+		  $.ajax({
+			  url : "checkStudent.do",
+	            data:{lNo:lNo,lInning:lInning},
+	            dataType:"json",
+				type:"post",
+	            success:function(data){
+       			console.log(data);
+       			
+       			
+       			if(data.length != 0){
+       			for(var key in data){
+       				alert(data[key].user_id);
+       			}
+       			}else{
+       				alert("한명도 신청을 안했네...");
+       			}
+	            },error:function(){
+	               console.log("ajax 통신 실패");
+	            }
+	            })   
+    	
+    	
+    }
+    
+    
+    
+    
+  
     
     
     </script>

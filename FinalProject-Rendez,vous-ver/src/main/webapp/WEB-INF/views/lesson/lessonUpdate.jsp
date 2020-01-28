@@ -27,7 +27,7 @@
 	<link rel="canonical" href="https://taling.me">
 
 
-    <link rel="shortcut icon" href="//taling.me/Content/Images/favicon.ico" />
+    <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
     <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
 
 	<script src="https://taling.me/Scripts/prototype.js"></script>
@@ -941,7 +941,7 @@
 
 
 				<br><br>
-				<a onclick="pop_pay()" ><font class="pink"><img src="${contextPath}/resources/h1/Images/icon_info.png">&nbsp;탈잉 수수료 정책의 이점에 대해서 더 알아보세요.</font></a>
+				<a onclick="pop_pay()" ><font class="pink"><img src="${contextPath}/resources/h1/Images/icon_info.png">&nbsp;RENDEZ 수수료 정책의 이점에 대해서 더 알아보세요.</font></a>
 				<!--https://taling.me/Tutor/Register_pop.html-->
 				<script>
 					function pop_pay(){

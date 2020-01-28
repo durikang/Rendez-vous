@@ -417,7 +417,7 @@
        				alert(data[key].user_id);
        			}
        			}else{
-       				alert("한명도 신청을 안했네...");
+       				alert("한명도 신청을 안했네..");
        			}
 	            },error:function(){
 	               console.log("ajax 통신 실패");

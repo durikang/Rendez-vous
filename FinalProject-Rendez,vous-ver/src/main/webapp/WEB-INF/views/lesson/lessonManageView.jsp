@@ -110,16 +110,37 @@
 			cursor: pointer;
 		}
 		
-		table,tr,th,td{
-		border: 1px solid black;
+		tr{
+		border-bottom: 1px solid #ddd;
 		}
+		
+		tr:not(:first-child):hover{
+		background-color: #f7fafc;
+		}
+		
+		
 		td,th{
 			width: 100px;
 			text-align: center;
-			height: 50px;
+			height: 50px; 
 		}
 	
-	
+		.le{
+		    border-radius: 4px;
+		    padding: 3px 10px 4px;
+		    font-size: 14px;
+		    font-weight: 400;
+		    color: white;
+		}
+		.le-before{
+		 background-color:#5bc0de; 
+		}
+		.le-ing{
+		 background-color: #f0ad4e;
+		}
+		.le-after{
+		 background-color:#5cb85c;
+		}
 	
 	
 	
@@ -249,13 +270,13 @@
 					
 					<td>
 					<c:if test="${ l.sTime gt currTime }">
-					시작 전
+					<span class="le le-before">시작 전</span>
 					</c:if>
 					<c:if test="${ l.eTime lt currTime }">
-					완료
+					<span class="le le-after">완료</span>
 					</c:if>
 					<c:if test="${ l.sTime le currTime and currTime lt l.eTime}">
-					수업중
+					<span class="le le-ing">수업중</span>
 					</c:if>
 					</td>
 					
@@ -344,9 +365,9 @@
         <form action="lessonTimeInsert.do">
         <input id="adlno" type="text" name="lno" hidden> <br>
         <input id="adprice" name="price" type="number" hidden=""> <br>          
-		날짜: <input type="date" id="dday" name="dday" onchange="asd(this);"  required> <br>
+		날짜: <input type="date" id="dday" name="dday" onchange="asd1(this);"  required> <br>
 		시작 시간 : <input type="time" id="stime" name="stime" step="300" required> <br>
-		종료 시간 : <input type="time" id="etime" name="etime" step="300" required><br>
+		종료 시간 : <input type="time" id="etime" name="etime" step="300" onchange="asd2();"  required><br>
 		모집 인원 : <input type="number" name="total" required><br>
 		<button type="submit" class="btn btn-primary ">등록하기</button>
 		<button type="button" id="close" class="btn btn-default ">닫기</button>
@@ -386,17 +407,42 @@
     
     <script>
     
-    function asd(value){
+    function asd1(value){
     	var curTime = new Date();
     	var val = $(value).val();
     	var valTime = new Date(val);
+    	console.log("선택시간 : " + valTime.getTime());
+    	console.log("현재시간 : " + curTime.getTime());
+    	console.log(curTime.getTime()-valTime.getTime());
     	
-    	if(curTime.getTime()-valTime.getTime()>60*60*24*1000){
-    		alert("경고");
+    	if(curTime.getTime()-valTime.getTime()>-86400000){
+    		alert("당일 등록과 지난 날짜로는 등록할 수 없습니다");
+    		$("#dday").val("");
     	}
-    	
-    	
+	
     }
+    
+    function asd2(){
+    	var stime = $("#stime").val();
+    	var etime = $("#etime").val();
+    	
+    	if(stime>etime){
+    		alert("옳바른 시간 설정이 필요합니다");
+    		$("#etime").val("");
+    		$("#stime").val("");
+    	}
+    }	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     function checkStudent(value){
     	var lNo = $(value).parent().children().eq(0).val();

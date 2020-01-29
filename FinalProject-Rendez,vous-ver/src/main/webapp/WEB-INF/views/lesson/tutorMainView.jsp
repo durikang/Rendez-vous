@@ -46,7 +46,7 @@
 	
 	
 	
-    <link rel="shortcut icon" href="//taling.me/Content/Images/favicon.ico" />
+    <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
     <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
 	
     <meta property="fb:app_id" content="1488135204822133" />

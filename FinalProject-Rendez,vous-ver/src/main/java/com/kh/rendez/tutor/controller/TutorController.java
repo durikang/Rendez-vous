@@ -76,8 +76,9 @@ public class TutorController {
 		@RequestParam(name="certImg", required=false) List<MultipartFile> certImg,
 		String tInstagram, String tBlog, String tYoutube
 			) {
-
-		int uno = ((Member)request.getSession().getAttribute("loginUser")).getUser_no();
+		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int uno = loginUser.getUser_no();
 		
 		
 		Tutor inTutor = new Tutor();
@@ -121,7 +122,8 @@ public class TutorController {
 			}
 			
 			if(result3>0) {
-				status.setComplete();
+				loginUser.setUser_type("T");
+				mv.addObject("loginUser",loginUser);
 				mv.addObject("msg","튜터 신청이 완료되있습니다  승인 완료 후 수업 등록이 가능합니다.");
 				mv.setViewName("home");
 			}

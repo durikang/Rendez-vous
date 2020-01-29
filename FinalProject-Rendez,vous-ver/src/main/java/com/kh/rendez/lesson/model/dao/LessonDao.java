@@ -1,6 +1,7 @@
 package com.kh.rendez.lesson.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
+import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.review.model.vo.Review;
 
 @Repository("lDao")
@@ -131,6 +133,15 @@ public class LessonDao {
 
 	public int lessonInfoUpdate(LessonInfo li) {
 		return sqlSession.update("lessonInfoMapper.lessonInfoUpdate",li);
+	}
+
+	public int updatePT() {
+		return sqlSession.update("lessonInfoMapper.updatePT");
+	}
+
+	public ArrayList<Member> selectStudents(Map<String, Integer> map) {
+		System.out.println(map);
+		return (ArrayList)sqlSession.selectList("lessonInfoMapper.selectStudents",map);
 	}
 
 	

@@ -195,7 +195,7 @@
 	width: 70%;
 	margin-top: 30%;
 }
-
+/*찜 목록 스타일*/
  .swiper-container {
         width: 100%;
         height: auto;
@@ -206,7 +206,7 @@
         text-align: center;
         font-size: 18px;
         background: #fff;
-        height: 200px;
+        height: 300px;
         
         /* Center slide text vertically */
         display: -webkit-box;
@@ -225,14 +225,7 @@
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
-
-
-
-
-
-
-
-	<!-- Main container -->
+<!-- Main container -->
 	<div class="page-container">
 		<!-- Navigation Bloc -->
 		<div class="bloc l-bloc bgc-white" id="nav-bloc">
@@ -342,6 +335,9 @@
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 
     <!-- Swiper JS -->
@@ -354,6 +350,10 @@
         slidesPerView: 3,
         slidesPerColumn: 2,
         paginationClickable: true,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
         spaceBetween: 30
     });
     </script>
@@ -481,8 +481,8 @@
 		<!-- review end -->
 
 		<!-- bloc-8 쿠폰함 -->
-		<div class="bloc bg-95cdfeef1 bgc-ferrari-red d-bloc b-parallax"
-			id="contact">
+		<div class="bloc bg-95cdfeef1 bgc-ferrari-red d-bloc b-parallax" 
+			id="contact" >
 			<div class="container bloc-lg">
 				<div class="row">
 					<div class="col-sm-12 col-md-6 col-md-offset-3">
@@ -675,21 +675,13 @@
 								<button type="button"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
 									onclick="location.href='${ mdelete }'">탈퇴하기</button>
-								<td align="right" class="pop"><a onclick="closeWin();"><font color="black">닫기</font></a>
+								<td align="right" class="pop"><a href="mypage.do"><font color="black">닫기</font></a>
 								</td> <br>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			<script>
-				function closeWin() {
-					if (document.getElementById("pop_today").checked) {
-						setCookie("ncookie", "done", 24);
-					}
-					document.getElementById('layer_pop').style.display = "none";
-				}
-			</script>
 
 			<script>
 				$('#layer_pop').hide();

@@ -119,11 +119,6 @@ public class MemberController {
 	public String myInfoView() {
 		return "member/myInfo";
 	}
-
-	@RequestMapping("join.do")
-	public String joinView() {
-		return "member/join";
-	}
 	
 	@RequestMapping("pwdCheckPage.do")
 		public String pwdCheckPageView() {
@@ -147,9 +142,8 @@ public class MemberController {
 	
 	@RequestMapping(value="minsert.do", method=RequestMethod.POST)
 	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
-								@RequestParam("post") String post,
 								@RequestParam("user_id") String id,
-								@RequestParam("net") String id2,
+								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
 								@RequestParam("address2") String address2,
 								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
@@ -173,7 +167,7 @@ public class MemberController {
 		            vo.setMem_uphoto(renameFileName);
 		         }
 		      }*/
-		m.setUser_id(id+"@"+id2);
+		m.setUser_id(id);
 		m.setAddress(post + "," + address1 + ", " + address2);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
 		

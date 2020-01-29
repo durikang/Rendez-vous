@@ -35,6 +35,7 @@
       <typeAlias type="com.kh.rendez.manager.model.vo.AdminPay" alias="AdminPay"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.AdminLesson" alias="AdminLesson"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.AdminMemJoinPay" alias="AdminMemJoinPay"/>
+      <typeAlias type="com.kh.rendez.manager.model.vo.AdminMonthsStatic" alias="AdminMonthsStatic"/>
       
       <!-- 봄 -->
       <typeAlias type="com.kh.rendez.member.model.vo.Member" alias="Member"/>

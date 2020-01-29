@@ -30,6 +30,22 @@
 		<result property="total_pay" column="TOTAL_PAY" />
 		<result property="enrollDate" column="ENROLL_DATE" />
 	</resultMap>
+	
+<!-- 년도별 개월에 따른 수 조회  -->
+	 <resultMap id="AdminMonthsStaticResultSet" type="AdminMonthsStatic">
+		<result property="january" column="january" />
+		<result property="february" column="february" />
+		<result property="march" column="march" />
+		<result property="april" column="april" />
+		<result property="may" column="may" />
+		<result property="june" column="june" />
+		<result property="july" column="july" />
+		<result property="august" column="august" />
+		<result property="september" column="september" />
+		<result property="october" column="october" />
+		<result property="november" column="november" />
+		<result property="decemver" column="decemver" />
+	</resultMap>
 
 
 	
@@ -160,6 +176,36 @@
 		where user_type !='A'
 		
 	</select>
+	<!-- 년도별 회원 수 조회  -->
+	<select id="selectmemberCountList" resultMap="AdminMonthsStaticResultSet" parameterType="string">
+		select count(decode(to_char(enroll_date,'MM'),'01',1)) "january",count(decode(to_char(enroll_date,'MM'),'02',1)) "february",
+		count(decode(to_char(enroll_date,'MM'),'03',1)) "march",count(decode(to_char(enroll_date,'MM'),'04',1)) "april",count(decode(to_char(enroll_date,'MM'),'05',1)) "may",
+		count(decode(to_char(enroll_date,'MM'),'06',1)) "june",count(decode(to_char(enroll_date,'MM'),'07',1)) "july",count(decode(to_char(enroll_date,'MM'),'08',1)) "august",
+		count(decode(to_char(enroll_date,'MM'),'09',1)) "september",count(decode(to_char(enroll_date,'MM'),'10',1)) "october",count(decode(to_char(enroll_date,'MM'),'11',1)) "november",
+		count(decode(to_char(enroll_date,'MM'),'12',1)) "decemver"
+		from member
+		where extract(year from enroll_date)=extract(year from to_date(#{value},'YYYY')) and u_status !='N'
+		group by to_char(sysdate,'yyyy-MM')
+		order by 1
+		
+	</select>
+
+	<!-- 년도별 월 수입 조회  -->
+	<select id="selectmonthlyIncome" resultMap="AdminMonthsStaticResultSet" parameterType="string">
+		
+		select sum(decode(to_char(payment_date, 'mm'), '01', payment_cost, 0)) "january" ,sum(decode(to_char(payment_date, 'mm'), '02', payment_cost, 0)) "february" ,
+		    sum(decode(to_char(payment_date, 'mm'), '03', payment_cost, 0)) "march" ,sum(decode(to_char(payment_date, 'mm'), '04', payment_cost, 0)) "april" ,
+		    sum(decode(to_char(payment_date, 'mm'), '05', payment_cost, 0)) "may" ,sum(decode(to_char(payment_date, 'mm'), '06', payment_cost, 0)) "june" ,
+		    sum(decode(to_char(payment_date, 'mm'), '07', payment_cost, 0)) "july" ,sum(decode(to_char(payment_date, 'mm'), '08', payment_cost, 0)) "august" ,
+		    sum(decode(to_char(payment_date, 'mm'), '09', payment_cost, 0)) "september" ,sum(decode(to_char(payment_date, 'mm'), '10', payment_cost, 0)) "october" ,
+		    sum(decode(to_char(payment_date, 'mm'), '11', payment_cost, 0)) "november" ,sum(decode(to_char(payment_date, 'mm'), '12', payment_cost, 0)) "decemver"
+		from payment
+		where to_char(payment_date,'YYYY')=#{value}
+		
+	</select>
+	
+	
+	
 	<!-- 튜터 인증신청 멤버와 튜터 인증완료된 멤버  셀렉  -->
 	<select id="selectTutorList" resultMap="mAndtuJoinResultSet" parameterType="_int">
 		select *
@@ -449,4 +495,20 @@
 		where to_date(enroll_date,'YYYY/MM/DD')=to_date(sysdate,'YYYY/MM/DD')
 		and u_status='Y' and user_type != 'A' and coupon_no is null
 	</select>
+
+	<select id="selectYearList" resultType="string">
+		select distinct extract(year from enroll_date)
+		from member
+		order by 1 desc
+	</select>
+
+	<select id="selectYearList2" resultType="string">
+		select distinct extract(year from payment_date)
+		from payment
+		left join member using(user_no)
+		where payment_status='1'
+		order by 1 asc
+	</select>
+	
+	
 </mapper>

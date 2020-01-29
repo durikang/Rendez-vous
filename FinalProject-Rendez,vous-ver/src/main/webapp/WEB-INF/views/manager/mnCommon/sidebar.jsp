@@ -169,9 +169,6 @@ color: #fff; */
 				<c:if test="${ pageName eq 'request' }">
 					<h5  align="center">튜터 신청 관리</h5>
 				</c:if>
-				<c:if test="${ pageName eq 'static' }">
-					<h5  align="center">통계</h5>
-				</c:if>
 			</div>
 			<ul>
 				<li id="adminHome">
@@ -196,12 +193,6 @@ color: #fff; */
 					<a href="mnRequest.do?pageName=request&n=2">
 						<i class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>
 						 튜터 신청 관리
-					</a>
-				</li>
-				<li id="static">
-					<a href="static.do?pageName=static">
-						<i class="fas fa-chart-bar" style="color: #c9c0b1;"></i>
-						 통계
 					</a>
 				</li>
 			</ul>

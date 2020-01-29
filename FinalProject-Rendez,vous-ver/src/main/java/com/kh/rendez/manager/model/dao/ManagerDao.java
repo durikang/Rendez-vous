@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.rendez.manager.model.vo.AdminLesson;
+import com.kh.rendez.manager.model.vo.AdminMemCounts;
 import com.kh.rendez.manager.model.vo.AdminMember;
+import com.kh.rendez.manager.model.vo.AdminMonthsStatic;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.PageInfo;
@@ -154,6 +156,22 @@ public class ManagerDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("managerMapper.selectNewJoinList",null,rowBounds);
+	}
+
+	public ArrayList<String> selectYearList() {
+		return (ArrayList)sqlSession.selectList("managerMapper.selectYearList");
+	}
+
+	public AdminMonthsStatic selectmemberList(String year) {
+		return sqlSession.selectOne("managerMapper.selectmemberCountList",year);
+	}
+
+	public AdminMonthsStatic selectmonthlyIncome(String year) {
+		return sqlSession.selectOne("managerMapper.selectmonthlyIncome",year);
+	}
+
+	public ArrayList<String> selectYearList2() {
+		return (ArrayList)sqlSession.selectList("managerMapper.selectYearList2");
 	}
 	
 }

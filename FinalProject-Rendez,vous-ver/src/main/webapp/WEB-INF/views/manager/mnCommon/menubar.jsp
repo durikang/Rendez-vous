@@ -140,7 +140,6 @@
 			<li><a class="menuFontSize" href="manageHo.do?pageName=managerHome">홈페이지 관리</a></li>
 			<li><a class="menuFontSize" href="mn.do?pageName=memNTut" onclick="pageSubmitFn('memNTut');">회원 / 튜터 관리</a></li>
 			<li><a class="menuFontSize" href="mnRequest.do?pageName=request" onclick="pageSubmitFn('request');">튜터 신청 관리</a></li>
-			<li><a class="menuFontSize" href="static.do?pageName=static" onclick="pageSubmitFn('static');">통계</a></li>
 		</ul>
 		</div>
 
@@ -159,8 +158,6 @@
 
 		
 	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	
 </body>
 </html>

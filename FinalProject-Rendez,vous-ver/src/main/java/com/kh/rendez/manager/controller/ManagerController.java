@@ -2,8 +2,11 @@ package com.kh.rendez.manager.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -24,10 +27,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.rendez.manager.common.Pagination;
+import com.kh.rendez.manager.common.RandomCode;
 import com.kh.rendez.manager.model.exception.ManagerException;
 import com.kh.rendez.manager.model.service.ManagerService;
 import com.kh.rendez.manager.model.vo.AdminLesson;
 import com.kh.rendez.manager.model.vo.AdminMember;
+import com.kh.rendez.manager.model.vo.AdminMonthsStatic;
 import com.kh.rendez.manager.model.vo.AdminStatic;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
@@ -43,11 +48,37 @@ public class ManagerController {
 	JavaMailSender mailSender;
 
 	@RequestMapping("adminHome.do")
-	public ModelAndView ManagerHome(HttpServletRequest request,
+	public ModelAndView ManagerHome(HttpServletRequest request,@RequestParam(value="year1",required=false) String year1,
+			@RequestParam(value="year2",required=false) String year2,
 			@RequestParam(value = "pageName", required = false) String pageName, ModelAndView mv) {
 
-		mv.setViewName("manager/AdminHome");
+		ArrayList<String> YearList = mnService.selectYearList();
+		ArrayList<String> YearList2 = mnService.selectYearList2();
+		
+//		현재 날자
+		Calendar calendar = new GregorianCalendar(Locale.KOREA);
+		int nYear;
+		nYear = calendar.get(Calendar.YEAR);
+		
+		
+		if(year1 == null) {
+		    year1 = nYear+"";
+		}
+		if(year2 == null) {
+			year2 = nYear+"";
+		}
+		
+		AdminMonthsStatic monthsJoinMember = mnService.selectmemberList(year1);
+		AdminMonthsStatic monthlyIncome = mnService.selectmonthlyIncome(year2);
+		
+		
+		
+		mv.addObject("monthsJoinMember",monthsJoinMember);
+		mv.addObject("monthlyIncome",monthlyIncome);
+		mv.addObject("YearList",YearList);
+		mv.addObject("YearList2",YearList2);
 		mv.addObject("pageName", pageName);
+		mv.setViewName("manager/AdminHome");
 
 		if (request.getSession().getAttribute("loginUser") == null) {
 			mv.addObject("msg", "회원 전용입니다. 로그인 해주세요");
@@ -570,15 +601,41 @@ public class ManagerController {
 		}
 		return mv;
 	}
-
-//	통계
-	@RequestMapping("static.do")
-	public ModelAndView EnrollArea(ModelAndView mv,
-			@RequestParam(value = "pageName", required = false) String pageName) {
-
+	
+	@RequestMapping("monthsJoinMember.do")
+	public ModelAndView monthsJoinMember(ModelAndView mv,HttpServletRequest request,
+			@RequestParam(value="year1",required=false) String year1) {
+		String pageName="adminHome";
+		
+		mv.addObject("year1",year1);
 		mv.addObject("pageName", pageName);
-		mv.setViewName("manager/boarder/statisticsBoarder");
+		mv.setViewName("redirect:adminHome.do");
+		
+		if (request.getSession().getAttribute("loginUser") == null) {
+			mv.addObject("msg", "회원 전용입니다. 로그인 해주세요");
+			mv.setViewName("redirect:home.do");
+		}
 		return mv;
 	}
+	
+	@RequestMapping("monthsIncome.do")
+	public ModelAndView monthsIncome(ModelAndView mv,HttpServletRequest request,
+			@RequestParam(value="year2",required=false) String year2,@RequestParam(value="year1",required=false) String year1) {
+		String pageName="adminHome";
+		
+		mv.addObject("year1",year1);
+		mv.addObject("year2",year2);
+		mv.addObject("pageName", pageName);
+		mv.setViewName("redirect:adminHome.do");
+		
+		if (request.getSession().getAttribute("loginUser") == null) {
+			mv.addObject("msg", "회원 전용입니다. 로그인 해주세요");
+			mv.setViewName("redirect:home.do");
+		}
+		return mv;
+	}
+	
+
+
 
 }

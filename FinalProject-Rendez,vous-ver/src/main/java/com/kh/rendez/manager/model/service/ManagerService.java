@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.rendez.manager.model.vo.AdminLesson;
+import com.kh.rendez.manager.model.vo.AdminMemCounts;
 import com.kh.rendez.manager.model.vo.AdminMember;
+import com.kh.rendez.manager.model.vo.AdminMonthsStatic;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.Search;
@@ -26,6 +28,9 @@ public interface ManagerService {
 	public int countMember(int i);
 
 	public int sumPay(int i);
+	
+	// 회원 가입자 수 평균페이지에 리턴
+	public AdminMonthsStatic selectmemberList(String year);
 
 	public ArrayList<AdminMember> selectMemberList();
 //	쿠폰 생성에 필요한 (멤버 uno에 맞는 멤버 리스트들 리턴)
@@ -48,7 +53,14 @@ public interface ManagerService {
 	public ArrayList<AdminMember> sortingSelectMemberList(Map<String, Object> param, int currentPage);
 
 	public ArrayList<AdminMember> selectTopFiveVip();
-
+// 새로 가입한 멤버들 셀렉
 	public ArrayList<AdminMember> selectNewJoinList(int currentPage);
+//	년도 셀랙
+	public ArrayList<String> selectYearList();
+
+	public AdminMonthsStatic selectmonthlyIncome(String year);
+
+	public ArrayList<String> selectYearList2();
+
 
 }

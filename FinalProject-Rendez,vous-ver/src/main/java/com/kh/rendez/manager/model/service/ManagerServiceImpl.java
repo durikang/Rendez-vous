@@ -12,6 +12,7 @@ import com.kh.rendez.manager.common.Pagination;
 import com.kh.rendez.manager.model.dao.ManagerDao;
 import com.kh.rendez.manager.model.vo.AdminLesson;
 import com.kh.rendez.manager.model.vo.AdminMember;
+import com.kh.rendez.manager.model.vo.AdminMonthsStatic;
 import com.kh.rendez.manager.model.vo.Coupon;
 import com.kh.rendez.manager.model.vo.MemberJoinTutor;
 import com.kh.rendez.manager.model.vo.PageInfo;
@@ -157,6 +158,24 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		
 		return mnDao.selectNewJoinList(pi);
+	}
+	@Override
+	public ArrayList<String> selectYearList() {
+		
+		return mnDao.selectYearList();
+	}
+	@Override
+	public AdminMonthsStatic selectmemberList(String year) {
+		return mnDao.selectmemberList(year);
+	}
+	@Override
+	public AdminMonthsStatic selectmonthlyIncome(String year) {
+		return mnDao.selectmonthlyIncome(year);
+	}
+	@Override
+	public ArrayList<String> selectYearList2() {
+		// TODO Auto-generated method stub
+		return mnDao.selectYearList2();
 	}
 
 

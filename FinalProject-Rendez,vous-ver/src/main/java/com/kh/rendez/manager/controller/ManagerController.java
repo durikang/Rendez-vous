@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.rendez.manager.common.Gmail;
 import com.kh.rendez.manager.common.Pagination;
 import com.kh.rendez.manager.common.RandomCode;
 import com.kh.rendez.manager.model.exception.ManagerException;
@@ -44,8 +44,9 @@ public class ManagerController {
 
 	@Autowired
 	private ManagerService mnService;
+	
 	@Autowired
-	JavaMailSender mailSender;
+	private Gmail mail;
 
 	@RequestMapping("adminHome.do")
 	public ModelAndView ManagerHome(HttpServletRequest request,@RequestParam(value="year1",required=false) String year1,
@@ -54,6 +55,8 @@ public class ManagerController {
 
 		ArrayList<String> YearList = mnService.selectYearList();
 		ArrayList<String> YearList2 = mnService.selectYearList2();
+		
+		
 		
 //		현재 날자
 		Calendar calendar = new GregorianCalendar(Locale.KOREA);
@@ -67,6 +70,12 @@ public class ManagerController {
 		if(year2 == null) {
 			year2 = nYear+"";
 		}
+		
+		
+		if(YearList2.isEmpty()) {
+			YearList2.add(Integer.toString(nYear));
+		}
+		
 		
 		AdminMonthsStatic monthsJoinMember = mnService.selectmemberList(year1);
 		AdminMonthsStatic monthlyIncome = mnService.selectmonthlyIncome(year2);
@@ -118,8 +127,8 @@ public class ManagerController {
 
 	@RequestMapping("mn.do")
 	public ModelAndView memberList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
-			HttpServletRequest request) {
-
+			HttpServletRequest request,@RequestParam(value="msg", required=false)String msg) {
+		
 		int currentPage = page != null ? page : 1;
 
 		String pageName = request.getParameter("pageName");
@@ -128,6 +137,7 @@ public class ManagerController {
 
 		if (list != null) {
 			mv.addObject("list", list);
+			mv.addObject("msg",msg);
 			mv.addObject("pi", Pagination.getPageInfo());
 			mv.addObject("pageName", pageName);
 
@@ -332,7 +342,7 @@ public class ManagerController {
 
 		}
 
-		if (MailSend(mlist, Arraycode)) {
+		if (mail.MailSend(mlist, Arraycode)) {
 
 			msg = mnService.insertCoupon(clist) != 0 ? "성공적으로 쿠폰 생성 및 이메일을 보냈습니다! " : "쿠폰 생성에 실패 하였습니다.";
 			mv.addObject("msg", msg);
@@ -345,58 +355,7 @@ public class ManagerController {
 
 	}
 
-	public boolean MailSend(ArrayList<AdminMember> mlist, String[] arraycode) {
-		boolean success = false;
-		String setfrom = "kooda21@naver.com";
-		String[] toMail = new String[mlist.size()];
-		int cnt = toMail.length;
-		for (int i = 0; i < cnt; i++) {
-			toMail[i] = mlist.get(i).getuId();
-		}
 
-		String title = "쿠폰 코드 보내드립니다.";
-
-		String[] content = new String[cnt];
-
-		for (int i = 0; i < cnt; i++) {
-			content[i] = System.getProperty("line.separator") + // 한줄씩 줄간격을 두기위해 작성
-
-					System.getProperty("line.separator") +
-
-					"안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
-
-					+ System.getProperty("line.separator") +
-
-					System.getProperty("line.separator") +
-
-					" 쿠폰번호는 [ " + arraycode[i] + " ] 입니다. "
-
-					+ System.getProperty("line.separator") +
-
-					System.getProperty("line.separator") +
-
-					"받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다.";
-
-		}
-
-		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-			for (int i = 0; i < cnt; i++) {
-				messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
-				messageHelper.setTo(toMail[i]); // 받는사람 이메일
-				messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-				messageHelper.setText(content[i]); // 메일 내용
-
-				mailSender.send(message);
-			}
-			success = true;
-
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		return success;
-	}
 
 //	
 	@RequestMapping("mnRequest.do")
@@ -457,7 +416,7 @@ public class ManagerController {
 
 	}
 
-//	실시간 챗
+//	실시간 통계
 	@RequestMapping(value = "realTimeCount.do", produces = "appllication/json; charset=utf-8")
 	@ResponseBody
 	public String realTimeMemberCount(HttpServletResponse response) throws JsonIOException, IOException {

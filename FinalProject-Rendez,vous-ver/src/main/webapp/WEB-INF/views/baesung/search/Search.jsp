@@ -602,6 +602,15 @@ text-decoration: none;
 		.star-rating,.star-rating span { display:inline-block; height:12px; overflow:hidden; background:url('resources/baesung/images/ystar2.png')no-repeat; }
 		.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
 	
+	.cMain{
+	font-size: 14px;
+	}
+	
+	.main .cSub{
+	font-size: 14px;
+	}
+	
+	
 
     </style>
 
@@ -1247,7 +1256,7 @@ text-decoration: none;
                 <div class="num_class" style="float: left;">
                     ${ pi.listCount }개의 수업
                      <div style="float: right; clear: both;">
-                     &nbsp; | <a href="${orderlistReview}" class="orderType" name="Review">리뷰 개수순</a> | <a href="${orderlistPrice}" class="orderType" name="Price">낮은 가격순</a> | <a href="${orderlistGrade}" class="orderType" name="Grade">평점 높은순</a>
+                     &nbsp; | <a href="${orderlistReview}" class="orderType" name="Review" style="font-size: 14px;">리뷰 개수순</a> | <a href="${orderlistPrice}" class="orderType" name="Price" style="font-size: 14px;">낮은 가격순</a> | <a href="${orderlistGrade}" class="orderType" name="Grade" style="font-size: 14px;">평점 높은순</a>
                     </div>
                      </div>      
  

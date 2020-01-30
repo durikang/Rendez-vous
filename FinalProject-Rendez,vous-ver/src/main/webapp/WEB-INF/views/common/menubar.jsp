@@ -190,6 +190,19 @@
         	$("#tMain").hide();
         }
         	
+        $("#search").keyup(function(e){
+
+        	// var value=$(this).val();
+
+        	//$("p").text($(this).val());
+
+        	// $("p").text(value);
+		if(e.key == 'Enter'){
+			search2();
+		}
+        	
+        	});
+        
     	
     </script>
     

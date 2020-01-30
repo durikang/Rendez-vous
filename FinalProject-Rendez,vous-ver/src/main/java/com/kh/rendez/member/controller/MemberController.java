@@ -115,11 +115,6 @@ public class MemberController {
 		return "member/loginPage";
 	}
 	
-	@RequestMapping("myInfo.do")
-	public String myInfoView() {
-		return "member/myInfo";
-	}
-	
 	@RequestMapping("pwdCheckPage.do")
 		public String pwdCheckPageView() {
 			return "member/pwdCheckPage";

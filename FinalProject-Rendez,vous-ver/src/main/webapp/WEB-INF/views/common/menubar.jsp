@@ -150,7 +150,8 @@
         <nav>
             <ul class="nav_links">
                 <li>|</li>
-
+		<li><a href="support_main.do">고객 센터</a></li>
+		<li>|</li>
                 <c:if test="${ empty sessionScope.loginUser }">
                 	<li><a href="loginPage.do">로그인</a></li>
                 </c:if>

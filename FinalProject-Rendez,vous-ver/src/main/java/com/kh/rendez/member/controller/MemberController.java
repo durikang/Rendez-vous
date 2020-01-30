@@ -99,7 +99,6 @@ public class MemberController {
 		int writer = loginUser.getUser_no();
 		/*ArrayList<#> list = mService.selectMyReview(currentPage, writer);*/
 		ArrayList<Qna> list = mService.selectMyQnaList(currentPage, writer);
-		System.out.println(list);
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", Pagination.getPageInfo());
@@ -129,8 +128,6 @@ public class MemberController {
 		map.put("isUsable", isUsable);
 		mv.addAllObjects(map);
 		mv.setViewName("jsonView");
-		
-		System.out.println(user_id);
 		
 		return mv;
 	}

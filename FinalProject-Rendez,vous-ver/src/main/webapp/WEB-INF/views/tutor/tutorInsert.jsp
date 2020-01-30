@@ -33,7 +33,7 @@
 	<link rel="canonical" href="https://taling.me">
 
 
-    <link rel="shortcut icon" href="//taling.me/Content/Images/favicon.ico" />
+    <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
     <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
 
 	<script src="https://taling.me/Scripts/prototype.js"></script>

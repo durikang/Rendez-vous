@@ -144,6 +144,22 @@ public class LessonDao {
 		return (ArrayList)sqlSession.selectList("lessonInfoMapper.selectStudents",map);
 	}
 
+	public int selectNowCount(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectNowCount",user_no);
+	}
+
+	public int selectNowSum(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectNowSum",user_no);
+	}
+
+	public int selectTotalCount(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectTotalCount",user_no);
+	}
+
+	public int selectTotalSum(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectTotalSum",user_no);
+	}
+
 	
 
 	

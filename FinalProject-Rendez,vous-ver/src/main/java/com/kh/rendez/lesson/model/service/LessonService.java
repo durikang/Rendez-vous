@@ -75,6 +75,14 @@ public interface LessonService {
 
 	ArrayList<Member> selectStudents(Map<String, Integer> map);
 
+	int selectNowCount(int user_no);
+
+	int selectNowSum(int user_no);
+
+	int selectTotalCount(int user_no);
+
+	int selectTotalSum(int user_no);
+
 	
 
 	

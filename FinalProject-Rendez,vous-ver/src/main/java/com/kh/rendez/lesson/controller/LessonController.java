@@ -809,7 +809,7 @@ public class LessonController {
 
 	/*---------------------------------------------------------------------------------------------------*/
 	
-	@Scheduled(cron="0 0/30 * * * ?")
+	@Scheduled(cron="0 * * * * ?")
     public void updatePT(){
         System.out.println("스케줄러 실행");
         long time = System.currentTimeMillis(); 

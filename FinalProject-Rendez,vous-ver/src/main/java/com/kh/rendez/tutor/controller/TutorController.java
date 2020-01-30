@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.rendez.lesson.model.service.LessonService;
 import com.kh.rendez.manager.common.Pagination;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.tutor.model.service.TutorService;
@@ -27,6 +28,11 @@ public class TutorController {
 	@Autowired
 	private TutorService tService;
 	
+	@Autowired
+	private LessonService lService;
+	
+	
+	
 	@RequestMapping("tutorMain.do")
 	public ModelAndView tutorMainGo(ModelAndView mv,
 			HttpServletRequest request) {
@@ -35,6 +41,21 @@ public class TutorController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		String tStatus = tService.selectTutorStatus(loginUser.getUser_no());
 		
+		int nowCount = lService.selectNowCount(loginUser.getUser_no());
+		int nowSum = lService.selectNowSum (loginUser.getUser_no());
+		int totalCount = lService.selectTotalCount(loginUser.getUser_no());
+		int totalSum = lService.selectTotalSum(loginUser.getUser_no());
+		System.out.println(nowCount);
+		System.out.println(nowSum);
+		System.out.println(totalCount);
+		System.out.println(totalSum);
+		
+
+		mv.addObject("nowCount",nowCount);
+		mv.addObject("nowSum",nowSum);
+		mv.addObject("totalCount",totalCount);
+		mv.addObject("totalSum",totalSum);
+
 		mv.addObject("tStatus",tStatus);
 		mv.setViewName("lesson/tutorMainView");
 		

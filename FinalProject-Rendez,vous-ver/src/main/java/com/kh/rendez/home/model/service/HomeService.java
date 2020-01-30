@@ -8,4 +8,6 @@ public interface HomeService {
 
 	ArrayList<HomeList> selectList();
 
+	ArrayList<HomeList> selectDateList();
+
 }

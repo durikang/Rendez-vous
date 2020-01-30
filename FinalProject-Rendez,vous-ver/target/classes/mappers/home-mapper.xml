@@ -23,6 +23,15 @@
 		FROM HOME_LIST
 		WHERE L_STATUS = 'Y'
 	</select>
+	
+	<select id="selectDateList" resultMap="homeListSet">
+		SELECT *
+		FROM (SELECT *
+			FROM HOME_LIST
+			WHERE L_STATUS ='Y'
+			ORDER BY L_DAY DESC)
+		WHERE ROWNUM  <![CDATA[ <= 12 ]]>
+	</select>
 
 
 

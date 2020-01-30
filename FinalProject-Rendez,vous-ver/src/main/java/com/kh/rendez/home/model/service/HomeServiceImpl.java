@@ -18,4 +18,9 @@ public class HomeServiceImpl implements HomeService {
 		return hDao.selectList();
 	}
 
+	@Override
+	public ArrayList<HomeList> selectDateList() {
+		return hDao.selectDateList();
+	}
+
 }

@@ -136,7 +136,7 @@
 		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
             <input class="search-text" type="text" id="search" placeholder="Search">
-            <a class="search-btn">
+            <a class="search-btn" onclick="search2()">
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
         </div>        
@@ -150,7 +150,8 @@
         <nav>
             <ul class="nav_links">
                 <li>|</li>
-
+		<li><a href="support_main.do">고객 센터</a></li>
+		<li>|</li>
                 <c:if test="${ empty sessionScope.loginUser }">
                 	<li><a href="loginPage.do">로그인</a></li>
                 </c:if>
@@ -190,6 +191,19 @@
         	$("#tMain").hide();
         }
         	
+        $("#search").keyup(function(e){
+
+        	// var value=$(this).val();
+
+        	//$("p").text($(this).val());
+
+        	// $("p").text(value);
+		if(e.key == 'Enter'){
+			search2();
+		}
+        	
+        	});
+        
     	
     </script>
     

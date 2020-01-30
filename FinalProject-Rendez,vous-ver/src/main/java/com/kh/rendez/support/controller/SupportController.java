@@ -129,7 +129,7 @@ public class SupportController {
 	@RequestMapping("qinsert.do")
 	public String insertQna(HttpServletRequest request, Qna q, HttpSession session) {	
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		q.setUserNo(loginUser.getUser_no());	
+		q.setUserNo(loginUser.getUser_no());
 		
 		int result = 0;
 		if(!q.getqContent().isEmpty() && !q.getqTitle().isEmpty()) {
@@ -183,7 +183,6 @@ public class SupportController {
 	
 	@RequestMapping("qupView.do")
 	public String qnaUploadView(Model model, int qNo, int page, Qna q) {
-		
 		model.addAttribute("q", q);
 		model.addAttribute("currentPage", page);
 		return "Support/update_qna";

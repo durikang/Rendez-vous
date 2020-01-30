@@ -29,6 +29,10 @@
 <link href="resources/support/css/landing-page.min.css" rel="stylesheet">
 </head>
 <style>
+
+	.container {
+		font-family: 'Do Hyeon', sans-serif;
+	}
 	.faq-area {
 		width: 100%;
 		height:2000px;

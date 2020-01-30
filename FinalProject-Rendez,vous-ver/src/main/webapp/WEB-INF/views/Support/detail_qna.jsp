@@ -270,7 +270,7 @@
 						<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
 						<button onclick="location.href='manageHo.do'">이전으로(관리자 전용)</button>
 						</c:if>
-						<c:if test="${ loginUser.user_name eq q.qWriter }">
+						<c:if test="${ loginUser.user_no eq q.userNo }">
 							<button onclick="location.href='${ qupView }'">수정하기</button>
 							<button id="delete" onclick="location.href='${ qdelete }'">삭제하기</button>
 						</c:if>			
@@ -283,7 +283,7 @@
 						<textarea cols="100" rows="3" id="aContent" style="resize:none"></textarea>
 					</td>
 					<td>
-							<button id="aSubmit">등록하기</button>
+						<button id="aSubmit">등록하기</button>
 					</td>
 				</tr>
 				</c:if>

@@ -10,7 +10,7 @@ public interface SupportService {
 	ArrayList<Qna> selectList(int currentPage);
 
 	Qna selectQna(int qNo);
-	
+
 	ArrayList<Qna> selectSearch(int currentPage, String keyword);
 
 	int insertQna(Qna q);

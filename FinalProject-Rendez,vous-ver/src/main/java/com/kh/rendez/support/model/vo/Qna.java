@@ -37,7 +37,7 @@ public class Qna {
 	public void setqNo(int qNo) {
 		this.qNo = qNo;
 	}
-	
+
 	public int getUserNo() {
 		return userNo;
 	}
@@ -99,6 +99,8 @@ public class Qna {
 		return "Qna [qNo=" + qNo + ", userNo=" + userNo + ", qTitle=" + qTitle + ", qWriter=" + qWriter + ", qContent="
 				+ qContent + ", qDate=" + qDate + ", aStatus=" + aStatus + ", qStatus=" + qStatus + "]";
 	}
+
+	
 
 	
 	

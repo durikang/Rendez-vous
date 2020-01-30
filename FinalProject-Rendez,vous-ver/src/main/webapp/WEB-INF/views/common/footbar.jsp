@@ -46,11 +46,10 @@
         color: white;
     }
     .footer-menu-one {
-        width: 100%;
         height: auto;
         margin: auto;
         margin-top: 2%;
-        margin-left: 2%;
+        margin-left: 4.5%;
     }
     .footer-menu-one ul {
         margin: 0px;

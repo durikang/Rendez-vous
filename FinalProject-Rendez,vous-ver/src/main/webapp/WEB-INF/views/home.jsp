@@ -609,8 +609,12 @@ div ul {
 <body>
 
 	<c:import url="common/menubar.jsp" />
+	
+	<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-	 <div id="wrap">
+	 <!-- <div id="wrap">
 		<section id="banner">
 			 <div class="slideList">
 				<div class="slideImg">
@@ -624,7 +628,30 @@ div ul {
 				</div>
 			</div> 
 		</section>
+	</div> -->
+	
+	<div class="swiper-container2">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide"><img src="resources/homeImg/slide2.PNG" style="width:1920px; height:436px;"></div>
+		<div class="swiper-slide"><img src="resources/homeImg/slide1.PNG" style="width:1920px; height:436px;"></div>
+		<div class="swiper-slide"><a href="#"><img src="resources/homeImg/slide3.png" style="width:1920px; height:436px;"></a></div>
 	</div>
+	
+	<div class="swiper-button-next" style="margin-top:-7%;">
+    <img src="https://img.icons8.com/flat_round/52/000000/wide-right-arrow.png" style="margin-left:-90%; margin-top:-18%;"></div>
+	<div class="swiper-button-prev" style="margin-top:-7%;">
+	<img src="https://img.icons8.com/flat_round/52/000000/wide-left-arrow.png" style="margin-left:-20%; margin-top:-18%;"></div>
+	
+	</div>
+	
+	<script>
+	new Swiper('.swiper-container2', {
+		navigation : { // 네비게이션 설정
+			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+		},
+	});
+	</script>
 
 	<!------------------------------------------------->
 
@@ -636,11 +663,6 @@ div ul {
 		</ul> -->
 
 <div style="text-align:center; margin:0 0 100px 0; background:#555; line-height:80px;"></div>
-
-<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-
 
 <div class="swiper-area">
 	<div class="swiper-container swiper1">
@@ -830,7 +852,7 @@ div ul {
 
 	<!--팝업창-->
 	<div class="layer_popup" style="position:absolute; width:500px; left:50%; 
-    margin-left:-920px; top:40px; z-index:1; border:1px solid #333333;" id="layer_pop">
+    margin-left:-860px; top:20px; z-index:1; border:1px solid #333333;" id="layer_pop">
         <table width="500" border="0" cellpadding="0" cellspacing="0">
          <tr>
           <td><img src="resources/homeImg/pop.png" width="500" height="600" border="0" usemap="#m_pop" /></td>
@@ -987,7 +1009,6 @@ div ul {
 			},
 				
 		});
-		
 		
 		</script>
 

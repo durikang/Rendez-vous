@@ -634,7 +634,7 @@ div ul {
 	<div class="swiper-wrapper">
 		<div class="swiper-slide"><img src="resources/homeImg/slide2.PNG" style="width:1920px; height:436px;"></div>
 		<div class="swiper-slide"><img src="resources/homeImg/slide1.PNG" style="width:1920px; height:436px;"></div>
-		<div class="swiper-slide"><a href=""><img src="resources/homeImg/slide3.png" style="width:1920px; height:436px;"></a></div>
+		<div class="swiper-slide"><a href="pointView.do"><img src="resources/homeImg/slide3.png" style="width:1920px; height:436px;"></a></div>
 	</div>
 	
 	<div class="swiper-button-next" style="margin-top:-7%;">

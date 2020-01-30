@@ -63,7 +63,7 @@ public class MemberController {
 	      
 	      if(loginUser != null && bcryptPasswordEncoder.matches(pwd, loginUser.getUser_pwd())) {
 	         session.setAttribute("loginUser", loginUser);
-	         return "home";
+	         return "redirect:home.do";
 	      } else {
 	         model.addAttribute("msg", "로그인 실패");
 	         return "member/loginPage";
@@ -73,7 +73,7 @@ public class MemberController {
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {		
 		status.setComplete();
-		return "home";
+		return "redirect:home.do";
 	}
 	
 	// 회원정보 수정 시 입력하는 비밀번호 확인용

@@ -658,7 +658,7 @@ div ul {
 	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
 	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>	
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
 	      	</div>	      	
 	      </div>
 	      </c:forEach>
@@ -712,15 +712,28 @@ div ul {
             </div> 
         </div>    
 	
-	<div class="ad" style="background-color:lightgray; width: 100%; height: 440px; margin-bottom:9%;">
+	<div class="ad" style="background-color:lightgray; margin-bottom:9%;">
 		<div class="swiper-container swiper2">
-			<h2 class="highc">마감 임박&nbsp;&nbsp;<img src="https://img.icons8.com/offices/33/000000/high-risk.png"></h2>
-		   <div class="swiper-wrapper">
-		      <div class="swiper-slide" style="padding-left:5%;"><img src="resources/homeImg/광고배너5.PNG" style="border-radius:9%;"></div>
-		      <div class="swiper-slide" style="padding-right:5%;"><img src="resources/homeImg/광고배너2.PNG" style="border-radius:9%;"></div>
-		      <div class="swiper-slide" style="padding-left:5%;"><img src="resources/homeImg/광고배너3.PNG" style="border-radius:9%;"></div>
-		      <div class="swiper-slide" style="padding-right:5%;"><img src="resources/homeImg/광고배너4.PNG" style="border-radius:9%;"></div>
-		   </div>
+		<h2 class="highc">마감 임박&nbsp;&nbsp;<img src="https://img.icons8.com/offices/33/000000/high-risk.png" style="margin-bottom:-7px;"></h2>
+		<div class="swiper-wrapper">	   
+			<c:forEach var="l" items="${ alist }">
+			<c:if test="${l.remain < 11}">
+	    <div class="swiper-slide" style="height: 560px;">
+	      	<div id="img-area">
+	      		<c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>	      			
+	      		<a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
+	      	</div>
+	    <div id="text-area" style="margin-top:-2%;">
+	      		<h3>${ l.lTitle }</h3>
+	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
+	      		<p>${ l.price }원</p>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
+	      </div>	      	
+	      </div>
+	      </c:if>
+	      </c:forEach>	      
+	     </div>
 		   <div class="swiper-button-next">
 		   <img src="https://img.icons8.com/cotton/64/000000/circled-chevron-right.png" style="margin-left:-80%; margin-top:-20%;"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
 		   <div class="swiper-button-prev">
@@ -744,7 +757,7 @@ div ul {
 	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
 	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>	
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
 	      	</div>	      	
 	      </div>
 	      </c:if>
@@ -768,7 +781,7 @@ div ul {
 	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
 	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>	
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
 	      	</div>	      	
 	      </div>
 	      </c:forEach>
@@ -849,16 +862,17 @@ div ul {
 	</script>
 
 	<!-- 버튼 -->
-	<div class="btn"><button class="trigger">광고, 이벤트 받아보기</button></div>
+	<div class="btn"><button class="trigger">수강 시간표 받아보기</button></div>
 
 	<!-- 팝업 될 레이어 -->
 	<div class="modal">
 		<div class="modal-content">
 			<span class="close-button">&times;</span>
 			<h1 class="title">메일 보내기</h1>
-			<form action="auth.do" method="POST">
+			<form action="home.do" method="POST">
 				<label for="email">Email</label> 
 				<input type="email" name="e_mail" placeholder="Your email" required="required"> 
+				<input type="hidden" name="alist" placeholder="Your email" required="required" value="${ alist }">
 				<label></label>
 				<input type="submit" id="submit" value="보내기">
 				<input type="button" id="cancel" value="취소"> 

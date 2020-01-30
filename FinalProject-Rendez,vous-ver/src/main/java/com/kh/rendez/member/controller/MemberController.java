@@ -83,10 +83,10 @@ public class MemberController {
 		Member loginUser = mService.loginMember(m);
 		 
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUser_pwd(), loginUser.getUser_pwd())) {
-			model.addAttribute("msg1", "비밀번호 일치");
+			model.addAttribute("msg3", "비밀번호 일치");
 			return "member/myPage";
 		}else {
-			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			model.addAttribute("msg4", "비밀번호 불일치");
 			return "member/myPage";
 		}
 	}
@@ -96,7 +96,7 @@ public class MemberController {
 	public ModelAndView myPageView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page, HttpSession session) {
 		int currentPage = page != null ? page : 1;
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		int writer = loginUser.getUser_no();
+		String writer = loginUser.getUser_name();
 		/*ArrayList<#> list = mService.selectMyReview(currentPage, writer);*/
 		ArrayList<Qna> list = mService.selectMyQnaList(currentPage, writer);
 		System.out.println(list);
@@ -113,16 +113,6 @@ public class MemberController {
 	@RequestMapping("loginPage.do")
 	public String loginPageView() {
 		return "member/loginPage";
-	}
-	
-	@RequestMapping("myInfo.do")
-	public String myInfoView() {
-		return "member/myInfo";
-	}
-
-	@RequestMapping("join.do")
-	public String joinView() {
-		return "member/join";
 	}
 	
 	@RequestMapping("pwdCheckPage.do")
@@ -147,9 +137,8 @@ public class MemberController {
 	
 	@RequestMapping(value="minsert.do", method=RequestMethod.POST)
 	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
-								@RequestParam("post") String post,
 								@RequestParam("user_id") String id,
-								@RequestParam("net") String id2,
+								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
 								@RequestParam("address2") String address2,
 								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
@@ -173,7 +162,7 @@ public class MemberController {
 		            vo.setMem_uphoto(renameFileName);
 		         }
 		      }*/
-		m.setUser_id(id+"@"+id2);
+		m.setUser_id(id);
 		m.setAddress(post + "," + address1 + ", " + address2);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
 		
@@ -211,7 +200,7 @@ public class MemberController {
 			file.transferTo(new File(renamePath));
 		} catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
-		}l
+		}
 		
 		return upphoto;
 	}*/
@@ -219,19 +208,31 @@ public class MemberController {
 	// 회원 정보 수정
 		@RequestMapping("mupdate.do")
 		public String memberUpdate(Member m, Model model,
+									HttpSession session,
+									@RequestParam("pw") String pw,
 									@RequestParam("post") String post,
 									@RequestParam("address1") String address1,
 									@RequestParam("address2") String address2) {
 			
 			m.setAddress(post + ", " + address1 + ", " + address2);
 			
+			if(pw.equals("")) {
+				Member m2 = (Member)session.getAttribute("loginUser");
+				m.setUser_pwd(m2.getUser_pwd());
+				
+			} else {
+			m.setUser_pwd(pw);
+			String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
+			m.setUser_pwd(encPwd);
+			}
+			
 			int result = mService.updateMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg", "회원 정보 수정 완료");
+				model.addAttribute("msg2", "회원 정보 수정 성공");
 				model.addAttribute("loginUser", m);
 			} else {
-				model.addAttribute("msg", "회원 정보 수정 실패");
+				throw new MemberException("회원 정보 수정 실패");
 			}
 			return "member/myPage";
 		}
@@ -244,13 +245,12 @@ public class MemberController {
 			int result = mService.deleteMember(m);
 			
 			if(result > 0) {
-				model.addAttribute("msg", "회원탈퇴 완료");
+				model.addAttribute("msg0", "회원탈퇴 성공");
 				status.setComplete();
-				return "home";
+				return "member/myPage";
 				
 			} else {
-				model.addAttribute("msg", "회원탈퇴 실패");
-				return "member/myPage";
+				throw new MemberException("회원 탈퇴 실패");
 			}
 
 		}

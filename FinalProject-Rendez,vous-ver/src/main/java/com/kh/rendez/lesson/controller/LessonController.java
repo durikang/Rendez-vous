@@ -811,7 +811,7 @@ public class LessonController {
 	
 	@Scheduled(cron="0 * * * * ?")
     public void updatePT(){
-        System.out.println("스케줄러 실행");
+        System.out.println("스케줄러 실행!");
         long time = System.currentTimeMillis(); 
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 		String str = dayTime.format(new Date(time));

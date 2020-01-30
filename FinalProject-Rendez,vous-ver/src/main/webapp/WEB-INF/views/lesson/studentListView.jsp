@@ -56,7 +56,7 @@
                                                     <tr>
                                                         <th>사진</th>
                                                         <th>이름</th>
-                                                        <th>아이디</th>
+                                                        <th></th>
                                                         <th>연락처</th>
                                                         <th>나이</th>
                                                         <th>성별</th>
@@ -105,7 +105,7 @@
             </div>
             <!-- /.container-fluid -->
             <footer class="footer t-a-c">
-                © 2017 Cubic Admin
+                © 2020 RENDEZ
             </footer>
         </div>
         

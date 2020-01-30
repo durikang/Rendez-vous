@@ -18,4 +18,8 @@ public class HomeDao {
 		return (ArrayList)sqlSession.selectList("homeMapper.selectHomeList");
 	}
 
+	public ArrayList<HomeList> selectDateList() {
+		return (ArrayList)sqlSession.selectList("homeMapper.selectDateList");
+	}
+
 }

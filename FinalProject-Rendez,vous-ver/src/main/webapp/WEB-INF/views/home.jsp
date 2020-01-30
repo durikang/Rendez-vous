@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -10,6 +11,7 @@
 
 <script src="https://kit.fontawesome.com/8af8965544.js" crossorigin="anonymous"></script>
 <script src="https://fonts.googleapis.com/css?family=Montserrat&display=swap"></script>
+<link rel="stylesheet" href="views/home/swiper.min.css">
 
 </head>
 
@@ -171,8 +173,7 @@ button:hover {
 	float: left;
 	width: 1920px;
 	height: 450px;
-}
-
+} 
 /****************************************************/
 /* #wrap2 {
 	width: 900px;
@@ -538,10 +539,13 @@ div ul {
    width:1200px;  
 }
 .swiper-slide {
-   margin-top:6%;
+   margin-top:3%;
    text-align:center;
    align-items:center; /* 위아래 기준 중앙정렬 */
    justify-content:center; /* 좌우 기준 중앙정렬 */
+}
+.highc {
+	margin-top:2%;
 }
 #slide-img {
    width:90%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
@@ -605,10 +609,14 @@ div ul {
 <body>
 
 	<c:import url="common/menubar.jsp" />
+	
+	<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-	<div id="wrap">
+	 <!-- <div id="wrap">
 		<section id="banner">
-			<div class="slideList">
+			 <div class="slideList">
 				<div class="slideImg">
 					<img src="resources/homeImg/slide1.PNG">
 				</div>
@@ -616,12 +624,34 @@ div ul {
 					<img src="resources/homeImg/slide2.PNG">
 				</div>
 				<div class="slideImg">
-					<a href = "pointView.do"><img src="resources/homeImg/slide3.png"></a>
+					<a href = "링크할 주소"><img src="resources/homeImg/slide3.png"></a>
 				</div>
-			</div>
+			</div> 
 		</section>
-		<!-- //banner -->
+	</div> -->
+	
+	<div class="swiper-container2">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide"><img src="resources/homeImg/slide2.PNG" style="width:1920px; height:436px;"></div>
+		<div class="swiper-slide"><img src="resources/homeImg/slide1.PNG" style="width:1920px; height:436px;"></div>
+		<div class="swiper-slide"><a href=""><img src="resources/homeImg/slide3.png" style="width:1920px; height:436px;"></a></div>
 	</div>
+	
+	<div class="swiper-button-next" style="margin-top:-7%;">
+    <img src="https://img.icons8.com/flat_round/52/000000/wide-right-arrow.png" style="margin-left:-90%; margin-top:-18%;"></div>
+	<div class="swiper-button-prev" style="margin-top:-7%;">
+	<img src="https://img.icons8.com/flat_round/52/000000/wide-left-arrow.png" style="margin-left:-20%; margin-top:-18%;"></div>
+	
+	</div>
+	
+	<script>
+	new Swiper('.swiper-container2', {
+		navigation : { // 네비게이션 설정
+			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+		},
+	});
+	</script>
 
 	<!------------------------------------------------->
 
@@ -634,17 +664,12 @@ div ul {
 
 <div style="text-align:center; margin:0 0 100px 0; background:#555; line-height:80px;"></div>
 
-<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-
-
 <div class="swiper-area">
 	<div class="swiper-container swiper1">
 		<h2>추천 수업</h2>
 		<a class="trigger2"><img src="https://img.icons8.com/android/24/000000/menu.png"></a> 
 	   <div class="swiper-wrapper">
-		<c:forEach var="l" items="${ list }">
+		<c:forEach var="l" items="${ alist }">
 	      <div class="swiper-slide">
 	      	<div id="img-area">
 	      		<c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>	      			
@@ -655,7 +680,7 @@ div ul {
 	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
 	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>	
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
 	      	</div>	      	
 	      </div>
 	      </c:forEach>
@@ -709,168 +734,82 @@ div ul {
             </div> 
         </div>    
 	
-	<div class="ad" style="background-color:lightgray; width: 100%; height: 440px; margin-bottom:9%;">
+	<div class="ad" style="background-color:lightgray; margin-bottom:9%;">
 		<div class="swiper-container swiper2">
-		   <div class="swiper-wrapper">
-		      <div class="swiper-slide" style="padding-left:5%;"><img src="resources/homeImg/광고배너5.PNG"></div>
-		      <div class="swiper-slide" style="padding-right:5%;"><img src="resources/homeImg/광고배너2.PNG"></div>
-		      <div class="swiper-slide" style="padding-left:5%;"><img src="resources/homeImg/광고배너3.PNG"></div>
-		      <div class="swiper-slide" style="padding-right:5%;"><img src="resources/homeImg/광고배너4.PNG"></div>
-		   </div>
+		<h2 class="highc">마감 임박&nbsp;&nbsp;<img src="https://img.icons8.com/offices/33/000000/high-risk.png" style="margin-bottom:-7px;"></h2>
+		<div class="swiper-wrapper">	   
+			<c:forEach var="l" items="${ alist }">
+			<c:if test="${l.remain < 11}">
+	    <div class="swiper-slide" style="height: 560px;">
+	      	<div id="img-area">
+	      		<c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>	      			
+	      		<a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
+	      	</div>
+	    <div id="text-area" style="margin-top:-2%;">
+	      		<h3>${ l.lTitle }</h3>
+	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
+	      		<p>${ l.price }원</p>
+	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
+	      </div>	      	
+	      </div>
+	      </c:if>
+	      </c:forEach>	      
+	     </div>
 		   <div class="swiper-button-next">
-		   <img src="https://img.icons8.com/cotton/64/000000/circled-chevron-right.png" style="margin-left:-80%; margin-top:-50%;"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+		   <img src="https://img.icons8.com/cotton/64/000000/circled-chevron-right.png" style="margin-left:-80%; margin-top:-20%;"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
 		   <div class="swiper-button-prev">
-		   <img src="https://img.icons8.com/cotton/64/000000/circled-chevron-left.png" style="margin-left:-50%; margin-top:-50%;"></div><!-- 이전 버튼 -->
+		   <img src="https://img.icons8.com/cotton/64/000000/circled-chevron-left.png" style="margin-left:-50%; margin-top:-20%;"></div><!-- 이전 버튼 -->
 		</div>
 	</div>
 	
 	<div class="swiper-container swiper3" style="margin-bottom:4%;">
 		   <div class="swiper-container swiper1">
 		<h2>만원 이하 클래스</h2>
-	   <div class="swiper-wrapper">
+	   <div class="swiper-wrapper">	   
+		<c:forEach var="l" items="${ alist }">
+		<c:if test="${l.price < 10000 }">
 	      <div class="swiper-slide">
 	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex.PNG">
+	      		<c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>	      			
+	      		<a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
 	      	</div>
 	      	<div id="text-area">
-	      		<h3>■1:1전문■ 고퀄레슨NO.1</h3>
-	      		<p>01월18일 시작 : 지역</p><br>
+	      		<h3>${ l.lTitle }</h3>
+	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
+	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>	
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
 	      	</div>	      	
 	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>	
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex3.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[이벤트]에어비앤비 호스트!</h3>
-	      		<p>01월29일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	   </div>
+	      </c:if>
+	      </c:forEach>	      
+	     </div>
 	</div>
 		</div>
 		
 		<div class="swiper-container swiper4">
 		   <div class="swiper-container swiper1">
-		<h2>신규 클래스</h2>
+		<h2>오늘의 신규 클래스</h2>
 	   <div class="swiper-wrapper">
+		<c:forEach var="l" items="${ dlist }">
 	      <div class="swiper-slide">
 	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex.PNG">
+	      		<c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>	      			
+	      		<a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
 	      	</div>
 	      	<div id="text-area">
-	      		<h3>■1:1전문■ 고퀄레슨NO.1</h3>
-	      		<p>01월18일 시작 : 지역</p><br>
+	      		<h3>${ l.lTitle }</h3>
+	      		<p>${l.lDay} 시작 : ${ l.lRegion }</p>
+	      		<p>${ l.price }원</p>
 	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>	
+	      		<p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }개 빈자리</p>	
 	      	</div>	      	
 	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>	
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex3.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[이벤트]에어비앤비 호스트!</h3>
-	      		<p>01월29일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	      <div class="swiper-slide">
-	      	<div id="img-area">
-	      		<img src="resources/homeImg/ex2.PNG">
-	      	</div>
-	      	<div id="text-area">
-	      		<h3>[보험가입자필독/1:1]</h3>
-	      		<p>01월17일 시작 : 지역</p><br>
-	      		<img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-	      		<p style="color:#F15F5F; float:left;">&nbsp;500명 참여</p>		      		
-	      	</div>
-	      </div>
-	   </div>
-	</div>
+	      </c:forEach>
+	     </div>
 		</div>
+	   </div>
 
 	<script>
 		var slideCount = $(".slideImg").length;
@@ -913,7 +852,7 @@ div ul {
 
 	<!--팝업창-->
 	<div class="layer_popup" style="position:absolute; width:500px; left:50%; 
-    margin-left:-920px; top:40px; z-index:1; border:1px solid #333333;" id="layer_pop">
+    margin-left:-860px; top:20px; z-index:1; border:1px solid #333333;" id="layer_pop">
         <table width="500" border="0" cellpadding="0" cellspacing="0">
          <tr>
           <td><img src="resources/homeImg/pop.png" width="500" height="600" border="0" usemap="#m_pop" /></td>
@@ -945,16 +884,17 @@ div ul {
 	</script>
 
 	<!-- 버튼 -->
-	<div class="btn"><button class="trigger">광고, 이벤트 받아보기</button></div>
+	<div class="btn"><button class="trigger">수강 시간표 받아보기</button></div>
 
 	<!-- 팝업 될 레이어 -->
 	<div class="modal">
 		<div class="modal-content">
 			<span class="close-button">&times;</span>
 			<h1 class="title">메일 보내기</h1>
-			<form action="auth.do" method="POST">
+			<form action="home.do" method="POST">
 				<label for="email">Email</label> 
 				<input type="email" name="e_mail" placeholder="Your email" required="required"> 
+				<input type="hidden" name="alist" placeholder="Your email" required="required" value="${ alist }">
 				<label></label>
 				<input type="submit" id="submit" value="보내기">
 				<input type="button" id="cancel" value="취소"> 
@@ -1069,7 +1009,6 @@ div ul {
 			},
 				
 		});
-		
 		
 		</script>
 

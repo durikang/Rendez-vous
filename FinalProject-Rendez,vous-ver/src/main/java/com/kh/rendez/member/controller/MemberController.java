@@ -213,11 +213,23 @@ public class MemberController {
 	// 회원 정보 수정
 		@RequestMapping("mupdate.do")
 		public String memberUpdate(Member m, Model model,
+									HttpSession session,
+									@RequestParam("pw") String pw,
 									@RequestParam("post") String post,
 									@RequestParam("address1") String address1,
 									@RequestParam("address2") String address2) {
 			
 			m.setAddress(post + ", " + address1 + ", " + address2);
+			
+			if(pw.equals("")) {
+				Member m2 = (Member)session.getAttribute("loginUser");
+				m.setUser_pwd(m2.getUser_pwd());
+				
+			} else {
+			m.setUser_pwd(pw);
+			String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
+			m.setUser_pwd(encPwd);
+			}
 			
 			int result = mService.updateMember(m);
 			

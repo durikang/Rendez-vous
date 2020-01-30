@@ -95,14 +95,14 @@ $(function(){
 						EMAIL 
 						<input class="w3-input" type="text" id="user_id" name="user_id" readonly value="${ loginUser.user_id }"> 
 					</p>
-					<!-- <p>
+					<p>
 						New Password 
 						<input class="w3-input" id="pw" name="pw" placeholder="변경할 패스워드를 입력하세요." type="password" required >
 					</p>
 					<p>
 						Confirm
 						<input class="w3-input" id="pw2" name="pw2" placeholder="변경할 패스워드 확인을 위해 동일하게 입력해주세요." type="password" required >
-					</p> -->
+					</p>
 					<p>
 						NAME 
 						<input class="w3-input" type="text" id="user_name" name="user_name" value="${ loginUser.user_name }" required> 
@@ -112,7 +112,7 @@ $(function(){
 						<br>
 					<c:if test="${ loginUser.gender eq 'M' }">
 						<td>
-							<input type="radio" name="gender" value="M" checked>남
+							<input type="radio" name="gender" value="M" mimchecked>남
 							<input type="radio" name="gender" value="F">여
 						</td>
 					</c:if>
@@ -139,7 +139,7 @@ $(function(){
 						<tr>
 							<td>우편번호</td>
 							<td>
-								<input type="text" name="post" class="postcodify_postcode5" value="${ addr }" size="6" />
+								<input type="text" name="post" class="postcodify_postcode5" id="postcodify_postcode5" value="${ addr }" size="6" />
 								<button type="button" id="postcodify_search_button">검색</button>
 							</td>
 						</tr>
@@ -149,7 +149,7 @@ $(function(){
 						<br>
 							<td>도로명 주소</td>
 							<td>
-								<input type="text" name="address1" class="postcodify_address" value="${ addr }" />		
+								<input type="text" name="address1" class="postcodify_address" id="postcodify_address" value="${ addr }" />		
 							</td>
 						</tr>
 					</c:if>
@@ -158,7 +158,7 @@ $(function(){
 						<br>
 							<td>상세 주소</td>
 							<td>
-								<input type="text" name="address2" class="postcodify_extra_info" value="${ addr }" />
+								<input type="text" name="address2" class="postcodify_extra_info" id="postcodify_extra_info" value="${ addr }" />
 							</td>
 						</tr>
 					</c:if>
@@ -166,7 +166,7 @@ $(function(){
 				</p>
 
 					<p class="w3-center">
-						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
+						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" id="btnCng">회원정보 변경</button>
 					</p>
 	<div class="text-center">
 		<c:url var="mdelete" value="mdelete.do">
@@ -179,5 +179,65 @@ $(function(){
 	</div>
 	</div>
 </div>
+
+<script>
+   /** 회원수정 폼 유효성 체크**/
+  $("#btnCng").click(function() {
+
+   if($("#pw").val()=="") {
+    alert("비밀번호를 입력해주세요");
+    $("#pw").focus();
+    return false;
+   }
+   else if(!/^[a-zA-Z0-9!,@,#,$,%,^,&,*,?,_,~]{8,15}$/.test($("#user_pwd").val())){            
+       alert('숫자+영문자+특수문자 조합으로 8자리 이상 15이하로 사용해야 합니다. (사용 가능 특수문자는 !,@,#,$,%,^,&,*,?,_,~ 입니다.)');
+       $('#pw').focus();
+       return false;
+   }
+   else if($("#pw2").val()=="") {
+    alert("비밀번호확인를 입력해주세요");
+    $("#pw2").focus();
+    return false;
+   }  
+   else if($("#user_name").val()==""){
+    alert("이름을 입력해주세요");
+    $("#user_name").focus();
+    return false;
+   }
+   else if($("#phone-number-check").val()==""){
+	    alert("전화번호를 입력해주세요");
+	    $("#phone-number-check").focus();
+	    return false;
+	}
+   else if($("#age").val()==""){
+	    alert("나이를 입력해주세요");
+	    return false;
+	}
+   else if($("#postcodify_postcode5").val()==""){
+	    alert("우편번호를 입력해주세요");
+	    return false;
+	}
+   else if($("#postcodify_address").val()==""){
+	    alert("주소를 입력해주세요");
+	    return false;
+	}
+   else if($("#postcodify_extra_info").val()==""){
+	    alert("상세주소를 입력해주세요");
+	    return false;
+	}
+   else if($("#pw").val() != $("#pw2").val()) {
+    alert("비밀번호가 일치하지 않습니다.");
+    $("#pw2").val("");
+    $("#pw2").focus();
+    return false;
+   }
+   else {
+	   return true;
+   }
+   
+  });
+   </script>
+
+
 </body>
 </html>

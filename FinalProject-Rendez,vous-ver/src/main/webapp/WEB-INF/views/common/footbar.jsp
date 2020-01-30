@@ -11,7 +11,6 @@
 </head>
 <style>
     .footer-main-div {
-        width: 100%;
         height: auto;
         margin: auto;
         background: #272727;

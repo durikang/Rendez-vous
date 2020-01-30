@@ -25,7 +25,7 @@ public interface MemberService {
 	public int deleteMember(Member m);
 	
 	// 내가 쓴 문의내역 리스트
-	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
+	public ArrayList<Qna> selectMyQnaList(int currentPage, int writer);
 
 	
 

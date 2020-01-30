@@ -96,7 +96,7 @@ public class MemberController {
 	public ModelAndView myPageView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page, HttpSession session) {
 		int currentPage = page != null ? page : 1;
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		String writer = loginUser.getUser_name();
+		int writer = loginUser.getUser_no();
 		/*ArrayList<#> list = mService.selectMyReview(currentPage, writer);*/
 		ArrayList<Qna> list = mService.selectMyQnaList(currentPage, writer);
 		System.out.println(list);

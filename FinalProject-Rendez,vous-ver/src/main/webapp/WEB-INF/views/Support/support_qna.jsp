@@ -204,6 +204,7 @@
 			</div>
 		</div>
 	</header>
+	<!-- test -->
 	<div class="board_box">
 		<div class="wrapper">
 			<div class="sidebar">

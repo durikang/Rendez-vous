@@ -136,7 +136,7 @@
 		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
             <input class="search-text" type="text" id="search" placeholder="Search">
-            <a class="search-btn">
+            <a class="search-btn" onclick="search2()">
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
         </div>        

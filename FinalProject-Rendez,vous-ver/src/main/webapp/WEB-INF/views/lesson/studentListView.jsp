@@ -56,7 +56,7 @@
                                                     <tr>
                                                         <th>사진</th>
                                                         <th>이름</th>
-                                                        <th></th>
+                                                        <th>이메일</th>
                                                         <th>연락처</th>
                                                         <th>나이</th>
                                                         <th>성별</th>

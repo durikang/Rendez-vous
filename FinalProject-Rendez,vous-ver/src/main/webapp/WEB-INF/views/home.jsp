@@ -616,7 +616,7 @@ div ul {
 					<img src="resources/homeImg/slide2.PNG">
 				</div>
 				<div class="slideImg">
-					<a href = "링크할 주소"><img src="resources/homeImg/slide3.png"></a>
+					<a href = "pointView.do"><img src="resources/homeImg/slide3.png"></a>
 				</div>
 			</div>
 		</section>

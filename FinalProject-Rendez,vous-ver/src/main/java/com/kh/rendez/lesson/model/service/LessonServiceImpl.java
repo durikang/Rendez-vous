@@ -1,6 +1,7 @@
 package com.kh.rendez.lesson.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
+import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.review.model.vo.Review;
 
 @Service("lService")
@@ -159,6 +161,16 @@ public class LessonServiceImpl implements LessonService {
 	@Override
 	public int lessonInfoUpdate(LessonInfo li) {
 		return lDao.lessonInfoUpdate(li);
+	}
+
+	@Override
+	public int updatePT() {
+		return lDao.updatePT();
+	}
+
+	@Override
+	public ArrayList<Member> selectStudents(Map<String, Integer> map) {
+		return lDao.selectStudents(map);
 	}
 
 

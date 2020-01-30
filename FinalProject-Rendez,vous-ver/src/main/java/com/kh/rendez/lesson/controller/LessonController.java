@@ -3,11 +3,15 @@ package com.kh.rendez.lesson.controller;
 import java.io.File;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -324,7 +328,8 @@ public class LessonController {
 	@RequestMapping("lessonTimeInsert.do")
 	public String lessonTimeInsert(
 			String lno,String dday,String stime,String etime,
-			String total,String price
+			String total,String price,
+			RedirectAttributes ra
 			) {
 		
 		Lesson l = new Lesson();
@@ -337,7 +342,7 @@ public class LessonController {
 		l.setTotal(Integer.parseInt(total));
 		
 		int result = lService.insertLessonTime(l);
-			
+		ra.addFlashAttribute("msg","수업 일정을 추가하였습니다.");	
 		return "redirect:lessonManage.do?lno="+lno;
 	}
 	
@@ -776,6 +781,16 @@ public class LessonController {
 	}
 	
 	
+	@RequestMapping("checkStudent.do")
+	@ResponseBody
+	public ArrayList<Member> checkStudent(int lNo,int lInning) {
+		Map<String,Integer> map = new HashMap<>();
+		map.put("lInning", lInning);
+		map.put("lNo", lNo);
+		ArrayList<Member> students = lService.selectStudents(map);
+		
+		return students;
+	}
 	
 	
 	
@@ -790,23 +805,22 @@ public class LessonController {
 	
 	
 	
+
+
+	/*---------------------------------------------------------------------------------------------------*/
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Scheduled(cron="0 * * * * ?")
+    public void updatePT(){
+        System.out.println("스케줄러 실행");
+        long time = System.currentTimeMillis(); 
+		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		String str = dayTime.format(new Date(time));
+		System.out.println(str);
+
+
+        
+        lService.updatePT();
+    }
 	
 	/*---------------------------------------------------------------------------------------------------*/
 	
@@ -931,11 +945,16 @@ public class LessonController {
 		
 		return reFileName;
 	}
-	
-	
+
+
+
 	/*---------------------------------------------------------------------------------------------------*/
 	
 	
+
+
+
+
 	
 
 }

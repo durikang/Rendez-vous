@@ -27,7 +27,7 @@ public class SupportServiceImpl implements SupportService {
 	}
 	
 	@Override
-	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer) {
+	public ArrayList<Qna> selectMyQnaList(int currentPage, int writer) {
 		int listCount = sDao.getMyQnaListCount(writer);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		

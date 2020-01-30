@@ -56,15 +56,15 @@ div {
 	
 </head>
 <body>
-	<div id="left_nav">
+	<div id="left_nav" style="margin-left: 150px">
 	<div class="left_subject">튜터메뉴</div>
 	<ul>
 	
 		 <!-- style="color: rgb(40, 52, 68); -->
 		
 		<li><a href="tutorMain.do">튜터메인</a></li>
-		<li><a href="lessonInsert.do">수업등록하기</a></li>
 		<li><a href="lessonManage.do">수업 관리</a></li>
+		<li><a href="lessonInsert.do">수업등록하기</a></li>
 	</ul>
 	
 

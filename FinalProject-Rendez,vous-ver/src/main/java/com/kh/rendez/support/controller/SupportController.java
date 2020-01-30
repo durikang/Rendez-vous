@@ -68,7 +68,7 @@ public class SupportController {
 	public ModelAndView myQnaList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page, HttpSession session) {
 		int currentPage = page != null ? page : 1;
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		String writer = loginUser.getUser_name();
+		int writer = loginUser.getUser_no();
 		ArrayList<Qna> list = sService.selectMyQnaList(currentPage, writer);
 		if(list != null) {
 			mv.addObject("list", list);
@@ -127,7 +127,10 @@ public class SupportController {
 	}
 	
 	@RequestMapping("qinsert.do")
-	public String insertQna(HttpServletRequest request, Qna q) {		
+	public String insertQna(HttpServletRequest request, Qna q, HttpSession session) {	
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		q.setUserNo(loginUser.getUser_no());	
+		
 		int result = 0;
 		if(!q.getqContent().isEmpty() && !q.getqTitle().isEmpty()) {
 			result = sService.insertQna(q);
@@ -180,7 +183,7 @@ public class SupportController {
 	
 	@RequestMapping("qupView.do")
 	public String qnaUploadView(Model model, int qNo, int page, Qna q) {
-		System.out.println(q);
+		
 		model.addAttribute("q", q);
 		model.addAttribute("currentPage", page);
 		return "Support/update_qna";

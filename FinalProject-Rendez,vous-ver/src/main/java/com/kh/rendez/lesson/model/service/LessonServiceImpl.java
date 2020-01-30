@@ -14,6 +14,7 @@ import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
+import com.kh.rendez.lesson.model.vo.Student;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.review.model.vo.Review;
 
@@ -169,7 +170,7 @@ public class LessonServiceImpl implements LessonService {
 	}
 
 	@Override
-	public ArrayList<Member> selectStudents(Map<String, Integer> map) {
+	public ArrayList<Student> selectStudents(Map<String, Integer> map) {
 		return lDao.selectStudents(map);
 	}
 

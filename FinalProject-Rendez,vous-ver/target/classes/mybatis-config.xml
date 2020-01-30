@@ -26,6 +26,7 @@
       <typeAlias alias="Review" type="com.kh.rendez.review.model.vo.Review"/>
       <typeAlias alias="LessonReview" type="com.kh.rendez.lesson.model.vo.LessonReview"/>
       <typeAlias alias="LessonDetailInfo" type="com.kh.rendez.lesson.model.vo.LessonDetailInfo"/>
+      <typeAlias alias="Student" type="com.kh.rendez.lesson.model.vo.Student"/>
       <!-- 두리 별칭  -->
       <typeAlias type="com.kh.rendez.manager.model.vo.LessonJoin" alias="LessonJoin"/>
       <typeAlias type="com.kh.rendez.manager.model.vo.Coupon" alias="Coupon"/>

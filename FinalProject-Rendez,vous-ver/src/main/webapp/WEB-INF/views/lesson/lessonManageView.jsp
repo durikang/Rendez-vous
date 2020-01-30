@@ -283,7 +283,8 @@
 					<td>
 					<input type="text" hidden value="${li.lNo }">
 					<input type="text" hidden value="${l.lInning }">
-					<button onclick="checkStudent(this)">조회</button>
+					<input type="text" hidden value="${li.lTitle }">
+					<button onclick="openPop(this)">조회</button>
 					</td>
 					
 					</tr>
@@ -472,6 +473,23 @@
     	
     	
     }
+    
+    
+    function openPop(value){
+    	
+    	var lNo = $(value).parent().children().eq(0).val();
+    	var lInning = $(value).parent().children().eq(1).val();
+    	var lTitle = $(value).parent().children().eq(2).val();
+
+		var pop_title = "신청인 목록" ;
+         
+        window.open("studentList.do?lNo="+lNo+"&lInning="+lInning+"&lTitle="+lTitle, pop_title) ;
+
+         
+    }
+    
+    
+    
     
     
     

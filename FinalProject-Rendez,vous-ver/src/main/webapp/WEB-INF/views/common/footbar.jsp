@@ -108,7 +108,7 @@
                 <li>|</li>
                 <li><a href="mypage.do">My Page</a></li>
                 <li>|</li>
-                <li><a href="support_main.do">Services</a></li>
+                <li><a href="support_main.do">Support</a></li>
                 <li>|</li>
                 <li><a href="#">Products</a></li>
                 <li>|</li>

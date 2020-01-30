@@ -374,20 +374,73 @@
 	
 	
 	
+	<!-- 튜터 통계 -->
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<select id="updatePT" statementType="CALLABLE">
-	CALL PST()
+	<select id="selectNowCount" parameterType="_int" resultType="_int">
+	SELECT NVL(COUNT(PAYMENT_COST),0)
+	FROM PAYMENT
+	WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
+	AND TO_CHAR(SYSDATE,'YYYYMM') =  TO_CHAR(PAYMENT_DATE,'YYYYMM')
 	</select>
+	
+	
+	<select id="selectNowSum" parameterType="_int" resultType="_int">
+	SELECT NVL(SUM(PAYMENT_COST),0)
+	FROM PAYMENT
+	WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
+	AND TO_CHAR(SYSDATE,'YYYYMM') =  TO_CHAR(PAYMENT_DATE,'YYYYMM')	
+	</select>
+	
+	
+	<select id="selectTotalCount" parameterType="_int" resultType="_int">
+	SELECT NVL(COUNT(PAYMENT_COST),0)
+	FROM PAYMENT
+	WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
+	</select>
+	
+	
+	<select id="selectTotalSum" parameterType="_int" resultType="_int">
+	SELECT NVL(SUM(PAYMENT_COST),0)
+	FROM PAYMENT
+		WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- <update id="updatePT">
+	UPDATE PAYMENT
+    SET PAYMENT_STATUS = 11
+    WHERE (L_INNING, L_NO) IN (SELECT L_INNING,L_NO
+                        FROM LESSON
+                        WHERE SYSDATE- START_TIME &lt; 1)
+	</update> -->
+	
+	
+	<update id="updatePT" statementType="CALLABLE">
+	{CALL PST()}
+	</update>
 	
 	
 

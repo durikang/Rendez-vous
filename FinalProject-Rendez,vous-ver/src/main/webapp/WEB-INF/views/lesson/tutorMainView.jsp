@@ -8,7 +8,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <title>수업 관리 페이지</title>   
+    <title>튜터 정보</title>   
 
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -124,16 +124,16 @@
 
 </head>
 <body style="" cz-shortcut-listen="true">
-
-
-<div id="wrap">
-
 	<div class="hcont">
 		<c:import url="../common/menubar.jsp"/>
 	</div>
 	<c:import url="../common/hyunsidebar.jsp"/>
+	
 
-	<div class="container" style="height: 1200px">
+<div id="wrap">
+
+
+	<div class="container" style="height: 1200px; right: 150px; bottom: 47px">
 	
 		<c:if test="${empty loginUser || loginUser.user_type ne 'T'}">
 		<script>
@@ -155,6 +155,172 @@
 		<div class="title-box">
 			<h1>튜터 정보</h1>
 		</div>	
+		
+		<!-- 정보 -->
+		<div class="class_detail" id="sumary" style="width: 840px">
+				<div class="class_name">
+					<div class="tutor_img"><a href="/rendez/resources/user/img/l_2018051401001756000137172.jpg" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('/rendez/resources/user/img/l_2018051401001756000137172.jpg');"></div></a></div>
+					<div class="name">김두한</div>
+					<div class="nickname">듀듀듀한한한이이이이이</div>
+				</div>
+				<div class="class_title">
+					
+					<!--찜하기 시작-->
+						<a class="bnt_wishlist" id="won" style=""><img src="/rendez/resources/h1/Images/icon_btn_wish_on.png"> 찜하기</a>
+						<a class="bnt_wishlist" id="woff" style="display: none;"><img src="/rendez/resources/h1/Images/icon_btn_wish.png"> 찜하기</a>
+					<!--찜하기 끝-->
+					
+					
+					
+
+
+					
+					<script>
+						$(function(){
+								
+							
+							$("#won").hide();
+												
+							
+							$("#won").click(function(){
+								
+								
+								
+
+								
+								if($("#won").css("display")=='block' && $("#woff").css("display")=='none'){
+									
+									
+									var uno = 50;
+									
+									
+									var lno = 24;
+									
+									  $.ajax({
+								            url:"fav.do",
+								            data:{flag:'delete',uno:uno,lno:lno},
+											type:"post",
+								            success:function(data){
+					               
+								            },error:function(){
+								               console.log("ajax 통신 실패");
+								            }
+								            })
+														
+									
+									
+									alert("찜 목록에서 삭제하였습니다");							
+									$("#won").hide();
+									$("#woff").show();
+									
+								}
+								
+
+							});		
+							
+							$("#woff").click(function(){
+								
+								
+								
+								
+								if($("#won").css("display")=='none' && $("#woff").css("display")=='block'){
+									
+									
+									var uno = 50;
+									
+									
+									var lno = 24;
+									
+									  $.ajax({
+								            url:"fav.do",
+								            data:{flag:'insert',uno:uno,lno:lno},
+											type:"post",
+								            success:function(data){
+					               
+								            },error:function(){
+								               console.log("ajax 통신 실패");
+								            }
+								            })
+									
+									
+									
+									alert("찜 목록에서 추가하였습니다");							
+									$("#won").show();
+									$("#woff").hide();
+								}
+								
+							});	
+							
+							
+							
+							$("#won").show();
+							$("#woff").hide();
+													
+						});					
+					</script>
+					
+					
+					<div class="info">
+						<a class="starimg">
+							<div class="title">누구인가?</div>
+							<!-- <img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png">								(6) -->
+													</a>
+					</div>
+					<div class="info">
+						<ul>
+							<li class="ar">
+																분당							</li>							
+							<li class="hu"><font color="#ff005a">1</font>시간/회</li>
+							<li class="gr">
+																인원:<font color="#ff005a">3~5</font>명
+								</li>
+							<li class="ohu">
+																<font color="#ff005a">￦1</font>/회당
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		
+		
+		
+		<!-- 수입 -->
+		<div class="row">
+							<div class="col-sm-12" >
+								<div class="card-box widget-inline">
+									<div class="row">
+										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-primary mdi mdi-access-point-network"></i> <b data-plugin="counterup">${nowCount }</b></h3>
+												<p class="text-muted">이번 달 수업 신청 건수</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-custom mdi mdi-airplay"></i> <b data-plugin="counterup">${nowSum }</b></h3>
+												<p class="text-muted">이번 달 매출</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-info mdi mdi-black-mesa"></i> <b data-plugin="counterup">${totalCount }</b></h3>
+												<p class="text-muted">총 수업 건수</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center b-0">
+												<h3 class="m-t-10"><i class="text-danger mdi mdi-cellphone-link"></i> <b data-plugin="counterup">${totalSum }</b></h3>
+												<p class="text-muted">총 매출</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
 		
 		
 		

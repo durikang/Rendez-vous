@@ -173,6 +173,26 @@ public class LessonServiceImpl implements LessonService {
 		return lDao.selectStudents(map);
 	}
 
+	@Override
+	public int selectNowCount(int user_no) {
+		return lDao.selectNowCount(user_no);
+	}
+
+	@Override
+	public int selectNowSum(int user_no) {
+		return lDao.selectNowSum(user_no);
+	}
+
+	@Override
+	public int selectTotalCount(int user_no) {
+		return lDao.selectTotalCount(user_no);
+	}
+
+	@Override
+	public int selectTotalSum(int user_no) {
+		return lDao.selectTotalSum(user_no);
+	}
+
 
 
 

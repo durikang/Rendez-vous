@@ -169,7 +169,7 @@
 <!-- //HEADER -->
 
 	<!--container-->
-	<div class="container" style="height: 1200px">
+	<div class="container" style="height: 1200px; right: 150px; bottom: 47px">
 
 		<!--MyTItleBox head-->
 		<div class="title-box">

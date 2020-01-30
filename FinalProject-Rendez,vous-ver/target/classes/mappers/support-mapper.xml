@@ -38,7 +38,7 @@
    <select id="getMyQnaListCount" resultType="_int">
       SELECT COUNT(*)
       FROM QNA
-      WHERE USER_NO = #{userNo}
+      WHERE USER_NO = #{writer}
       AND Q_STATUS = 'Y'
    </select>
    
@@ -52,7 +52,7 @@
    <select id="selectMyQnaList" resultMap="qnaResultSet">
       SELECT *
       FROM QNA
-      WHERE USER_NO = #{userNo}
+      WHERE USER_NO = #{writer}
       AND Q_STATUS = 'Y'
       ORDER BY Q_NO DESC
    </select>

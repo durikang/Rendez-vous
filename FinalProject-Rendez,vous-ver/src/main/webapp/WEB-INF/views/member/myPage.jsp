@@ -368,7 +368,7 @@
 					<div class="myRevieww">
 						<table id="myReviewTable">
 							<tr>
-								<th width="25%">수업 제목</th>
+								<th width="25%">수업제목</th>
 								<th width="50%">내용</th>
 								<th width="25%">작성일</th>
 							</tr>

@@ -516,7 +516,9 @@ label {
         <script>
         function setMode()
         {
-            if ($('#StartRegion').val()=='')
+        	alert($('#lNo').val());
+        	
+            if ($('#lNo').val()=='')
             {
                 alert('수업일정을 선택해주세요.');
             }

@@ -895,6 +895,7 @@ div ul {
       </script>
 
    <c:import url="common/footbar.jsp" /> 
+   <!-- test -->
 </body>
 
 </html>

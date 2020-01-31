@@ -265,9 +265,9 @@ public class ManagerController {
 			@RequestParam(value = "page", required = false) Integer page) {
 		// System.out.println(search.getSearchCondition());
 		int currentPage = page != null ? page : 1;
-
+		System.out.println(search);
 		ArrayList<AdminMember> searchList = mnService.searchMemberList(search, currentPage);
-
+		
 		if (searchList != null) {
 			mv.addObject("list", searchList).addObject("pi", Pagination.getPageInfo()).addObject("search", search)
 					.setViewName("manager/boarder/memberBoarderForm");
@@ -336,15 +336,14 @@ public class ManagerController {
 			c.setDisRate(coupon.getDisRate());
 			c.setStartDate(coupon.getStartDate());
 			c.setEndDate(coupon.getEndDate());
-			c.setuNo(unolist.get(i));
 
 			clist.add(c);
 
 		}
 
-		if (mail.MailSend(mlist, Arraycode)) {
+		if (mail.MailSend(coupon.getcName(),mlist, Arraycode)) {
 
-			msg = mnService.insertCoupon(clist) != 0 ? "성공적으로 쿠폰 생성 및 이메일을 보냈습니다! " : "쿠폰 생성에 실패 하였습니다.";
+			msg = mnService.insertCoupon(clist) != 0 ? "성공적으로 쿠폰 등록 성공! " : "쿠폰 등록 실패 하였습니다.";
 			mv.addObject("msg", msg);
 			mv.setViewName("redirect:mn.do");
 		} else {

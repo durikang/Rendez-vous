@@ -14,22 +14,48 @@
  	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jquery UI 링크 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
 
+
+</style>
 </head>
-<body>
+<body class="container">
 
+	<h1 class="h1" align="center">쿠폰 생성 및 메일 보내기 창</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col align-self-center">
+				<form action="couSend.do" method="get">
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">회원 번호</span>
+					  </div>
+					  <input type="text" style='width:200px;' name="arrayUno" id="arrayUno" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+					</div>			
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">쿠폰 이름</span>
+					  </div>
+					  <input type="text" name="cName" id="cName" placeholder="쿠폰 이름" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+					</div>			
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+						  </div>
+						  <select name="disRate" class="custom-select" id="inputGroupSelect01">
+						     <c:forEach var="i" begin="1" end="9">
+						    <option value="${10 * i }">${ i*10 }%할인</option>  
+						    </c:forEach>
+						  </select>
+						</div>
+				    <p><input type="text" id="from" placeholder="시작일을 선택하세요" name="startDate"> ~ <input type="text" id="to" name="endDate" placeholder="종료일을 선택하세요."></p>
+						<button type="submit" class="btn btn-info" onclick="sendCoupon" id="sendBtn">쿠폰 보내기</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 
-	<form action="couSend.do" method="get">
-	<span>회원 번호 : </span><input type="text" name="arrayUno" id="arrayUno"><br>					
-	<input type="text" name="cName" id="cName" placeholder="쿠폰 이름"><br><br>	
-		<select name="disRate"class="selectpicker">
-	      <c:forEach var="i" begin="1" end="9">					         
-			  <option value="${10 * i }">${ i*10 }%할인</option>        
-	      </c:forEach>
-		</select>
-    <p><input type="text" id="from" placeholder="시작일을 선택하세요" name="startDate"> ~ <input type="text" id="to" name="endDate" placeholder="종료일을 선택하세요."></p>
-		<button type="submit" class="btn btn-success" onclick="sendCoupon" id="sendBtn">쿠폰 보내기</button>
-	</form>
 
 <!-- jquery CDN -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

@@ -207,13 +207,16 @@ $(function(){
 							<div class="input-group-append">
 								<select id="searchCondition" name="searchCondition"
 									class="selectpicker">
-									<option value="all"
-										<c:if test="${ search.searchCondition == 'all' }">selected</c:if>>
-										전체</option>
+									<option value="uId"
+										<c:if test="${ search.searchCondition == 'uId' }">selected</c:if>>
+										이메일</option>
+									<option value="uNo"
+										<c:if test="${ search.searchCondition == 'uNo' }">selected</c:if>>
+										회원 번호</option>
 									<option value="mName"
 										<c:if test="${ search.searchCondition == 'mName' }">selected</c:if>>
 										회원명
-										</option>
+									</option>
 								</select>
 							</div>
 							<input type="search" placeholder="회원을 검색하세요" name="searchValue"
@@ -729,8 +732,13 @@ $(function(){
 		                    uNo.push($(this).val());
 		                }
 		            });
+		            var popupX = (document.body.offsetWidth / 2) - (1200 / 2);
+		          //&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+		          var popupY= (document.body.offsetHeight / 2) - (500 / 2);
+		          //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 		            
-		            window.open("cuponEnroll.do?uNo="+uNo, "newWindow", "width=700, height=700, scrollbar=no");
+		            window.open("cuponEnroll.do?uNo="+uNo, "newWindow", 'status=no,scrollbar=no, width=1200, height=500, left='+ popupX + ', top='+ popupY);
 		        });
 		});
       
@@ -745,6 +753,9 @@ $(function(){
 
 	<br><br><br><br><br><br><br><br>
 	<c:import url="../../common/footbar.jsp"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

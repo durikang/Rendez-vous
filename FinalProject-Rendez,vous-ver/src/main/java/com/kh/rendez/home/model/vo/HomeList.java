@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class HomeList {
 	
+	private int lInning;
 	private int lNo;
 	private String lTitle;
 	private String lRegion;
@@ -19,9 +20,10 @@ public class HomeList {
 		
 	}
 
-	public HomeList(int lNo, String lTitle, String lRegion, Date lDay, int total, int price, String oName, String cName,
-			String lStatus, int remain) {
+	public HomeList(int lInning, int lNo, String lTitle, String lRegion, Date lDay, int total, int price, String oName,
+			String cName, String lStatus, int remain) {
 		super();
+		this.lInning = lInning;
 		this.lNo = lNo;
 		this.lTitle = lTitle;
 		this.lRegion = lRegion;
@@ -32,6 +34,14 @@ public class HomeList {
 		this.cName = cName;
 		this.lStatus = lStatus;
 		this.remain = remain;
+	}
+
+	public int getlInning() {
+		return lInning;
+	}
+
+	public void setlInning(int lInning) {
+		this.lInning = lInning;
 	}
 
 	public int getlNo() {
@@ -116,11 +126,11 @@ public class HomeList {
 
 	@Override
 	public String toString() {
-		return "HomeList [lNo=" + lNo + ", lTitle=" + lTitle + ", lRegion=" + lRegion + ", lDay=" + lDay + ", total="
-				+ total + ", price=" + price + ", oName=" + oName + ", cName=" + cName + ", lStatus=" + lStatus
-				+ ", remain=" + remain + "]";
+		return "HomeList [lInning=" + lInning + ", lNo=" + lNo + ", lTitle=" + lTitle + ", lRegion=" + lRegion
+				+ ", lDay=" + lDay + ", total=" + total + ", price=" + price + ", oName=" + oName + ", cName=" + cName
+				+ ", lStatus=" + lStatus + ", remain=" + remain + "]";
 	}
 	
-	
-
 }
+	
+	

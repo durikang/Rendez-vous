@@ -3,36 +3,41 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="homeMapper">
-	
-	<resultMap type="HomeList" id="homeListSet">
-		<id property="lNo" column="L_NO"></id>
-		<result property="lTitle" column="L_TITLE"></result>
-		<result property="lRegion" column="L_REGION"></result>
-		<result property="lDay" column="L_DAY"></result>
-		<result property="total" column="TOTAL"></result>
-		<result property="price" column="PRICE"></result>
-		<result property="oName" column="O_NAME"></result>
-		<result property="cName" column="C_NAME"></result>
-		<result property="lStatus" column="L_STATUS"></result>
-		<result property="remain" column="REMAIN"></result>
-	</resultMap>
-	
-	
-	<select id="selectHomeList" resultMap="homeListSet">
-		SELECT *
-		FROM HOME_LIST
-		WHERE L_STATUS = 'Y'
-	</select>
-	
-	<select id="selectDateList" resultMap="homeListSet">
-		SELECT *
-		FROM (SELECT *
-			FROM HOME_LIST
-			WHERE L_STATUS ='Y'
-			ORDER BY L_DAY DESC)
-		WHERE ROWNUM  <![CDATA[ <= 12 ]]>
-	</select>
-
-
+   
+   <resultMap type="HomeList" id="homeListSet">
+      <id property="lNo" column="L_NO"></id>
+      <result property="lTitle" column="L_TITLE"></result>
+      <result property="lRegion" column="L_REGION"></result>
+      <result property="lDay" column="L_DAY"></result>
+      <result property="total" column="TOTAL"></result>
+      <result property="price" column="PRICE"></result>
+      <result property="oName" column="O_NAME"></result>
+      <result property="cName" column="C_NAME"></result>
+      <result property="lStatus" column="L_STATUS"></result>
+      <result property="remain" column="REMAIN"></result>
+   </resultMap>
+   
+   <select id="selectAllList" resultMap="homeListSet">
+         SELECT *
+         FROM HOME_LIST
+         WHERE L_STATUS='Y'
+   </select>
+   
+   <select id="selectInningList" resultMap="homeListSet">
+      SELECT * 
+      FROM HOME_LIST 
+      WHERE L_INNING = (SELECT MAX(L_INNING) FROM HOME_LIST) 
+      ORDER BY L_NO DESC
+   </select>
+   
+   <select id="selectDateList" resultMap="homeListSet">
+      SELECT *
+      FROM (SELECT *
+      FROM HOME_LIST
+      WHERE L_STATUS ='Y'
+        AND TO_DATE(L_DAY,'YYYY/MM/DD') = TO_DATE(SYSDATE,'YYYY/MM/DD') 
+      ORDER BY L_DAY DESC)
+      WHERE ROWNUM  <![CDATA[ <= 12 ]]>
+   </select>
 
 </mapper>

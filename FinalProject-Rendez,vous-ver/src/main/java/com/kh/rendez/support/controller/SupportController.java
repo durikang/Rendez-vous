@@ -96,7 +96,7 @@ public class SupportController {
 			mv.setViewName("Support/detail_qna");
 		}else {
 			throw new SupportException("게시글 상세보기 전체 조회 실패!");
-		}		
+		}		 
 		
 		return mv;
 	}

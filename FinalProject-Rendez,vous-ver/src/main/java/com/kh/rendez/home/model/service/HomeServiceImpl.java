@@ -14,13 +14,22 @@ public class HomeServiceImpl implements HomeService {
 	private HomeDao hDao;
 	
 	@Override
-	public ArrayList<HomeList> selectList() {
-		return hDao.selectList();
+	public ArrayList<HomeList> selectAllList() {
+		return hDao.selectAllList();
+	}
+	
+	@Override
+	public ArrayList<HomeList> selecInningtList() {
+		return hDao.selectInningList();
 	}
 
 	@Override
 	public ArrayList<HomeList> selectDateList() {
 		return hDao.selectDateList();
 	}
+
+	
+
+
 
 }

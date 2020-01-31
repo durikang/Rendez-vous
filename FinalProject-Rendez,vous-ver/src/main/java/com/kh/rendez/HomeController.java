@@ -30,13 +30,14 @@ public class HomeController {
 		
 		/*Member loginUser = (Member)session.getAttribute("loginUser");
 		int uno = loginUser.getUser_no();*/
-		
-		ArrayList<HomeList> alist = hService.selectList();
+		ArrayList<HomeList> alist = hService.selectAllList();
+		ArrayList<HomeList> ilist = hService.selecInningtList();
 		ArrayList<HomeList> dlist = hService.selectDateList();
 
-		if(alist != null && dlist != null) {
+		if(alist != null && ilist != null && dlist != null) {
 			mv.addObject("msg",msg);
 			mv.addObject("alist", alist);
+			mv.addObject("ilist", ilist);
 			mv.addObject("dlist", dlist);
 			return mv;			
 		} else {

@@ -6,8 +6,10 @@ import com.kh.rendez.home.model.vo.HomeList;
 
 public interface HomeService {
 
-	ArrayList<HomeList> selectList();
-
 	ArrayList<HomeList> selectDateList();
+
+	ArrayList<HomeList> selecInningtList();
+
+	ArrayList<HomeList> selectAllList();
 
 }

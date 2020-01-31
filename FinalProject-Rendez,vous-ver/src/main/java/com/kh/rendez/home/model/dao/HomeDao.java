@@ -13,13 +13,19 @@ public class HomeDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+	public ArrayList<HomeList> selectAllList() {
+		return (ArrayList)sqlSession.selectList("homeMapper.selectAllList");
+	}
 
-	public ArrayList<HomeList> selectList() {
-		return (ArrayList)sqlSession.selectList("homeMapper.selectHomeList");
+	public ArrayList<HomeList> selectInningList() {
+		return (ArrayList)sqlSession.selectList("homeMapper.selectInningList");
 	}
 
 	public ArrayList<HomeList> selectDateList() {
 		return (ArrayList)sqlSession.selectList("homeMapper.selectDateList");
 	}
+
+	
 
 }

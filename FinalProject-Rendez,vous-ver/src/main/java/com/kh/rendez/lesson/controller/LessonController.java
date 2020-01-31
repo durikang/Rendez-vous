@@ -835,6 +835,10 @@ public class LessonController {
 	
 	@Scheduled(cron="0 * * * * ?")
     public void updatePT(){
+
+
+
+        
         lService.updatePT();
     }
 	

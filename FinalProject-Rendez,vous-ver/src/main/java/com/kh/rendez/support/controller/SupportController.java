@@ -204,7 +204,7 @@ public class SupportController {
 	public String addAnswer(Answer a, int refQno, HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		a.setaWriter(loginUser.getUser_name());
-		
+		System.out.println(a);
 		int result = sService.insertAnswer(a);
 		int result1 = sService.updateAnswerStatus(refQno);
 		if(result > 0 && result1 > 0) {

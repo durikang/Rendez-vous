@@ -153,18 +153,20 @@
 	</select>
 	<!-- 회원수를 검색하여 리턴하는 구문  -->
 	<select id="getListMemberSearchCount" resultType="_int">
-	<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
 	
 		select count(*)
 		from member
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
-					AND USER_NAME LIKE #{sv}
+					AND USER_NAME LIKE #{searchValue}
 				</when>
-				<otherwise>
-					AND (USER_NAME LIKE #{sv} OR USER_TYPE LIKE #{sv})
-				</otherwise>
+				<when test="searchCondition == 'uId'">
+					AND USER_ID LIKE #{searchValue}
+				</when>
+				<when test="searchCondition == 'uNo'">
+					AND USER_NO LIKE #{searchValue}
+				</when>
 			</choose>
 		</where>
 	</select>
@@ -227,17 +229,19 @@
 	<select id="searchMemberList" parameterType="Search"
 		resultMap="AdminMemberResultSet">
 		
-		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
 
 		SELECT * FROM member
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
-					AND USER_NAME LIKE #{sv}
+					AND USER_NAME LIKE #{searchValue}
 				</when>
-				<otherwise>
-					AND (USER_NAME LIKE #{sv} OR USER_TYPE LIKE #{sv})
-				</otherwise>
+				<when test="searchCondition == 'uId'">
+					AND USER_ID LIKE #{searchValue}
+				</when>
+				<when test="searchCondition == 'uNo'">
+					AND USER_NO LIKE #{searchValue}
+				</when>
 			</choose>
 		</where>
 		ORDER BY USER_NO asc
@@ -255,7 +259,7 @@
                  #{i.startDate},
                  #{i.endDate},
                  'R',
-                 #{i.uNo})
+                 null)
              </foreach>
 			
 				
@@ -492,7 +496,7 @@
 		from member
 		left join coupon using(user_no)
 		where to_date(enroll_date,'YYYY/MM/DD')=to_date(sysdate,'YYYY/MM/DD')
-		and u_status='Y' and user_type != 'A' and coupon_no is null
+		and u_status='Y' and user_type != 'A'
 	</select>
 
 	<select id="selectYearList" resultType="string">

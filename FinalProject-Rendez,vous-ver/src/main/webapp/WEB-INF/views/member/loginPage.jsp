@@ -180,13 +180,7 @@ a{color:inherit;text-decoration:none}
 
 </style>
 <body>
-		<c:if test="${ !empty msg }">
-		<script>
-        	alert("로그인 실패!");
-        	opener.parent.location.replace("loginPage.do");
-		</script>
-		</c:if>
-		
+
 		<c:import url="../common/menubar.jsp"/>
 		
 		<div id="wrapper">

@@ -119,6 +119,5 @@
     <div class="footer-bottom">
         <p>Copyright(C) 2019.Rendez,vous.All rights reserved. </p>
     </div>
-    
 </body>
 </html> 

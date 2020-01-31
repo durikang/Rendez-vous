@@ -144,145 +144,22 @@
 		</c:if>
 		
 		
-		<c:if test="${tStatus eq 'R'}">
+		<c:if test="${tutor.tStatus eq 'R'}">
 		<div class="title-box">
 			<h1>튜터 승인 대기 중입니다 승인 완료 후 수업 등록이 가능해집니다. </h1>
 		</div>		
 		</c:if>
 	
 		<!-- 여기서부터 제대로 작성할 것 -->
-		<c:if test="${tStatus eq 'Y'}">
+		<c:if test="${tutor.tStatus eq 'Y'}">
 		<div class="title-box">
 			<h1>튜터 정보</h1>
 		</div>	
 		
-		<!-- 정보 -->
-		<div class="class_detail" id="sumary" style="width: 840px">
-				<div class="class_name">
-					<div class="tutor_img"><a href="/rendez/resources/user/img/l_2018051401001756000137172.jpg" target="_blank"><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('/rendez/resources/user/img/l_2018051401001756000137172.jpg');"></div></a></div>
-					<div class="name">김두한</div>
-					<div class="nickname">듀듀듀한한한이이이이이</div>
-				</div>
-				<div class="class_title">
-					
-					<!--찜하기 시작-->
-						<a class="bnt_wishlist" id="won" style=""><img src="/rendez/resources/h1/Images/icon_btn_wish_on.png"> 찜하기</a>
-						<a class="bnt_wishlist" id="woff" style="display: none;"><img src="/rendez/resources/h1/Images/icon_btn_wish.png"> 찜하기</a>
-					<!--찜하기 끝-->
-					
-					
-					
-
-
-					
-					<script>
-						$(function(){
-								
-							
-							$("#won").hide();
-												
-							
-							$("#won").click(function(){
-								
-								
-								
-
-								
-								if($("#won").css("display")=='block' && $("#woff").css("display")=='none'){
-									
-									
-									var uno = 50;
-									
-									
-									var lno = 24;
-									
-									  $.ajax({
-								            url:"fav.do",
-								            data:{flag:'delete',uno:uno,lno:lno},
-											type:"post",
-								            success:function(data){
-					               
-								            },error:function(){
-								               console.log("ajax 통신 실패");
-								            }
-								            })
-														
-									
-									
-									alert("찜 목록에서 삭제하였습니다");							
-									$("#won").hide();
-									$("#woff").show();
-									
-								}
-								
-
-							});		
-							
-							$("#woff").click(function(){
-								
-								
-								
-								
-								if($("#won").css("display")=='none' && $("#woff").css("display")=='block'){
-									
-									
-									var uno = 50;
-									
-									
-									var lno = 24;
-									
-									  $.ajax({
-								            url:"fav.do",
-								            data:{flag:'insert',uno:uno,lno:lno},
-											type:"post",
-								            success:function(data){
-					               
-								            },error:function(){
-								               console.log("ajax 통신 실패");
-								            }
-								            })
-									
-									
-									
-									alert("찜 목록에서 추가하였습니다");							
-									$("#won").show();
-									$("#woff").hide();
-								}
-								
-							});	
-							
-							
-							
-							$("#won").show();
-							$("#woff").hide();
-													
-						});					
-					</script>
-					
-					
-					<div class="info">
-						<a class="starimg">
-							<div class="title">누구인가?</div>
-							<!-- <img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png">								(6) -->
-													</a>
-					</div>
-					<div class="info">
-						<ul>
-							<li class="ar">
-																분당							</li>							
-							<li class="hu"><font color="#ff005a">1</font>시간/회</li>
-							<li class="gr">
-																인원:<font color="#ff005a">3~5</font>명
-								</li>
-							<li class="ohu">
-																<font color="#ff005a">￦1</font>/회당
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+		<h3>튜터 별명 : ${tutor.tNick }</h3>
 		
 		
+		<br>
 		
 		<!-- 수입 -->
 		<div class="row">

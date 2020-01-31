@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>수강생 목록</title>
 	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="${contextPath }/resources/h2/plugins/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${contextPath }/resources/h1/Images/logo.ico">
     <title>Cubic Admin Template</title>
     <!-- ===== Bootstrap CSS ===== -->
     <link href="${contextPath }/resources/h2/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
                                                     <tr>
                                                         <th>사진</th>
                                                         <th>이름</th>
-                                                        <th>아이디</th>
+                                                        <th>이메일</th>
                                                         <th>연락처</th>
                                                         <th>나이</th>
                                                         <th>성별</th>
@@ -94,7 +94,7 @@
                                 </div>
                                 <!-- .left-aside-column-->
                                 </div>
-                                <div id="btnArea" style="margin-bottom: 50px; right: 500px">
+                                <div id="btnArea" style="margin-bottom: 50px; left:1000px">
                                 <button id="print" class="btn btn-default btn-outline" type="button" style="l"> <span><i class="fa fa-print"></i> Print</span> </button>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
             </div>
             <!-- /.container-fluid -->
             <footer class="footer t-a-c">
-                © 2017 Cubic Admin
+                © 2020 RENDEZ
             </footer>
         </div>
         
@@ -140,18 +140,6 @@
         });
     });
     </script>
-    <!--slimscroll JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/custom.js"></script>
-    <!-- Footable -->
-    <script src="../plugins/components/footable/js/footable.all.min.js"></script>
-    <script src="../plugins/components/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
-    <!--FooTable init-->
-    <script src="../plugins/components/jfootable/footable-init.js"></script>
-    <!--Style Switcher -->
-    <script src="../plugins/components/styleswitcher/jQuery.style.switcher.js"></script>
+
 </body>
 </html>

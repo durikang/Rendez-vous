@@ -474,14 +474,16 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 
 		if(PointOnOff == "off"){// 포인트 사용시 
 		
-		if(usePoint <= 0 || usePoint == "" || isNaN(usePoint) ){
+		if(usePoint <= 0 || usePoint == "" || isNaN(usePoint) || Number(usePoint) > Number(Price)){
 			alert('올바른 값을 입력하세요');
 			return;
 		}		
 		if(Number(usePoint) > Number('${point}')){
 			alert("사용가능한 포인트를 확인해주세요");
 			return;
-		}	
+		}
+		
+		
 		
 		/// 유효성 검사후 포인트 차감하는 메소스 
 		
@@ -551,19 +553,32 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 		{					
 			if(PointOnOff == "off"){
 			
+			if((${tClass.price} * ((100 -price)/100)) < 0){
+				
+				if(comfirm("0원이하의 할인율은 적용되지 않습니다.그럼에도 사용하시겠습니까?")){
+					Price = 0;
+				}else{
+					return;
+				}
+			}	
+				
 			Price = (${tClass.price} * ((100 -price)/100));
 			}else{
 			Price = (${tClass.price} * ((100 -price)/100)) - Number(usePoint);
+			
+			if(Price < 0){
+				alert("0이하의 할인률은 반환되지 않습니다.");
+				Price = 0;				
 			}
-			
-			
+					
+		}
+				
 			strtotalPrice = formatMoney(Price.toString());
 			
 			$('#payArea2').text(strtotalPrice);
 			$('#couponArea2').text(name+' '+price+'%할인');
 			$('#payFinalPrice').val(Price);
 
-		
 		}
 	}
     
@@ -598,7 +613,13 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
             	 }
             	  
              }
-        	
+        		
+        	if(Price == 0){
+        		alert("포인트(혹은 쿠폰)로 결제를 완료하였습니다.")
+        		location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val+'&Price='+Price+'&usePoint='+usePoint;
+        	}	
+        		
+
         	var IMP = window.IMP; // 생략가능
         	IMP.init('imp68401756'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         	
@@ -608,7 +629,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	    merchant_uid : 'merchant_' + new Date().getTime(),
         	    name : '${tClass.lTitle}',
         	    amount : Price,
-        	    buyer_email : 'whqotjd@naver.com',
+        	    buyer_email : '${loginUser.user_id}',
         	    buyer_name : '${loginUser.user_name}',
         	    buyer_tel : '${loginUser.phone}',
         	    buyer_addr : '${loginUser.address}',

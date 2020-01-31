@@ -467,7 +467,7 @@ label {
                          </div>
                             </div>
                             <div class="box">
-                                상세장소 :  ${tClass.lRegionDetail }
+                                상세장소 : 추후 공지하겠습니다. 
                                 <div class="info">                               
                                  </div>
                             </div>
@@ -516,7 +516,9 @@ label {
         <script>
         function setMode()
         {
-            if ($('#StartRegion').val()=='')
+        	//alert($('#lNo').val());
+        	
+            if ($('#lNo').val()=='')
             {
                 alert('수업일정을 선택해주세요.');
             }

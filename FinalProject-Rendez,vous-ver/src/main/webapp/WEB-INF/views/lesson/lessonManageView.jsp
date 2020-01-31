@@ -174,7 +174,7 @@
 		<!--MyTItleBox head-->
 		<div class="title-box">
 			<h1>내 수업</h1>
-			<select class="class-option" id="se1" onchange="fnSelectTitle();">
+			<select class="class-option" id="se1" onchange="fnSelectTitle();" style="margin-top: 30px">
 				<c:forEach var="li" items="${liList}">
 						<option id="sop${li.lNo}" value="${li.lNo }">${li.lTitle}</option>
 				</c:forEach>				
@@ -416,7 +416,7 @@
     	console.log("현재시간 : " + curTime.getTime());
     	console.log(curTime.getTime()-valTime.getTime());
     	
-    	if(curTime.getTime()-valTime.getTime()>-86400000){
+    	if(curTime.getTime()-valTime.getTime()>0){
     		alert("당일 등록과 지난 날짜로는 등록할 수 없습니다");
     		$("#dday").val("");
     	}

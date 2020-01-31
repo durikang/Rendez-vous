@@ -264,7 +264,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div id="page1" class="tab">
 	
 	<div class="box">
-		<div class="title">수업제목<b class="pink">*</b><br><br><span class="gray8">공백포함<br>최소20자~최대50자 이내</span></div>
+		<div class="title">수업제목<b class="pink">*</b><br><br><span class="gray8">공백포함<br>최소3자~최대50자 이내</span></div>
 		<div class="cont">
 			<div class="caution caution2">
 				<b class="pink">TIP</b><br>
@@ -311,7 +311,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</div>
 	</div>
 	<div class="box">
-		<div class="title">수업대상<b class="pink">*</b><br><br><span class="gray8">공백포함 200자 이상 권장</span></div>
+		<div class="title">수업대상<b class="pink">*</b><br><br><span class="gray8">최소 50자<br>공백포함 200자 이상 권장</span></div>
 		<div class="cont">
 			<div class="caution caution2">
 				<b class="pink">TIP</b><br>
@@ -909,8 +909,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 		function onsub(){
 			
- 			if($("#lTitle").val().length<5 || $("#lTitle").val().length>20){
-				alert("수업 제목은 5자 이상 20자 이하로 입력해주세요");
+ 			if($("#lTitle").val().length<3 || $("#lTitle").val().length>20){
+				alert("수업 제목은 3자 이상 20자 이하로 입력해주세요");
 				$("#pg1").click();
 				$("#lTitle").focus();
 				return false;

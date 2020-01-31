@@ -100,5 +100,19 @@
 	WHERE USER_NO = #{uNo}) WHERE USER_NO = #{uNo}
 	</update>
 	
+	<select id="checkCoupon" parameterType="InsertCouponInfo" resultType="_int">
+	select COUNT(COUPON_NO)
+	from COUPON
+	where COUPON_CODE = #{code} And END_DATE >= SYSDATE
+	</select>
+	
+	<select id="checkCoupon2" parameterType="InsertCouponInfo" resultType="_int">
+	select COUNT(user_no)
+	from COUPON
+	where COUPON_CODE = #{code} And END_DATE >= SYSDATE
+	</select>
+
+	
+	
 	
 </mapper>

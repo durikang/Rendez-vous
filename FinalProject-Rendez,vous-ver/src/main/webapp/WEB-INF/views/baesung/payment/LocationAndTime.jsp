@@ -516,7 +516,7 @@ label {
         <script>
         function setMode()
         {
-        	alert($('#lNo').val());
+        	//alert($('#lNo').val());
         	
             if ($('#lNo').val()=='')
             {

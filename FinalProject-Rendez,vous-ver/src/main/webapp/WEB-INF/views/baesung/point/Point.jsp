@@ -25,7 +25,7 @@
 .search-box {
     margin: 0;
     padding: 0;
-    background:#c9c0b1;
+    background: #c9c0b1;
     height: 60px;
     border-radius: 40px;
     padding: 10px;
@@ -95,8 +95,13 @@
     font-weight: bold;
     text-decoration:none;
 }
-.nav_links li {
+.nav_links li{
     font-weight: 500;
+    font-size: 16px;
+    color: black;
+}
+.menu_body a {
+	font-weight: 500;
     font-size: 16px;
     color: black;
 }
@@ -113,11 +118,12 @@
     transition: all 0.3s ease 0s;
     color: black;
     font-weight: bold;
+    font-size: 16px;
 }
 .button:hover {
     background-color: #ddd8cf;
 }
-.search-btn:hover{
+.search-box:hover{
 	cursor: pointer;
 }
 
@@ -217,42 +223,56 @@ border-style: solid;
 
 </head>
 <body>
-	
-	<header class="header">
+	<div class="menu_body">
+	 <c:if test="${ !empty msg}">
+      <script>
+         alert("${msg}");
+      </script>
+      <c:remove var="msg"/>
+   </c:if>
+   
+	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
-    <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-<img class="logo" src="resources/common/img/logo1.png" alt="logo">
-
+    <header class="header">
+		<img class="logo" src="resources/common/img/logo1.png" alt="logo">
         <div class="search-box">
-            <input class="search-text" type="text" id="search" placeholder="검색어를 입력하세요">
-            <a class="search-btn" style="font-size: 16px;">
+            <input class="search-text" type="text" id="search" placeholder="Search">
+            <a class="search-btn" onclick="search2()">
                 <i class="fas fa-search" onclick="search2()"></i>
             </a>
         </div>        
-         <a class="cta" href="hynnmenubar.do"><button class="button">튜터 등록</button></a>
+
+		 <c:if test="${!empty sessionScope.loginUser and  sessionScope.loginUser.user_type eq 'N' }">
+         <a id="tInsert" class="cta" href="tutorInsertPage.do"><button class="button">튜터 등록</button></a>
+       	 </c:if>
+         <c:if test="${!empty sessionScope.loginUser and  sessionScope.loginUser.user_type eq 'T' }">
+         <a id="tMain" class="cta" href="tutorMain.do"><button class="button">튜터 메뉴</button></a>
+         </c:if>
         <nav>
             <ul class="nav_links">
                 <li>|</li>
-
+		<li><a href="support_main.do">고객 센터</a></li>
+		<li>|</li>
                 <c:if test="${ empty sessionScope.loginUser }">
-                	<li><a href="loginPage.do" style="font-size: 16px;">로그인</a></li>
+                	<li><a href="loginPage.do">로그인</a></li>
                 </c:if>
 
                 <c:if test="${ !empty sessionScope.loginUser and loginUser.user_type != 'A' }">
-					<li><a href="mypage.do" style="font-size: 16px;"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
+					<li><a href="mypage.do"><c:out value="${ loginUser.user_name }님 "/>마이페이지</a></li>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser and loginUser.user_type == 'A' }">
-					<a href="managerHome.do" style="font-size: 16px;">관리자 페이지</a>
+					<a href="adminHome.do?pageName=adminHome">관리자 페이지</a>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser }">
 					<li>|</li>
-                	<li><a href="logout.do" style="font-size: 16px;">로그아웃</a></li>
+                	<li><a href="logout.do" >로그아웃</a></li>
 				</c:if>
             </ul>
         </nav>
     </header>
+    </div>
     <script>
     	$(".logo").on("click", function(){
     		location.href='home.do';
@@ -267,7 +287,37 @@ border-style: solid;
            
            location.href = "search.do?sValue=" + sValue;
         }
+        
+        function bhide(){
+        	$("#tInsert").hide();
+        	$("#tMain").hide();
+        }
+        	
+        $("#search").keyup(function(e){
+
+        	// var value=$(this).val();
+
+        	//$("p").text($(this).val());
+
+        	// $("p").text(value);
+		if(e.key == 'Enter'){
+			search2();
+		}
+        	
+        	});
+        
+    	
     </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
  <!--  -->
  	<div style="border-top: 1px solid rgb(218,220,224);"></div>

@@ -243,7 +243,7 @@
 						<tr>
 							<td height="400">내용</td>
 							<td>
-								<textarea name="qContent"></textarea>
+								<textarea name="qContent">${q.qContent}</textarea>
 			   	                <script>
 			                        $(document).ready(function(){
 			                        	CKEDITOR.replace( 'qContent', {

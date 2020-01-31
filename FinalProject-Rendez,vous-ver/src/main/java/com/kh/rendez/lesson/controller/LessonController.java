@@ -29,6 +29,7 @@ import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
+import com.kh.rendez.lesson.model.vo.Student;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.review.model.service.ReviewService;
 import com.kh.rendez.review.model.vo.Review;
@@ -783,13 +784,36 @@ public class LessonController {
 	
 	@RequestMapping("checkStudent.do")
 	@ResponseBody
-	public ArrayList<Member> checkStudent(int lNo,int lInning) {
+	public ArrayList<Student> checkStudent(int lNo,int lInning) {
 		Map<String,Integer> map = new HashMap<>();
 		map.put("lInning", lInning);
 		map.put("lNo", lNo);
-		ArrayList<Member> students = lService.selectStudents(map);
+		ArrayList<Student> students = lService.selectStudents(map);
 		
 		return students;
+	}
+	
+	
+	@RequestMapping("studentList.do")
+	public ModelAndView studentList(ModelAndView mv,
+			int lNo, int lInning,String lTitle
+			) {
+		
+		
+		
+		Map<String,Integer> map = new HashMap<>();
+		map.put("lInning", lInning);
+		map.put("lNo", lNo);
+		ArrayList<Student> students = lService.selectStudents(map);
+		System.out.println(students);
+		System.out.println("제목:"+lTitle);
+		
+		mv.addObject("lTitle",lTitle);
+		mv.addObject("lInning",lInning);
+		mv.addObject("students",students);
+		mv.setViewName("lesson/studentListView");
+		
+		return mv;
 	}
 	
 	
@@ -809,13 +833,9 @@ public class LessonController {
 
 	/*---------------------------------------------------------------------------------------------------*/
 	
-	@Scheduled(cron="0 0/30 * * * ?")
+	@Scheduled(cron="0 * * * * ?")
     public void updatePT(){
-        System.out.println("스케줄러 실행");
-        long time = System.currentTimeMillis(); 
-		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		String str = dayTime.format(new Date(time));
-		System.out.println(str);
+
 
 
         

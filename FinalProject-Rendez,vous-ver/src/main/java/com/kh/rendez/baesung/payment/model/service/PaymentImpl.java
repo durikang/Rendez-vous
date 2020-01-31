@@ -58,6 +58,16 @@ public class PaymentImpl implements PaymentService{
 	@Override
 	public int insertCoupon(InsertCouponInfo cInfo) {
 		
+		int result1 = jpDao.checkCoupon(cInfo);
+		int result2 = jpDao.checkCoupon2(cInfo);
+		
+		if(result1 == 0) {
+			return 0;
+		}else if(result2 == 1){
+			return -1;
+		}
+		
+		
 		return jpDao.insertCoupon(cInfo);
 	}
 

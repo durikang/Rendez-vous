@@ -8,7 +8,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <title>수업 관리 페이지</title>   
+    <title>튜터 정보</title>   
 
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -124,16 +124,16 @@
 
 </head>
 <body style="" cz-shortcut-listen="true">
-
-
-<div id="wrap">
-
 	<div class="hcont">
 		<c:import url="../common/menubar.jsp"/>
 	</div>
 	<c:import url="../common/hyunsidebar.jsp"/>
+	
 
-	<div class="container" style="height: 1200px">
+<div id="wrap">
+
+
+	<div class="container" style="height: 1200px; right: 150px; bottom: 47px">
 	
 		<c:if test="${empty loginUser || loginUser.user_type ne 'T'}">
 		<script>
@@ -144,17 +144,60 @@
 		</c:if>
 		
 		
-		<c:if test="${tStatus eq 'R'}">
+		<c:if test="${tutor.tStatus eq 'R'}">
 		<div class="title-box">
 			<h1>튜터 승인 대기 중입니다 승인 완료 후 수업 등록이 가능해집니다. </h1>
 		</div>		
 		</c:if>
 	
 		<!-- 여기서부터 제대로 작성할 것 -->
-		<c:if test="${tStatus eq 'Y'}">
+		<c:if test="${tutor.tStatus eq 'Y'}">
 		<div class="title-box">
 			<h1>튜터 정보</h1>
 		</div>	
+		
+		<h3>튜터 별명 : ${tutor.tNick }</h3>
+		
+		
+		<br>
+		
+		<!-- 수입 -->
+		<div class="row">
+							<div class="col-sm-12" >
+								<div class="card-box widget-inline">
+									<div class="row">
+										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-primary mdi mdi-access-point-network"></i> <b data-plugin="counterup">${nowCount }</b></h3>
+												<p class="text-muted">이번 달 수업 신청 건수</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-custom mdi mdi-airplay"></i> <b data-plugin="counterup">${nowSum }</b></h3>
+												<p class="text-muted">이번 달 매출</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-info mdi mdi-black-mesa"></i> <b data-plugin="counterup">${totalCount }</b></h3>
+												<p class="text-muted">총 수업 건수</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center b-0">
+												<h3 class="m-t-10"><i class="text-danger mdi mdi-cellphone-link"></i> <b data-plugin="counterup">${totalSum }</b></h3>
+												<p class="text-muted">총 매출</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
 		
 		
 		

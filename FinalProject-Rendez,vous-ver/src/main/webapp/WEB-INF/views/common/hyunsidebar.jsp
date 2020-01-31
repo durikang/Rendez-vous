@@ -56,7 +56,7 @@ div {
 	
 </head>
 <body>
-	<div id="left_nav">
+	<div id="left_nav" style="margin-left: 100px">
 	<div class="left_subject">튜터메뉴</div>
 	<ul>
 	

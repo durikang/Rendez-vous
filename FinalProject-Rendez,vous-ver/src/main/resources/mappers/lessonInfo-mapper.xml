@@ -347,29 +347,68 @@
 	
 	<!-- 수업 신청 학생들 조회를 위한 처리 -->
 	
-	<resultMap type="Member" id="memberResultSet">
+	<resultMap type="Student" id="studentResultSet">
 		<result property="user_no" column="USER_NO"/>
 		<result property="user_id" column="USER_ID"/>
-		<result property="user_pwd" column="USER_PWD"/>
 		<result property="user_name" column="USER_NAME"/>
-		<result property="gender" column="GENDER"/>
 		<result property="age" column="AGE"/>
 		<result property="phone" column="PHONE"/>
-		<result property="address" column="ADDRESS"/>
-		<result property="enroll_date" column="ENROLL_DATE"/>
-		<result property="update_date" column="UPDATE_DATE"/>
-		<result property="user_type" column="USER_TYPE"/>
-		<result property="uStatus" column="U_STATUS"/>
+		<result property="gender" column="GENDER"/>
+		<result property="uCName" column="NVL(UP.U_C_NAME,'default.jpg')"/>
+
 	</resultMap>
 	
+
 	
-	<select id="selectStudents" parameterType="hashmap" resultMap="memberResultSet">
-	SELECT M.*
-	FROM MEMBER M,PAYMENT P
+	<select id="selectStudents" parameterType="hashmap" resultMap="studentResultSet">
+	SELECT M.USER_NO,M.USER_ID,M.USER_NAME,M.AGE,M.PHONE,M.GENDER,NVL(UP.U_C_NAME,'default.jpg')
+	FROM MEMBER M,PAYMENT P,USERPROPIC UP
 	WHERE M.USER_NO = P.USER_NO
+    AND M.USER_NO = UP.USER_NO
 	AND P.L_NO = ${lNo}
 	AND P.L_INNING = ${lInning}
-	AND P.PAYMENT_STATUS != 2 
+	AND P.PAYMENT_STATUS != 2
+	</select>
+	
+	
+	
+	<!-- 튜터 통계 -->
+	
+	<select id="selectNowCount" parameterType="_int" resultType="_int">
+	SELECT NVL(COUNT(PAYMENT_COST),0)
+	FROM PAYMENT
+	WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
+	AND TO_CHAR(SYSDATE,'YYYYMM') =  TO_CHAR(PAYMENT_DATE,'YYYYMM')
+	</select>
+	
+	
+	<select id="selectNowSum" parameterType="_int" resultType="_int">
+	SELECT NVL(SUM(PAYMENT_COST),0)
+	FROM PAYMENT
+	WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
+	AND TO_CHAR(SYSDATE,'YYYYMM') =  TO_CHAR(PAYMENT_DATE,'YYYYMM')	
+	</select>
+	
+	
+	<select id="selectTotalCount" parameterType="_int" resultType="_int">
+	SELECT NVL(COUNT(PAYMENT_COST),0)
+	FROM PAYMENT
+	WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
+	</select>
+	
+	
+	<select id="selectTotalSum" parameterType="_int" resultType="_int">
+	SELECT NVL(SUM(PAYMENT_COST),0)
+	FROM PAYMENT
+		WHERE L_NO IN ( SELECT L_NO
+	                FROM LESSON_INFO
+	                WHERE USER_NO= #{user_no})
 	</select>
 	
 	
@@ -385,9 +424,21 @@
 	
 	
 	
-	<select id="updatePT" statementType="CALLABLE">
-	CALL PST()
-	</select>
+	
+	
+	
+	<!-- <update id="updatePT">
+	UPDATE PAYMENT
+    SET PAYMENT_STATUS = 11
+    WHERE (L_INNING, L_NO) IN (SELECT L_INNING,L_NO
+                        FROM LESSON
+                        WHERE SYSDATE- START_TIME &lt; 1)
+	</update> -->
+	
+	
+	<update id="updatePT" statementType="CALLABLE">
+	{CALL PST()}
+	</update>
 	
 	
 

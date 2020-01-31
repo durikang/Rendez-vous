@@ -14,6 +14,7 @@ import com.kh.rendez.lesson.model.vo.LessonAttachment;
 import com.kh.rendez.lesson.model.vo.LessonDetailInfo;
 import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.lesson.model.vo.LessonReview;
+import com.kh.rendez.lesson.model.vo.Student;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.review.model.vo.Review;
 
@@ -139,9 +140,25 @@ public class LessonDao {
 		return sqlSession.update("lessonInfoMapper.updatePT");
 	}
 
-	public ArrayList<Member> selectStudents(Map<String, Integer> map) {
+	public ArrayList<Student> selectStudents(Map<String, Integer> map) {
 		System.out.println(map);
 		return (ArrayList)sqlSession.selectList("lessonInfoMapper.selectStudents",map);
+	}
+
+	public int selectNowCount(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectNowCount",user_no);
+	}
+
+	public int selectNowSum(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectNowSum",user_no);
+	}
+
+	public int selectTotalCount(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectTotalCount",user_no);
+	}
+
+	public int selectTotalSum(int user_no) {
+		return sqlSession.selectOne("lessonInfoMapper.selectTotalSum",user_no);
 	}
 
 	

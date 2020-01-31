@@ -169,12 +169,12 @@
 <!-- //HEADER -->
 
 	<!--container-->
-	<div class="container" style="height: 1200px">
+	<div class="container" style="height: 1200px; right: 150px; bottom: 47px">
 
 		<!--MyTItleBox head-->
 		<div class="title-box">
 			<h1>내 수업</h1>
-			<select class="class-option" id="se1" onchange="fnSelectTitle();">
+			<select class="class-option" id="se1" onchange="fnSelectTitle();" style="margin-top: 30px">
 				<c:forEach var="li" items="${liList}">
 						<option id="sop${li.lNo}" value="${li.lNo }">${li.lTitle}</option>
 				</c:forEach>				
@@ -283,7 +283,8 @@
 					<td>
 					<input type="text" hidden value="${li.lNo }">
 					<input type="text" hidden value="${l.lInning }">
-					<button onclick="checkStudent(this)">조회</button>
+					<input type="text" hidden value="${li.lTitle }">
+					<button onclick="openPop(this)">조회</button>
 					</td>
 					
 					</tr>
@@ -415,7 +416,7 @@
     	console.log("현재시간 : " + curTime.getTime());
     	console.log(curTime.getTime()-valTime.getTime());
     	
-    	if(curTime.getTime()-valTime.getTime()>-86400000){
+    	if(curTime.getTime()-valTime.getTime()>0){
     		alert("당일 등록과 지난 날짜로는 등록할 수 없습니다");
     		$("#dday").val("");
     	}
@@ -472,6 +473,23 @@
     	
     	
     }
+    
+    
+    function openPop(value){
+    	
+    	var lNo = $(value).parent().children().eq(0).val();
+    	var lInning = $(value).parent().children().eq(1).val();
+    	var lTitle = $(value).parent().children().eq(2).val();
+
+		var pop_title = "신청인 목록" ;
+         
+        window.open("studentList.do?lNo="+lNo+"&lInning="+lInning+"&lTitle="+lTitle, pop_title) ;
+
+         
+    }
+    
+    
+    
     
     
     

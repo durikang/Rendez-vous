@@ -626,7 +626,7 @@ text-decoration: none;
 	<div style="border-bottom: 1px solid #c9c9c9;"></div>
     <!-- //HEADER -->
     <script>
-        // 카테고리 보기
+        // 카테고리 보기1
         fbq('track', 'Search', {
          search_string: '영어회화'
         });

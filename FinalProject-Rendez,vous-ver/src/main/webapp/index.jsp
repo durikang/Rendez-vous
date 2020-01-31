@@ -11,7 +11,7 @@
 		window.onload=function(){	
 			location.href='home.do';
 		}
-		/* 수  */
+		/* 수정! */
 	</script>
 </body>
 </html>

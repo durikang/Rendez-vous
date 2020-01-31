@@ -29,7 +29,6 @@ import com.kh.rendez.member.model.service.MemberService;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.member.model.vo.ReviewList;
 import com.kh.rendez.member.model.vo.Userpropic;
-import com.kh.rendez.support.exception.SupportException;
 import com.kh.rendez.support.model.service.SupportService;
 
 @SessionAttributes("loginUser")

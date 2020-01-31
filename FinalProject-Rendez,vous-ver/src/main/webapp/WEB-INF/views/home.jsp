@@ -546,7 +546,7 @@ div ul {
    <div class="swiper-wrapper">
       <div class="swiper-slide"><img src="resources/homeImg/slide2.PNG" style="width:1920px; height:436px;"></div>
       <div class="swiper-slide"><img src="resources/homeImg/slide1.PNG" style="width:1920px; height:436px;"></div>
-      <div class="swiper-slide"><a href=""><img src="resources/homeImg/slide3.png" style="width:1920px; height:436px;"></a></div>
+      <div class="swiper-slide"><a href="pointView.do"><img src="resources/homeImg/slide3.png" style="width:1920px; height:436px;"></a></div>
    </div>
    
    <div class="swiper-button-next" style="margin-top:-7%;">
@@ -603,33 +603,33 @@ div ul {
                 <span class="close-button2">&times;</span> 
                  <div id="icon-area1">
                     <ul id="icon-ul">
-                       <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/design.png"><br>디자인</a>
+                       <li>                       
+                         <a href="<c:url value="cateMain.do?cateMain=디자인"/>"><img src="https://img.icons8.com/nolan/64/design.png"><br>디자인</a>
                       </li>
                        <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/workstation.png"><br>실무역량</a>
+                         <a href="<c:url value="cateMain.do?cateMain=실무역량"/>"><img src="https://img.icons8.com/nolan/64/workstation.png"><br>실무역량</a>
                        </li>
                        <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/lipstick.png"><br>뷰티</a>
+                         <a href="<c:url value="cateMain.do?cateMain=뷰티"/>"><img src="https://img.icons8.com/nolan/64/lipstick.png"><br>뷰티</a>
                        </li>
                        <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/documentary.png"><br>영상</a>
+                         <a href="<c:url value="cateMain.do?cateMain=영상"/>"><img src="https://img.icons8.com/nolan/64/documentary.png"><br>영상</a>
                        </li>                    
                     </ul>
                  </div>
                  <div id="icon-area2">
                     <ul id="icon-ul2">
                        <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/google-translate.png"><br>외국어</a>
+                         <a href="<c:url value="cateMain.do?cateMain=외국어"/>"><img src="https://img.icons8.com/nolan/64/google-translate.png"><br>외국어</a>
                        </li>
                        <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/musical-notes.png"><br>음악</a>
+                         <a href="<c:url value="cateMain.do?cateMain=음악"/>"><img src="https://img.icons8.com/nolan/64/musical-notes.png"><br>음악</a>
                        </li>
                        <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/running.png"><br>라이프스타일</a>
+                         <a href="<c:url value="cateMain.do?cateMain=라이프스타일"/>"><img src="https://img.icons8.com/nolan/64/running.png"><br>라이프스타일</a>
                        </li>
                        <li>                          
-                         <a href="#"><img src="https://img.icons8.com/nolan/64/settings--v1.png"><br>기타</a>
+                         <a href="<c:url value="cateMain.do?cateMain=기타"/>"><img src="https://img.icons8.com/nolan/64/settings--v1.png"><br>기타</a>
                        </li>
                     </ul>
                  </div>

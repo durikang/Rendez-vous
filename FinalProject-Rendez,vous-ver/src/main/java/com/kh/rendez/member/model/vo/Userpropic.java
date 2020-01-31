@@ -1,4 +1,4 @@
-package com.kh.rendez.manager.model.vo;
+package com.kh.rendez.member.model.vo;
 
 public class Userpropic {
 

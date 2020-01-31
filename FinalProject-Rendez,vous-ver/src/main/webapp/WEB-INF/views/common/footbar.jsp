@@ -49,7 +49,6 @@
         color: white;
     }
     .footer-menu-one {
-        width: 100%;
         height: auto;
         margin: auto;
         margin-top: 2%;

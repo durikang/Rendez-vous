@@ -9,8 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.rendez.home.model.vo.HomeList;
 import com.kh.rendez.member.model.dao.MemberDao;
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.member.model.vo.ReviewList;
+import com.kh.rendez.member.model.vo.Userpropic;
+import com.kh.rendez.review.model.vo.Review;
 import com.kh.rendez.support.common.Pagination;
 import com.kh.rendez.support.model.vo.PageInfo;
 import com.kh.rendez.support.model.vo.Qna;
@@ -43,17 +47,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer) {
-		int listCount = mDao.getMyQnaListCount(currentPage, writer);
-		System.out.println(listCount);
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
-		return mDao.selectMyQnaList(pi, writer);
-	}
-
-	@Override
 	public int deleteMember(Member m) {
 		return mDao.deleteMember(m);
 	}
+
+	// 리뷰리스트
+	@Override
+	public ArrayList<ReviewList> selectList(int userNo) {
+		return mDao.selectList(userNo);
+	}
+
+	@Override
+	public Userpropic selectOne(int user_no) {
+		// TODO Auto-generated method stub
+		return mDao.selectOne(user_no);
+	}
+	
 
 }

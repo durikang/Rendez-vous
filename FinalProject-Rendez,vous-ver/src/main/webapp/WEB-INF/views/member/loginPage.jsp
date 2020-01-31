@@ -32,7 +32,7 @@ a{color:inherit;text-decoration:none}
 
 .login-wrap{
 	width:100%;
-	margin-left:31.5%;
+	margin-left:31%;
 	margin-top:-2%;
 	max-width:525px;
 	min-height:670px;
@@ -182,7 +182,6 @@ a{color:inherit;text-decoration:none}
 <body>
 		<c:if test="${ !empty msg }">
 		<script>
-        	alert("로그인 실패!");
         	opener.parent.location.replace("loginPage.do");
 		</script>
 		</c:if>
@@ -223,7 +222,10 @@ a{color:inherit;text-decoration:none}
 			<!-- 회원가입 div -->
 			<div class="sign-up-htm">
 				<div class="centerText">
-      			<form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()">
+      			<form action="minsert.do" method="post" id="joinForm" onsubmit="return validate()" enctype="multipart/form-data">
+					<div id="pt" style=" display:none;">
+	     				<input type='file' id="image_upload" name="uploadFile" />
+					</div>
 				
 				<div style="float:left; width:47.5%;">
 					<div class="group">
@@ -231,7 +233,7 @@ a{color:inherit;text-decoration:none}
 						<input type="text" name="user_id" id="user_id" class="input">
 						
 						<span class="guide ok">이 이메일은 사용 가능합니다.</span>
-		                <span class="guide no">이 이메일은 중복되므로 사용할 수 없습니다.</span>
+		                <span class="guide error">이 이메일은 중복되므로 사용할 수 없습니다.</span>
 		                <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
 					</div>
 					<div class="group">
@@ -323,7 +325,7 @@ a{color:inherit;text-decoration:none}
     $("#user_pwd").focus();
     return false;
    }
-   else if(!/^[a-zA-Z0-9!,@,#,$,%,^,&,*,?,_,~]{8,15}$/.test($("#user_pwd").val())){            
+   else if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/.test($("#user_pwd").val())){            
        alert('숫자+영문자+특수문자 조합으로 8자리 이상 15이하로 사용해야 합니다. (사용 가능 특수문자는 !,@,#,$,%,^,&,*,?,_,~ 입니다.)');
        $('#user_pwd').focus();
        return false;
@@ -451,6 +453,7 @@ a{color:inherit;text-decoration:none}
    
    
     -->
+
    
    <!-- 전화번호 유효성검사 -->
    <script>
@@ -500,6 +503,33 @@ a{color:inherit;text-decoration:none}
 	      }
 	  });  
 	});
+	   
+$(document).ready(function() {
+	   $(function() {
+           $("#image_upload").on('change', function(){
+               readURL(this);
+           });
+       });
+
+       function readURL(input) {
+           if (input.files && input.files[0]) {
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+                   $('#profile').attr('src', e.target.result);
+               }
+
+             reader.readAsDataURL(input.files[0]);
+           }
+           else {
+               var reader = new FileReader();
+
+               reader.onload = $('#profile').attr('src','../resources/myPage/img/user2.jpg');
+
+           }
+
+       }
+});
    </script>
 
 <c:import url="../common/footbar.jsp"/>

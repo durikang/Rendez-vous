@@ -2,10 +2,9 @@ package com.kh.rendez.member.model.service;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpSession;
-
 import com.kh.rendez.member.model.vo.Member;
-import com.kh.rendez.support.model.vo.Qna;
+import com.kh.rendez.member.model.vo.ReviewList;
+import com.kh.rendez.member.model.vo.Userpropic;
 
 public interface MemberService {
 	
@@ -23,11 +22,11 @@ public interface MemberService {
 	
 	// 회원 탈퇴
 	public int deleteMember(Member m);
-	
-	// 내가 쓴 문의내역 리스트
-	public ArrayList<Qna> selectMyQnaList(int currentPage, String writer);
 
-	
+	// 내가 쓴 리뷰내역 리스트
+	public ArrayList<ReviewList> selectList(int userNo);
+
+	public Userpropic selectOne(int user_no);
 
 
 	

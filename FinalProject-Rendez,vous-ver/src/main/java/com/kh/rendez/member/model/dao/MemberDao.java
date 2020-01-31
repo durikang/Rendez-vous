@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.member.model.vo.ReviewList;
+import com.kh.rendez.member.model.vo.Userpropic;
 import com.kh.rendez.support.model.vo.PageInfo;
 import com.kh.rendez.support.model.vo.Qna;
 
@@ -38,16 +40,20 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.idCheck", user_id);
 	}
 	
-	public int getMyQnaListCount(int currentPage, String writer) {
+	public int getMyQnaListCount(int currentPage, int writer) {
 		return sqlSession.selectOne("supportMapper.getMyQnaListCount", writer);
 	}
 
-	public ArrayList<Qna> selectMyQnaList(PageInfo pi, String writer) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("supportMapper.selectMyQnaList", writer, rowBounds);
+	//리뷰리스트
+	public ArrayList<ReviewList> selectList(int userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectReviewList", userNo);
 	}
+
+	public Userpropic selectOne(int user_no) {
+		
+		return sqlSession.selectOne("memberMapper.userpropic",user_no);
+	}
+
 
 	
 

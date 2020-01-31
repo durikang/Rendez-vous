@@ -65,5 +65,15 @@ public class PaymentDao {
 		return sqlSession.update("paymentMapper.updatePoint",map);
 	}
 
+	public int checkCoupon(InsertCouponInfo cInfo) {
+
+		return sqlSession.selectOne("paymentMapper.checkCoupon", cInfo);
+	}
+
+	public int checkCoupon2(InsertCouponInfo cInfo) {
+		return sqlSession.selectOne("paymentMapper.checkCoupon2", cInfo);
+	}
+
+
 	
 }

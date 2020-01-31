@@ -608,7 +608,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	    merchant_uid : 'merchant_' + new Date().getTime(),
         	    name : '${tClass.lTitle}',
         	    amount : Price,
-        	    buyer_email : 'whqotjd@naver.com',
+        	    buyer_email : '${loginUser.user_id}',
         	    buyer_name : '${loginUser.user_name}',
         	    buyer_tel : '${loginUser.phone}',
         	    buyer_addr : '${loginUser.address}',

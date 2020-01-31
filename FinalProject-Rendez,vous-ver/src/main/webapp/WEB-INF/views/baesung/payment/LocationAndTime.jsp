@@ -467,7 +467,7 @@ label {
                          </div>
                             </div>
                             <div class="box">
-                                상세장소 :  ${tClass.lRegionDetail }
+                                상세장소 : 추후 공지하겠습니다. 
                                 <div class="info">                               
                                  </div>
                             </div>

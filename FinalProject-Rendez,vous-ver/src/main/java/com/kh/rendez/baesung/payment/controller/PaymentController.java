@@ -97,12 +97,19 @@ public class PaymentController {
 		Member m = (Member) session.getAttribute("loginUser");
 		
 		int result = jpService.insertCoupon(new InsertCouponInfo(code, m.getUser_no()));
+		
+		
 		ArrayList<Coupon> CouponList = null;
 		if(result > 0) {
-			CouponList = new ArrayList<Coupon>();
-			 CouponList = jpService.selectCouponList(m.getUser_no());
+			 mv.addObject("msg", "쿠폰등록에 성공하였습니다.");
+		}else if(result == 0){
+			mv.addObject("msg", "유효하지 않은 쿠폰입니다.");
+		}else if(result == -1){
+			mv.addObject("msg", "이미 등록한 쿠폰입니다.");
 		}
 		
+		CouponList = new ArrayList<Coupon>();
+		 CouponList = jpService.selectCouponList(m.getUser_no());
 		mv.addObject("CouponList", CouponList);
 		mv.setViewName("baesung/payment/coupon");
 		

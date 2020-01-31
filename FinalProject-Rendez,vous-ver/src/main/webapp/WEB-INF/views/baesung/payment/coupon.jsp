@@ -211,6 +211,14 @@ body {
     </style>
 </head>
 <body>
+	<c:if test="${ !empty msg}">
+      <script>
+         alert("${msg}");
+      </script>
+      <c:remove var="msg"/>
+   </c:if>
+
+
     <div class="title">
 		<img class="clse"src="resources/baesung/images/btn-clse.png" onclick="javascript:self.close();">
 		<div class="rmv">

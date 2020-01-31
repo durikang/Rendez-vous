@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,26 +16,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.rendez.manager.model.vo.Userpropic;
-import com.kh.rendez.member.controller.MemberController;
+import com.kh.rendez.member.model.exception.MemberException;
 import com.kh.rendez.member.model.service.MemberService;
 import com.kh.rendez.member.model.vo.Member;
-import com.kh.rendez.support.common.Pagination;
+import com.kh.rendez.member.model.vo.ReviewList;
+import com.kh.rendez.member.model.vo.Userpropic;
 import com.kh.rendez.support.exception.SupportException;
 import com.kh.rendez.support.model.service.SupportService;
-import com.kh.rendez.support.model.vo.Qna;
-import com.sun.glass.ui.Window;
-import com.kh.rendez.member.model.exception.MemberException;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -63,7 +59,7 @@ public class MemberController {
 	      
 	      if(loginUser != null && bcryptPasswordEncoder.matches(pwd, loginUser.getUser_pwd())) {
 	         session.setAttribute("loginUser", loginUser);
-	         return "redirect:home.do";
+	         return "home";
 	      } else {
 	         model.addAttribute("msg", "로그인 실패");
 	         return "member/loginPage";
@@ -73,7 +69,7 @@ public class MemberController {
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {		
 		status.setComplete();
-		return "redirect:home.do";
+		return "home";
 	}
 	
 	// 회원정보 수정 시 입력하는 비밀번호 확인용
@@ -93,21 +89,29 @@ public class MemberController {
 
 	
 	@RequestMapping("mypage.do")
-	public ModelAndView myPageView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page, HttpSession session) {
-		int currentPage = page != null ? page : 1;
+		public ModelAndView myPageView(ModelAndView mv, HttpSession session,
+				  HttpServletRequest request, HttpServletResponse response) {
+	
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		int writer = loginUser.getUser_no();
-		/*ArrayList<#> list = mService.selectMyReview(currentPage, writer);*/
-		ArrayList<Qna> list = mService.selectMyQnaList(currentPage, writer);
-		System.out.println(list);
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.addObject("pi", Pagination.getPageInfo());
-			mv.setViewName("member/myPage");
-		} else {
-			throw new SupportException("문의 내역 조회 실패");
-		}
-			return mv;
+		int userNo = loginUser.getUser_no();
+		
+		ArrayList<ReviewList> r = mService.selectList(userNo);
+		
+		Userpropic u = mService.selectOne(loginUser.getUser_no());
+		
+		System.out.println(r);
+		mv.addObject("list", r);
+		mv.addObject("userPropic", u);
+		mv.setViewName("member/myPage");
+				
+		
+		return mv;
+	}
+	
+	@RequestMapping("ReviewDetail.do")
+	public String ReviewDetail(int lNo) {
+		System.out.println(lNo);
+		return "redirect:lessonDetail.do?lNo=" + lNo;
 	}
 	
 	@RequestMapping("loginPage.do")
@@ -129,39 +133,31 @@ public class MemberController {
 		map.put("isUsable", isUsable);
 		mv.addAllObjects(map);
 		mv.setViewName("jsonView");
-		
-		System.out.println(user_id);
-		
+				
 		return mv;
 	}
 	
 	@RequestMapping(value="minsert.do", method=RequestMethod.POST)
-	public String memberInsert(HttpServletRequest request, Member m, Userpropic u,
+	public String memberInsert(HttpServletRequest request, Member m,
 								@RequestParam("user_id") String id,
 								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
 								@RequestParam("address2") String address2,
 								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
 		
-		/*if(!file.getuOriginName().equals("")) {
-			String uChangeName = saveFile(file, request);
-			
-			
-			
-			if(uChangeName != null) {
-				m.setuOriginName(file.getuOriginName());
-				m.setuChangeName(uChangeName);
-			}			
-		}*/	
-/*		      
-		      if(!file.getOriginalFilename().equals("")) {
-		         String renameFileName = saveFile(file, request);
-		         
-		         if(renameFileName != null) {
-		            vo.setMem_photo(file.getOriginalFilename());
-		            vo.setMem_uphoto(renameFileName);
-		         }
-		      }*/
+
+		 if(!file.getOriginalFilename().equals("")) {
+			   String renameFileName = saveFile(file, request);
+
+			   if(renameFileName != null) {
+			    m.setPhoto(file.getOriginalFilename());
+			    m.setUpphoto(renameFileName);
+			   }
+			  }
+		 
+		
+		
+
 		m.setUser_id(id);
 		m.setAddress(post + "," + address1 + ", " + address2);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
@@ -170,8 +166,8 @@ public class MemberController {
 		
 		int result = mService.insertMember(m);
 		
-		/*if(result > 0 || m.getMem_photo() == null || m.getMem_uphoto() != null || m.getMem_photo() != null || m.getMem_uphoto() == null) {*/
-		if(result > 0) {
+		
+		if(result > 0 || m.getPhoto() == null || m.getUpphoto() != null || m.getPhoto() != null || m.getUpphoto() == null ) {
 			model.addAttribute("msg", "회원가입이 완료 되었습니다.");
 			return "home";
 		} else {
@@ -179,10 +175,10 @@ public class MemberController {
 		}
 	}
 	
-	/*public String saveFile(MultipartFile file, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("/resources/myPage/uploadImg/");
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
 		
-		String savePath = root + "\\uploadImg";
+		String savePath = root + "\\myPage/img";
 		
 		File folder = new File(savePath);
 		
@@ -191,7 +187,7 @@ public class MemberController {
 		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmss");
-		String photo = file.getPhoto();
+		String photo = file.getOriginalFilename();
 		String upphoto = sdf.format(new java.util.Date()) + "." + photo.substring(photo.lastIndexOf(".") + 1);
 		
 		String renamePath = folder + "\\" + upphoto;
@@ -203,7 +199,7 @@ public class MemberController {
 		}
 		
 		return upphoto;
-	}*/
+	}
 	
 	// 회원 정보 수정
 		@RequestMapping("mupdate.do")
@@ -255,14 +251,4 @@ public class MemberController {
 
 		}
 		
-		
-		/*//패스워드 체크
-		@RequestMapping(value="passCheck.do", method=RequestMethod.POST, produces = "application/text; charset=utf8")
-		@ResponseBody
-		public String passCheck(Member member) {
-			
-			int result = mService.passCheck(member);
-			return Integer.toString(result);
-		}
-		*/
 }

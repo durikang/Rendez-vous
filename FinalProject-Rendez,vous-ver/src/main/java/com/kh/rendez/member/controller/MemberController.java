@@ -141,21 +141,10 @@ public class MemberController {
 								@RequestParam("user_id") String id,
 								@RequestParam("post") String post,
 								@RequestParam("address1") String address1,
-								@RequestParam("address2") String address2,
-								@RequestParam(value="uploadFile", required=false) MultipartFile file, Model model) {
+								@RequestParam("address2") String address2, Model model) {
 		
 
-		 if(!file.getOriginalFilename().equals("")) {
-			   String renameFileName = saveFile(file, request);
 
-			   if(renameFileName != null) {
-			    m.setPhoto(file.getOriginalFilename());
-			    m.setUpphoto(renameFileName);
-			   }
-			  }
-		 
-		
-		
 
 		m.setUser_id(id);
 		m.setAddress(post + "," + address1 + ", " + address2);
@@ -166,7 +155,7 @@ public class MemberController {
 		int result = mService.insertMember(m);
 		
 		
-		if(result > 0 || m.getPhoto() == null || m.getUpphoto() != null || m.getPhoto() != null || m.getUpphoto() == null ) {
+		if(result > 0) {
 			model.addAttribute("msg", "회원가입이 완료 되었습니다.");
 			return "home";
 		} else {

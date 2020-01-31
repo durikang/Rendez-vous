@@ -492,11 +492,11 @@
 		WHERE ROWNUM <![CDATA[ <= ]]> 5  
 	</select>
 	<select id="selectNewJoinList" resultMap="AdminMemberResultSet">
-		select *
-		from member
-		left join coupon using(user_no)
+		select m.user_id,m.user_name,c.user_no
+		from member m
+		left join coupon c on(c.user_no=m.user_no)
 		where to_date(enroll_date,'YYYY/MM/DD')=to_date(sysdate,'YYYY/MM/DD')
-		and u_status='Y' and user_type != 'A'
+		and u_status='Y' and user_type != 'A' and c.user_no is null
 	</select>
 
 	<select id="selectYearList" resultType="string">

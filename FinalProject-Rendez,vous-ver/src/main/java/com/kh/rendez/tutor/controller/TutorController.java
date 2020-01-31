@@ -39,24 +39,21 @@ public class TutorController {
 		
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		String tStatus = tService.selectTutorStatus(loginUser.getUser_no());
+		Tutor tutor = tService.selectTutorInfo(loginUser.getUser_no());
+
 		
 		int nowCount = lService.selectNowCount(loginUser.getUser_no());
 		int nowSum = lService.selectNowSum (loginUser.getUser_no());
 		int totalCount = lService.selectTotalCount(loginUser.getUser_no());
 		int totalSum = lService.selectTotalSum(loginUser.getUser_no());
-		System.out.println(nowCount);
-		System.out.println(nowSum);
-		System.out.println(totalCount);
-		System.out.println(totalSum);
-		
 
+		mv.addObject("tutor",tutor);
+		
 		mv.addObject("nowCount",nowCount);
 		mv.addObject("nowSum",nowSum);
 		mv.addObject("totalCount",totalCount);
 		mv.addObject("totalSum",totalSum);
 
-		mv.addObject("tStatus",tStatus);
 		mv.setViewName("lesson/tutorMainView");
 		
 		return mv;

@@ -73,6 +73,10 @@
 			background-position: 0 0;
 		}	
 		
+		#gogaek{
+		    font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+		
 		
 		
 					
@@ -1061,12 +1065,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- 문의 -->
 			<div class="class_detail detail_sec_bor" id="qna" style="width: 840px">
 				<div class="section01">
-					<h1>실시간톡</h1><h1>
-					<img src="https://taling.me/Content/Images/app_install3.png">
+					<h1>고객센터</h1><h1>
+					<div class="col-lg-6 order-lg-1 my-auto showcase-text" id="gogaek">
+					<h2>고객 센터 운영 시간</h2>
+					<p class="lead mb-2">평일 오전 10시 ~ 오후 6시</p>
+					<p class="lead mb-2">점심시간 오후 1시 ~ 오후 2시</p>
+					<p class="lead mb-2">공휴일 휴무</p>
+					</div>
 					<p style="padding-top:10px;"></p>
-					<a href="https://itunes.apple.com/kr/app/탈잉-taling/id1153218962?l=en&amp;mt=8" target="_blank"><img src="https://taling.me/Content/Images/ios.png" width="50%"></a><a href="https://play.google.com/store/apps/details?id=com.taling" target="_blank"><img src="https://taling.me/Content/Images/and.png" width="50%"></a>
+					<a href="" target="_blank"><img src="resources/support/img/time1.jpg" width="50%"></a><a href="https://play.google.com/store/apps/details?id=com.taling" target="_blank"><img src="https://taling.me/Content/Images/and.png" width="50%"></a>
 						
-						<a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="btn_st">실시간 톡하기</a>						
+						<a href="support_main.do" class="btn_st">고객센터</a>						
 										
 					<div class="review_list" id="bookmarkQna">
 						<ul>

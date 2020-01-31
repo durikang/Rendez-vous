@@ -234,7 +234,7 @@
 							<img src="resources/homeImg/slide2.PNG" class="d-block w-95" style="height:35vh; margin:1% auto;">
 						</div>
 						<div class="carousel-item">
-							<img src="resources/homeImg/slide3.PNG" class="d-block w-95" style="height:35vh; margin:1% auto;">
+							<a href="pointView.do"><img src="resources/homeImg/slide3.png" class="d-block w-95" style="height:35vh; margin:1% auto;"></a>
 						</div>
 					</div>
 				</div>

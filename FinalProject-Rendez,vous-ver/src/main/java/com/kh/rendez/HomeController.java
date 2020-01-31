@@ -22,28 +22,29 @@ import com.kh.rendez.home.model.vo.HomeList;
  */
 @Controller
 public class HomeController {
-	@Autowired
-	private HomeService hService;
+   @Autowired
+   private HomeService hService;
 
-	@RequestMapping(value = "home.do", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, ModelAndView mv,@RequestParam(value="msg",required=false) String msg, HttpSession session) {
-		
-		/*Member loginUser = (Member)session.getAttribute("loginUser");
-		int uno = loginUser.getUser_no();*/
-		
-		ArrayList<HomeList> alist = hService.selectList();
-		ArrayList<HomeList> dlist = hService.selectDateList();
+   @RequestMapping(value = "home.do", method = RequestMethod.GET)
+   public ModelAndView home(Locale locale, ModelAndView mv,@RequestParam(value="msg",required=false) String msg, HttpSession session) {
+      
+      /*Member loginUser = (Member)session.getAttribute("loginUser");
+      int uno = loginUser.getUser_no();*/
+      ArrayList<HomeList> alist = hService.selectAllList();
+      ArrayList<HomeList> ilist = hService.selecInningtList();
+      ArrayList<HomeList> dlist = hService.selectDateList();
 
-		if(alist != null && dlist != null) {
-			mv.addObject("msg",msg);
-			mv.addObject("alist", alist);
-			mv.addObject("dlist", dlist);
-			return mv;			
-		} else {
-			mv.addObject("msg","게시물 불러오기 실패!");
-			mv.setViewName("common/errorPage");
-			return mv;
-		}
-		
-	}
+      if(alist != null && ilist != null && dlist != null) {
+         mv.addObject("msg",msg);
+         mv.addObject("alist", alist);
+         mv.addObject("ilist", ilist);
+         mv.addObject("dlist", dlist);
+         return mv;         
+      } else {
+         mv.addObject("msg","게시물 불러오기 실패!");
+         mv.setViewName("common/errorPage");
+         return mv;
+      }
+      
+   }
 }

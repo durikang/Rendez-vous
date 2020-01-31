@@ -10,17 +10,26 @@ import com.kh.rendez.home.model.vo.HomeList;
 
 @Service("hService")
 public class HomeServiceImpl implements HomeService {
-	@Autowired
-	private HomeDao hDao;
-	
-	@Override
-	public ArrayList<HomeList> selectList() {
-		return hDao.selectList();
-	}
+   @Autowired
+   private HomeDao hDao;
+   
+   @Override
+   public ArrayList<HomeList> selectAllList() {
+      return hDao.selectAllList();
+   }
+   
+   @Override
+   public ArrayList<HomeList> selecInningtList() {
+      return hDao.selectInningList();
+   }
 
-	@Override
-	public ArrayList<HomeList> selectDateList() {
-		return hDao.selectDateList();
-	}
+   @Override
+   public ArrayList<HomeList> selectDateList() {
+      return hDao.selectDateList();
+   }
+
+   
+
+
 
 }

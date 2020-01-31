@@ -204,8 +204,10 @@ body {
 		margin-left: 0px;
 		-webkit-transform: rotate(270deg);
                 -ms-transform: rotate(270deg);
-
-
+	}
+	
+	#registerC:hover{
+	cursor: pointer;
 	}
 
     </style>
@@ -230,7 +232,7 @@ body {
 		<div>쿠폰등록</div>
 		<div class="cpn">
 		
-			<input type="text" placeholder="프로모션 혹은 쿠폰 코드 입력" name="code" id="code"><button onclick="couponRegister()">쿠폰등록</button>
+			<input type="text" placeholder="프로모션 혹은 쿠폰 코드 입력" name="code" id="code"><button onclick="couponRegister()" id="registerC">쿠폰등록</button>
 		
 		</div>			
 		

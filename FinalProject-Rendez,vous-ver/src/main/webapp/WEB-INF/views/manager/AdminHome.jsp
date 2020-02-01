@@ -77,6 +77,11 @@ overflow: hidden;
 	clear: both;
 }
 
+
+
+
+
+
 </style>
  <script>
 	$(function(){
@@ -118,10 +123,14 @@ overflow: hidden;
 		
 
 /* =============================================================  */
+
+	
+
+
+
 	</script>
  </head>
 <body>
-
 
 	<c:import url="mnCommon/menubar.jsp" />
 	<br><br>

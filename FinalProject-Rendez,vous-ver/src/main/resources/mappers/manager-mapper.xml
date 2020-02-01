@@ -492,7 +492,7 @@
 		WHERE ROWNUM <![CDATA[ <= ]]> 5  
 	</select>
 	<select id="selectNewJoinList" resultMap="AdminMemberResultSet">
-		select m.user_id,m.user_name,c.user_no
+		select m.user_no user_no,m.user_id user_id,m.user_name user_name,m.gender gender,m.age age,m.enroll_date enroll_date,m.user_type user_type
 		from member m
 		left join coupon c on(c.user_no=m.user_no)
 		where to_date(enroll_date,'YYYY/MM/DD')=to_date(sysdate,'YYYY/MM/DD')

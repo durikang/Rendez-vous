@@ -107,11 +107,9 @@ $(function(){
 	<br>
 	<br>
 	<script>
-	if(${Condition ne null}){
-		console.log(${Condition});
-		console.log(${param1});
-		console.log(${param2});
-	}
+	
+	alert(${ pageName});
+	
 	</script>
 
 	

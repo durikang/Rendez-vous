@@ -541,10 +541,9 @@
 					</div>
 					<div>
 
-						<form id="myForm" action="mupdate.do" method="post">
+						<form id="myForm" action="mupdate.do" method="post" enctype="multipart/form-data">
 							<p>
-								PROFILE <input class="w3-input" type="text" id="user_id"
-									name="user_id" readonly value="${ loginUser.user_id }">
+								PROFILE <input class="w3-input" type="file" id="pro" name="reloadFile" >
 							</p>
 							<p>
 								EMAIL <input class="w3-input" type="text" id="user_id"

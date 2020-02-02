@@ -29,7 +29,6 @@
 	</resultMap>
 	<!-- 유저프로필 -->
 	<resultMap type="Userpropic" id="userpropicResultSet">
-
 		<id property="uNo" column="USER_NO"/>
 		<result property="uOriginName" column="U_O_NAME"/>
 		<result property="uChangeName" column="U_C_NAME"/>
@@ -73,7 +72,8 @@
 	</update>
 	
 	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER
+		UPDATE ALL
+      	MEMBER
 		SET USER_NAME = #{user_name},
 			USER_PWD = #{user_pwd},
 			GENDER = #{gender},
@@ -82,6 +82,11 @@
 			ADDRESS = #{address},
 			UPDATE_DATE = SYSDATE
 		WHERE USER_ID = #{user_id}
+      	USERPROPIC
+     	SET U_O_NAME = #{uOriginName},
+     	    U_C_NAME = #{uChangeName}
+      	SELECT *
+      	from dual
 	</update>
 	
 	<select id="selectReviewList" resultMap="reviewListSet">

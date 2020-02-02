@@ -75,6 +75,7 @@
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
 		SET USER_NAME = #{user_name},
+			USER_PWD = #{user_pwd},
 			GENDER = #{gender},
 			AGE = #{age},
 			PHONE = #{phone},

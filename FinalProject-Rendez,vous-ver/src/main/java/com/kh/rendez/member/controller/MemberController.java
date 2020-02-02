@@ -1,5 +1,6 @@
 package com.kh.rendez.member.controller;
 
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -167,7 +168,7 @@ public class MemberController {
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
-		String savePath = root + "\\myPage/img";
+		String savePath = root + "\\user/img";
 		
 		File folder = new File(savePath);
 		
@@ -175,11 +176,12 @@ public class MemberController {
 			folder.mkdirs();
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmss");
-		String photo = file.getOriginalFilename();
-		String upphoto = sdf.format(new java.util.Date()) + "." + photo.substring(photo.lastIndexOf(".") + 1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String uOriginName = file.getOriginalFilename();
+		String uChangeName = sdf.format(new java.util.Date()) + "."
+		+ uOriginName.substring(uOriginName.lastIndexOf(".") + 1);
 		
-		String renamePath = folder + "\\" + upphoto;
+		String renamePath = folder + "\\" + uChangeName;
 		
 		try {
 			file.transferTo(new File(renamePath));
@@ -187,19 +189,38 @@ public class MemberController {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
 		
-		return upphoto;
+		return uChangeName;
 	}
+	
+	
 	
 			// 회원 정보 수정
 			@RequestMapping("mupdate.do")
 			public String memberUpdate(Member m, Model model,
+										Userpropic u,
 										HttpSession session,
 										@RequestParam("pw") String pw,
 										@RequestParam("post") String post,
 										@RequestParam("address1") String address1,
-										@RequestParam("address2") String address2) {
+										@RequestParam("address2") String address2,
+										@RequestParam(value="reloadFile", required=false) MultipartFile file, HttpServletRequest request) {
+				
+				
+				
+			
+				if(!file.getOriginalFilename().equals("")) { 
+					String uChangeName = saveFile(file, request);
+					System.out.println(file);
+				if(uChangeName != null) {
+							u.setuOriginName(file.getOriginalFilename());
+							u.setuChangeName(uChangeName);
+					}
+				}
+
+
 				
 				m.setAddress(post + ", " + address1 + ", " + address2);
+				
 				
 				System.out.println(pw);
 				

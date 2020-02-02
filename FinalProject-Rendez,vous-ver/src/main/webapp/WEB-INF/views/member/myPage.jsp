@@ -121,6 +121,7 @@
 }
 
 .avatar {
+	margin: auto;
 	width: 138px;
 	height: 138px;
 }
@@ -243,7 +244,6 @@
 					<div class="collapse navbar-collapse navbar-1">
 						<ul class="site-navigation nav navbar-nav">
 							<li><a onclick="scrollToTarget('#portfolio')">찜 목록</a></li>
-							<li><a onclick="scrollToTarget('#moon')">1:1 문의내역</a></li>
 							<li><a onclick="scrollToTarget('#review')">작성한 리뷰</a></li>
 							<li><a onclick="scrollToTarget('#contact')">쿠폰함</a></li>
 						</ul>
@@ -251,28 +251,20 @@
 				</nav>
 			</div>
 		</div>
+		</div>
 		<!-- Navigation Bloc END -->
 
 		<!-- bloc-1 -->
-		<div
-			class="bloc bg-95cdfeef1 bgc-ferrari-red d-bloc tc-white b-parallax"
-			id="bloc-1">
+		<div class="bloc bg-95cdfeef1 bgc-ferrari-red d-bloc tc-white b-parallax" id="bloc-1">
 			<div class="container bloc-lg">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="text-center">
-							<%-- <c:if test="${ !empty userpropic.uOriginName }">
-						<a href="${ contextPath }/resources/user/img/default.jpg"/>
-						</c:if>
-						
-						<c:out value="${ loginUser.uOriginName }"></c:out>
-                    	<c:if test="${ !empty userpropic.uChangeName }">
-						<a href="${ contextPath }/resources/user/img/default.jpg${ userpropic.uChangeName }" download>${ userpropic.uOriginName }</a>
-						</c:if> --%>
 
-							<img src="resources/user/img/default.jpg" class="avatar"
-								alt="User image">
-						</div>
+						
+						<!-- 프로필사진 -->
+						<div class="avatar" alt="User image" style="background-image: url('${ contextPath }/resources/user/img/${ userPropic.uChangeName }'); background-size:cover;"></div> 
+						
 						<h1 class="mg-md text-center tc-black">
 							<c:out value="${ loginUser.user_name }" />
 							님 마이페이지
@@ -299,9 +291,10 @@
 				</div>
 			</div>
 		</div>
+		</div>
 		<!-- bloc-1 END -->
 
-		<!-- portfolio -->
+		<!-- wish -->
 		<div class="bloc l-bloc bgc-white" id="portfolio">
 			<div class="container bloc-lg">
 				<div class="row">
@@ -357,52 +350,42 @@
     });
     </script>
 		</div>
-		<!-- portfolio END -->
+		<!-- wish END -->
 
-		<!-- 문의 -->
-		<div class="bloc l-bloc bgc-white" id="moon">
+		<!-- review start -->
+		<div class="bloc l-bloc bgc-white" id="review">
 			<div class="container bloc-lg">
 				<div class="row">
 					<div class="col-sm-12">
-						<h2 class="mg-md text-center">1:1 문의내역</h2>
+						<h2 class="mg-md text-center">작성한 리뷰</h2>
 
 						<div class="divider-h">
 							<span class="divider divider-half"></span>
 						</div>
 					</div>
 				</div>
-				<div class="moon2">
-					<div class="moonlist">
-						<table id="mymoonTable">
+				<div class="myReview">
+					<div class="myRevieww">
+						<table id="myReviewTable">
 							<tr>
-								<th width="10%">번호</th>
-								<th width="50%">제목</th>
-								<th width="15%">작성자</th>
-								<th width="15%">작성일</th>
-								<th width="10%">답변현황</th>
+								<th width="25%">수업 제목</th>
+								<th width="50%">내용</th>
+								<th width="25%">작성일</th>
 							</tr>
-							<c:forEach var="q" items="${ list }">
-								<tr>
-									<td>${q.qNo}</td>
-									<td><c:if test="${ !empty loginUser }">
-											<c:url var="myQnaDetail" value="myQnaDetail.do">
-												<c:param name="qNo" value="${ q.qNo }" />
-												<c:param name="page" value="${ pi.currentPage }" />
-											</c:url>
-											<a href="${ myQnaDetail }">${ q.qTitle }</a>
-										</c:if> <c:if test="${ empty loginUser }">
-										${ q.qTitle }
-										</c:if></td>
-									<td>${q.qWriter}</td>
-									<td>${q.qDate}</td>
-									<td><c:if test='${ q.aStatus == "N" }'>
-										X
-									</c:if> <c:if test='${ q.aStatus == "Y" }'>
-										O
-									</c:if></td>
-								</tr>
+							<c:if test="${ !empty loginUser }">
+							<c:forEach var="r" items="${ list }">
+							<tr>
+								<c:url var="myReview" value="ReviewDetail.do">
+									<c:param name="lNo" value="${ r.lNo }"/>
+								</c:url>								
+								<td><a href="${ myReview }">${ r.lTitle }</a></td>
+								<td>${r.rContent}</td>
+								<td>${r.rDate}</td>		
+							</tr>
 							</c:forEach>
-							<!-- <a onclick="scrollToTarget('#moon')"></a> -->
+							</c:if>			
+								
+								<!-- <a onclick="scrollToTarget('#moon')"></a> -->
 							<tr align="center" height="20">
 								<td colspan="6">
 									<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
@@ -434,44 +417,9 @@
 								</td>
 							</tr>
 							<c:if test="${ empty list }">
-								<h1>문의 내역이 없습니다.</h1>
+								<h1 style="color:green; font-size: 15px">작성하신 리뷰가 없습니다.</h1>
 							</c:if>
 							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 문의 END -->
-		<!-- review start -->
-		<div class="bloc l-bloc bgc-white" id="review">
-			<div class="container bloc-lg">
-				<div class="row">
-					<div class="col-sm-12">
-						<h2 class="mg-md text-center">작성한 리뷰</h2>
-
-						<div class="divider-h">
-							<span class="divider divider-half"></span>
-						</div>
-					</div>
-				</div>
-				<div class="myReview">
-					<div class="myRevieww">
-						<table id="myReviewTable">
-							<tr>
-								<th width="10%">번호</th>
-								<th width="50%">제목</th>
-								<th width="15%">작성자</th>
-								<th width="15%">작성일</th>
-								<th width="10%">조회수</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>리뷰리뷰</td>
-								<td>회원1</td>
-								<td>2019-12-26</td>
-								<td>1</td>
-							</tr>
 						</table>
 					</div>
 				</div>
@@ -561,9 +509,9 @@
 
 	<!-- 비밀번호 확인 성공 시 넘어가는 div -->
 	<div class="layer_popup" id="layer_pop"
-		style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+		style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); ">
 		<div class="update"
-			style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 600px; height: 800px; border-radius: 0.5rem; z-index: 1;">
+			style="overflow:scroll; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 600px; height: 800px; border-radius: 0.5rem; z-index: 1;">
 				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script> 
 						      $(function() { 
@@ -594,6 +542,10 @@
 					<div>
 
 						<form id="myForm" action="mupdate.do" method="post">
+							<p>
+								PROFILE <input class="w3-input" type="text" id="user_id"
+									name="user_id" readonly value="${ loginUser.user_id }">
+							</p>
 							<p>
 								EMAIL <input class="w3-input" type="text" id="user_id"
 									name="user_id" readonly value="${ loginUser.user_id }">
@@ -701,7 +653,7 @@
    if($("#pw").val()=="") {
     return true;
    }
-   else if(!/^[a-zA-Z0-9!,@,#,$,%,^,&,*,?,_,~]{8,15}$/.test($("#pw").val())){            
+   else if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/.test($("#pw").val())){            
        alert('숫자+영문자+특수문자 조합으로 8자리 이상 15이하로 사용해야 합니다. (사용 가능 특수문자는 !,@,#,$,%,^,&,*,?,_,~ 입니다.)');
        $('#pw').focus();
        return false;

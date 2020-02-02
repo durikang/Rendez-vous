@@ -29,6 +29,7 @@ import com.kh.rendez.member.model.service.MemberService;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.member.model.vo.ReviewList;
 import com.kh.rendez.member.model.vo.Userpropic;
+import com.kh.rendez.support.exception.SupportException;
 import com.kh.rendez.support.model.service.SupportService;
 
 @SessionAttributes("loginUser")
@@ -189,38 +190,43 @@ public class MemberController {
 		return upphoto;
 	}
 	
-	// 회원 정보 수정
-		@RequestMapping("mupdate.do")
-		public String memberUpdate(Member m, Model model,
-									HttpSession session,
-									@RequestParam("pw") String pw,
-									@RequestParam("post") String post,
-									@RequestParam("address1") String address1,
-									@RequestParam("address2") String address2) {
-			
-			m.setAddress(post + ", " + address1 + ", " + address2);
-			
-			if(pw.equals("")) {
-				Member m2 = (Member)session.getAttribute("loginUser");
-				m.setUser_pwd(m2.getUser_pwd());
+			// 회원 정보 수정
+			@RequestMapping("mupdate.do")
+			public String memberUpdate(Member m, Model model,
+										HttpSession session,
+										@RequestParam("pw") String pw,
+										@RequestParam("post") String post,
+										@RequestParam("address1") String address1,
+										@RequestParam("address2") String address2) {
 				
-			} else {
-			m.setUser_pwd(pw);
-			String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
-			m.setUser_pwd(encPwd);
+				m.setAddress(post + ", " + address1 + ", " + address2);
+				
+				System.out.println(pw);
+				
+				if(pw.equals("")) {
+					Member m2 = (Member)session.getAttribute("loginUser");
+					m.setUser_pwd(m2.getUser_pwd());
+					System.out.println(m.getUser_pwd()+1);
+					
+				} else {
+				m.setUser_pwd(pw);
+				String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
+				m.setUser_pwd(encPwd);
+
+				
+				}
+				
+				
+				int result = mService.updateMember(m);
+				
+				if(result > 0) {
+					model.addAttribute("msg2", "회원 정보 수정 성공");
+					model.addAttribute("loginUser", m);
+				} else {
+					throw new MemberException("회원 정보 수정 실패");
+				}
+				return "member/myPage";
 			}
-			
-			int result = mService.updateMember(m);
-			
-			if(result > 0) {
-				model.addAttribute("msg2", "회원 정보 수정 성공");
-				model.addAttribute("loginUser", m);
-			} else {
-				throw new MemberException("회원 정보 수정 실패");
-			}
-			return "member/myPage";
-		}
-		
 		
 		
 		@RequestMapping("mdelete.do")

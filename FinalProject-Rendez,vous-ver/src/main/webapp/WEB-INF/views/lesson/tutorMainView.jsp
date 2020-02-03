@@ -15,10 +15,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=191216" />
-	<link rel="canonical" href="https://taling.me">
+
 
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/mypage_style.css?ver=191216" />
-	<!--link type="text/css" rel="stylesheet" href="/Content/app3/css/header_pc.css?ver=191021" /-->
+	
 	
 	
 	<link href="${contextPath}/resources/h1/css/style_sub17.css?after" rel="stylesheet" type="text/css">
@@ -151,6 +151,19 @@
 		</div>	
 		
 		<h3>튜터 별명 : ${tutor.tNick }</h3>
+		
+		<div class="col-md-5 user-description-box  col-sm-5">
+                      <h4 class="semi-bold no-margin" style="font-weight: 500; color: #505458">John Smith</h4>
+                      <h6 class="no-margin">CEO of web-arch.co.uk</h6>
+                      <br>
+                     <ul>
+                     
+                     
+                     <c:forEach var="tc" items="${tutorCerArr}">
+                     <li class="com">${tc}</li>   
+                     </c:forEach>                           
+                	 </ul>
+        </div>
 		
 		
 		<br>

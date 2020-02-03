@@ -106,11 +106,6 @@ $(function(){
  	 
 	<br>
 	<br>
-	<script>
-	
-	alert(${ pageName});
-	
-	</script>
 
 	
 	<c:import url="../mnCommon/sidebar.jsp" >

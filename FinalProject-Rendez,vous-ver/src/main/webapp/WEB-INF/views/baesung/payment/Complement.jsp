@@ -369,7 +369,7 @@ img {
             ${tClass.lTitle }	</div>
         <div class="apply">
             <div class="pf_box">
-                <div class="pf" style="background-image:url(resources/user/img/${tClass.uCName})"></div>
+                <div class="pf" style="background-image:url('${contextPath }/resources/user/img/${tClass.uCName}')"></div>
                 <p class="triangle-border top gray" style="margin-top:50px; margin-bottom: 45px;">
                     신청해 주셔서 정말 감사합니다.
                     <br>

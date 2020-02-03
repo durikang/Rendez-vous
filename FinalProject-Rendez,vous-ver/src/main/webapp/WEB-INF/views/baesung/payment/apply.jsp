@@ -316,7 +316,7 @@ a {
         </script>
         <div class="apply">
             <div class="pf_box">
-                <div class="pf" style="background-image:url(resources/user/img/${tClass.uCName})"></div>
+                <div class="pf" style="background-image:url('${contextPath }/resources/user/img/${tClass.uCName}')"></div>
                 <p class="triangle-border top gray" style="margin-top:50px; margin-bottom: 46px;">
                     결제/환불 방식은 바쁘시더라도 꼭 읽어보세요.
             </p></div>

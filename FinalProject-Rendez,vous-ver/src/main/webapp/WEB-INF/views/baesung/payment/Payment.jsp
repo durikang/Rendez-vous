@@ -392,7 +392,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
              ${tClass.lTitle }	</div>
         <div class="apply">
             <div class="pf_box">
-                <div class="pf" style="background-image:url(resources/user/img/${tClass.uCName})"></div>
+                <div class="pf" style="background-image:url('${contextPath }/resources/user/img/${tClass.uCName}')"></div>
                 <p class="triangle-border top gray" style="margin-top:50px; margin-bottom: 50px;">
                     결제 후 신청이 완료되니 서둘러주세요! 수업이 조기 마감될 수 있습니다.	
             </p></div>
@@ -617,6 +617,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
         	if(Price == 0){
         		alert("포인트(혹은 쿠폰)로 결제를 완료하였습니다.")
         		location.href = 'payComplete.do?payMethod='+payMethod+'&couponNo='+val+'&Price='+Price+'&usePoint='+usePoint;
+        		return;
         	}	
         		
 

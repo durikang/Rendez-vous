@@ -642,7 +642,7 @@ div ul {
       <h2 class="highc">마감 임박&nbsp;&nbsp;<img src="https://img.icons8.com/offices/33/000000/high-risk.png" style="margin-bottom:-7px;"></h2>
       <div class="swiper-wrapper">      
          <c:forEach var="l" items="${ alist }">
-         <c:if test="${l.remain < 10}">
+         <c:if test="${l.remain/l.total <= 0.2}">
        <div class="swiper-slide" style="height: 560px;">
             <div id="img-area">
                <c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>                  

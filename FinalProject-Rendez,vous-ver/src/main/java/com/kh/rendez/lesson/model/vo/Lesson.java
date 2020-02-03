@@ -95,6 +95,11 @@ public class Lesson {
 	public void setRemain(int remain) {
 		this.remain = remain;
 	}
+	
+	public long getDeTime() {
+		return (this.eTime.getTime() - this.sTime.getTime())/1000/60/60;
+	}
+	
 
 	@Override
 	public String toString() {

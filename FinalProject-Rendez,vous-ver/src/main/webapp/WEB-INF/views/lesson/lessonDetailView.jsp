@@ -188,15 +188,27 @@
 					
 					
 					<c:forEach var="lti" items="${lTime }">
+						
 						<div class="option">
 							<div class="top">
 								<div class="timedetail">
-								<div class="indate"><fmt:formatDate value="${lti.lDay}" pattern="MM.dd(E)"/></div><fmt:formatDate value="${lti.sTime}" pattern="HH:mm"/>~<fmt:formatDate value="${lti.eTime}" pattern="HH:mm"/>							
+								<div class="indate"><fmt:formatDate value="${lti.lDay}" pattern="MM.dd(E)"/></div><fmt:formatDate value="${lti.sTime}" pattern="HH:mm"/>~<fmt:formatDate value="${lti.eTime}" pattern="HH:mm"/>
 								</div>
 							<span>|</span> <div class="region_name"></div> ${ lti.remain }/ ${ lti.total }
 							</div>
 						</div>
+						
+						<c:set value=""/>
+						
 					</c:forEach>
+					
+					
+					
+		
+					
+
+					
+					
 
 
 								
@@ -290,17 +302,7 @@
 		<li data-target="#myCarousel" data-slide-to="${i}">
 				
 		</c:forEach>
-		
-		
-		
-					
-<!-- 		<li data-target="#myCarousel" data-slide-to="1"></li>
 			
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-			
-		<li data-target="#myCarousel" data-slide-to="3"></li> -->
-			
-		
 	</ol>
 	<!--페이지-->
 
@@ -583,7 +585,7 @@
 						<ul>
 							<li class="ar">
 																${ldi.lRegionSub }							</li>							
-							<li class="hu"><font color="#ff005a">1</font>시간/회</li>
+							<li class="hu"><font color="#ff005a"></font>시간/회</li>
 							<li class="gr">
 																인원:<font color="#ff005a">${ minPerson }~${ maxPerson }</font>명
 								</li>

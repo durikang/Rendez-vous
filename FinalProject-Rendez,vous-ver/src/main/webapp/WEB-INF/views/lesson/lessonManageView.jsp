@@ -393,6 +393,14 @@
     </script>
     
     
+    <form name="frmData" id="frmData" action="studentList.do" method="post">
+    <input id="plNo" name="lNo" hidden>
+    <input id="plInning" name="lInning" hidden>
+    <input id="plTitle" name="lTitle" hidden>
+    </form>
+    
+    
+    
     <script>
     
     function asd1(value){
@@ -467,10 +475,21 @@
     	var lNo = $(value).parent().children().eq(0).val();
     	var lInning = $(value).parent().children().eq(1).val();
     	var lTitle = $(value).parent().children().eq(2).val();
+    	
+    	$("#plNo").val(lNo)
+    	$("#plInning").val(lInning)
+    	$("#plTitle").val(lTitle)
+    	
 
 		var pop_title = "신청인 목록" ;
-         
-        window.open("studentList.do?lNo="+lNo+"&lInning="+lInning+"&lTitle="+lTitle, pop_title) ;
+		
+		window.open("studentList.do", pop_title) ;
+		
+		var frmData = document.frmData ;
+		frmData.target = pop_title ;
+		frmData.action = "studentList.do" ;
+		
+		frmData.submit() ;
 
          
     }

@@ -177,6 +177,10 @@ public class ManagerServiceImpl implements ManagerService {
 		// TODO Auto-generated method stub
 		return mnDao.selectYearList2();
 	}
+	@Override
+	public int currentCount() {
+		return mnDao.selectCurrentCount();
+	}
 
 
 }

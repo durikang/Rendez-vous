@@ -62,5 +62,7 @@ public interface ManagerService {
 
 	public ArrayList<String> selectYearList2();
 
+	public int currentCount();
+
 
 }

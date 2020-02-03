@@ -58,8 +58,8 @@ public class TutorDao {
 	}
 
 	//증명사진 전체 갯수 리턴- 두리
-	public int getListCount() {
-		return sqlSession.selectOne("tutorMapper.getListCount");
+	public int getListCount(int uNo) {
+		return sqlSession.selectOne("tutorMapper.getListCount",uNo);
 	}
 
 

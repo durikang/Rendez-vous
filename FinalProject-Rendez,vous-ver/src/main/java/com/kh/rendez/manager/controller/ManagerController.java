@@ -351,7 +351,7 @@ public class ManagerController {
 
 		ArrayList<MemberJoinTutor> RequestTutorlist = mnService.selectTutorList(currentPage, 2);
 		
-		int currentRequest=RequestTutorlist.size();
+		int currentRequest=mnService.currentCount();
 		
 		
 		
@@ -462,7 +462,6 @@ public class ManagerController {
 			@RequestParam(value = "page", required = false) Integer page) {
 		
 		int currentPage = page != null ? page : 1;
-		
 		ArrayList<MemberJoinTutor> AllTutorlist = mnService.searchTutor(search,currentPage);
 		
 		mv.addObject("AllTutorlist",AllTutorlist);

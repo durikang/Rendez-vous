@@ -185,7 +185,7 @@ $(function(){
 									<td>${ m.uId }</td>
 									<td><span class="target" data-toggle="tooltip" data-placement="top" title="${ m.tuNick }">${ m.tuNick }</span></td>
 									<td class="target" data-toggle="tooltip" data-placement="top" title="${ m.tuCareer }">${ m.tuCareer } </td>
-									<td style="width:150px;">
+									<td>
 										<c:choose>
 										<c:when test="${m.tuSocial eq null }">없음</c:when>
 										<c:otherwise>
@@ -213,8 +213,8 @@ $(function(){
 									<td class="td-hidden">${m.uNo}</td>
 									<th scope="row"><input type="checkbox" name="uNo" class="tutor" value="${ m.uNo }"> &nbsp;${m.uNo}</th>
 									<td>${ m.uId }</td>
-									<td class="target" data-toggle="tooltip" data-placement="top" title="${ m.tuNick }">${ m.tuNick }</td>
-									<td style="width:150px;">${ m.tuCareer } </td>
+									<td  title="${ m.tuNick }">${ m.tuNick }</td>
+									<td class="target" data-toggle="tooltip" data-placement="top" style="width:150px;">${ m.tuCareer } </td>
 									<td style="width:150px;">
 										<c:choose>
 										<c:when test="${m.tuSocial eq null }">없음</c:when>
@@ -269,12 +269,15 @@ $(function(){
 								<div class="input-group-append">
 									<select id="searchCondition" name="searchCondition"
 										class="selectpicker">
-										<option value="all"
-											<c:if test="${ search.searchCondition == 'all' }">selected</c:if>>
-											전체</option>
-										<option value="mName"
-											<c:if test="${ search.searchCondition == 'mName' }">selected</c:if>>
-											회원명</option>
+										<option value="uNo"
+											<c:if test="${ search.searchCondition == 'uNo' }">selected</c:if>>
+											회원번호</option>
+										<option value="uId"
+											<c:if test="${ search.searchCondition == 'uId' }">selected</c:if>>
+											이메일</option>
+										<option value="tu_Nic"
+											<c:if test="${ search.searchCondition == 'tu_Nic' }">selected</c:if>>
+											튜텨별명</option>
 									</select>
 								</div>
 								<input type="search" placeholder="회원을 검색하세요" name="searchValue"
@@ -291,6 +294,56 @@ $(function(){
 				</c:if>
 				<hr>
 				<br>
+				<!-- 검색에 대한 페이징 처리  -->
+					
+						<c:if test="${ search ne null }">	
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:choose>
+									<c:when test="${ p eq pi.currentPage }">
+										<li class="page-item active">
+											<a class="page-link" href="#">
+												${ p } <span class="sr-only"></span>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:url var="pagination" value="mnsearch.do">
+											<c:param name="page" value="${ p }" />
+											<c:param name="searchCondition" value="${ search.searchCondition }"/>
+											<c:param name="searchValue" value="${ search.searchValue }"/>
+										</c:url>
+										<li class="page-item">
+											<a class="page-link" href="${ pagination }">${ p } 
+												<span class="sr-only"></span>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:if>
+				
+				
+				<!-- 검색에 대한 페이징 처리  -->
+						<c:if test="${search ne null}">
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							<li class="page-item disabled"><a class="page-link disabled"
+								href="#">Next</a></li>
+						</c:if>
+						
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="after" value="tutorSearch.do">
+								<c:param name="page" value="${ pi.currentPage + 1 }" />
+								<c:param name="searchCondition" value="${ search.searchCondition }"/>
+								<c:param name="searchValue" value="${ search.searchValue }"/>
+							</c:url>
+							<li class="page-item "><a class="page-link"
+								href="${ after }">다음</a></li>
+						</c:if>
+						</c:if>
+				
+				
+				
 				<c:if test="${ RequestTutorlist ne null  }">
 				<!-- 페이징 처리  -->
 				<nav aria-label="...">
@@ -337,7 +390,8 @@ $(function(){
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage }">
 							<c:url var="after" value="mnRequest.do">
-								<c:param name="page" value="${ pi.currentPage + 1 }" />
+								<c:param name="page" value="${ pi.currentPage + 1 }" />	
+								<c:param name="Condition" value="${ Condition }"/>
 							</c:url>
 							<li class="page-item "><a class="page-link"
 								href="${ after }">다음</a></li>

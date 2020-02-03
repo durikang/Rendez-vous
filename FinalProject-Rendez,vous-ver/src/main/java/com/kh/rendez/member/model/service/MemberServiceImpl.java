@@ -62,6 +62,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mDao.selectOne(user_no);
 	}
+
+	@Override
+	public int updatePropic(Userpropic u) {
+		// TODO Auto-generated method stub
+		return mDao.updatePropic(u);
+	}
 	
 
 }

@@ -54,6 +54,10 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.userpropic",user_no);
 	}
 
+	public int updatePropic(Userpropic u) {
+		return sqlSession.update("memberMapper.updateMember1",u);
+	}
+
 
 	
 

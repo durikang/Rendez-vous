@@ -28,6 +28,8 @@ public interface MemberService {
 
 	public Userpropic selectOne(int user_no);
 
+	public int updatePropic(Userpropic u);
+
 
 	
 	

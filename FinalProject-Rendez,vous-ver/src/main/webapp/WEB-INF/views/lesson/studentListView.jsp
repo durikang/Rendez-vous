@@ -94,8 +94,8 @@
                                 </div>
                                 <!-- .left-aside-column-->
                                 </div>
-                                <div id="btnArea" style="margin-bottom: 50px; left:1000px">
-                                <button id="print" class="btn btn-default btn-outline" type="button" style="l"> <span><i class="fa fa-print"></i> Print</span> </button>
+                                <div id="btnArea" style="margin-left: 531px; margin-bottom: 50px">
+                                <button id="print" class="btn btn-default btn-outline" type="button" style="l;width: 500px; height: 70px"> <span><i class="fa fa-print"></i> Print</span> </button>
                                 </div>
                             </div>
                             <!-- /.left-right-aside-column-->

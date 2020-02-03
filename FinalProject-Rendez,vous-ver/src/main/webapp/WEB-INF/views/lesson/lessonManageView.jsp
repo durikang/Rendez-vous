@@ -14,17 +14,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="매력 넘치는 능력자들에게 수업을 들어보세요. 베이킹부터 엑셀까지 다 있다!">
-	<meta property="og:title" content="탈잉 - 세상의 모든 재능">
-	<meta property="og:url" content="https://taling.me/">
-	<meta property="og:image" content="https://taling.me/Content/Images/ogimage2.png" />
-	<meta property="og:description" content="매력 넘치는 능력자들에게 수업을 들어보세요. 베이킹부터 엑셀까지 다 있다!">	
-	<meta name="p:domain_verify" content="1dd028b45d9d85306bb74db3d9911bbb"/>
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=191216" />
-	<link rel="canonical" href="https://taling.me">
 
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/mypage_style.css?ver=191216" />
-	<!--link type="text/css" rel="stylesheet" href="/Content/app3/css/header_pc.css?ver=191021" /-->
 	
 	
 	<link href="${contextPath}/resources/h1/css/style_sub17.css?after" rel="stylesheet" type="text/css">
@@ -47,19 +39,14 @@
 	
 	
     <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
-    <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
-	
-    <meta property="fb:app_id" content="1488135204822133" />
+        
 	
 
-	
 
 
 	
 	
 
-    
-	<!-- Page-hiding snippet (recommended)  -->
 	<style>
 	
 	.async-hide { opacity: 0 !important}

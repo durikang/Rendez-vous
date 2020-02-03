@@ -24,42 +24,30 @@
 	<link rel="stylesheet" href="${contextPath}/resources/h1/css/default.css">
 
 
-	<link rel="canonical" href="https://taling.me">
+
 
 
     <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
-    <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
+        
 
 	<script src="https://taling.me/Scripts/prototype.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   
-    <script src="https://taling.me/Scripts/topbar.js"></script>
-    <script src="https://taling.me/Scripts/common4.js"></script>
-	<script src="https://taling.me/Scripts/func13.js"></script>
-	<script src="https://taling.me/Scripts/controll.js"></script>
-	<script src="https://taling.me/Scripts/motion.js"></script>
-	<script src="https://taling.me/tutor/tutor_common.js"></script>
+    <script src="${contextPath}/resources/h1/Scripts/topbar.js"></script>
+    <script src="${contextPath}/resources/h1/Scripts/common4.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/func13.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/controll.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/motion.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/tutor_common.js"></script>
 	
 	
 
 
 
-    <script src="https://taling.me/Scripts/popper.js"></script>
-    <script src="https://taling.me/Scripts/mainbootstrap.js"></script>
+    <script src="${contextPath}/resources/h1/Scripts/popper.js"></script>
+    <script src="${contextPath}/resources/h1/Scripts/mainbootstrap.js"></script>
 	
-    <meta property="fb:app_id" content="1488135204822133" />
 
-
-
-
-	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-876466920"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'AW-876466920');
-	</script>
     
 	<style>
 		.async-hide { 
@@ -942,7 +930,7 @@
 
 				<br><br>
 				<a onclick="pop_pay()" ><font class="pink"><img src="${contextPath}/resources/h1/Images/icon_info.png">&nbsp;RENDEZ 수수료 정책의 이점에 대해서 더 알아보세요.</font></a>
-				<!--https://taling.me/Tutor/Register_pop.html-->
+				
 				<script>
 					function pop_pay(){
 						$('#pay_pop').show();
@@ -1049,111 +1037,6 @@
 	
 </div>
 
-<script>
-	function setMode(val)
-	{
-		Mode = val;
-		$('#frm-register-detail').submit();
-	}
-
-	var isUploading = false;
-	$('#frm-register-detail').submit(function (e) {
-        e.preventDefault();
-		
-		if($('#isAuth').val() == '0' ){ alert('번호 인증을 해주세요');$('#phone').focus();return false;}
-
-		if($('#picture').val() == '' ){ 
-			if($('#ProfileThumbnailUrl').val() == '//taling.me/Content/Images/placeholders/profile-default.thumb.jpg' ){ 
-				alert('프로필사진을 등록해주세요');$('#picture').focus();return false;
-			}
-		}
-
-		if($('#Description').val() == '' ){ alert('별명을 입력하세요');$('#Description').focus();return false;}
-		
-		
-		if($('#SchoolMajor').val() != '' ){			
-			if($('#SchoolMajorS').val() == '' ){
-				alert('학과를 입력하세요');$('#SchoolMajorS').focus();return false;
-			}
-			if($('#input-cover-image2').val() == '' ){ 			
-				alert('자격 증명 사진을 업로드 하세요');$('#input-cover-image2').focus();return false;						
-			}
-		}
-
-		if($('#SchoolMajor2').val() != '' ){			
-			if($('#SchoolMajor2S').val() == '' ){
-				alert('학과를 입력하세요');$('#SchoolMajor2S').focus();return false;
-			}
-			if($('#input-cover-image3').val() == '' ){ 			
-				alert('자격 증명 사진을 업로드 하세요');$('#input-cover-image3').focus();return false;						
-			}
-		}
-				
-		//if($('#IsPhone').val() == '0' ){ alert('휴대폰 번호를 인증해주세요');$('#Phone2').focus();return false;}
-
-		if(isUploading) {
-			alert('업로드 중입니다. 잠시만 기다려 주세요');
-			return false;
-		}
-		
-		//미리 생성해 놓은 값 중에서 값이 없는 건 disabled
-		$("input[type=text]").each(function() {
-			if($(this).val() == "") {				
-				$(this).attr("disabled",true);
-			}
-		});
-		$("input[type=file]").each(function() {
-			if($(this).val() == "") {				
-				$(this).attr("disabled",true);
-			}
-		});
-
-		var formData = new FormData(this);
-	
-		isUploading = true;
-		$.ajax({
-			type: 'POST',
-			url: '/tutor/regiInfo_proc.php',
-			contentType: false,
-			data: formData,
-			processData: false,
-			success: function (response) {
-				isUploading = false;
-
-				if(response == "error3")
-				{
-					alert("이미지 파일을 확인해주세요! jpg,jpeg,bmp,png 만 가능합니다.");
-					return;
-				}
-				else
-				{			   
-					if(response == '0000')
-					{
-						alert('등록이 완료되었습니다.');
-						if(Mode == 1)
-						{
-							location.href="/tutor/regiTitle/"+$('#Id').val();
-						}
-						else
-						{
-							location.href="/tutor/regiInfo/"+$('#Id').val();
-						}
-
-						
-					}
-					else
-					{
-						alert(response);
-					}
-				}
-			},
-			error: function(response) {
-				isUploading = false;
-			}
-		});
-		return false;
-	});
-</script>
 
 
 	<!-- FOOTER -->

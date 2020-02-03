@@ -13,12 +13,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="내 상황을 딱! 이해하는 튜터들에게 1:1로 수업을 받아보세요. 중국어, 코딩, 미술 등">
-	<meta property="og:title" content="탈잉 - 나만의 튜터를 만나보세요">
-	<meta property="og:url" content="https://taling.me/">
-	<meta property="og:image" content="https://taling.me/Content/Images/ogimage2.png" />
-	<meta property="og:description" content="내 상황을 딱! 이해하는 튜터들에게 1:1로 수업을 받아보세요. 중국어, 코딩, 미술 등">	
-	<meta name="p:domain_verify" content="1dd028b45d9d85306bb74db3d9911bbb"/>
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=1909272" />
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/publy2.css" />
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main15.css?ver=19121" />
@@ -33,47 +27,27 @@
 	<link rel="canonical" href="https://taling.me">
 
 
-    <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
-    <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
+    <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />   
 
-	<script src="https://taling.me/Scripts/prototype.js"></script>
+	<script src="${contextPath }/resources/h1/Scripts/prototype.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   
-    <script src="https://taling.me/Scripts/topbar.js"></script>
-    <script src="https://taling.me/Scripts/common4.js"></script>
-	<script src="https://taling.me/Scripts/func13.js"></script>
-	<script src="https://taling.me/Scripts/controll.js"></script>
-	<script src="https://taling.me/Scripts/motion.js"></script>
-	<script src="https://taling.me/tutor/tutor_common.js"></script>
+    <script src="${contextPath}/resources/h1/Scripts/topbar.js"></script>
+    <script src="${contextPath}/resources/h1/Scripts/common4.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/func13.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/controll.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/motion.js"></script>
+	<script src="${contextPath}/resources/h1/Scripts/tutor_common.js"></script>
 	
 	
 
 
 
-    <script src="https://taling.me/Scripts/popper.js"></script>
-    <script src="https://taling.me/Scripts/mainbootstrap.js"></script>
-	
-    <meta property="fb:app_id" content="1488135204822133" />
+    <script src="${contextPath}/resources/h1/Scripts/popper.js"></script>
+    <script src="${contextPath}/resources/h1/Scripts/mainbootstrap.js"></script>
 
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-MTJJTC6');</script>
-	<!-- End Google Tag Manager -->
 
-	<!-- Global site tag (gtag.js) - AdWords: 876466920 -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-876466920"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
 
-	  gtag('config', 'AW-876466920');
-	</script>
-    
-	<!-- Page-hiding snippet (recommended)  -->
 	<style>
 		.async-hide { 
 			opacity: 0 !important
@@ -91,73 +65,8 @@
 
 	
 	</style>
-	<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-	h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-	(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-	})(window,document.documentElement,'async-hide','dataLayer',4000,
-	{'GTM-NBPXJKP':true});</script>
 
-    <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-77451578-1', 'auto', {allowLinker: true});
-	  ga('require', 'GTM-NBPXJKP');
-	  ga('send', 'pageview');
-
-	</script>
-	<!-- Facebook Pixel Code -->
-	<script>
-	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-	document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '666003960220481');
-	fbq('track', "PageView");
-	</script>
-	<noscript><img height="1" width="1" style="display:none"
-	src="https://www.facebook.com/tr?id=666003960220481&ev=PageView&noscript=1"
-	/></noscript>
-	<!-- End Facebook Pixel Code -->
-	<!-- Naver --> 
-	<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script> 
-	<script type="text/javascript"> 
-	if (!wcs_add) var wcs_add={};
-	wcs_add["wa"] = "s_568925707495";
-	if (!_nasa) var _nasa={};
-	wcs.inflow();
-	wcs_do(_nasa);
-	</script>
-	<!-- Naver -->
-	<script>
-		window.fbAsyncInit = function () {
-			FB.init({
-				appId: '1488135204822133',
-				xfbml: true,
-				version: 'v2.8'
-			});
-		};
-
-		(function (d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) { return; }
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/ko_KR/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-
-		$(document).mouseup(function (e){
-			if($(e.target).attr('datasearch') != 'yes'){	
-				$('.weekly_best').hide();
-				$('.inner_area','.weekly_best').hide();
-				$('div','.weekly_best').removeClass("inner_area");	
-			}
-		});
-	</script>
 	<script>
 		function mySub(){
 			if($('#mySub').css('display')!='block'){
@@ -175,10 +84,8 @@
 
 </head>
 <body style="">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTJJTC6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
+
 <div id="wrap">
 <!--HEADER -->
 	<div class="hcont">

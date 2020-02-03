@@ -480,7 +480,7 @@
        $("#plInning").val(lInning)
        $("#plTitle").val(lTitle)
 
-		
+	
        
       var pop_title = "신청인 목록" ;
       

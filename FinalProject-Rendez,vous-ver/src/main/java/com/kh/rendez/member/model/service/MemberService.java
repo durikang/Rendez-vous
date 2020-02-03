@@ -2,9 +2,12 @@ package com.kh.rendez.member.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.rendez.Wish.model.vo.Wish;
+import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.member.model.vo.ReviewList;
 import com.kh.rendez.member.model.vo.Userpropic;
+import com.kh.rendez.member.model.vo.WishList;
 
 public interface MemberService {
 	
@@ -29,6 +32,12 @@ public interface MemberService {
 	public Userpropic selectOne(int user_no);
 
 	public int updatePropic(Userpropic u);
+
+	public ArrayList<WishList> selectList1(int user_no);
+
+	public ArrayList<Wish> selectListWi(int userNo);
+
+	public ArrayList<WishList> selectListl(int l_no);
 
 
 	

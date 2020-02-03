@@ -25,11 +25,14 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.rendez.Wish.model.vo.Wish;
+import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.member.model.exception.MemberException;
 import com.kh.rendez.member.model.service.MemberService;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.member.model.vo.ReviewList;
 import com.kh.rendez.member.model.vo.Userpropic;
+import com.kh.rendez.member.model.vo.WishList;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -57,7 +60,7 @@ public class MemberController {
 	      
 	      if(loginUser != null && bcryptPasswordEncoder.matches(pwd, loginUser.getUser_pwd())) {
 	         session.setAttribute("loginUser", loginUser);
-	         return "home";
+	         return "redirect:home.do";
 	      } else {
 	         model.addAttribute("msg", "로그인 실패");
 	         return "member/loginPage";
@@ -93,11 +96,27 @@ public class MemberController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int userNo = loginUser.getUser_no();
 		
+						
+		ArrayList<Wish> w = mService.selectListWi(userNo);
+		
+		for(int i = 0; i<w.size(); i++) {
+			Wish c = w.get(i);
+			ArrayList<WishList> l = mService.selectListl(c.getL_no());
+			mv.addObject("list1", l);
+			System.out.println(l);
+		}
+		
+	
+		
+		
 		ArrayList<ReviewList> r = mService.selectList(userNo);
+		
+		
 		
 		Userpropic u = mService.selectOne(loginUser.getUser_no());
 		
 		System.out.println(r);
+		
 		mv.addObject("list", r);
 		mv.addObject("userPropic", u);
 		mv.setViewName("member/myPage");

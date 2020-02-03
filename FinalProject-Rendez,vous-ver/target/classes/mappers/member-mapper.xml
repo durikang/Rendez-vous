@@ -32,8 +32,43 @@
 		<id property="uNo" column="USER_NO"/>
 		<result property="uOriginName" column="U_O_NAME"/>
 		<result property="uChangeName" column="U_C_NAME"/>
-		
 	</resultMap>
+	<!-- 찜리스트 -->
+	<resultMap type="WishList" id="WishList">
+		<id property="l_no" column="L_NO"/>
+		<result property="l_title" column="L_TITLE"/>
+		<result property="l_region" column="L_REGION"/>
+		<result property="l_region_sub" column="L_REGION_SUB"/>
+		<result property="l_day" column="L_DAY"/>
+		<result property="total" column="TOTAL"/>
+		<result property="price" column="PRICE"/>
+		<result property="o_name" column="O_NAME"/>
+		<result property="c_name" column="C_NAME"/>
+		<result property="l_status" column="L_STATUS"/>
+		<result property="remain" column="REMAIN"/>
+	</resultMap>
+		<resultMap type="Wish" id="Wish">
+		<id property="user_no" column="USER_NO"/>
+		<result property="l_no" column="L_NO"/>
+		<result property="w_no" column="W_NO"/>
+		<result property="w_date" column="W_DATE"/>
+	</resultMap>
+	<!-- 
+	<resultMap id="liResultSet" type="LessonInfo">
+		<id property="lNo" column="L_NO"/>
+		<result property="lTitle" column="L_TITLE"/>
+		<result property="lIntroduction" column="L_INTRODUCTION"/>
+		<result property="lTarget" column="L_TARGET"/>
+		<result property="lYtb" column="L_YTB"/>
+		<result property="lRegion" column="L_REGION"/>
+		<result property="lRegionSub" column="L_REGION_SUB"/>
+		<result property="lRegionDetail" column="L_REGION_DETAIL"/>
+		<result property="lCateMain" column="L_CATE_MAIN"/>
+		<result property="lCateSub" column="L_CATE_SUB"/>
+		<result property="lPrice" column="PRICE"/>
+		<result property="lStatus" column="L_STATUS"/>
+		<result property="uNo" column="USER_NO"/>
+	</resultMap> -->
 	
 	<select id="loginCheck" resultType="int">
 			SELECT count(*) FROM member
@@ -103,5 +138,28 @@
 		join userpropic using(user_no)
 		where user_no=${value}
 	</select>
+	
+	
+	<select id="selectWishList1" resultMap="reviewListSet">
+		SELECT *
+		FROM WISH_LIST
+		WHERE USER_NO = #{user_no}
+	</select>
+	
+	<select id="wishw" resultMap="Wish">
+		SELECT *
+		FROM WISH
+		WHERE USER_NO = #{user_no}
+	</select>
+	
+	<select id="lesson" resultMap="WishList">
+		SELECT *
+		FROM WISH_LIST
+		WHERE L_NO = #{l_no}
+	</select>
+	
+	
+	
+	
 
 </mapper>

@@ -222,6 +222,18 @@
         -webkit-align-items: center;
         align-items: center;
     }
+    
+    #slide-img {
+   width:90%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+   height:90%;
+   border-radius:20px;
+   }
+
+   
+   
+
+
+
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -311,26 +323,31 @@
 				</div>
 
 				<!-- Swiper -->
-    <div class="swiper-container">
+<div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
-            <div class="swiper-slide">Slide 6</div>
-            <div class="swiper-slide">Slide 7</div>
-            <div class="swiper-slide">Slide 8</div>
-            <div class="swiper-slide">Slide 9</div>
-            <div class="swiper-slide">Slide 10</div>
+        <c:forEach var="p" items="${ list1 }">
+            <div class="swiper-slide">
+            <div id="img-area">
+            <c:url var="goLesson" value="lessonDetail.do?lNo=${ p.l_no }"/>
+             <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ p.c_name }"></a>
+            </div>
+            <div id="text-area">
+            <h3>${ p.l_title }</h3>
+            <p>${p.l_day} 시작 : ${ p.l_region } ${p.l_region_sub }</p>
+            <p>${ p.price }원</p>
+               <img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
+               <p style="color:#F15F5F; float:left;">&nbsp;${ p.total }명 중 ${ p.remain }</p>  
+            </div>
+            </div>
+         </c:forEach>
         </div>
+        
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
         <!-- Add Arrows -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
-
     <!-- Swiper JS -->
     <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
 

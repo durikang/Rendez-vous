@@ -43,6 +43,8 @@
       <typeAlias type="com.kh.rendez.Wish.model.vo.Wish" alias="Wish"/>
       <typeAlias type="com.kh.rendez.member.model.vo.ReviewList" alias="ReviewList"/>
       <typeAlias type="com.kh.rendez.member.model.vo.Userpropic" alias="Userpropic"/>
+      <typeAlias type="com.kh.rendez.member.model.vo.WishList" alias="WishList"/>
+      <typeAlias alias="LessonInfo" type="com.kh.rendez.lesson.model.vo.LessonInfo"/>
       <!-- 준섭  -->
       <typeAlias type="com.kh.rendez.support.model.vo.Qna" alias="Qna"/>
       <typeAlias type="com.kh.rendez.support.model.vo.Answer" alias="Answer"/>

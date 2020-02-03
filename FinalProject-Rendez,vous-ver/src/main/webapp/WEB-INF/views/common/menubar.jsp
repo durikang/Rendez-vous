@@ -154,7 +154,7 @@ $(function(){
 
 </script>
 <div id="loading"><img id="loading-image" src="${contextPath }/resources/managerResources/Img/loading.gif" alt="Loading..." /></div>
-s
+
 
    <c:if test="${ !empty msg}">
       <script>

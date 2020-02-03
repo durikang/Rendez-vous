@@ -141,7 +141,7 @@
 	opacity: 0.9;
 }
 
-.modal3 {
+.modal3, .modal4 {
 	z-index: 1;
 	position: fixed;
 	left: 0;
@@ -156,14 +156,14 @@
 		0.25s;
 }
 
-.show-modal3 {
+.show-modal3, .show-modal4 {
 	opacity: 1;
 	visibility: visible;
 	transform: scale(1.0);
 	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
-.modal-content3 {
+.modal-content3, .modal-content4 {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -175,7 +175,7 @@
 	border-radius: 0.5rem;
 }
 
-.close-button5 {
+.close-button5, .close-button6 {
 	float: right;
 	width: 1.5rem;
 	line-height: 1.5rem;
@@ -185,7 +185,7 @@
 	background-color: lightgray;
 }
 
-.close-button5:hover {
+.close-button5:hover, .close-button6:hover {
 	background-color: darkgray;
 }
 
@@ -264,7 +264,6 @@
 						
 						<!-- 프로필사진 -->
 						<div class="avatar" alt="User image" style="background-image: url('${ contextPath }/resources/user/img/${ userPropic.uChangeName }'); background-size:cover;"></div> 
-						
 						<h1 class="mg-md text-center tc-black">
 							<c:out value="${ loginUser.user_name }" />
 							님 마이페이지
@@ -478,40 +477,14 @@
 			</form>
 		</div>
 	</div>
-
-	<script>
-							var modal = document.querySelector(".modal3");
-				            var trigger = document.querySelector('#trigger3');
-				            var closeButton = document.querySelector(".close-button5");
-
-				    
-				            function toggleModal() {
-				                modal.classList.toggle("show-modal3");
-				            }
-
-				            function windowOnClick(event) {
-				                if (event.target === modal) {
-				                    toggleModal();
-				                } else if (event.target === modal2) {
-				                    toggleModal2();
-				                }
-				            }
-				    
-				            trigger.addEventListener("click", toggleModal);
-				            closeButton.addEventListener("click", toggleModal);
-				            window.addEventListener("click", windowOnClick);
-                    	</script>
-
-
-
-
-
-
+	
+	<div id="btn" style="display:none;" class="trigger4"></div>
+	
 	<!-- 비밀번호 확인 성공 시 넘어가는 div -->
-	<div class="layer_popup" id="layer_pop"
-		style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); ">
-		<div class="update"
-			style="overflow:scroll; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 600px; height: 800px; border-radius: 0.5rem; z-index: 1;">
+	<div class="modal4"> 
+            <div class="modal-content2"> 
+                 <div class="update"
+			style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 1000px; height: 620px; border-radius: 0.5rem; z-index: 1;">
 				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script> 
 						      $(function() { 
@@ -536,12 +509,13 @@
 			<div class="w3-content w3-container w3-margin-top">
 				<div class="w3-container w3-card-4">
 					<div class="w3-center w3-large w3-margin-top">
+                <span class="close-button6">&times;</span> 
 						<h3>내 정보</h3>
 						<br>
 					</div>
 					<div>
-
 						<form id="myForm" action="mupdate.do" method="post" enctype="multipart/form-data">
+					      <div style="float:left; width:47.5%;">					
 							<p>
 								PROFILE <input class="w3-input" type="file" id="pro" name="reloadFile" >
 							</p>
@@ -561,6 +535,13 @@
 								NAME <input class="w3-input" type="text" id="user_name"
 									name="user_name" value="${ loginUser.user_name }" required>
 							</p>
+							</div>
+							
+							<div style="float:left; width:5%;">
+							<br><br>
+							</div>
+							
+							<div style="float:left; width:47.5%;">
 							<p>
 								GENDER <br>
 								<c:if test="${ loginUser.gender eq 'M' }">
@@ -612,7 +593,8 @@
 									</c:if>
 								</c:forTokens>
 							</p>
-
+							</div>
+							
 							<p class="w3-center">
 								<button type="submit"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" id="btnCng">회원정보
@@ -625,21 +607,52 @@
 								<button type="button"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
 									onclick="location.href='${ mdelete }'">탈퇴하기</button>
-								<td align="right" class="pop"><a href="mypage.do"><font color="black">닫기</font></a>
-								</td> <br>
+								<br>
 							</div>
 						</form>
 					</div>
 				</div>
-			</div>
+            </div> 
+        </div>    
+	
+						<script>
+							var modal = document.querySelector(".modal3");
+				            var modal2 = document.querySelector(".modal4");
 
-			<script>
-				$('#layer_pop').hide();
-			</script>
-			
+				            var trigger = document.querySelector('#trigger3');
+				            var trigger2 = document.querySelector(".trigger4");
+
+				            var closeButton = document.querySelector(".close-button5");
+				            var closeButton2 = document.querySelector(".close-button6");
+				    
+				            function toggleModal() {
+				                modal.classList.toggle("show-modal3");
+				            }
+				            
+				            function toggleModal2() {
+				                modal2.classList.toggle("show-modal4");
+				            }
+
+				            function windowOnClick(event) {
+				                if (event.target === modal) {
+				                    toggleModal();
+				                } else if (event.target === modal2) {
+				                    toggleModal2();
+				                }
+				            }
+				    
+				            trigger.addEventListener("click", toggleModal);
+				            trigger2.addEventListener("click", toggleModal2);
+
+				            closeButton.addEventListener("click", toggleModal);
+				            closeButton2.addEventListener("click", toggleModal2);
+
+				            window.addEventListener("click", windowOnClick);
+                    	</script>
+
 			<c:if test="${ !empty msg3 }">
 				<script>
-					$('#layer_pop').show(); //회원수정 창 열기
+					$('#btn').trigger("click"); //회원수정 창 열기 (div btn 만들어서 숨겨놓고 강제로 클릭 이벤트 발생하게 함!)
 				</script>
 			</c:if>
 		</div>
@@ -749,6 +762,8 @@
 	      }
 	  });  
 	});
+	   
+	   
    </script>
 	
 	<c:import url="../common/footbar.jsp" />

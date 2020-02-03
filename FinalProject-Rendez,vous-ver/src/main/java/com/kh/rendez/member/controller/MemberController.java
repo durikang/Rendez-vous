@@ -30,8 +30,6 @@ import com.kh.rendez.member.model.service.MemberService;
 import com.kh.rendez.member.model.vo.Member;
 import com.kh.rendez.member.model.vo.ReviewList;
 import com.kh.rendez.member.model.vo.Userpropic;
-import com.kh.rendez.support.exception.SupportException;
-import com.kh.rendez.support.model.service.SupportService;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -42,7 +40,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
-	private SupportService sService;
 
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -197,13 +194,17 @@ public class MemberController {
 			// 회원 정보 수정
 			@RequestMapping("mupdate.do")
 			public String memberUpdate(Member m, Model model,
-										Userpropic u,
 										HttpSession session,
+										Userpropic u,
 										@RequestParam("pw") String pw,
 										@RequestParam("post") String post,
 										@RequestParam("address1") String address1,
 										@RequestParam("address2") String address2,
 										@RequestParam(value="reloadFile", required=false) MultipartFile file, HttpServletRequest request) {
+				
+				int uNo=((Member)session.getAttribute("loginUser")).getUser_no();
+	            u.setuNo(uNo);
+	            
 				
 				
 				
@@ -234,15 +235,16 @@ public class MemberController {
 				String encPwd = bcryptPasswordEncoder.encode(m.getUser_pwd());
 				m.setUser_pwd(encPwd);
 
-				
 				}
 				
 				
+				int result2 =mService.updatePropic(u);
 				int result = mService.updateMember(m);
 				
-				if(result > 0) {
+				if(result > 0 || result2 > 0) {
 					model.addAttribute("msg2", "회원 정보 수정 성공");
 					model.addAttribute("loginUser", m);
+					model.addAttribute("userPropic" , u);
 				} else {
 					throw new MemberException("회원 정보 수정 실패");
 				}

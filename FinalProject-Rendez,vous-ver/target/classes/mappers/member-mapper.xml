@@ -71,23 +71,25 @@
 		WHERE USER_ID = #{user_id}
 	</update>
 	
-	<update id="updateMember" parameterType="Member">
-		UPDATE ALL
-      	MEMBER
-		SET USER_NAME = #{user_name},
-			USER_PWD = #{user_pwd},
-			GENDER = #{gender},
-			AGE = #{age},
-			PHONE = #{phone},
-			ADDRESS = #{address},
-			UPDATE_DATE = SYSDATE
-		WHERE USER_ID = #{user_id}
-      	USERPROPIC
-     	SET U_O_NAME = #{uOriginName},
-     	    U_C_NAME = #{uChangeName}
-      	SELECT *
-      	from dual
-	</update>
+   <update id="updateMember" parameterType="Member">
+      update member
+      SET USER_NAME = #{user_name},
+          USER_PWD = #{user_pwd},
+          GENDER = #{gender},
+          AGE = #{age},
+          PHONE = #{phone},
+          ADDRESS = #{address},
+          UPDATE_DATE = SYSDATE
+      WHERE USER_ID = #{user_id}
+   </update>
+   
+	<update id="updateMember1" parameterType="Userpropic">
+      UPDATE USERPROPIC
+      SET U_O_NAME = #{uOriginName},
+          U_C_NAME = #{uChangeName}
+      WHERE USER_NO = #{uNo}
+   </update>
+   
 	
 	<select id="selectReviewList" resultMap="reviewListSet">
 		SELECT *

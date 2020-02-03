@@ -579,8 +579,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<div class="class_title">
 					
 					<!--찜하기 시작-->
+					<form id="form" name="l_no">
 						<a class="bnt_wishlist" id="won"><img src="${contextPath}/resources/h1/Images/icon_btn_wish_on.png"> 찜하기</a>
 						<a class="bnt_wishlist" id="woff"><img src="${contextPath}/resources/h1/Images/icon_btn_wish.png"> 찜하기</a>
+					</form>
 					<!--찜하기 끝-->
 					
 					

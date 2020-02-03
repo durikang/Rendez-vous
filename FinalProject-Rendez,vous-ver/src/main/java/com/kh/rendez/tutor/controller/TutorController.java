@@ -40,7 +40,7 @@ public class TutorController {
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		Tutor tutor = tService.selectTutorInfo(loginUser.getUser_no());
-
+		String[] tutorCerArr = tutor.gettCareer().split(","); 
 		
 		int nowCount = lService.selectNowCount(loginUser.getUser_no());
 		int nowSum = lService.selectNowSum (loginUser.getUser_no());
@@ -49,6 +49,7 @@ public class TutorController {
 
 		mv.addObject("tutor",tutor);
 		
+		mv.addObject("tutorCerArr",tutorCerArr);
 		mv.addObject("nowCount",nowCount);
 		mv.addObject("nowSum",nowSum);
 		mv.addObject("totalCount",totalCount);

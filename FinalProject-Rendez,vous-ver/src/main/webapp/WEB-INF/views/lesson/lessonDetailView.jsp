@@ -9,10 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 	<title>${ldi.lTitle }</title>
-	<!-- <meta property="og:url" content="http://taling.me/Talent/Detail/166" /> -->
-	<link rel="image_src" href="http://s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/41d6f52384099fcb7eeeacbbf2727e37b3ecb4b3.jpg" />
 	
-	<!-- Page-hiding snippet (recommended)  -->
 	<style>
 		.async-hide { 
 			opacity: 0 !important
@@ -83,26 +80,9 @@
 
 	</style>
 	
-	<script>
-	(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-	h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-	(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-	})(window,document.documentElement,'async-hide','dataLayer',4000,
-	{'GTM-NBPXJKP':true});
-	</script>
 
-    <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-77451578-1', 'auto', {allowLinker: true});
-	  ga('require', 'GTM-NBPXJKP');
-	  ga('set', 'contentGroup1', '국악');
-	  ga('send', 'pageview');
 
-	</script>
 
 	
 	<meta charset="UTF-8">   
@@ -144,59 +124,11 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     
-    
-    
-    
-  
-    
+
 	
-    <meta property="fb:app_id" content="1488135204822133" />
 
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-MTJJTC6');</script>
-	<!-- End Google Tag Manager -->
 
-	<!-- Global site tag (gtag.js) - AdWords: 876466920 -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-876466920"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
 
-	  gtag('config', 'AW-876466920');
-	</script>
-    
-   
-	<!-- Facebook Pixel Code -->
-	<script>
-	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-	document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '666003960220481');
-	fbq('track', "PageView");
-	</script>
-	<noscript><img height="1" width="1" style="display:none"
-	src="https://www.facebook.com/tr?id=666003960220481&amp;ev=PageView&amp;noscript=1"
-	/></noscript>
-	<!-- End Facebook Pixel Code -->
-	<!-- Naver --> 
-	<script type="text/javascript" src="http://wcs.naver.net/wcslog.js"> </script> 
-	<script type="text/javascript"> 
-	if (!wcs_add) var wcs_add={};
-	wcs_add["wa"] = "s_568925707495";
-	if (!_nasa) var _nasa={};
-	wcs.inflow();
-	wcs_do(_nasa);
-	</script>
-	<!-- Naver -->
-	
 	<style>
 		.mySlides {display:none}
 		.w3-left, .w3-right, .w3-badge {cursor:pointer}
@@ -215,41 +147,12 @@
 	
 </head>
 
-<script>
-	window.fbAsyncInit = function () {
-		FB.init({
-			appId: '1488135204822133',
-			xfbml: true,
-			version: 'v2.8'
-		});
-	};
-
-	(function (d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) { return; }
-		js = d.createElement(s); js.id = id;
-		js.src = "http://connect.facebook.net/ko_KR/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-
-	$(document).mouseup(function (e){
-		if($(e.target).attr('datasearch') != 'yes'){	
-			$('.weekly_best').hide();
-			$('.inner_area','.weekly_best').hide();
-			$('div','.weekly_best').removeClass("inner_area");	
-		}
-	});
-</script>
-
 
 
 
 
 <body style="">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTJJTC6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
 <div id="wrap">
 <!--HEADER -->
 	<div class="hcont">
@@ -262,21 +165,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 <!-- CONTAINER -->
 <div id="container_detail">
-<input type="hidden" id="tutorName" value="선찬주">
-<input type="hidden" id="tutorImage" value="//taling.me/Content/Uploads/Profile/s_aa73a9b108426fbddb18c590ffd278ea8117ef07.png">
-
-<input type="hidden" id="Account_Id" value="">
-<input type="hidden" id="Talent_Id" value="166">
-<input type="hidden" id="Owner_Id" value="262">
-
-
 
 <div class="class_wrap">
 		
-		<!-- 수업결제 정보 -->
+		
 		<div class="class_price" id="class_price" style="position:relative; width:300px">
-			<!--div class="pricetxt">총 1회 / 3시간  <span>12,000원/1시간</span></div-->
-			<!--원써니 수정 장소/시간 pc-->
+
 			<div class="regions">
 				<div class="title">
 				수업 일정				</div>
@@ -294,15 +188,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					
 					
 					<c:forEach var="lti" items="${lTime }">
+						
 						<div class="option">
 							<div class="top">
 								<div class="timedetail">
-								<div class="indate"><fmt:formatDate value="${lti.lDay}" pattern="MM.dd(E)"/></div><fmt:formatDate value="${lti.sTime}" pattern="HH:mm"/>~<fmt:formatDate value="${lti.eTime}" pattern="HH:mm"/>							
+								<div class="indate"><fmt:formatDate value="${lti.lDay}" pattern="MM.dd(E)"/></div><fmt:formatDate value="${lti.sTime}" pattern="HH:mm"/>~<fmt:formatDate value="${lti.eTime}" pattern="HH:mm"/>
 								</div>
 							<span>|</span> <div class="region_name"></div> ${ lti.remain }/ ${ lti.total }
 							</div>
 						</div>
+						
+						<c:set value=""/>
+						
 					</c:forEach>
+					
+					
+					
+		
+					
+
+					
+					
 
 
 								
@@ -383,7 +289,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		
 		<!-- 상단이미지 -->
 		<div class="class_img" style="margin-right:498px">
-			<!-- <iframe width="840" height="540" src="https://taling.me/Talent/lightslider/?Id=166" frameborder="0"></iframe> -->
+		
 			
 			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false"> 
 	
@@ -396,17 +302,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<li data-target="#myCarousel" data-slide-to="${i}">
 				
 		</c:forEach>
-		
-		
-		
-					
-<!-- 		<li data-target="#myCarousel" data-slide-to="1"></li>
 			
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-			
-		<li data-target="#myCarousel" data-slide-to="3"></li> -->
-			
-		
 	</ol>
 	<!--페이지-->
 
@@ -540,7 +436,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<li><a href="#tutorinfo" id="tli">튜터</a></li>
 					<li><a href="#Introduction" id="ili">수업소개</a></li>
 					<li><a href="#review" id="rli">리뷰</a></li>
-					<li><a href="#qna" id="qli">실시간톡</a></li>
+					<li><a href="#qna" id="qli">고객센터</a></li>
 				</ul>
 			</div>
 			<!-- /상세단락 네비 -->
@@ -682,14 +578,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<div class="info">
 						<a class="starimg">
 							<div class="title">${ldi.lTitle }</div>
-							<!-- <img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png">								(6) -->
+							
 													</a>
 					</div>
 					<div class="info">
 						<ul>
 							<li class="ar">
 																${ldi.lRegionSub }							</li>							
-							<li class="hu"><font color="#ff005a">1</font>시간/회</li>
+							<li class="hu"><font color="#ff005a"></font>시간/회</li>
 							<li class="gr">
 																인원:<font color="#ff005a">${ minPerson }~${ maxPerson }</font>명
 								</li>
@@ -1073,7 +969,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<p class="lead mb-2">공휴일 휴무</p>
 					</div>
 					<p style="padding-top:10px;"></p>
-					<a href="" target="_blank"><img src="resources/support/img/time1.jpg" width="50%"></a><a href="https://play.google.com/store/apps/details?id=com.taling" target="_blank"><img src="https://taling.me/Content/Images/and.png" width="50%"></a>
+					<a href="" target="_blank"><img src="resources/support/img/time1.jpg" width="50%"></a><a href="" target="_blank"><img src="https://taling.me/Content/Images/and.png" width="50%"></a>
 						
 						<a href="support_main.do" class="btn_st">고객센터</a>						
 										
@@ -1117,74 +1013,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- //비슷한강의 -->
 
 </div>
-<div id="popup-write-review" class="popup popup-write-review" data-hide="popup-write-review">
-	<form action="https://taling.me/Talent/WriteReview/166" method="POST" class="popup-content" id="frm-write-review">
-		<h1>
-			<strong>선찬주</strong> 튜터의 수업은 어떠셨나요?
-		</h1>
-		<div class="review-scores row">
-			<div class="review-scores-detail review-scores-price">
-				<label>커리큘럼</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="priceScore" id="priceScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-quality">
-				<label>전달력</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="qualityScore" id="qualityScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-recommend">
-				<label>준비성</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="recommendScore" id="recommendScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-tran">
-				<label>친절도</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="TranScore" id="TranScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-kind">
-				<label>&nbsp;&nbsp;&nbsp;&nbsp;시간준수</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="KindScore" id="KindScore" value="0">
-				</div>
-			</div>
-		</div>
-		<div class="review-content">
-			<textarea name="content" id="content"></textarea>
-			<button type="submit" class="btn btn-pink btn-sm pull-right">리뷰 올리기</button>
-		</div>
-	</form>
-</div>
+
 
 <div id="popup-write-qna" class="popup popup-write-qna" data-hide="popup-write-qna">
 	<div class="popup-content" id="frm-write-review">
@@ -1275,13 +1104,6 @@ $(window).scroll(function() {
 </script>
 
 <c:import url="../common/footbar.jsp"/>
-
- 
-
-
-
-
-<!-- Mirrored from taling.me/Talent/Detail/166 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Dec 2019 22:07:36 GMT -->
 
 </body>
 </html>

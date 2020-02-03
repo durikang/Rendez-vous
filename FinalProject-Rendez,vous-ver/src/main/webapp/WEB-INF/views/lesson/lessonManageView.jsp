@@ -10,19 +10,21 @@
 
     <title>수업 관리 페이지</title>   
 
-   
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=191216" />
 
-   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/mypage_style.css?ver=191216" />
-   
-   
-   <link href="${contextPath}/resources/h1/css/style_sub17.css?after" rel="stylesheet" type="text/css">
-   
-   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=1909272" />
-   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/publy2.css" />
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/mypage_style.css?ver=191216" />
+	
+	
+	<link href="${contextPath}/resources/h1/css/style_sub17.css?after" rel="stylesheet" type="text/css">
+	
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=1909272" />
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/publy2.css" />
+
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main15.css?ver=19121" />
    <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main16.css" />
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/main18.css" />
@@ -40,18 +42,17 @@
    
     <link rel="shortcut icon" href="${contextPath }/resources/h1/Images/logo.ico" />
         
-   
-
 
 
    
    
 
-   <style>
-   
-   .async-hide { opacity: 0 !important}
-   
-        .modal {
+	<style>
+	
+	.async-hide { opacity: 0 !important}
+	
+	  	.modal {
+
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
@@ -471,26 +472,27 @@
     
     
     function openPop(value){
-       
-       var lNo = $(value).parent().children().eq(0).val();
-       var lInning = $(value).parent().children().eq(1).val();
-       var lTitle = $(value).parent().children().eq(2).val();
-       
-       $("#plNo").val(lNo)
-       $("#plInning").val(lInning)
-       $("#plTitle").val(lTitle)
 
-	
-       
-      var pop_title = "신청인 목록" ;
-      
-      window.open("studentList.do", pop_title) ;
-      
-      var frmData = document.frmData ;
-      frmData.target = pop_title ;
-      frmData.action = "studentList.do" ;
-      
-      frmData.submit() ;
+    	
+    	var lNo = $(value).parent().children().eq(0).val();
+    	var lInning = $(value).parent().children().eq(1).val();
+    	var lTitle = $(value).parent().children().eq(2).val();
+    	
+    	$("#plNo").val(lNo)
+    	$("#plInning").val(lInning)
+    	$("#plTitle").val(lTitle)
+    	
+
+		var pop_title = "신청인 목록" ;
+		
+		window.open("studentList.do", pop_title) ;
+		
+		var frmData = document.frmData ;
+		frmData.target = pop_title ;
+		frmData.action = "studentList.do" ;
+		
+		frmData.submit() ;
+
 
          
     }

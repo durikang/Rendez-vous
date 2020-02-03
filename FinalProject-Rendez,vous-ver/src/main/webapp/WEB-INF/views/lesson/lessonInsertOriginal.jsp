@@ -12,12 +12,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="내 상황을 딱! 이해하는 튜터들에게 1:1로 수업을 받아보세요. 중국어, 코딩, 미술 등">
-	<meta property="og:title" content="탈잉 - 나만의 튜터를 만나보세요">
-	<meta property="og:url" content="https://taling.me/">
-	<meta property="og:image" content="https://taling.me/Content/Images/ogimage2.png" />
-	<meta property="og:description" content="내 상황을 딱! 이해하는 튜터들에게 1:1로 수업을 받아보세요. 중국어, 코딩, 미술 등">	
-	<meta name="p:domain_verify" content="1dd028b45d9d85306bb74db3d9911bbb"/>
     <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/my_header_style.css?ver=1909272" />
 	<link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/publy2.css" />
     <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/main15.css?ver=19121" />
@@ -29,11 +23,6 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/h1/css/default.css">
 
 
-	<link rel="canonical" href="https://taling.me">
-
-
-    <link rel="shortcut icon" href="//taling.me/Content/Images/favicon.ico" />
-    <link rel="apple-touch-icon" href="//taling.me/Content/Images/mobicon.png"/>    
 
 	<script src="https://taling.me/Scripts/prototype.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

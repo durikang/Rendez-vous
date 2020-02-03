@@ -173,5 +173,9 @@ public class ManagerDao {
 	public ArrayList<String> selectYearList2() {
 		return (ArrayList)sqlSession.selectList("managerMapper.selectYearList2");
 	}
+
+	public int selectCurrentCount() {
+		return sqlSession.selectOne("managerMapper.selectCurrentCount");
+	}
 	
 }

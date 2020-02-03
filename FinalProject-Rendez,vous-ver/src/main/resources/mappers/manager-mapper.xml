@@ -394,15 +394,21 @@
 	
 	<select id="getListTutorSearchCount" resultType="_int">
 	<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
-	
-		select count(*)
+		
+		select count(distinct user_no)
 		from member m
 		left join tutor using(user_no)
 		left join certification using(user_no)
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
-					AND t_nick LIKE #{sv}
+					AND user_id LIKE #{searchValue}
+				</when>
+				<when test="searchCondition == 'uNo'">
+					AND user_no LIKE #{searchValue}
+				</when>
+				<when test="searchCondition == 'tu_Nic'">
+					AND T_NICK LIKE #{sv}
 				</when>
 			</choose>
 			and user_type ='T' AND U_STATUS='Y' and tstatus='Y'
@@ -411,14 +417,21 @@
 	<select id="searchTutorList" parameterType="Search"
 	resultMap="mAndtuJoinResultSet">
 		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'" />
-		select *
+	
+		select distinct user_no,user_id,t_nick,t_career,tsocial,tstatus
 		from member m
 		left join tutor using(user_no)
 		left join certification using(user_no)
 		<where>
 			<choose>
 				<when test="searchCondition == 'mName'">
-					AND t_nick LIKE #{sv}
+					AND user_id LIKE #{searchValue}
+				</when>
+				<when test="searchCondition == 'uNo'">
+					AND user_no LIKE #{searchValue}
+				</when>
+				<when test="searchCondition == 'tu_Nic'">
+					AND T_NICK LIKE #{sv}
 				</when>
 			</choose>
 			and user_type ='T' AND U_STATUS='Y' and tstatus='Y'
@@ -510,6 +523,14 @@
 		from payment
 		where payment_status='1'
 		order by 1 asc
+	</select>
+	
+	<select id="selectCurrentCount" resultType="_int">
+		select count(*)
+		from member m
+		left join tutor using(user_no)
+		where
+		user_type='T' AND U_STATUS='Y' and tstatus='R'
 	</select>
 	
 	

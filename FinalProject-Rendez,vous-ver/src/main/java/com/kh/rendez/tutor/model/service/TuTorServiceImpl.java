@@ -45,7 +45,7 @@ public class TuTorServiceImpl implements TutorService {
 
 	@Override
 	public ArrayList<Certification> selectTCert(int uNo, int currentPage) {
-		int listCount = tDao.getListCount();
+		int listCount = tDao.getListCount(uNo);
 		// 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				

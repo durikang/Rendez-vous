@@ -9,8 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 	<title>미리보기 페이지</title>
-	<!-- <meta property="og:url" content="http://taling.me/Talent/Detail/166" /> -->
-	<link rel="image_src" href="http://s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/41d6f52384099fcb7eeeacbbf2727e37b3ecb4b3.jpg" />
+	
 	
 	<!-- Page-hiding snippet (recommended)  -->
 	<style>
@@ -258,12 +257,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 <!-- CONTAINER -->
 <div id="container_detail">
-<input type="hidden" id="tutorName" value="선찬주">
-<input type="hidden" id="tutorImage" value="//taling.me/Content/Uploads/Profile/s_aa73a9b108426fbddb18c590ffd278ea8117ef07.png">
 
-<input type="hidden" id="Account_Id" value="">
-<input type="hidden" id="Talent_Id" value="166">
-<input type="hidden" id="Owner_Id" value="262">
 
 
 
@@ -342,7 +336,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		
 		<!-- 상단이미지 -->
 		<div class="class_img" style="margin-right:498px">
-			<!-- <iframe width="840" height="540" src="https://taling.me/Talent/lightslider/?Id=166" frameborder="0"></iframe> -->
 			
 			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false"> 
 	
@@ -568,7 +561,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<div class="info">
 						<a class="starimg">
 							<div class="title">${ldi.lTitle }</div>
-							<!-- <img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png"><img src="https://taling.me/Content/Images/class/icon_star_new.png">								(6) -->
+							
 													</a>
 					</div>
 					<div class="info">
@@ -938,13 +931,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- 문의 -->
 			<div class="class_detail detail_sec_bor" id="qna" style="width: 840px">
 				<div class="section01">
-					<h1>실시간톡</h1><h1>
-					<img src="https://taling.me/Content/Images/app_install3.png">
+					<h1>고객센터</h1><h1>
+					<div class="col-lg-6 order-lg-1 my-auto showcase-text" id="gogaek">
+					<h2>고객 센터 운영 시간</h2>
+					<p class="lead mb-2">평일 오전 10시 ~ 오후 6시</p>
+					<p class="lead mb-2">점심시간 오후 1시 ~ 오후 2시</p>
+					<p class="lead mb-2">공휴일 휴무</p>
+					</div>
 					<p style="padding-top:10px;"></p>
-					<a href="https://itunes.apple.com/kr/app/탈잉-taling/id1153218962?l=en&amp;mt=8" target="_blank"><img src="https://taling.me/Content/Images/ios.png" width="50%"></a><a href="https://play.google.com/store/apps/details?id=com.taling" target="_blank"><img src="https://taling.me/Content/Images/and.png" width="50%"></a>
+					<a href="" target="_blank"><img src="resources/support/img/time1.jpg" width="50%"></a><a href="https://play.google.com/store/apps/details?id=com.taling" target="_blank"><img src="https://taling.me/Content/Images/and.png" width="50%"></a>
 						
-						<a onclick="" class="btn_st">실시간 톡하기</a>						
-						<!-- <a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="btn_st">실시간 톡하기</a> -->				
+						<a href="support_main.do" class="btn_st">고객센터</a>						
+										
 					<div class="review_list" id="bookmarkQna">
 						<ul>
 							<div id="innerQnaDiv">
@@ -985,74 +983,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- //비슷한강의 -->
 
 </div>
-<div id="popup-write-review" class="popup popup-write-review" data-hide="popup-write-review">
-	<form action="https://taling.me/Talent/WriteReview/166" method="POST" class="popup-content" id="frm-write-review">
-		<h1>
-			<strong>선찬주</strong> 튜터의 수업은 어떠셨나요?
-		</h1>
-		<div class="review-scores row">
-			<div class="review-scores-detail review-scores-price">
-				<label>커리큘럼</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="priceScore" id="priceScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-quality">
-				<label>전달력</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="qualityScore" id="qualityScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-recommend">
-				<label>준비성</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="recommendScore" id="recommendScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-tran">
-				<label>친절도</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="TranScore" id="TranScore" value="0">
-				</div>
-			</div>
-			<div class="review-scores-detail review-scores-kind">
-				<label>&nbsp;&nbsp;&nbsp;&nbsp;시간준수</label>
-				<div class="stars">
-					<i class="glyphicon glyphicon-star" data-value="1"></i>
-					<i class="glyphicon glyphicon-star" data-value="2"></i>
-					<i class="glyphicon glyphicon-star" data-value="3"></i>
-					<i class="glyphicon glyphicon-star" data-value="4"></i>
-					<i class="glyphicon glyphicon-star" data-value="5"></i>
-					<input type="hidden" name="KindScore" id="KindScore" value="0">
-				</div>
-			</div>
-		</div>
-		<div class="review-content">
-			<textarea name="content" id="content"></textarea>
-			<button type="submit" class="btn btn-pink btn-sm pull-right">리뷰 올리기</button>
-		</div>
-	</form>
-</div>
+
 
 <div id="popup-write-qna" class="popup popup-write-qna" data-hide="popup-write-qna">
 	<div class="popup-content" id="frm-write-review">
@@ -1146,10 +1077,6 @@ $(window).scroll(function() {
 
  
 
-
-
-
-<!-- Mirrored from taling.me/Talent/Detail/166 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Dec 2019 22:07:36 GMT -->
 
 </body>
 </html>

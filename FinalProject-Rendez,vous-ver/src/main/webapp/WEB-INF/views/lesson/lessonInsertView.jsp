@@ -816,7 +816,7 @@
 	
 		function onsub(){
 			
- 			if($("#lTitle").val().length<3 || $("#lTitle").val().length>20){
+ 			if($("#lTitle").val().length<3 || $("#lTitle").val().length>50){
 				alert("수업 제목은 3자 이상 20자 이하로 입력해주세요");
 				$("#pg1").click();
 				$("#lTitle").focus();

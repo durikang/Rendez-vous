@@ -148,13 +148,12 @@
 $(function(){
 	setTimeout(function() {
 		$('#loading').hide();  	
-	}, 500);
-	
+	}, 100);
 })
 
 </script>
-<div id="loading"><img id="loading-image" src="${contextPath }/resources/managerResources/Img/loading.gif" alt="Loading..." /></div>
-s
+<div id="loading"><img id="loading-image" src="${contextPath }/resources/managerResources/Img/loading1.gif" alt="Loading..." /></div>
+
 
    <c:if test="${ !empty msg}">
       <script>
@@ -170,7 +169,7 @@ s
         <div class="search-box">
             <input class="search-text" type="text" id="search" placeholder="Search">
             <a class="search-btn" onclick="search2()">
-                <i class="fas fa-search" onclick="search2()"></i>
+                <i class="fas fa-search"></i>
             </a>
         </div>        
 
@@ -204,6 +203,11 @@ s
             </ul>
         </nav>
     </header>
+    
+    <form action="search.do" method="post" id="sTarget">
+      <input type="hidden" id="formValue" name="sValue">
+      </form>
+    
     <script>
     	$(".logo").on("click", function(){
     		location.href='home.do';
@@ -211,12 +215,13 @@ s
     	
         function search2(){
            var sValue = $("#search").val();
+           $("#formValue").val(sValue);
            if(sValue ==""){
               alert("검색어를 입력해주세요 !");
               return;
            }
            
-           location.href = "search.do?sValue=" + sValue;
+           $('#sTarget').submit();
         }
         
         function bhide(){

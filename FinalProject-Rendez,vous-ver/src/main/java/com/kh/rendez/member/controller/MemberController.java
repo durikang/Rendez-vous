@@ -236,11 +236,13 @@ public class MemberController {
 
 				
 				}
-				
+				int uNo=((Member)session.getAttribute("loginUser")).getUser_no();
+				u.setuNo(uNo);
 				
 				int result = mService.updateMember(m);
-				
+				System.out.println("result : "+result);
 				if(result > 0) {
+					System.out.println();
 					model.addAttribute("msg2", "회원 정보 수정 성공");
 					model.addAttribute("loginUser", m);
 				} else {

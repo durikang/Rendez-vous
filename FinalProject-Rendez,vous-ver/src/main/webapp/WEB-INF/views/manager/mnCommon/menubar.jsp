@@ -130,11 +130,11 @@
 $(function(){
 	setTimeout(function() {
 		$('#loading').hide();  	
-	}, 500);
+	}, 100);
 	
 })
 </script>
-<div id="loading"><img id="loading-image" src="${contextPath }/resources/managerResources/Img/loading.gif" alt="Loading..." /></div>
+<div id="loading"><img id="loading-image" src="${contextPath }/resources/managerResources/Img/loading1.gif" alt="Loading..." /></div>
 
 	<c:if test="${ !empty msg}">
 		<c:set var ="m" value="${msg}"/>

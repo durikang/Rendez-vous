@@ -197,12 +197,25 @@
                      </div>
                   </div>
                </c:forEach>
-
-
-                        
+        
             </div>
                         
             <!--여기까지 new region id box-->
+            
+			<c:set var="sum" value="0"/>
+            
+            <script type="text/javascript">
+            
+            <c:forEach var="lti2" items="${lTime }">
+            <c:set var="sum" value="${sum + lti2.getDeTime()}"/>
+            </c:forEach> 
+			
+            <c:set var="avt" value="${sum/lTime.size() }"/>
+            
+            
+            </script>
+            
+            
             
 
          </div>
@@ -583,7 +596,7 @@
                   <ul>
                      <li class="ar">
                                                 ${ldi.lRegionSub }                     </li>                     
-                     <li class="hu"><font color="#ff005a">1</font>시간/회</li>
+                     <li class="hu">평균<font color="#ff005a"> ${avt }</font>시간/회</li>
                      <li class="gr">
                                                 인원:<font color="#ff005a">${ minPerson }~${ maxPerson }</font>명
                         </li>

@@ -198,6 +198,7 @@
 		FROM LESSON
 		WHERE L_NO= #{lNo}
 		AND START_TIME>SYSDATE
+		selectTimeofLI
 	</select>
 	
 	

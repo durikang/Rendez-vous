@@ -67,6 +67,11 @@ public class TuTorServiceImpl implements TutorService {
 		return tDao.selectTutorPic(uNo);
 	}
 
+	@Override
+	public String selectSubCate(int user_no) {
+		return tDao.selectSubCate(user_no);
+	}
+
 
 
 

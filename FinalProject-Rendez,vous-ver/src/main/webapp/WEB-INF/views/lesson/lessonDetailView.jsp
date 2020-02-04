@@ -596,7 +596,7 @@
                   <ul>
                      <li class="ar">
                                                 ${ldi.lRegionSub }                     </li>                     
-                     <li class="hu">평균<font color="#ff005a"> ${avt }</font>시간/회</li>
+                     <li class="hu">평균<font color="#ff005a"> <fmt:formatNumber value="${avt }" pattern=".0"/></font>시간/회</li>
                      <li class="gr">
                                                 인원:<font color="#ff005a">${ minPerson }~${ maxPerson }</font>명
                         </li>

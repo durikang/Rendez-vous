@@ -127,9 +127,6 @@ $(function(){
                     <li class="nav-item">
                         <a class="nav-link" href="vip5.do?pageName=memNTut">TOP5 VIP</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="newjoin.do?pageName=memNTut">신규 가입자</a>
-                    </li>
                 </ul>
                 <table class="position-left">
                 	<tr>

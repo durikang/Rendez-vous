@@ -68,7 +68,7 @@
 	</insert>
 	
 	<select id="CheckRemain" parameterType="_int" resultType="_int">
-	SELECT SUM(REMAIN) FROM LESSON WHERE L_NO = #{lNo} AND L_DAY >= SYSDATE
+	SELECT SUM(REMAIN) FROM LESSON WHERE L_NO = #{lNo} AND START_TIME >= SYSDATE
 	</select>
 	
 	<update id="LessonRemainDown" parameterType="LessonTime">

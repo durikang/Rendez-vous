@@ -79,7 +79,7 @@ public class TutorController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		if(loginUser == null || loginUser.getUser_type().equals("T")) {
-			mv.addObject("msg","잘못된 접근입니다");
+			mv.addObject("msg","잘못된 접근입니다!");
 			mv.setViewName("home");
 			return mv;
 		}

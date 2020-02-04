@@ -141,7 +141,7 @@
 	opacity: 0.9;
 }
 
-.modal3 {
+.modal3, .modal4 {
 	z-index: 1;
 	position: fixed;
 	left: 0;
@@ -156,14 +156,14 @@
 		0.25s;
 }
 
-.show-modal3 {
+.show-modal3, .show-modal4 {
 	opacity: 1;
 	visibility: visible;
 	transform: scale(1.0);
 	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
-.modal-content3 {
+.modal-content3, .modal-content4 {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -175,7 +175,7 @@
 	border-radius: 0.5rem;
 }
 
-.close-button5 {
+.close-button5, .close-button6 {
 	float: right;
 	width: 1.5rem;
 	line-height: 1.5rem;
@@ -185,7 +185,7 @@
 	background-color: lightgray;
 }
 
-.close-button5:hover {
+.close-button5:hover, .close-button6:hover {
 	background-color: darkgray;
 }
 
@@ -203,11 +203,10 @@
         margin-right: auto;
     }
     .swiper-slide {
-        text-align: center;
-        font-size: 18px;
+        text-align: left;
+        font-size: 15px;
         background: #fff;
         height: 300px;
-        
         /* Center slide text vertically */
         display: -webkit-box;
         display: -ms-flexbox;
@@ -222,6 +221,22 @@
         -webkit-align-items: center;
         align-items: center;
     }
+    
+    #slide-img {
+   width:90%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+   height:90%;
+   border-radius:20px;
+   }
+ 
+   #text-area {
+   margin:auto;
+   width:100%;
+   height:50%;
+   text-align:left;
+}
+
+
+
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -245,7 +260,6 @@
 						<ul class="site-navigation nav navbar-nav">
 							<li><a onclick="scrollToTarget('#portfolio')">찜 목록</a></li>
 							<li><a onclick="scrollToTarget('#review')">작성한 리뷰</a></li>
-							<li><a onclick="scrollToTarget('#contact')">쿠폰함</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -264,7 +278,6 @@
 						
 						<!-- 프로필사진 -->
 						<div class="avatar" alt="User image" style="background-image: url('${ contextPath }/resources/user/img/${ userPropic.uChangeName }'); background-size:cover;"></div> 
-						
 						<h1 class="mg-md text-center tc-black">
 							<c:out value="${ loginUser.user_name }" />
 							님 마이페이지
@@ -281,8 +294,8 @@
 							<span class="divider divider-half"></span>
 						</div>
 						<div class="text-center">
-							<a class="btn btn-lg wire-btn-white btn-wire btn-rd"
-								id="trigger3">내 정보</a>
+							<a class="bloc-button btn btn-wire" id="trigger3">내 정보</a>
+							<button class="bloc-button btn btn-wire" type="button" onclick="couponPop()">쿠폰 등록하기</button>
 							<tr>
 								<td colspan="2" align="center"></td>
 							</tr>
@@ -294,7 +307,14 @@
 		</div>
 		<!-- bloc-1 END -->
 
-		<!-- wish -->
+	<script>
+	function couponPop()
+	{
+	   popupWindow = window.open('coupon.do', '_blank', 'height=800,width=450,scrollbars=no,status=no');
+	}
+	</script>
+
+	<!-- wish -->
 		<div class="bloc l-bloc bgc-white" id="portfolio">
 			<div class="container bloc-lg">
 				<div class="row">
@@ -312,42 +332,49 @@
 				</div>
 
 				<!-- Swiper -->
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
-            <div class="swiper-slide">Slide 6</div>
-            <div class="swiper-slide">Slide 7</div>
-            <div class="swiper-slide">Slide 8</div>
-            <div class="swiper-slide">Slide 9</div>
-            <div class="swiper-slide">Slide 10</div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-
-    <!-- Swiper JS -->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<c:forEach var="p" items="${ list1 }">
+						<div class="swiper-slide" style="border: 2px solid lightgray;">
+							<div id="img-area">
+								<c:url var="goLesson" value="lessonDetail.do?lNo=${ p.l_no }" />
+								<a href="${ goLesson }"><img id="slide-img"
+									src="resources/lessonImg/${ p.c_name }"></a>
+							</div>
+							<div id="text-area">
+								<h3>${ p.l_title }</h3>
+								<p>수업 시작 :${p.l_day}</p>
+								<p>장소 : ${ p.l_region } ${p.l_region_sub }</p>
+								<p>비용 : ${ p.price }원</p>
+								<p style="color: #F15F5F; float: left;">현재 신청 가능 인원 ${ p.remain }명!</p>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+				<!-- Add Arrows -->
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+			</div>
+			
+	<!-- Swiper JS -->
     <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
 
     <!-- Initialize Swiper -->
     <script>
     var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
         slidesPerView: 3,
         slidesPerColumn: 2,
+        slidesPerGroup : 6,
+        spaceBetween: 30,
         paginationClickable: true,
+        loopFillGroupWithBlank : true,
         pagination: '.swiper-pagination',
-        paginationClickable: true,
         nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        spaceBetween: 30
-    });
+        prevButton: '.swiper-button-prev'
+        });
     </script>
 		</div>
 		<!-- wish END -->
@@ -426,35 +453,91 @@
 			</div>
 		</div>
 		<!-- review end -->
-
-		<!-- bloc-8 쿠폰함 -->
-		<div class="bloc bg-95cdfeef1 bgc-ferrari-red d-bloc b-parallax" 
-			id="contact" >
+		
+		<!-- payment start -->
+		<div class="bloc l-bloc bgc-white" id="review">
 			<div class="container bloc-lg">
 				<div class="row">
-					<div class="col-sm-12 col-md-6 col-md-offset-3">
-						<form id="form-1" novalidate>
-							<h3 class="mg-md text-center">쿠폰 등록</h3>
+					<div class="col-sm-12">
+						<h2 class="mg-md text-center">결제내역</h2>
 
-							<div class="form-group">
-								<label> Coupon-number </label> <input id="name"
-									class="form-control" required />
-							</div>
-							<div class="text-center">
-								<button class="bloc-button btn btn-lg btn-wire" type="submit">
-									등록하기</button>
-								<button class="bloc-button btn btn-lg btn-wire" type="button">
-									보유 쿠폰 보기</button>
-							</div>
-						</form>
+						<div class="divider-h">
+							<span class="divider divider-half"></span>
+						</div>
+					</div>
+				</div>
+				<div class="myReview">
+					<div class="myRevieww">
+						<table id="myReviewTable">
+							<tr>
+								<th width="30%">수업제목</th>
+								<th width="30%">결제일</th>
+								<th width="30%">상세내역</th>
+								<th width="10%">현재상태</th>
+							</tr>
+							<c:if test="${ !empty loginUser }">
+							<c:forEach var="p" items="${ plist }">
+							<tr>
+								<c:url var="myReview" value="ReviewDetail.do">
+									<c:param name="lNo" value="${ p.lNo }"/>
+								</c:url>								
+								<td><a href="${ myReview }">${ p.l_title }</a></td>
+								<td>${p.pDate}</td>
+								<td>결제 타입 : ${p.pType}
+								      <br> 결제 금액 : ${p.pCost}</td>
+								 <form action="uppayment.do" method="post">
+								<td><c:if test="${p.paymentStatus == 1}">결제완료<button name="pmNo" value="${p.pmNo}">결제취소</button></c:if>
+									<c:if test="${p.paymentStatus == 2}">결제취소</c:if>
+									<c:if test="${p.paymentStatus == 3}">이용완료</c:if>
+									<c:if test="${p.paymentStatus == 11}">수강대기</c:if>
+									<c:if test="${p.paymentStatus == 12}">수강중</c:if>
+									<c:if test="${p.paymentStatus == 13}">수강종료<button name="pmNo" value="${p.pmNo}">이용완료</button></c:if></td>
+								</form>
+							</tr>
+							</c:forEach>
+							</c:if>			
+								
+								<!-- <a onclick="scrollToTarget('#moon')"></a> -->
+							<tr align="center" height="20">
+								<td colspan="6">
+									<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
+									[이전] &nbsp;
+							   	   </c:if> <c:if test="${ pi.currentPage > 1 }">
+										<c:url var="before" value="mypage.do">
+											<c:param name="page" value="${ pi.currentPage - 1 }" />
+										</c:url>
+										<a href="${ before }">[이전]</a>
+									</c:if> <!-- [페이지] --> <c:forEach var="p" begin="${ pi.startPage }"
+										end="${ pi.endPage }">
+										<c:if test="${ p eq pi.currentPage }">
+											<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
+										</c:if>
+										<c:if test="${ p ne pi.currentPage }">
+											<c:url var="pagination" value="mypage.do">
+												<c:param name="page" value="${ p }" />
+											</c:url>
+											<a href="${ pagination }">[${ p }]</a>
+										</c:if>
+									</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
+											[다음]
+								   </c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
+										<c:url var="after" value="mypage.do">
+											<c:param name="page" value="${ pi.currentPage + 1 }" />
+										</c:url>
+										<a href="${ after }">[다음]</a>
+									</c:if>
+								</td>
+							</tr>
+							<c:if test="${ empty list }">
+								<h1 style="color:green; font-size: 15px">작성하신 리뷰가 없습니다.</h1>
+							</c:if>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- bloc-8 END -->
-	</div>
-
-
+		<!-- payment end -->
 
 	<!-- 내 정보 클릭 시 띄워지는 모달 창 -->
 
@@ -478,40 +561,14 @@
 			</form>
 		</div>
 	</div>
-
-	<script>
-							var modal = document.querySelector(".modal3");
-				            var trigger = document.querySelector('#trigger3');
-				            var closeButton = document.querySelector(".close-button5");
-
-				    
-				            function toggleModal() {
-				                modal.classList.toggle("show-modal3");
-				            }
-
-				            function windowOnClick(event) {
-				                if (event.target === modal) {
-				                    toggleModal();
-				                } else if (event.target === modal2) {
-				                    toggleModal2();
-				                }
-				            }
-				    
-				            trigger.addEventListener("click", toggleModal);
-				            closeButton.addEventListener("click", toggleModal);
-				            window.addEventListener("click", windowOnClick);
-                    	</script>
-
-
-
-
-
-
+	
+	<div id="btn" style="display:none;" class="trigger4"></div>
+	
 	<!-- 비밀번호 확인 성공 시 넘어가는 div -->
-	<div class="layer_popup" id="layer_pop"
-		style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); ">
-		<div class="update"
-			style="overflow:scroll; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 600px; height: 800px; border-radius: 0.5rem; z-index: 1;">
+	<div class="modal4"> 
+            <div class="modal-content2"> 
+                 <div class="update"
+			style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 1000px; height: 620px; border-radius: 0.5rem; z-index: 1;">
 				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script> 
 						      $(function() { 
@@ -536,12 +593,13 @@
 			<div class="w3-content w3-container w3-margin-top">
 				<div class="w3-container w3-card-4">
 					<div class="w3-center w3-large w3-margin-top">
+                <span class="close-button6">&times;</span> 
 						<h3>내 정보</h3>
 						<br>
 					</div>
 					<div>
-
 						<form id="myForm" action="mupdate.do" method="post" enctype="multipart/form-data">
+					      <div style="float:left; width:47.5%;">					
 							<p>
 								PROFILE <input class="w3-input" type="file" id="pro" name="reloadFile" >
 							</p>
@@ -561,6 +619,13 @@
 								NAME <input class="w3-input" type="text" id="user_name"
 									name="user_name" value="${ loginUser.user_name }" required>
 							</p>
+							</div>
+							
+							<div style="float:left; width:5%;">
+							<br><br>
+							</div>
+							
+							<div style="float:left; width:47.5%;">
 							<p>
 								GENDER <br>
 								<c:if test="${ loginUser.gender eq 'M' }">
@@ -612,7 +677,8 @@
 									</c:if>
 								</c:forTokens>
 							</p>
-
+							</div>
+							
 							<p class="w3-center">
 								<button type="submit"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" id="btnCng">회원정보
@@ -625,21 +691,52 @@
 								<button type="button"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
 									onclick="location.href='${ mdelete }'">탈퇴하기</button>
-								<td align="right" class="pop"><a href="mypage.do"><font color="black">닫기</font></a>
-								</td> <br>
+								<br>
 							</div>
 						</form>
 					</div>
 				</div>
-			</div>
+            </div> 
+        </div>    
+	
+						<script>
+							var modal = document.querySelector(".modal3");
+				            var modal2 = document.querySelector(".modal4");
 
-			<script>
-				$('#layer_pop').hide();
-			</script>
-			
+				            var trigger = document.querySelector('#trigger3');
+				            var trigger2 = document.querySelector(".trigger4");
+
+				            var closeButton = document.querySelector(".close-button5");
+				            var closeButton2 = document.querySelector(".close-button6");
+				    
+				            function toggleModal() {
+				                modal.classList.toggle("show-modal3");
+				            }
+				            
+				            function toggleModal2() {
+				                modal2.classList.toggle("show-modal4");
+				            }
+
+				            function windowOnClick(event) {
+				                if (event.target === modal) {
+				                    toggleModal();
+				                } else if (event.target === modal2) {
+				                    toggleModal2();
+				                }
+				            }
+				    
+				            trigger.addEventListener("click", toggleModal);
+				            trigger2.addEventListener("click", toggleModal2);
+
+				            closeButton.addEventListener("click", toggleModal);
+				            closeButton2.addEventListener("click", toggleModal2);
+
+				            window.addEventListener("click", windowOnClick);
+                    	</script>
+
 			<c:if test="${ !empty msg3 }">
 				<script>
-					$('#layer_pop').show(); //회원수정 창 열기
+					$('#btn').trigger("click"); //회원수정 창 열기 (div btn 만들어서 숨겨놓고 강제로 클릭 이벤트 발생하게 함!)
 				</script>
 			</c:if>
 		</div>
@@ -749,6 +846,8 @@
 	      }
 	  });  
 	});
+	   
+	   
    </script>
 	
 	<c:import url="../common/footbar.jsp" />

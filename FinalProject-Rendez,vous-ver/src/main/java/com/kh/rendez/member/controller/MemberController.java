@@ -25,11 +25,16 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.rendez.Wish.model.vo.Wish;
+import com.kh.rendez.baesung.payment.model.vo.Payment;
+import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.member.model.exception.MemberException;
 import com.kh.rendez.member.model.service.MemberService;
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.member.model.vo.PaymentList;
 import com.kh.rendez.member.model.vo.ReviewList;
 import com.kh.rendez.member.model.vo.Userpropic;
+import com.kh.rendez.member.model.vo.WishList;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -57,7 +62,7 @@ public class MemberController {
 	      
 	      if(loginUser != null && bcryptPasswordEncoder.matches(pwd, loginUser.getUser_pwd())) {
 	         session.setAttribute("loginUser", loginUser);
-	         return "home";
+	         return "redirect:home.do";
 	      } else {
 	         model.addAttribute("msg", "로그인 실패");
 	         return "member/loginPage";
@@ -86,25 +91,68 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping("mypage.do")
-		public ModelAndView myPageView(ModelAndView mv, HttpSession session,
-				  HttpServletRequest request, HttpServletResponse response) {
-	
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int userNo = loginUser.getUser_no();
+	   @RequestMapping("mypage.do")
+	    public ModelAndView myPageView(ModelAndView mv, HttpSession session,
+	            HttpServletRequest request, HttpServletResponse response) {
+	 
+	    Member loginUser = (Member)session.getAttribute("loginUser");
+	    int userNo = loginUser.getUser_no();
+	    
+	    
+	    
+	    
+	    ArrayList<PaymentList> p = mService.selectListP(userNo);
+	    
+	    System.out.println(p);
+	    ArrayList<Wish> w = mService.selectListWi(userNo);
+	    ArrayList<WishList> l = new ArrayList<>();
+	    
+
+	    
+	    
+	    for(int i = 0; i<w.size(); i++) {
+	       WishList wl = mService.selectListl(w.get(i).getL_no());
+	       l.add(wl);
+	    }
+	    
+	    mv.addObject("plist",p);
+	    mv.addObject("list1", l);
+	    
+	    ArrayList<ReviewList> r = mService.selectList(userNo);
+	    
+	    Userpropic u = mService.selectOne(loginUser.getUser_no());
+	    
+	    System.out.println(r);
+	    
+	    mv.addObject("list", r);
+	    mv.addObject("userPropic", u);
+	    mv.setViewName("member/myPage");
+	          
+	    
+	    return mv;
+	 }
+	@RequestMapping("uppayment.do")
+		public String uppayment(int pmNo,PaymentList p) {
 		
-		ArrayList<ReviewList> r = mService.selectList(userNo);
+		p = mService.selectOnePn(pmNo);
+		String p1 = "2";
+		String p2 = "3";
+
+	    if(p.getPaymentStatus().equals("1")) {
+	    	p.setPaymentStatus(p1);
+	    }else if(p.getPaymentStatus().equals("13")) {
+	    	p.setPaymentStatus(p2);
+	    }
+	    
+	    int result = mService.updatePayment(p);
 		
-		Userpropic u = mService.selectOne(loginUser.getUser_no());
-		
-		System.out.println(r);
-		mv.addObject("list", r);
-		mv.addObject("userPropic", u);
-		mv.setViewName("member/myPage");
+	    if(result > 0) {
+	    return "redirect:mypage.do";
+	    }else {
+	    throw new MemberException("취소실패");
+	    }
 				
-		
-		return mv;
-	}
+		}
 	
 	@RequestMapping("ReviewDetail.do")
 	public String ReviewDetail(int lNo) {

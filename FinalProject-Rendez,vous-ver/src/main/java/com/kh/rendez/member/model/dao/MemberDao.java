@@ -9,9 +9,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.rendez.Wish.model.vo.Wish;
+import com.kh.rendez.baesung.payment.model.vo.Payment;
+import com.kh.rendez.lesson.model.vo.LessonInfo;
 import com.kh.rendez.member.model.vo.Member;
+import com.kh.rendez.member.model.vo.PaymentList;
 import com.kh.rendez.member.model.vo.ReviewList;
 import com.kh.rendez.member.model.vo.Userpropic;
+import com.kh.rendez.member.model.vo.WishList;
 import com.kh.rendez.support.model.vo.PageInfo;
 import com.kh.rendez.support.model.vo.Qna;
 
@@ -57,6 +62,31 @@ public class MemberDao {
 	public int updatePropic(Userpropic u) {
 		return sqlSession.update("memberMapper.updateMember1",u);
 	}
+
+	public ArrayList<WishList> selectList1(int user_no) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectWishList1", user_no);
+	}
+
+	public ArrayList<Wish> selectListWi(int userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.wishw",userNo);
+	}
+
+	public WishList selectListl(int l_no) {
+		return sqlSession.selectOne("memberMapper.lesson",l_no);
+	}
+
+	public ArrayList<PaymentList> selectListP(int userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.paymentList", userNo);
+	}
+
+	public int updatePayment(PaymentList p) {
+		return sqlSession.update("memberMapper.updatePayment",p);
+	}
+
+	public PaymentList selectOnePn(int pmNo) {
+		return sqlSession.selectOne("memberMapper.selectOnePn",pmNo);
+	}
+
 
 
 	

@@ -60,7 +60,15 @@
 	WHERE USER_NO = #{uNo}
 	</select>
 	
-	
+	<select id="selectSubCate" parameterType="_int" resultType="String">
+	SELECT L_CATE_SUB
+	FROM (SELECT L_CATE_SUB,COUNT(L_CATE_SUB)
+	FROM LESSON_INFO
+	WHERE USER_NO=#{uNo}
+	GROUP BY L_CATE_SUB
+	ORDER BY 2 DESC)
+	WHERE ROWNUM = 1
+	</select>
 	
 	
 	

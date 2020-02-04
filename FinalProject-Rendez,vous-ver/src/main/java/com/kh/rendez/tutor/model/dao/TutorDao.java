@@ -62,6 +62,10 @@ public class TutorDao {
 		return sqlSession.selectOne("tutorMapper.getListCount",uNo);
 	}
 
+	public String selectSubCate(int uNo) {
+		return sqlSession.selectOne("tutorMapper.selectSubCate",uNo);
+	}
+
 
 
 	

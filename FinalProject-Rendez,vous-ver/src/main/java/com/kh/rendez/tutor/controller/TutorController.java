@@ -42,12 +42,16 @@ public class TutorController {
 		Tutor tutor = tService.selectTutorInfo(loginUser.getUser_no());
 		String[] tutorCerArr = tutor.gettCareer().split(","); 
 		
+		String subCate = tService.selectSubCate(loginUser.getUser_no());
+		
 		int nowCount = lService.selectNowCount(loginUser.getUser_no());
 		int nowSum = lService.selectNowSum (loginUser.getUser_no());
 		int totalCount = lService.selectTotalCount(loginUser.getUser_no());
 		int totalSum = lService.selectTotalSum(loginUser.getUser_no());
 
 		mv.addObject("tutor",tutor);
+		
+		mv.addObject("subCate",subCate);
 		
 		mv.addObject("tutorCerArr",tutorCerArr);
 		mv.addObject("nowCount",nowCount);

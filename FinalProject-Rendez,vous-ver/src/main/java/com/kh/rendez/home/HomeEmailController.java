@@ -52,13 +52,45 @@ public class HomeEmailController {
             "<th>시간</th>\n" + 
             "</tr>" + 
             "<tr align = \"center\">" + 
-            "<td>자바1</td>\n" + 
-            "<td>02-02-화  AM10:00</td>\n" + 
+            "<td>디자인</td>\n" + 
+            "<td>02-10-월  AM10:00</td>\n" + 
             "</tr>\n" + 
             "<tr align = \"center\">" + 
-            "<td>자바2</td>\n" + 
-            "<td>02-10-월  PM10:00</td>\n" + 
+            "<td>일러스트</td>\n" + 
+            "<td>02-12-수  PM07:00</td>\n" + 
             "</tr>\n" + 
+            "<tr align = \"center\">" + 
+            "<td>PPT</td>\n" + 
+            "<td>02-13-목  AM11:00</td>\n" + 
+            "</tr>\n" +
+            "<tr align = \"center\">" + 
+            "<td>일러스트/포토샵</td>\n" + 
+            "<td>02-15-토  PM04:00</td>\n" + 
+            "</tr>\n" +
+            "<tr align = \"center\">" + 
+            "<td>AI/PS</td>\n" + 
+            "<td>02-16-일  AM10:00</td>\n" + 
+            "</tr>\n" +
+            "<tr align = \"center\">" + 
+            "<td>쇼핑몰-포토샵/일러</td>\n" + 
+            "<td>02-17-월  PM08:00</td>\n" + 
+            "</tr>\n" +
+            "<tr align = \"center\">" + 
+            "<td>초&중급 포토샵</td>\n" + 
+            "<td>02-19-수  PM07:00</td>\n" + 
+            "</tr>\n" +
+            "<tr align = \"center\">" + 
+            "<td>포트폴리오</td>\n" + 
+            "<td>02-24-월  AM06:00</td>\n" + 
+            "</tr>\n" +
+            "<tr align = \"center\">" + 
+            "<td>생활 포토샵</td>\n" + 
+            "<td>02-27-목  PM09:00</td>\n" + 
+            "</tr>\n" +
+            "<tr align = \"center\">" + 
+            "<td>아트워크클래스<br>test</td>\n" + 
+            "<td>02-28-금  PM10:00</td>\n" + 
+            "</tr>\n" +
             "</table>";          
                                    
             try {

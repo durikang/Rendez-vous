@@ -42,12 +42,16 @@ public class TutorController {
 		Tutor tutor = tService.selectTutorInfo(loginUser.getUser_no());
 		String[] tutorCerArr = tutor.gettCareer().split(","); 
 		
+		String subCate = tService.selectSubCate(loginUser.getUser_no());
+		
 		int nowCount = lService.selectNowCount(loginUser.getUser_no());
 		int nowSum = lService.selectNowSum (loginUser.getUser_no());
 		int totalCount = lService.selectTotalCount(loginUser.getUser_no());
 		int totalSum = lService.selectTotalSum(loginUser.getUser_no());
 
 		mv.addObject("tutor",tutor);
+		
+		mv.addObject("subCate",subCate);
 		
 		mv.addObject("tutorCerArr",tutorCerArr);
 		mv.addObject("nowCount",nowCount);
@@ -75,7 +79,7 @@ public class TutorController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		if(loginUser == null || loginUser.getUser_type().equals("T")) {
-			mv.addObject("msg","잘못된 접근입니다");
+			mv.addObject("msg","잘못된 접근입니다!");
 			mv.setViewName("home");
 			return mv;
 		}

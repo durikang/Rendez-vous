@@ -26,6 +26,8 @@ public interface TutorService {
 
 	String selectTutorPic(int uNo);
 
+	String selectSubCate(int user_no);
+
 	
 
 }

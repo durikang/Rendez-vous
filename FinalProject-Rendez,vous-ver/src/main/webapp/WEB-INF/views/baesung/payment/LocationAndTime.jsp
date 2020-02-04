@@ -237,6 +237,8 @@ img {
 .tutor_cont .sh_box {
     width: 770px;
     float: right;
+    height: 366px;
+    overflow: auto;
     border-top: 1px solid #d8d9db;
 }
 .tutor_cont, .tutor_cont div {
@@ -542,7 +544,7 @@ label {
         }
     </script>
     </div>
-
+	 <c:import url="../../common/footbar.jsp" /> 
 
 </body>
 </html>

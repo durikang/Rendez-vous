@@ -423,7 +423,7 @@ img {
         <input type="hidden" id="aid" name="aid" value="155272">	
     </div>
 
-
+ <c:import url="../../common/footbar.jsp" /> 
 
 
 </body>

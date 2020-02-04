@@ -1680,7 +1680,7 @@ text-decoration: none;
     
     </script>
     
-    
+    <c:import url="../../common/footbar.jsp" /> 
     
     
     

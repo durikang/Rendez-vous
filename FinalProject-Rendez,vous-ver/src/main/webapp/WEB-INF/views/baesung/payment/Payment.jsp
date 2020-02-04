@@ -805,6 +805,6 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 	
 	
 </script>
-
+ <c:import url="../../common/footbar.jsp" /> 
 </body>
 </html>

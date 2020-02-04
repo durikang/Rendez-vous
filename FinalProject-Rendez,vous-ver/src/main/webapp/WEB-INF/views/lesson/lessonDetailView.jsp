@@ -741,7 +741,7 @@
                            <li>
                               <dl>
                                  <dt>
-                                    <p class="profile_img" style="background: #000; z-index: 0; width: 100%; background-size: cover; background-position: center; background-image: url(${contextPath}/resources/user/img/${lr.uCName });"></p>
+                                    <p class="profile_img" style="background: #000; z-index: 0; width: 100%; background-size: cover; background-position: center; background-image: url('${contextPath}/resources/user/img/${lr.uCName }');"></p>
                                     <p class="name">${lr.uName }</p>
                                  </dt>
                                  <dd>

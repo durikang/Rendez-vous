@@ -69,8 +69,8 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.wishw",userNo);
 	}
 
-	public ArrayList<WishList> selectListl(int l_no) {
-		return (ArrayList)sqlSession.selectList("memberMapper.lesson",l_no);
+	public WishList selectListl(int l_no) {
+		return sqlSession.selectOne("memberMapper.lesson",l_no);
 	}
 
 

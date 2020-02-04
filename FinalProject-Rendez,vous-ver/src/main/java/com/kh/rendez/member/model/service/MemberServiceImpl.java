@@ -83,7 +83,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<WishList> selectListl(int l_no) {
+	public WishList selectListl(int l_no) {
 		return mDao.selectListl(l_no);
 	}
 	

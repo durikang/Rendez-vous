@@ -203,11 +203,10 @@
         margin-right: auto;
     }
     .swiper-slide {
-        text-align: center;
-        font-size: 18px;
+        text-align: left;
+        font-size: 15px;
         background: #fff;
         height: 300px;
-        
         /* Center slide text vertically */
         display: -webkit-box;
         display: -ms-flexbox;
@@ -228,9 +227,13 @@
    height:90%;
    border-radius:20px;
    }
-
-   
-   
+ 
+   #text-area {
+   margin:auto;
+   width:100%;
+   height:50%;
+   text-align:left;
+}
 
 
 
@@ -257,7 +260,6 @@
 						<ul class="site-navigation nav navbar-nav">
 							<li><a onclick="scrollToTarget('#portfolio')">찜 목록</a></li>
 							<li><a onclick="scrollToTarget('#review')">작성한 리뷰</a></li>
-							<li><a onclick="scrollToTarget('#contact')">쿠폰함</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -292,8 +294,8 @@
 							<span class="divider divider-half"></span>
 						</div>
 						<div class="text-center">
-							<a class="btn btn-lg wire-btn-white btn-wire btn-rd"
-								id="trigger3">내 정보</a>
+							<a class="bloc-button btn btn-wire" id="trigger3">내 정보</a>
+							<button class="bloc-button btn btn-wire" type="button" onclick="couponPop()">쿠폰 등록하기</button>
 							<tr>
 								<td colspan="2" align="center"></td>
 							</tr>
@@ -305,7 +307,14 @@
 		</div>
 		<!-- bloc-1 END -->
 
-		<!-- wish -->
+	<script>
+	function couponPop()
+	{
+	   popupWindow = window.open('coupon.do', '_blank', 'height=800,width=450,scrollbars=no,status=no');
+	}
+	</script>
+
+	<!-- wish -->
 		<div class="bloc l-bloc bgc-white" id="portfolio">
 			<div class="container bloc-lg">
 				<div class="row">
@@ -323,47 +332,49 @@
 				</div>
 
 				<!-- Swiper -->
-<div class="swiper-container">
-        <div class="swiper-wrapper">
-        <c:forEach var="p" items="${ list1 }">
-            <div class="swiper-slide">
-            <div id="img-area">
-            <c:url var="goLesson" value="lessonDetail.do?lNo=${ p.l_no }"/>
-             <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ p.c_name }"></a>
-            </div>
-            <div id="text-area">
-            <h3>${ p.l_title }</h3>
-            <p>${p.l_day} 시작 : ${ p.l_region } ${p.l_region_sub }</p>
-            <p>${ p.price }원</p>
-               <img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-               <p style="color:#F15F5F; float:left;">&nbsp;${ p.total }명 중 ${ p.remain }</p>  
-            </div>
-            </div>
-         </c:forEach>
-        </div>
-        
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-    <!-- Swiper JS -->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<c:forEach var="p" items="${ list1 }">
+						<div class="swiper-slide" style="border: 2px solid lightgray;">
+							<div id="img-area">
+								<c:url var="goLesson" value="lessonDetail.do?lNo=${ p.l_no }" />
+								<a href="${ goLesson }"><img id="slide-img"
+									src="resources/lessonImg/${ p.c_name }"></a>
+							</div>
+							<div id="text-area">
+								<h3>${ p.l_title }</h3>
+								<p>수업 시작 :${p.l_day}</p>
+								<p>장소 : ${ p.l_region } ${p.l_region_sub }</p>
+								<p>비용 : ${ p.price }원</p>
+								<p style="color: #F15F5F; float: left;">현재 신청 가능 인원 ${ p.remain }명!</p>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+				<!-- Add Arrows -->
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+			</div>
+			
+	<!-- Swiper JS -->
     <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
 
     <!-- Initialize Swiper -->
     <script>
     var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
         slidesPerView: 3,
         slidesPerColumn: 2,
+        slidesPerGroup : 6,
+        spaceBetween: 30,
         paginationClickable: true,
+        loopFillGroupWithBlank : true,
         pagination: '.swiper-pagination',
-        paginationClickable: true,
         nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        spaceBetween: 30
-    });
+        prevButton: '.swiper-button-prev'
+        });
     </script>
 		</div>
 		<!-- wish END -->
@@ -442,35 +453,6 @@
 			</div>
 		</div>
 		<!-- review end -->
-
-		<!-- bloc-8 쿠폰함  -->
-		<div class="bloc bg-95cdfeef1 bgc-ferrari-red d-bloc b-parallax" 
-			id="contact" >
-			<div class="container bloc-lg">
-				<div class="row">
-					<div class="col-sm-12 col-md-6 col-md-offset-3">
-						<form id="form-1" novalidate>
-							<h3 class="mg-md text-center">쿠폰 등록</h3>
-
-							<div class="form-group">
-								<label> Coupon-number </label> <input id="name"
-									class="form-control" required />
-							</div>
-							<div class="text-center">
-								<button class="bloc-button btn btn-lg btn-wire" type="submit">
-									등록하기</button>
-								<button class="bloc-button btn btn-lg btn-wire" type="button">
-									보유 쿠폰 보기</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- bloc-8 END -->
-	</div>
-
-
 
 	<!-- 내 정보 클릭 시 띄워지는 모달 창 -->
 

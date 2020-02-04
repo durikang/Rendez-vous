@@ -89,41 +89,37 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping("mypage.do")
-		public ModelAndView myPageView(ModelAndView mv, HttpSession session,
-				  HttpServletRequest request, HttpServletResponse response) {
-	
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int userNo = loginUser.getUser_no();
-		
-						
-		ArrayList<Wish> w = mService.selectListWi(userNo);
-		
-		for(int i = 0; i<w.size(); i++) {
-			Wish c = w.get(i);
-			ArrayList<WishList> l = mService.selectListl(c.getL_no());
-			mv.addObject("list1", l);
-			System.out.println(l);
-		}
-		
-	
-		
-		
-		ArrayList<ReviewList> r = mService.selectList(userNo);
-		
-		
-		
-		Userpropic u = mService.selectOne(loginUser.getUser_no());
-		
-		System.out.println(r);
-		
-		mv.addObject("list", r);
-		mv.addObject("userPropic", u);
-		mv.setViewName("member/myPage");
-				
-		
-		return mv;
-	}
+	   @RequestMapping("mypage.do")
+	    public ModelAndView myPageView(ModelAndView mv, HttpSession session,
+	            HttpServletRequest request, HttpServletResponse response) {
+	 
+	    Member loginUser = (Member)session.getAttribute("loginUser");
+	    int userNo = loginUser.getUser_no();
+	    
+	                
+	    ArrayList<Wish> w = mService.selectListWi(userNo);
+	    ArrayList<WishList> l = new ArrayList<>();
+	    
+	    for(int i = 0; i<w.size(); i++) {
+	       WishList wl = mService.selectListl(w.get(i).getL_no());
+	       l.add(wl);
+	    }
+	    
+	    mv.addObject("list1", l);
+	    
+	    ArrayList<ReviewList> r = mService.selectList(userNo);
+	    
+	    Userpropic u = mService.selectOne(loginUser.getUser_no());
+	    
+	    System.out.println(r);
+	    
+	    mv.addObject("list", r);
+	    mv.addObject("userPropic", u);
+	    mv.setViewName("member/myPage");
+	          
+	    
+	    return mv;
+	 }
 	
 	@RequestMapping("ReviewDetail.do")
 	public String ReviewDetail(int lNo) {

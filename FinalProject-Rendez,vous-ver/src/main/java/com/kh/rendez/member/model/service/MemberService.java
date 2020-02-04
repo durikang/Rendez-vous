@@ -37,7 +37,7 @@ public interface MemberService {
 
 	public ArrayList<Wish> selectListWi(int userNo);
 
-	public ArrayList<WishList> selectListl(int l_no);
+	public WishList selectListl(int l_no);
 
 
 	

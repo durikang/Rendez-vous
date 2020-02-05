@@ -419,17 +419,6 @@ public class ManagerController {
 		return gson.toJson(as);
 	}
 
-	// 실시간 수업 순위
-	@RequestMapping(value = "realTimeLessonList.do", produces = "appllication/json; charset=utf-8")
-	@ResponseBody
-	public String realTimeLessonList(HttpServletResponse response) throws JsonIOException, IOException {
-		ArrayList<AdminLesson> Lessonlist = mnService.selectRealTimeLessonList();
-
-		Gson gson = new GsonBuilder().create();
-
-		return gson.toJson(Lessonlist);
-
-	}
 
 	@RequestMapping("changeTutor.do")
 	public ModelAndView changeTutor(ModelAndView mv, @RequestParam("cStr") String cStr,

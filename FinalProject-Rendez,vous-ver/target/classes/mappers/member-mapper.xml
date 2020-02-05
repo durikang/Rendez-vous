@@ -17,7 +17,7 @@
 		<result property="enroll_date" column="ENROLL_DATE"/>
 		<result property="update_date" column="UPDATE_DATE"/>
 		<result property="user_type" column="USER_TYPE"/>
-		<result property="u_status" column="U_STATUS"/>
+		<result property="uStatus" column="U_STATUS"/>
 	</resultMap>
 	<!-- 리뷰리스트 -->
 	<resultMap type="ReviewList" id="reviewListSet">
@@ -172,6 +172,13 @@
 		SELECT *
 		FROM PAYMENT_LIST
 		WHERE PM_NO = #{pmNo}
+	</select>
+
+<!-- 회원 정보를 가져온다.  -->
+   <select id="selectMember" resultMap="memberResultSet">
+		SELECT *
+		FROM member
+		WHERE user_no= ${value}
 	</select>
 	
 	

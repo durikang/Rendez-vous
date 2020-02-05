@@ -168,7 +168,7 @@ $(function(){
 		
 		<ul class="nav_links d-flex justify-content-center">
 			<li><a class="menuFontSize" href="manageHo.do?pageName=managerHome">홈페이지 관리</a></li>
-			<li><a class="menuFontSize" href="mn.do?pageName=memNTut" onclick="pageSubmitFn('memNTut');">회원 / 튜터 관리</a></li>
+			<li><a class="menuFontSize" href="mn.do?pageName=memNTut" onclick="pageSubmitFn('memNTut');">회원 관리</a></li>
 			<li><a class="menuFontSize" href="mnRequest.do?pageName=request" onclick="pageSubmitFn('request');">튜터 신청 관리</a></li>
 		</ul>
 		</div>

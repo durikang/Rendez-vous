@@ -47,6 +47,8 @@ public interface MemberService {
 
 	public PaymentList selectOnePn(int pmNo);
 
+	public Member selectMember(int user_no);
+
 
 
 	

@@ -393,6 +393,10 @@
 						<div class="divider-h">
 							<span class="divider divider-half"></span>
 						</div>
+						<p class="text-center sub-heading">
+							<c:out value="${ loginUser.user_name } " />
+							님이 작성하신 리뷰 목록입니다.
+						</p>
 					</div>
 				</div>
 				<div class="myReview">
@@ -468,6 +472,10 @@
 						<div class="divider-h">
 							<span class="divider divider-half"></span>
 						</div>
+						<p class="text-center sub-heading">
+							<c:out value="${ loginUser.user_name } " />
+							님의 결제내역입니다.
+						</p>
 					</div>
 				</div>
 				<div class="myReview">

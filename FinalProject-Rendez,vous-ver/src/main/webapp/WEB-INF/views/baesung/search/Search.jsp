@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>    	
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1302,7 +1302,7 @@ text-decoration: none;
                             ${ s.lTitle}					</div>
                         <div class="price">
                                                     <div class="price2">
-                                <span>￦<span><span>${ s.price }<span>
+                                <span>￦<span><span><fmt:formatNumber value="${ s.price }" pattern="#,###" /><span>
                             </span></span></span></span></div>
                                                 </div>
                         <div class="info">

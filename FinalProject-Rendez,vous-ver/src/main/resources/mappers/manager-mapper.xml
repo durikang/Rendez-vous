@@ -201,7 +201,7 @@
 		    nvl(sum(decode(to_char(payment_date, 'mm'), '09', payment_cost, 0)),0) "september" ,nvl(sum(decode(to_char(payment_date, 'mm'), '10', payment_cost, 0)),0) "october" ,
 		    nvl(sum(decode(to_char(payment_date, 'mm'), '11', payment_cost, 0)),0) "november" ,nvl(sum(decode(to_char(payment_date, 'mm'), '12', payment_cost, 0)),0) "decemver"
 		from payment
-		where to_char(payment_date,'YYYY')=#{value}
+		where to_char(payment_date,'YYYY')=#{value} and payment_status ='3' 
 		
 	</select>
 	
@@ -275,7 +275,7 @@
 		where to_date(enroll_date,'yyyy-mm-dd') = to_date(sysdate,'yyyy-mm-dd') and u_status='Y' and user_type !='A'
 		</when>
 		<when test="value == 2">
-		where extract(month from enroll_date) = extract(month from sysdate) and u_status='Y' and user_type !='A'
+		where to_char(extract(year from enroll_date))||to_char(extract(month from enroll_date)) = to_char(extract(year from sysdate))||to_char(extract(month from sysdate)) and u_status='Y' and user_type !='A'
 		</when>
 		</choose>
 	</select>
@@ -521,7 +521,7 @@
 	<select id="selectYearList2" resultType="string">
 		select distinct extract(year from payment_date)
 		from payment
-		where payment_status='1'
+		where payment_status='3'
 		order by 1 asc
 	</select>
 	

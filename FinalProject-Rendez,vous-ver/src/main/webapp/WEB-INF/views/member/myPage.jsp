@@ -222,20 +222,25 @@
         align-items: center;
     }
     
-    #slide-img {
+   #slide-img {
    width:90%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
    height:90%;
    border-radius:20px;
    }
  
    #text-area {
-   margin:auto;
+   margin-top:2%;
+   margin-left:15%;
    width:100%;
    height:50%;
    text-align:left;
 }
 
-
+#img-area {/*찜 이미지 크기 조절*/
+	margin-top:15%;
+   width:100%;
+   height:70%;
+}
 
 </style>
 <body>
@@ -335,14 +340,13 @@
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					<c:forEach var="p" items="${ list1 }">
-						<div class="swiper-slide" style="border: 2px solid lightgray;">
+						<div class="swiper-slide">
 							<div id="img-area">
 								<c:url var="goLesson" value="lessonDetail.do?lNo=${ p.l_no }" />
-								<a href="${ goLesson }"><img id="slide-img"
-									src="resources/lessonImg/${ p.c_name }"></a>
+								<a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ p.c_name }"></a>
 							</div>
-							<div id="text-area">
-								<h3>${ p.l_title }</h3>
+							<div id="text-area" style="margin-left:6%;">
+								<h5>${ p.l_title }</h5>
 								<p>수업 시작 :${p.l_day}</p>
 								<p>장소 : ${ p.l_region } ${p.l_region_sub }</p>
 								<p>비용 : ${ p.price }원</p>
@@ -389,6 +393,10 @@
 						<div class="divider-h">
 							<span class="divider divider-half"></span>
 						</div>
+						<p class="text-center sub-heading">
+							<c:out value="${ loginUser.user_name } " />
+							님이 작성하신 리뷰 목록입니다.
+						</p>
 					</div>
 				</div>
 				<div class="myReview">
@@ -464,6 +472,10 @@
 						<div class="divider-h">
 							<span class="divider divider-half"></span>
 						</div>
+						<p class="text-center sub-heading">
+							<c:out value="${ loginUser.user_name } " />
+							님의 결제내역입니다.
+						</p>
 					</div>
 				</div>
 				<div class="myReview">

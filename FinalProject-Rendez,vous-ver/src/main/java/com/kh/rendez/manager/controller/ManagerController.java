@@ -81,11 +81,12 @@ public class ManagerController {
 		AdminMonthsStatic monthlyIncome = mnService.selectmonthlyIncome(year2);
 		
 		
-		
 		mv.addObject("monthsJoinMember",monthsJoinMember);
 		mv.addObject("monthlyIncome",monthlyIncome);
 		mv.addObject("YearList",YearList);
 		mv.addObject("YearList2",YearList2);
+		mv.addObject("year1",year1);
+		mv.addObject("year2",year2);
 		mv.addObject("pageName", pageName);
 		mv.setViewName("manager/AdminHome");
 

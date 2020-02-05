@@ -204,7 +204,7 @@ overflow: hidden;
 			<div class="col border">
 				<div class="row">
 					    <div class="col">
-							<span align="center"><i class="fas fa-dollar-sign icon"style="color:#c9c0b1;"></i> &nbsp; 월별 가입자</span>
+							<h4 align="center"><i class="fas fa-dollar-sign icon"style="color:#c9c0b1;"></i> &nbsp; ${ year1 }년 월별 가입자</h4>
 					    </div>
 		  		</div>
 			
@@ -232,7 +232,7 @@ overflow: hidden;
 			</div>
 		<div class="row border">
 			<div class="col border">
-				<h4 align="center"><i class="fas fa-dollar-sign icon"style="color:#c9c0b1;"></i> 월별 수입</h4>
+				<h4 align="center"><i class="fas fa-dollar-sign icon"style="color:#c9c0b1;"></i>${ year2 }년 월별 수입</h4>
 				<canvas id="myChart2" width="150" height="75"></canvas>
 			</div>
 		</div>

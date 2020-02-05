@@ -567,11 +567,10 @@ div ul {
 
 <div style="text-align:center; margin:0 0 100px 0; background:#555; line-height:80px;"></div>
 
-<div class="swiper-area">
+<div class="swiper-area" style="margin-top:5%;">
    <div class="swiper-container swiper1">
       <h2>Rendez,vous 클래스 둘러보기</h2>
-      <a class="trigger2"><img src="https://img.icons8.com/android/24/000000/menu.png"></a> 
-      <div class="swiper-wrapper">
+      <div class="swiper-wrapper" >
       <c:forEach var="l" items="${ alist }">
          <div class="swiper-slide">
             <div id="img-area">
@@ -583,14 +582,42 @@ div ul {
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
                <img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }</p>   
+               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>   
             </div>            
          </div>
          </c:forEach>
         </div>
-   </div>   
+   </div>
+   <div id="icon-area1" style="margin-right:-2.5%;">
+                    <ul id="icon-ul">
+                       <li>                       
+                         <a href="<c:url value="cateMain.do?cateMain=디자인"/>"><img src="https://img.icons8.com/nolan/64/design.png"><br>디자인</a>
+                      </li>
+                       <li>                          
+                         <a href="<c:url value="cateMain.do?cateMain=실무역량"/>"><img src="https://img.icons8.com/nolan/64/workstation.png"><br>실무역량</a>
+                       </li>
+                       <li>                          
+                         <a href="<c:url value="cateMain.do?cateMain=뷰티"/>"><img src="https://img.icons8.com/nolan/64/lipstick.png"><br>뷰티</a>
+                       </li>
+                       <li>                          
+                         <a href="<c:url value="cateMain.do?cateMain=영상"/>"><img src="https://img.icons8.com/nolan/64/documentary.png"><br>영상</a>
+                       </li>                    
+                       <li>                          
+                         <a href="<c:url value="cateMain.do?cateMain=외국어"/>"><img src="https://img.icons8.com/nolan/64/google-translate.png"><br>외국어</a>
+                       </li>
+                       <li>                          
+                         <a href="<c:url value="cateMain.do?cateMain=음악"/>"><img src="https://img.icons8.com/nolan/64/musical-notes.png"><br>음악</a>
+                       </li>
+                       <li>                          
+                         <a href="<c:url value="cateMain.do?cateMain=라이프스타일"/>"><img src="https://img.icons8.com/nolan/64/running.png"><br>라이프스타일</a>
+                       </li>
+                       <li>                          
+                         <a href="<c:url value="cateMain.do?cateMain=기타"/>"><img src="https://img.icons8.com/nolan/64/settings--v1.png"><br>기타</a>
+                       </li>
+                    </ul>
+       </div>   
 </div>
-<br><br>
+<br><br><br><br>
 <div class="newYear">
    <img src="resources/homeImg/배너1.PNG">
 </div>
@@ -653,7 +680,7 @@ div ul {
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
                <img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여 가능</p>   
+               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 남음</p>   
          </div>            
          </div>
          </c:if>
@@ -682,7 +709,7 @@ div ul {
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
                <img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여가능</p>   
+               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>   
             </div>            
          </div>
          </c:if>
@@ -706,7 +733,7 @@ div ul {
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
                <img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여가능</p>   
+               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>   
             </div>            
          </div>
          </c:forEach>
@@ -786,36 +813,23 @@ div ul {
 
    <script type="text/javascript">
             var modal = document.querySelector(".modal");
-            var modal2 = document.querySelector(".modal2");
             var trigger = document.querySelector(".trigger");
-            var trigger2 = document.querySelector(".trigger2");
             var closeButton = document.querySelector(".close-button");
-            var closeButton2 = document.querySelector(".close-button2");
             var cancelButton = document.querySelector("#cancel");
-            var cancelButton2 = document.querySelector("#cancel2");
     
             function toggleModal() {
                 modal.classList.toggle("show-modal");
             }
 
-            function toggleModal2() {
-                modal2.classList.toggle("show-modal2");
-            }
-
             function windowOnClick(event) {
                 if (event.target === modal) {
                     toggleModal();
-                } else if (event.target === modal2) {
-                    toggleModal2();
-                }
+                } 
             }
     
             trigger.addEventListener("click", toggleModal);
-            trigger2.addEventListener("click", toggleModal2);
             closeButton.addEventListener("click", toggleModal);
-            closeButton2.addEventListener("click", toggleModal2);
             cancel.addEventListener("click", toggleModal);
-            cancel2.addEventListener("click", toggleModal2);
             window.addEventListener("click", windowOnClick);
         </script>
 

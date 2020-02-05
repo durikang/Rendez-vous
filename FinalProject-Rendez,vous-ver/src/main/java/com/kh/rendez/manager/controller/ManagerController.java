@@ -521,29 +521,7 @@ public class ManagerController {
 
 		return mv;
 	}
-	@RequestMapping("newjoin.do")
-	public ModelAndView newJoinMember(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
-			HttpServletRequest request)
-	{
-		int currentPage = page != null ? page : 1;
 
-		String pageName = request.getParameter("pageName");
-		String condition="join";
-		
-		ArrayList<AdminMember> list = mnService.selectNewJoinList(currentPage);
-		
-		
-		if (list != null) {
-			mv.addObject("list", list);
-			mv.addObject("pi", Pagination.getPageInfo());
-			mv.addObject("Condition", condition);
-			
-			mv.addObject("pageName", pageName);
-
-			mv.setViewName("manager/boarder/memberBoarderForm2");
-		}
-		return mv;
-	}
 	
 	@RequestMapping("monthsJoinMember.do")
 	public ModelAndView monthsJoinMember(ModelAndView mv,HttpServletRequest request,

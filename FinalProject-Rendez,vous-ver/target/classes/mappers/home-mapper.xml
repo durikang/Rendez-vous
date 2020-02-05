@@ -18,33 +18,26 @@
    </resultMap>
    
    <select id="selectAllList" resultMap="homeListSet">
-      SELECT * 
-      FROM HOME_LIST 
-      WHERE L_INNING = (SELECT MAX(L_INNING) FROM HOME_LIST) 
-      AND LA_TYPE = 1
-      ORDER BY L_NO DESC
+         SELECT *
+         FROM HOME_LIST
+         WHERE L_STATUS='Y'
    </select>
    
    <select id="selectInningList" resultMap="homeListSet">
       SELECT * 
-      FROM (SELECT *
       FROM HOME_LIST 
       WHERE L_INNING = (SELECT MAX(L_INNING) FROM HOME_LIST) 
-      AND LA_TYPE = 1
-      AND TO_DATE(L_DAY,'YYYY/MM/DD') = TO_DATE(SYSDATE,'YYYY/MM/DD') 
-      ORDER BY L_NO DESC)
-	  WHERE ROWNUM <![CDATA[ <= 12 ]]>    
+      ORDER BY L_NO DESC
    </select>
    
    <select id="selectDateList" resultMap="homeListSet">
-      SELECT * 
+      SELECT *
       FROM (SELECT *
-      FROM HOME_LIST 
-      WHERE L_INNING = (SELECT MAX(L_INNING) FROM HOME_LIST) 
-      AND LA_TYPE = 1
-      AND TO_DATE(L_DAY,'YYYY/MM/DD') = TO_DATE(SYSDATE,'YYYY/MM/DD') 
-      ORDER BY L_NO DESC)
-	  WHERE ROWNUM <![CDATA[ <= 12 ]]>
+      FROM HOME_LIST
+      WHERE L_STATUS ='Y'
+        AND TO_DATE(L_DAY,'YYYY/MM/DD') = TO_DATE(SYSDATE,'YYYY/MM/DD') 
+      ORDER BY L_DAY DESC)
+      WHERE ROWNUM  <![CDATA[ <= 12 ]]>
    </select>
 
 </mapper>

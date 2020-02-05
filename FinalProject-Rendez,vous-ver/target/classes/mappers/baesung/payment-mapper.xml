@@ -84,7 +84,7 @@
 	<select id="selectCouponList" resultMap="payCouponResultMap">
 	SELECT COUPON_NO, COUPON_NAME, DISCOUNT_RATE, TO_CHAR(START_DATE, 'YYYY-MM-DD') START_DATE,
 	TO_CHAR(END_DATE, 'YYYY-MM-DD') END_DATE, USER_NO
-	FROM COUPON WHERE USER_NO = #{userNo} AND STATUS = 'R' AND END_DATE >= SYSDATE
+	FROM COUPON WHERE USER_NO = #{userNo} AND STATUS in ('R','E') AND END_DATE >= SYSDATE
 	</select>
 	
 	<update id="insertCoupon" parameterType="InsertCouponInfo">

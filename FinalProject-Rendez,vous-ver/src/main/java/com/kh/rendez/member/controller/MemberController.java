@@ -138,7 +138,7 @@ public class MemberController {
 		String p1 = "2";
 		String p2 = "3";
 
-	    if(p.getPaymentStatus().equals("1")) {
+	    if(p.getPaymentStatus().equals("1") || p.getPaymentStatus().equals("11")) {
 	    	p.setPaymentStatus(p1);
 	    }else if(p.getPaymentStatus().equals("13")) {
 	    	p.setPaymentStatus(p2);

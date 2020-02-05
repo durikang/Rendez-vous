@@ -37,11 +37,11 @@ public class HomeEmailController {
         @RequestMapping( value = "home.do" , method=RequestMethod.POST )
         public ModelAndView mailSending(HttpServletRequest request, String e_mail, HttpServletResponse response_email) throws IOException {
              
-            String setfrom = "rendez.vous2019.12.26@gmail.com";
+            String setfrom = "rendez.vous2019.12.26@gmail.com"; // 보내는 사람 이메일
             String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
             String title = "안녕하세요 rendez.vous 입니다."; // 제목
             
-            String content =                  
+            String content =   // 내용                
             "안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"+
             "<br><br>"+
             "2월의 강의 시간표를 안내해드리겠습니다." + 

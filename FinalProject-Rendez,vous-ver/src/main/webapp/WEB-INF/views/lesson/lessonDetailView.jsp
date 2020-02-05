@@ -596,7 +596,7 @@
                   <ul>
                      <li class="ar">
                                                 ${ldi.lRegionSub }                     </li>                     
-                     <li class="hu">평균<font color="#ff005a"> ${avt }</font>시간/회</li>
+                     <li class="hu">평균<font color="#ff005a"> <fmt:formatNumber value="${avt }" pattern=".0"/></font>시간/회</li>
                      <li class="gr">
                                                 인원:<font color="#ff005a">${ minPerson }~${ maxPerson }</font>명
                         </li>
@@ -741,7 +741,7 @@
                            <li>
                               <dl>
                                  <dt>
-                                    <p class="profile_img" style="background: #000; z-index: 0; width: 100%; background-size: cover; background-position: center; background-image: url(${contextPath}/resources/user/img/${lr.uCName });"></p>
+                                    <p class="profile_img" style="background: #000; z-index: 0; width: 100%; background-size: cover; background-position: center; background-image: url('${contextPath}/resources/user/img/${lr.uCName }');"></p>
                                     <p class="name">${lr.uName }</p>
                                  </dt>
                                  <dd>

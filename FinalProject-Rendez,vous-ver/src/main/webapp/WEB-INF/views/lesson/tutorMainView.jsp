@@ -15,10 +15,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/my_header_style.css?ver=191216" />
-	<link rel="canonical" href="https://taling.me">
+
 
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/mypage_style.css?ver=191216" />
-	<!--link type="text/css" rel="stylesheet" href="/Content/app3/css/header_pc.css?ver=191021" /-->
+	
 	
 	
 	<link href="${contextPath}/resources/h1/css/style_sub17.css?after" rel="stylesheet" type="text/css">
@@ -33,6 +33,7 @@
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/h1/css/style.css" />
 	<link rel="stylesheet" href="${contextPath}/resources/h1/css/default.css">
 	
+	<link href="${contextPath }/resources/h2/css/style.css" rel="stylesheet">
 	
 	
 	
@@ -150,53 +151,96 @@
 			<h1>튜터 정보</h1>
 		</div>	
 		
-		<h3>튜터 별명 : ${tutor.tNick }</h3>
+	
+		
+
 		
 		
 		<br>
 		
-		<!-- 수입 -->
-		<div class="row">
-							<div class="col-sm-12" >
-								<div class="card-box widget-inline">
-									<div class="row">
-										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
-											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-primary mdi mdi-access-point-network"></i> <b data-plugin="counterup">${nowCount }</b></h3>
-												<p class="text-muted">이번 달 수업 신청 건수</p>
-											</div>
-										</div>
 
-										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
-											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-custom mdi mdi-airplay"></i> <b data-plugin="counterup">${nowSum }</b></h3>
-												<p class="text-muted">이번 달 매출</p>
-											</div>
-										</div>
+						
+						
+					<div class="row colorbox-group-widget">
+                    <div class="col-md-3 col-sm-6 info-color-box">
+                        <div class="white-box">
+                            <div class="media bg-info">
+                                <div class="media-body">
+                                    <h3 class="info-count">${nowCount } <span class="pull-right"></span></h3>
+                                    <p class="info-text font-12">이번 달 수업 신청 건수</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 info-color-box">
+                        <div class="white-box">
+                            <div class="media bg-success">
+                                <div class="media-body">
+                                    <h3 class="info-count"><fmt:formatNumber value="${nowSum}" pattern="#,###" />원 <span class="pull-right"></span></h3>
+                                    <p class="info-text font-12">이번 달 매출</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 info-color-box">
+                        <div class="white-box">
+                            <div class="media bg-danger">
+                                <div class="media-body">
+                                    <h3 class="info-count">${totalCount}<span class="pull-right"></span></h3>
+                                    <p class="info-text font-12">총 수업 건수</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 info-color-box">
+                        <div class="white-box">
+                            <div class="media bg-warning">
+                                <div class="media-body">
+                                    <h3 class="info-count"><fmt:formatNumber value="${totalSum}" pattern="#,###" />원<span class="pull-right"></span></h3>
+                                    <p class="info-text font-12">총 매출</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		
+		
+		
+		
+				<!--  -->
+				
+							<div class="white-box">
+                            <div class="user-btm-box">
+                                <!-- .row -->
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-6 b-r"><strong>튜터 별명</strong>
+                                        <p>${tutor.tNick }</p>
+                                    </div>
+                                    <div class="col-md-6"><strong>튜터 주요 분야  </strong>
+                                        <p>${subCate }</p>
+                                    </div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-12"><strong>튜터 경력</strong>
+                                        <c:forEach var="tc" items="${tutorCerArr}">
+                                        <p>${tc }</p>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                                <hr>
 
-										<div class="col-lg-3 col-sm-6" style="border-right: 1px solid #e3e8f1;">
-											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-info mdi mdi-black-mesa"></i> <b data-plugin="counterup">${totalCount }</b></h3>
-												<p class="text-muted">총 수업 건수</p>
-											</div>
-										</div>
-
-										<div class="col-lg-3 col-sm-6">
-											<div class="widget-inline-box text-center b-0">
-												<h3 class="m-t-10"><i class="text-danger mdi mdi-cellphone-link"></i> <b data-plugin="counterup">${totalSum }</b></h3>
-												<p class="text-muted">총 매출</p>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-		
-		
-		
-		
-		
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-12"><strong>튜터 소개</strong>
+                                        <c:forEach var="tr" items="${ tutor.tInfo }">
+                                        <p>${tr }</p>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 		
 		
 		

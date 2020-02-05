@@ -370,7 +370,7 @@ a {
     
     <!--  -->
     
-    
+     <c:import url="../../common/footbar.jsp" /> 
     
 </body>
 </html>

@@ -11,6 +11,7 @@ public class HomeList {
 	private Date lDay;
 	private int total;
 	private int price;
+	private int Latype;
 	private String oName;
 	private String cName;
 	private String lStatus;
@@ -20,8 +21,8 @@ public class HomeList {
 		
 	}
 
-	public HomeList(int lInning, int lNo, String lTitle, String lRegion, Date lDay, int total, int price, String oName,
-			String cName, String lStatus, int remain) {
+	public HomeList(int lInning, int lNo, String lTitle, String lRegion, Date lDay, int total, int price, int latype,
+			String oName, String cName, String lStatus, int remain) {
 		super();
 		this.lInning = lInning;
 		this.lNo = lNo;
@@ -30,6 +31,7 @@ public class HomeList {
 		this.lDay = lDay;
 		this.total = total;
 		this.price = price;
+		Latype = latype;
 		this.oName = oName;
 		this.cName = cName;
 		this.lStatus = lStatus;
@@ -92,6 +94,14 @@ public class HomeList {
 		this.price = price;
 	}
 
+	public int getLatype() {
+		return Latype;
+	}
+
+	public void setLatype(int latype) {
+		Latype = latype;
+	}
+
 	public String getoName() {
 		return oName;
 	}
@@ -127,10 +137,8 @@ public class HomeList {
 	@Override
 	public String toString() {
 		return "HomeList [lInning=" + lInning + ", lNo=" + lNo + ", lTitle=" + lTitle + ", lRegion=" + lRegion
-				+ ", lDay=" + lDay + ", total=" + total + ", price=" + price + ", oName=" + oName + ", cName=" + cName
-				+ ", lStatus=" + lStatus + ", remain=" + remain + "]";
+				+ ", lDay=" + lDay + ", total=" + total + ", price=" + price + ", Latype=" + Latype + ", oName=" + oName
+				+ ", cName=" + cName + ", lStatus=" + lStatus + ", remain=" + remain + "]";
 	}
-	
+
 }
-	
-	

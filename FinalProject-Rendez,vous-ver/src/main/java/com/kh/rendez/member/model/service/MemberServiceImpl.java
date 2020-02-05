@@ -104,6 +104,12 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectOnePn(pmNo);
 	}
 
+	@Override
+	public Member selectMember(int user_no) {
+		// TODO Auto-generated method stub
+		return mDao.selectMember(user_no);
+	}
+
 
 
 	

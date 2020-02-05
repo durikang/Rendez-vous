@@ -93,10 +93,14 @@ public class MemberController {
 	
 	   @RequestMapping("mypage.do")
 	    public ModelAndView myPageView(ModelAndView mv, HttpSession session,
-	            HttpServletRequest request, HttpServletResponse response) {
+	    		@RequestParam(value="userPropic",required=false) Userpropic u,
+	    		@RequestParam(value="msg2",required=false)String msg2) {
 	 
-	    Member loginUser = (Member)session.getAttribute("loginUser");
-	    int userNo = loginUser.getUser_no();
+//	    Member loginUser = (Member)session.getAttribute("loginUser");
+		System.out.println("uNo : "+((Member)session.getAttribute("loginUser")).getUser_no());
+	    Member m = mService.selectMember(((Member)session.getAttribute("loginUser")).getUser_no());
+	    
+	    int userNo = m.getUser_no();
 	    
 	    
 	    
@@ -119,10 +123,14 @@ public class MemberController {
 	    mv.addObject("list1", l);
 	    
 	    ArrayList<ReviewList> r = mService.selectList(userNo);
+	    if(u == null) {
+	    	u = mService.selectOne(m.getUser_no());	
+	    }
 	    
-	    Userpropic u = mService.selectOne(loginUser.getUser_no());
 	    
-	    System.out.println(r);
+	    if(msg2 !=null) {
+	    	mv.addObject("msg2",msg2);
+	    }
 	    
 	    mv.addObject("list", r);
 	    mv.addObject("userPropic", u);
@@ -131,6 +139,12 @@ public class MemberController {
 	    
 	    return mv;
 	 }
+	   
+	   
+	   
+	   
+	   
+	   
 	@RequestMapping("uppayment.do")
 		public String uppayment(int pmNo,PaymentList p) {
 		
@@ -259,7 +273,6 @@ public class MemberController {
 			
 				if(!file.getOriginalFilename().equals("")) { 
 					String uChangeName = saveFile(file, request);
-					System.out.println(file);
 				if(uChangeName != null) {
 							u.setuOriginName(file.getOriginalFilename());
 							u.setuChangeName(uChangeName);
@@ -271,12 +284,10 @@ public class MemberController {
 				m.setAddress(post + ", " + address1 + ", " + address2);
 				
 				
-				System.out.println(pw);
 				
 				if(pw.equals("")) {
 					Member m2 = (Member)session.getAttribute("loginUser");
 					m.setUser_pwd(m2.getUser_pwd());
-					System.out.println(m.getUser_pwd()+1);
 					
 				} else {
 				m.setUser_pwd(pw);
@@ -291,12 +302,11 @@ public class MemberController {
 				
 				if(result > 0 || result2 > 0) {
 					model.addAttribute("msg2", "회원 정보 수정 성공");
-					model.addAttribute("loginUser", m);
 					model.addAttribute("userPropic" , u);
 				} else {
 					throw new MemberException("회원 정보 수정 실패");
 				}
-				return "member/myPage";
+				return "redirect:mypage.do";
 			}
 		
 		

@@ -437,7 +437,7 @@
 
 	<div class="button_box">
 		<!-- <div class="next button prev" onclick="setMode(0);">임시저장</div> -->
-		<button class="next button on" id="realBtn" style="border: none;">제출하기</button>	
+		<button class="next button on" id="realBtn" style="border: none; background:#c9c0b1;">제출하기</button>	
 	</div>
 	
 	</div>

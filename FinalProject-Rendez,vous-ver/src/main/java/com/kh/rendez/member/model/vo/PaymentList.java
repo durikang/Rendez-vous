@@ -13,11 +13,12 @@ public class PaymentList {
 	private int uNo; // 회원번호
 	private int lInning; // 회차 
 	private int lNo; // 수업번호
+	private int remain; //잔여수업
 	
 	public PaymentList () {}
 
 	public PaymentList(int pmNo, String l_title, String paymentStatus, Date pDate, int pCost, String pType, int uNo,
-			int lInning, int lNo) {
+			int lInning, int lNo, int remain) {
 		super();
 		this.pmNo = pmNo;
 		this.l_title = l_title;
@@ -28,6 +29,7 @@ public class PaymentList {
 		this.uNo = uNo;
 		this.lInning = lInning;
 		this.lNo = lNo;
+		this.remain = remain;
 	}
 
 	public int getPmNo() {
@@ -102,14 +104,21 @@ public class PaymentList {
 		this.lNo = lNo;
 	}
 
-	@Override
-	public String toString() {
-		return "Paymentlist [pmNo=" + pmNo + ", l_title=" + l_title + ", paymentStatus=" + paymentStatus + ", pDate="
-				+ pDate + ", pCost=" + pCost + ", pType=" + pType + ", uNo=" + uNo + ", lInning=" + lInning + ", lNo="
-				+ lNo + "]";
+	public int getRemain() {
+		return remain;
 	}
 
-	
+	public void setRemain(int remain) {
+		this.remain = remain;
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentList [pmNo=" + pmNo + ", l_title=" + l_title + ", paymentStatus=" + paymentStatus + ", pDate="
+				+ pDate + ", pCost=" + pCost + ", pType=" + pType + ", uNo=" + uNo + ", lInning=" + lInning + ", lNo="
+				+ lNo + ", remain=" + remain + "]";
+	}
+
 	
 	
 }

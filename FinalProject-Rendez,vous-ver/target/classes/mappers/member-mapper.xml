@@ -65,6 +65,7 @@
 		<result property="uNo" column="USER_NO"/>
 		<result property="lInning" column="L_INNING"/>
 		<result property="lNo" column="L_NO"/>
+		<result property="remain" column="REMAIN"/>
 	</resultMap>
 	
 	

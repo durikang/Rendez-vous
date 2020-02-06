@@ -128,6 +128,7 @@ public class MemberController {
 	    }
 	    
 	    
+
 	    if(msg2 !=null) {
 	    	mv.addObject("msg2",msg2);
 	    }
@@ -142,6 +143,7 @@ public class MemberController {
 	    return mv;
 	 }
 	   
+
 	   
 	   
 	   
@@ -156,6 +158,7 @@ public class MemberController {
 
 	    if(p.getPaymentStatus().equals("1") || p.getPaymentStatus().equals("11")) {
 	    	p.setPaymentStatus(p1);
+	    	p.setRemain(p.getRemain()+1);
 	    }else if(p.getPaymentStatus().equals("13")) {
 	    	p.setPaymentStatus(p2);
 	    }
@@ -268,10 +271,6 @@ public class MemberController {
 				
 				int uNo=((Member)session.getAttribute("loginUser")).getUser_no();
 	            u.setuNo(uNo);
-	            
-				
-				
-				
 			
 				if(!file.getOriginalFilename().equals("")) { 
 					String uChangeName = saveFile(file, request);

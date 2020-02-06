@@ -49,47 +49,69 @@ public class HomeEmailController {
             "<table border=\"1\" bordercolor=\"blue\" width =\"300\" height=\"150\" align = \"center\" >" + 
             "<tr bgcolor=\"skybule\" align =\"center\">" + 
             "<th>강의명</th>\n" + 
-            "<th>시간</th>\n" + 
+            "<th>시 간</th>\n" + 
+            "<th>지 역</th>\n" + 
+            "<th>가 격</th>\n" + 
             "</tr>" + 
             "<tr align = \"center\">" + 
             "<td>3번으로 끝내는 디자인툴!</td>\n" + 
             "<td>02-10-월  AM10:00</td>\n" + 
+            "<td>강남</td>\n" + 
+            "<td>50,000</td>\n" + 
             "</tr>\n" + 
             "<tr align = \"center\">" + 
             "<td>일러스트<br>기초부터 탄탄하게</td>\n" + 
-            "<td>02-12-수  PM07:00</td>\n" + 
+            "<td>02-12-수  PM07:00</td>\n" +
+            "<td>교대</td>\n" + 
+            "<td>55,000</td>\n" + 
             "</tr>\n" + 
             "<tr align = \"center\">" + 
             "<td>PPT<br>하나로 쉽게 완성하기</td>\n" + 
             "<td>02-13-목  AM11:00</td>\n" + 
+            "<td>판교</td>\n" + 
+            "<td>48,000</td>\n" + 
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>일러스트/포토샵<br>나만의 아트워크 만들기!</td>\n" + 
             "<td>02-15-토  PM04:00</td>\n" + 
+            "<td>역삼</td>\n" + 
+            "<td>30,000</td>\n" + 
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>AI/PS<br>나를 브랜딩하기 위한 디자인!</td>\n" + 
             "<td>02-16-일  AM10:00</td>\n" + 
+            "<td>강남</td>\n" + 
+            "<td>52,000</td>\n" + 
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>쇼핑몰[포토샵/일러]의 모든것</td>\n" + 
             "<td>02-17-월  PM08:00</td>\n" + 
+            "<td>신촌</td>\n" + 
+            "<td>60,000</td>\n" + 
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>초&중급 포토샵</td>\n" + 
             "<td>02-19-수  PM07:00</td>\n" + 
+            "<td>홍대</td>\n" + 
+            "<td>80,000</td>\n" + 
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>[사진/포토샵]<br>디자인 핵심은 3회면 충분하다.</td>\n" + 
             "<td>02-24-월  AM06:00</td>\n" + 
+            "<td>교대</td>\n" + 
+            "<td>58,000</td>\n" + 
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>생활 포토샵<br>필요한 기능만 쏙쏙td>\n" + 
             "<td>02-27-목  PM09:00</td>\n" + 
+            "<td>논현</td>\n" + 
+            "<td>70,000</td>\n" + 
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>아트워크클래스<br>나만의 아트워크 만들기!/4주완성!</td>\n" + 
             "<td>02-28-금  PM10:00</td>\n" + 
+            "<td>강남</td>\n" + 
+            "<td>38,000</td>\n" + 
             "</tr>\n" +
             "</table>";          
                                    

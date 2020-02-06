@@ -18,9 +18,9 @@
    </resultMap>
    
    <select id="selectAllList" resultMap="homeListSet">
-         SELECT *
-         FROM HOME_LIST
-         WHERE L_STATUS='Y'
+      SELECT *
+      FROM HOME_LIST
+      WHERE L_STATUS='Y'
    </select>
    
    <select id="selectInningList" resultMap="homeListSet">
@@ -35,7 +35,7 @@
       FROM (SELECT *
       FROM HOME_LIST
       WHERE L_STATUS ='Y'
-        AND TO_DATE(L_DAY,'YYYY/MM/DD') = TO_DATE(SYSDATE,'YYYY/MM/DD') 
+      AND TO_DATE(L_DAY,'YYYY/MM/DD') = TO_DATE(SYSDATE,'YYYY/MM/DD') 
       ORDER BY L_DAY DESC)
       WHERE ROWNUM  <![CDATA[ <= 12 ]]>
    </select>

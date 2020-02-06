@@ -109,7 +109,7 @@ public class HomeEmailController {
             "</tr>\n" +
             "<tr align = \"center\">" + 
             "<td>아트워크클래스<br>나만의 아트워크 만들기! / 4주완성!</td>\n" + 
-            "<td>02-28-금  PM10:00</td>\n" + 
+            "<td>02-28-금  PM09:00</td>\n" + 
             "<td>강남</td>\n" + 
             "<td>38,000</td>\n" + 
             "</tr>\n" +

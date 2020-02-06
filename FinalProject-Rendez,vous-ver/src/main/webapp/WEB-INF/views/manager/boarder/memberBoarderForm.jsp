@@ -162,7 +162,7 @@ $(function(){
 				<table class="table listArea">
 					<thead class="thead-white">
 						<tr>
-							<th scope="col">회원 번호</th>
+							<th scope="col">No.</th>
 							<th scope="col">회원 이메일</th>
 							<th scope="col">회원명</th>
 							<th scope="col">성별</th>

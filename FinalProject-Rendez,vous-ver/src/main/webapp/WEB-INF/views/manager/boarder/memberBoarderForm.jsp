@@ -63,6 +63,13 @@ line-height: 50px;
     width: 940px;
   }
 }
+.goTobtn:hover{
+	background: #28a745;
+	transition:background-color .5s;
+	font-weight: bold;
+}
+
+
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
@@ -153,7 +160,7 @@ $(function(){
 					<label><span onclick="ok('type');" class="link" data-toggle="modal" data-target="#exampleModal">타입</span></label>
                 </div>	
 				<table class="table listArea">
-					<thead class="thead-dark">
+					<thead class="thead-white">
 						<tr>
 							<th scope="col">회원 번호</th>
 							<th scope="col">회원 이메일</th>
@@ -196,7 +203,7 @@ $(function(){
 				<br>
 					
 					
-				<input type="button" value="쿠폰 생성하기" class="btn btn-primary btn-sm goTobtn">
+				<input type="button" value="쿠폰 생성하기" class="btn btn-muted btn-sm goTobtn">
 				<br>
 				<!-- 검색바   -->
 				
@@ -699,7 +706,7 @@ $(function(){
 
 			$(".listArea td").mouseenter(function() {
 				$(this).parent().css({
-					"background" : "skyblue",
+					"background" : "#f7fafc",
 					"cursor" : "pointer"
 				});
 			}).mouseout(function() {

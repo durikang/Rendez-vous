@@ -639,7 +639,7 @@ text-decoration: none;
             <div class="cate_list">
                 <ul>
                    <li class="cate cate3" onmouseover="menuView(0)"  id="menu0">
-                   <a href="cateMain.do?cateMain=인기수업"><div id="cate1" class="cMain">인기수업</div></a></li>
+                   <a href="cateMain.do?cateMain=추천수업"><div id="cate1" class="cMain">추천수업</div></a></li>
                    <li class="cate cate3" onmouseover="menuView(1)"  id="menu1">
                    <a href="cateMain.do?cateMain=디자인"><div id="cate2" class="cMain">디자인</div></a></li>
    
@@ -673,7 +673,7 @@ text-decoration: none;
             
             <div class="catesub_list cates" onmouseover="menuView3()" onmouseout="menuView2()" id="sub0" style="display: none;">
                 <div class="main">
-                    <li><a href="cateSub.do?cateSub=탈잉이벤트" class="cSub">탈잉이벤트</a></li>
+                    <li><a href="cateSub.do?cateSub=랑데뷰이벤트" class="cSub">랑데뷰이벤트</a></li>
                     <li><a href="cateSub.do?cateSub=투잡" class="cSub">투잡</a></li>
                     <li><a href="cateSub.do?cateSub=퍼스널컬러" class="cSub">퍼스널컬러</a></li>
                     <li><a href="cateSub.do?cateSub=엑셀"class="cSub">엑셀</a></li>

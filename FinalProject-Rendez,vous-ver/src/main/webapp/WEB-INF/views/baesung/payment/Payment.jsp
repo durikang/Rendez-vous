@@ -424,7 +424,7 @@ div, table, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p {
 <input type="text" id="Paypoint" style="width: 120px; height: 30px; border: 1px solid #d8d8d8;" placeholder="${point}p" ><button id="point_button" onclick="pointCal(this)" style="background: rgb(184,145,105);margin-left: 10px;width: 50px;height: 30px; border: 1px solid #d8d8d8; color: white;border-radius: 10px;">사용</button>                            </div>
                         </div>
                         <div class="level2 top">					
-                            <div class="center2">수업료는 탈잉에서 보관하다가 첫 수업 후 튜터님께 전달 해 드려요.</div>									
+                            <div class="center2">수업료는 랑데뷰에서 보관하다가 첫 수업 후 튜터님께 전달 해 드려요.</div>									
                         </div>	
                         	
                     </div>

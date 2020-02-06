@@ -101,7 +101,7 @@ line-height: 50px;
                 	</tr>
                 </table>
 				<table class="table listArea">
-					<thead class="thead-dark">
+					<thead class="thead-white">
 						<tr>
 							<th scope="col">No.</th>
 							<th scope="col">이메일</th>
@@ -241,7 +241,7 @@ line-height: 50px;
 
 			$(".listArea td").mouseenter(function() {
 				$(this).parent().css({
-					"background" : "skyblue",
+					"background" : "#f7fafc",
 					"cursor" : "pointer"
 				});
 			}).mouseout(function() {

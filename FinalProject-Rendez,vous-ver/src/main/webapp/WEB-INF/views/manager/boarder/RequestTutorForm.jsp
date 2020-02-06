@@ -109,7 +109,7 @@ $(function(){
     
 	$(".listArea td").mouseenter(function() {
 		$(this).parent().css({
-			"background" : "skyblue",
+			"background" : "#f7fafc",
 			"cursor" : "pointer"
 		});
 	}).mouseout(function() {
@@ -176,7 +176,7 @@ $(function(){
                 	<label for="all">전체</label>
 					<input type="checkbox" id="all">
 				<table class="table listArea">
-					<thead class="thead-dark">
+					<thead class="thead-white">
 						<tr>
 							<th scope="col">No.</th>
 							<th scope="col">아이디</th>
@@ -207,11 +207,11 @@ $(function(){
 										</c:choose>
 									</td>
 									<td style="text-align:center">
-										<c:if test="${ m.tuStatus eq 'R' }">
-											<i class="fas fa-times"></i>
+										<c:if test="${ m.tuStatus eq 'R'}">
+											<i class="fas fa-times" style="color:#dc3545"></i>
 										</c:if>
 										<c:if test="${ m.tuStatus eq 'Y'}">
-											<i class="fas fa-check"></i>
+											<i class="fas fa-check" style="color:#dc3545"></i>
 										</c:if>
 									</td>
 								</tr>
@@ -238,10 +238,10 @@ $(function(){
 									</td>
 									<td style="text-align:center">
 										<c:if test="${ m.tuStatus eq 'R' }">
-											<i class="fas fa-times"></i>
+											<i class="fas fa-times " style="color:#28a745"></i>
 										</c:if>
 										<c:if test="${ m.tuStatus eq 'Y'}">
-											<i class="fas fa-check"></i>
+											<i class="fas fa-check" style="color:#28a745"></i>
 										</c:if>
 									</td>
 								</tr>
@@ -267,7 +267,7 @@ $(function(){
 				</script>
 				
 				</form>
-				<c:if test="${ AllTutorlist ne null }">	
+<%-- 				<c:if test="${ AllTutorlist ne null }">	
 					<!-- 검색바   -->
 					<br>
 					<div class="searchArea" align="center">
@@ -305,7 +305,7 @@ $(function(){
 						</form>
 					</div>
 				</c:if>
-				<hr>
+				<hr> --%>
 				<br>
 				<!-- 검색에 대한 페이징 처리  -->
 					

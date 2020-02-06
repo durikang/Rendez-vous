@@ -577,7 +577,7 @@ div ul {
                <c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>                  
                <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
             </div>
-            <div id="text-area" style="margin-left:6%;">
+            <div id="text-area" style="margin-left:4%;">
                <h3>${ l.lTitle }</h3>
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
@@ -704,7 +704,7 @@ div ul {
                <c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>                  
                <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
             </div>
-            <div id="text-area" style="margin-left:6%;">
+            <div id="text-area" style="margin-left:4%;">
                <h3>${ l.lTitle }</h3>
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
@@ -728,7 +728,7 @@ div ul {
                <c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>                  
                <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
             </div>
-            <div id="text-area" style="margin-left:6%;">
+            <div id="text-area" style="margin-left:4%;">
                <h3>${ l.lTitle }</h3>
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>

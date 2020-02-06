@@ -216,24 +216,26 @@
         align-items: center;
     }
     
+    
    #slide-img {
-   width:90%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+   width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
    height:90%;
-   border-radius:20px;
+   border-radius:7px;
    }
+
  
    #text-area {
    margin-top:2%;
-   margin-left:15%;
-  
+   width:110%;
+   height:50%;
    text-align:left;
 }
-
-#img-area {/*찜 이미지 크기 조절*/
-	margin-top:15%;
-   width:100%;
-   height:70%;
-}
+	
+	#img-area {/*찜 이미지 크기 조절*/
+	   margin-top:15%;
+	   width:110%;
+	   height:70%;
+	}
 
  .swiper-container {
         width: 100%;
@@ -241,27 +243,6 @@
         margin-left: auto;
         margin-right: auto;
     }
-
-.swiper-container2 {
-        width: 80%;
-        height: auto;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-.swiper-container3 {
-        width: 100%;
-        height: auto;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    
-   .swiper-button-next, .swiper-container-rtl, .swiper-button-prev{
-    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%…2L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E);
-    right: 20px;
-}
-
 
 </style>
 <body>
@@ -403,11 +384,11 @@
 		<!-- wish END -->
 
 		<!-- review start -->
-		<div class="bloc l-bloc bgc-white" id="review">
+				<div class="bloc l-bloc bgc-white" id="review">
 			<div class="container bloc-lg">
 				<div class="row">
 					<div class="col-sm-12">
-						<h2 class="mg-md text-center">작성한 리뷰</h2>
+						<h2 class="text-center mg-md">작성한 리뷰</h2>
 
 						<div class="divider-h">
 							<span class="divider divider-half"></span>
@@ -418,10 +399,10 @@
 						</p>
 					</div>
 				</div>
-				
-				<div class="swiper-container2">
+
+				<!-- Swiper -->
+			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<c:if test="${ !empty loginUser }">
 						<c:forEach var="r" items="${ list }">
 						<div class="swiper-slide">
 							<div id="text-area" style="margin-left:6%;">
@@ -434,11 +415,7 @@
 							</div>
 						</div>
 					</c:forEach>
-					</c:if>
-					<%-- <c:if test="${ empty list }">
-								<h1 style="color:green; font-size: 15px">작성하신 리뷰가 없습니다.</h1>
-							</c:if> --%>	
-				</div>
+					</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
 				<!-- Add Arrows -->
@@ -449,7 +426,7 @@
 			    <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
 			
 			<script>
-		    var swiper = new Swiper('.swiper-container2', {
+		    var swiper = new Swiper('.swiper-container', {
 		    	slidesPerView: 3,
 		        slidesPerColumn: 2,
 		        slidesPerGroup : 6,
@@ -462,7 +439,6 @@
 		        });
    			 </script>
 			</div>
-	
 		<!-- review end -->
 		
 		<!-- payment start -->
@@ -470,7 +446,7 @@
 			<div class="container bloc-lg">
 				<div class="row">
 					<div class="col-sm-12">
-						<h2 class="mg-md text-center">결제내역</h2>
+						<h2 class="text-center mg-md">결제내역</h2>
 
 						<div class="divider-h">
 							<span class="divider divider-half"></span>
@@ -481,13 +457,13 @@
 						</p>
 					</div>
 				</div>
-				
-				<div class="swiper-container3">
+
+				<!-- Swiper -->
+			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<c:if test="${ !empty loginUser }">
 							<c:forEach var="p" items="${ plist }">
 						<div class="swiper-slide">
-							<div id="text-area" style="margin-left:6%;  width:100%; height:50%;">
+							<div id="text-area" style="margin-left:6%;">
 								<c:url var="myReview" value="ReviewDetail.do">
 									<c:param name="lNo" value="${ p.lNo }"/>
 								</c:url>								
@@ -506,11 +482,7 @@
 							</div>
 						</div>
 					</c:forEach>
-					</c:if>
-					<%-- <c:if test="${ empty list }">
-								<h1 style="color:green; font-size: 15px">결제 내역이 없습니다.</h1>
-							</c:if> --%>	
-				</div>
+					</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
 				<!-- Add Arrows -->
@@ -521,11 +493,11 @@
 			    <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
 			
 			<script>
-		    var swiper = new Swiper('.swiper-container3', {
+		    var swiper = new Swiper('.swiper-container', {
 		    	slidesPerView: 3,
 		        slidesPerColumn: 2,
 		        slidesPerGroup : 6,
-		        spaceBetween: 100,
+		        spaceBetween: 30,
 		        paginationClickable: true,
 		        loopFillGroupWithBlank : true,
 		        pagination: '.swiper-pagination',

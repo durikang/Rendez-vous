@@ -364,7 +364,7 @@
       </div>
  
     </div>
-    
+    <!--변경  -->
     <!-- 모달 버튼 -->
     <!-- <button class="button_gray cursor" id="myBtn" >Open Modal</button> -->
     

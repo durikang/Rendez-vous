@@ -164,7 +164,7 @@ color: #fff; */
 					<h5 align="center">홈페이지 관리</h5>
 				</c:if>
 				<c:if test="${ pageName eq 'memNTut' }">
-					<h5 align="center">회원/튜터 관리</h5>
+					<h5 align="center">회원 관리</h5>
 				</c:if>
 				<c:if test="${ pageName eq 'request' }">
 					<h5  align="center">튜터 신청 관리</h5>
@@ -185,8 +185,7 @@ color: #fff; */
 				</li>
 				<li id="memNTut">
 					<a href="mn.do?pageName=memNTut"><i
-						class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>회원/튜터
-						관리
+						class="fas fa-list-alt m-auto" style="color: #c9c0b1;"></i>회원 관리
 					</a>
 				</li>
 				<li id="request">

@@ -522,7 +522,7 @@
 		select distinct extract(year from payment_date)
 		from payment
 		where payment_status='3'
-		order by 1 asc
+		order by 1 desc
 	</select>
 	
 	<select id="selectCurrentCount" resultType="_int">

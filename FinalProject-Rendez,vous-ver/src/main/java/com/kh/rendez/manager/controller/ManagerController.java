@@ -64,10 +64,8 @@ public class ManagerController {
 		nYear = calendar.get(Calendar.YEAR);
 		
 		
-		if(year1 == null) {
+		if(year1 == null && year2 ==null) {
 		    year1 = nYear+"";
-		}
-		if(year2 == null) {
 			year2 = nYear+"";
 		}
 		
@@ -419,17 +417,6 @@ public class ManagerController {
 		return gson.toJson(as);
 	}
 
-	// 실시간 수업 순위
-	@RequestMapping(value = "realTimeLessonList.do", produces = "appllication/json; charset=utf-8")
-	@ResponseBody
-	public String realTimeLessonList(HttpServletResponse response) throws JsonIOException, IOException {
-		ArrayList<AdminLesson> Lessonlist = mnService.selectRealTimeLessonList();
-
-		Gson gson = new GsonBuilder().create();
-
-		return gson.toJson(Lessonlist);
-
-	}
 
 	@RequestMapping("changeTutor.do")
 	public ModelAndView changeTutor(ModelAndView mv, @RequestParam("cStr") String cStr,
@@ -525,10 +512,11 @@ public class ManagerController {
 	
 	@RequestMapping("monthsJoinMember.do")
 	public ModelAndView monthsJoinMember(ModelAndView mv,HttpServletRequest request,
-			@RequestParam(value="year1",required=false) String year1) {
+			@RequestParam(value="year1",required=false) String year1,@RequestParam(value="year2",required=false) String year2) {
 		String pageName="adminHome";
 		
 		mv.addObject("year1",year1);
+		mv.addObject("year2",year2);
 		mv.addObject("pageName", pageName);
 		mv.setViewName("redirect:adminHome.do");
 		

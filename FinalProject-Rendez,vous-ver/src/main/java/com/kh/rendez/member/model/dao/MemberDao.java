@@ -87,6 +87,10 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectOnePn",pmNo);
 	}
 
+	public Member selectMember(int user_no) {
+		return sqlSession.selectOne("memberMapper.selectMember",user_no);
+	}
+
 
 
 	

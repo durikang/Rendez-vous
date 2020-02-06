@@ -591,7 +591,7 @@
 			<div class="w3-content w3-container w3-margin-top">
 				<div class="w3-container w3-card-4">
 					<div class="w3-center w3-large w3-margin-top">
-                <span class="close-button6">&times;</span> 
+                <span class="close-button6" onclick="location.href=mypage.do?userPropic=${userPropic}">&times;</span> 
 						<h3>내 정보</h3>
 						<br>
 					</div>

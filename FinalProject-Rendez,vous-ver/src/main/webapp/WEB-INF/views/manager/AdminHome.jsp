@@ -196,6 +196,7 @@ overflow: hidden;
 					<c:forEach var="m" items="${ YearList }">
 		    			<input type="hidden" value="${ m }" name="YearList">
 				 	</c:forEach>
+				 	<input type="hidden" value="${ year2 }" name="year2">
 					</div>
 				</form>
 				</div>
@@ -225,7 +226,7 @@ overflow: hidden;
 							<c:forEach var="m" items="${ YearList2 }">
 				    			<input type="hidden" value="${ m }" name="YearList">
 						 	</c:forEach>
-						 		<input type="hidden" value="${ saveYear }" name="year1">
+						 		<input type="hidden" value="${ year1 }" name="year1">
 					 	</div>
 					</form>
 				</div>

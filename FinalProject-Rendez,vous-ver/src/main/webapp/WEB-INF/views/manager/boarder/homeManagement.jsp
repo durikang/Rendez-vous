@@ -38,6 +38,12 @@
 	margin:0 30%;
 	width:770px;
 }
+.btn_color:hover{
+	background: #28a745;
+	transition:background-color .5s;
+	font-weight: bold;
+}
+
 		
 
 </style>
@@ -73,7 +79,7 @@
 		<div class="row">
 			<div class="col">
 				
-				<span class="count-area-left">(전체 문의 갯수 : <span id="allCount">0개</span> | 답변 안한 문의 : <span id="noCount">0개</span>)</span>
+				<span class="count-area-left">(전체 문의 갯수 : <span id="allCount">0개</span> | 답변 안한 문의 : <span id="noCount" style="color:#dc3545">0개</span>)</span>
 				<span class="count-area-right">
 			
 					<c:url var="allQna" value="rearrangement.do">
@@ -85,12 +91,12 @@
 						<c:param name="type" value="noQna" />
 					</c:url>
 				
-					<a id="all-qna" class="btn btn-info btn-sm" href="${ allQna }">전체 문의</a> | 
-					<a id="sort-qna" class="btn btn-info btn-sm" href="${ noQna }">답변 안한 문의</a>			
+					<a id="all-qna" class="btn btn-muted btn_color btn-sm" href="${ allQna }">전체 문의</a> | 
+					<a id="sort-qna" class="btn btn-muted btn_color btn-sm" href="${ noQna }">답변 안한 문의</a>			
 				</span>
 				<br>
 				<table class="table listArea ft-clear">
-					<thead class="thead-dark">
+					<thead class="thead-white">
 						<tr>
 							<th scope="col">문의 번호</th>
 							<th scope="col">제목</th>
@@ -106,7 +112,16 @@
 								<td>${ q.qTitle }</td>
 								<td>${ q.qWriter }</td>
 								<td>${ q.qDate }</td>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp; ${ q.aStatus }</td>
+								<c:if test="${q.aStatus == 'N' }">
+								<td style="color:#dc3545">&nbsp;&nbsp;&nbsp;&nbsp; 
+									${q.aStatus }										
+								</td>
+								</c:if>
+								<c:if test="${q.aStatus == 'Y' }">
+								<td style="color:#28a745">&nbsp;&nbsp;&nbsp;&nbsp; 
+									${q.aStatus }										
+								</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -286,7 +301,7 @@
 
 			$(".listArea td").mouseenter(function() {
 				$(this).parent().css({
-					"background" : "skyblue",
+					"background" : "#f7fafc",
 					"cursor" : "pointer"
 				});
 			}).mouseout(function() {

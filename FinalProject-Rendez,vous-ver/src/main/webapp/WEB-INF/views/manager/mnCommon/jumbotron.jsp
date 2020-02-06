@@ -28,7 +28,7 @@
 		<h4 align="center">홈페이지 관리</h4>
   	</c:if>
 	<c:if test="${ pageName eq 'memNTut' }">
-		<h4 align="center">회원/튜터 관리</h4>
+		<h4 align="center">회원 관리</h4>
   	</c:if>
 	<c:if test="${ pageName eq 'request' }">
 		<h4 align="center">튜터 신청 관리</h4>

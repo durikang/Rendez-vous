@@ -487,7 +487,7 @@
 
 	<div class="button_box">
 		<!-- <div class="next button prev" onclick="setMode(0);">임시저장</div> -->
-		<div class="next button on" onclick="next1();">다음단계</div>		
+		<div class="next button on" style="background: #c9c0b1;" onclick="next1();">다음단계</div>		
 	</div>
 	
 	</div>
@@ -710,7 +710,7 @@
 	</div>
 
 	<div class="button_box">
-		<div class="next button on" onclick="next2();">다음단계</div>		
+		<div class="next button on" style="background: #c9c0b1;" onclick="next2();">다음단계</div>		
 	</div>
 		
 		
@@ -803,7 +803,7 @@
 	</div>
 	<div class="button_box">
 		<a onclick="openPop();" target="_blank"><div class="next button prev">미리보기</div></a>
-		<button class="next button on" style="border: none;">등록하기</button>
+		<button class="next button on" style="border: none; background: #c9c0b1;">등록하기</button>
 	</div>
 
 	</div>

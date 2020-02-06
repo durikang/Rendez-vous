@@ -196,12 +196,6 @@
 	margin-top: 30%;
 }
 /*찜 목록 스타일*/
- .swiper-container {
-        width: 100%;
-        height: auto;
-        margin-left: auto;
-        margin-right: auto;
-    }
     .swiper-slide {
         text-align: left;
         font-size: 15px;
@@ -242,6 +236,34 @@
    height:70%;
 }
 
+ .swiper-container {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+.swiper-container2 {
+        width: 80%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+.swiper-container3 {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+   .swiper-button-next, .swiper-container-rtl, .swiper-button-prev{
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%…2L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E);
+    right: 20px;
+}
+
+
 </style>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -265,6 +287,7 @@
 						<ul class="site-navigation nav navbar-nav">
 							<li><a onclick="scrollToTarget('#portfolio')">찜 목록</a></li>
 							<li><a onclick="scrollToTarget('#review')">작성한 리뷰</a></li>
+							<li><a onclick="scrollToTarget('#pay')">결제 내역</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -354,7 +377,7 @@
 							</div>
 						</div>
 					</c:forEach>
-				</div>
+					</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
 				<!-- Add Arrows -->
@@ -362,25 +385,22 @@
 				<div class="swiper-button-prev"></div>
 			</div>
 			</div>
+			    <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
 			
-	<!-- Swiper JS -->
-    <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-    var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 3,
-        slidesPerColumn: 2,
-        slidesPerGroup : 6,
-        spaceBetween: 30,
-        paginationClickable: true,
-        loopFillGroupWithBlank : true,
-        pagination: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev'
-        });
-    </script>
-		</div>
+			<script>
+		    var swiper = new Swiper('.swiper-container', {
+		    	slidesPerView: 3,
+		        slidesPerColumn: 2,
+		        slidesPerGroup : 6,
+		        spaceBetween: 30,
+		        paginationClickable: true,
+		        loopFillGroupWithBlank : true,
+		        pagination: '.swiper-pagination',
+		        nextButton: '.swiper-button-next',
+		        prevButton: '.swiper-button-prev'
+		        });
+   			 </script>
+			</div>
 		<!-- wish END -->
 
 		<!-- review start -->
@@ -399,71 +419,55 @@
 						</p>
 					</div>
 				</div>
-				<div class="myReview">
-					<div class="myRevieww">
-						<table id="myReviewTable">
-							<tr>
-								<th width="25%">수업 제목</th>
-								<th width="50%">내용</th>
-								<th width="25%">작성일</th>
-							</tr>
-							<c:if test="${ !empty loginUser }">
-							<c:forEach var="r" items="${ list }">
-							<tr>
+				
+				<div class="swiper-container2">
+				<div class="swiper-wrapper">
+					<c:if test="${ !empty loginUser }">
+						<c:forEach var="r" items="${ list }">
+						<div class="swiper-slide">
+							<div id="text-area" style="margin-left:6%;">
 								<c:url var="myReview" value="ReviewDetail.do">
 									<c:param name="lNo" value="${ r.lNo }"/>
-								</c:url>								
-								<td><a href="${ myReview }">${ r.lTitle }</a></td>
-								<td>${r.rContent}</td>
-								<td>${r.rDate}</td>		
-							</tr>
-							</c:forEach>
-							</c:if>			
-								
-								<!-- <a onclick="scrollToTarget('#moon')"></a> -->
-							<tr align="center" height="20">
-								<td colspan="6">
-									<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
-									[이전] &nbsp;
-							   	   </c:if> <c:if test="${ pi.currentPage > 1 }">
-										<c:url var="before" value="mypage.do">
-											<c:param name="page" value="${ pi.currentPage - 1 }" />
-										</c:url>
-										<a href="${ before }">[이전]</a>
-									</c:if> <!-- [페이지] --> <c:forEach var="p" begin="${ pi.startPage }"
-										end="${ pi.endPage }">
-										<c:if test="${ p eq pi.currentPage }">
-											<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
-										</c:if>
-										<c:if test="${ p ne pi.currentPage }">
-											<c:url var="pagination" value="mypage.do">
-												<c:param name="page" value="${ p }" />
-											</c:url>
-											<a href="${ pagination }">[${ p }]</a>
-										</c:if>
-									</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
-											[다음]
-								   </c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
-										<c:url var="after" value="mypage.do">
-											<c:param name="page" value="${ pi.currentPage + 1 }" />
-										</c:url>
-										<a href="${ after }">[다음]</a>
-									</c:if>
-								</td>
-							</tr>
-							<c:if test="${ empty list }">
+								</c:url>
+								<p>수업 제목 : <a href="${ myReview }">${ r.lTitle }</a></p>
+								<p>내용 : ${r.rContent}</p>
+								<p>작성일 : ${r.rDate}</p>
+							</div>
+						</div>
+					</c:forEach>
+					</c:if>
+					<c:if test="${ empty list }">
 								<h1 style="color:green; font-size: 15px">작성하신 리뷰가 없습니다.</h1>
-							</c:if>
-							</tbody>
-						</table>
-					</div>
+							</c:if>	
 				</div>
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+				<!-- Add Arrows -->
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
 			</div>
-		</div>
+			</div>
+			    <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
+			
+			<script>
+		    var swiper = new Swiper('.swiper-container2', {
+		    	slidesPerView: 3,
+		        slidesPerColumn: 2,
+		        slidesPerGroup : 6,
+		        spaceBetween: 30,
+		        paginationClickable: true,
+		        loopFillGroupWithBlank : true,
+		        pagination: '.swiper-pagination',
+		        nextButton: '.swiper-button-next',
+		        prevButton: '.swiper-button-prev'
+		        });
+   			 </script>
+			</div>
+	
 		<!-- review end -->
 		
 		<!-- payment start -->
-		<div class="bloc l-bloc bgc-white" id="review">
+		<div class="bloc l-bloc bgc-white" id="pay">
 			<div class="container bloc-lg">
 				<div class="row">
 					<div class="col-sm-12">
@@ -478,77 +482,59 @@
 						</p>
 					</div>
 				</div>
-				<div class="myReview">
-					<div class="myRevieww">
-						<table id="myReviewTable">
-							<tr>
-								<th width="30%">수업제목</th>
-								<th width="30%">결제일</th>
-								<th width="30%">상세내역</th>
-								<th width="10%">현재상태</th>
-							</tr>
-							<c:if test="${ !empty loginUser }">
+				
+				<div class="swiper-container3">
+				<div class="swiper-wrapper">
+					<c:if test="${ !empty loginUser }">
 							<c:forEach var="p" items="${ plist }">
-							<tr>
+						<div class="swiper-slide">
+							<div id="text-area" style="margin-left:6%;">
 								<c:url var="myReview" value="ReviewDetail.do">
 									<c:param name="lNo" value="${ p.lNo }"/>
 								</c:url>								
-								<td><a href="${ myReview }">${ p.l_title }</a></td>
-								<td>${p.pDate}</td>
-								<td>결제 타입 : ${p.pType}
-								      <br> 결제 금액 : ${p.pCost}</td>
-								 <form action="uppayment.do" method="post">
-								<td><c:if test="${p.paymentStatus == 1}">결제완료<button name="pmNo" value="${p.pmNo}">결제취소</button></c:if>
-									<c:if test="${p.paymentStatus == 2}">결제취소</c:if>
-									<c:if test="${p.paymentStatus == 3}">이용완료</c:if>
-									<c:if test="${p.paymentStatus == 11}">수강대기</c:if>
-									<c:if test="${p.paymentStatus == 12}">수강중</c:if>
-									<c:if test="${p.paymentStatus == 13}">수강종료<button name="pmNo" value="${p.pmNo}">이용완료</button></c:if></td>
+								<p>수업 제목 : <a href="${ myReview }">${ p.l_title }</a></p>
+								<p>결제 타입 : ${p.pType}</p>
+								<p>결제 금액 : ${p.pCost}</p>
+								<p>결제일 : ${p.pDate}</p>
+								<form action="uppayment.do" class="pyy" method="post">
+									<c:if test="${p.paymentStatus == 1}">현재상태 : 결제완료<button name="pmNo" value="${p.pmNo}">결제취소</button></c:if>
+									<c:if test="${p.paymentStatus == 2}">현재상태 : 결제취소</c:if>
+									<c:if test="${p.paymentStatus == 3}">현재상태 : 이용완료</c:if>
+									<c:if test="${p.paymentStatus == 11}">현재상태 : 수강대기</c:if>
+									<c:if test="${p.paymentStatus == 12}">현재상태 : 수강중</c:if>
+									<c:if test="${p.paymentStatus == 13}">현재상태 : 수강종료<button name="pmNo" value="${p.pmNo}">이용완료</button></c:if>
 								</form>
-							</tr>
-							</c:forEach>
-							</c:if>			
-								
-								<!-- <a onclick="scrollToTarget('#moon')"></a> -->
-							<tr align="center" height="20">
-								<td colspan="6">
-									<!-- [이전] --> <c:if test="${ pi.currentPage <= 1 }">
-									[이전] &nbsp;
-							   	   </c:if> <c:if test="${ pi.currentPage > 1 }">
-										<c:url var="before" value="mypage.do">
-											<c:param name="page" value="${ pi.currentPage - 1 }" />
-										</c:url>
-										<a href="${ before }">[이전]</a>
-									</c:if> <!-- [페이지] --> <c:forEach var="p" begin="${ pi.startPage }"
-										end="${ pi.endPage }">
-										<c:if test="${ p eq pi.currentPage }">
-											<font color="#c9c0b1" size="4"><b>[${ p }]</b></font>
-										</c:if>
-										<c:if test="${ p ne pi.currentPage }">
-											<c:url var="pagination" value="mypage.do">
-												<c:param name="page" value="${ p }" />
-											</c:url>
-											<a href="${ pagination }">[${ p }]</a>
-										</c:if>
-									</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage >= pi.maxPage }">
-											[다음]
-								   </c:if> <c:if test="${ pi.currentPage < pi.maxPage }">
-										<c:url var="after" value="mypage.do">
-											<c:param name="page" value="${ pi.currentPage + 1 }" />
-										</c:url>
-										<a href="${ after }">[다음]</a>
-									</c:if>
-								</td>
-							</tr>
-							<c:if test="${ empty list }">
-								<h1 style="color:green; font-size: 15px">작성하신 리뷰가 없습니다.</h1>
-							</c:if>
-							</tbody>
-						</table>
-					</div>
+							</div>
+						</div>
+					</c:forEach>
+					</c:if>
+					<c:if test="${ empty list }">
+								<h1 style="color:green; font-size: 15px">결제 내역이 없습니다.</h1>
+							</c:if>	
 				</div>
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+				<!-- Add Arrows -->
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
 			</div>
-		</div>
+			</div>
+			    <script src="<c:url value="/resources/dist/js/swiper.min.js" />"></script>
+			
+			<script>
+		    var swiper = new Swiper('.swiper-container3', {
+		    	slidesPerView: 3,
+		        slidesPerColumn: 2,
+		        slidesPerGroup : 6,
+		        spaceBetween: 30,
+		        paginationClickable: true,
+		        loopFillGroupWithBlank : true,
+		        pagination: '.swiper-pagination',
+		        nextButton: '.swiper-button-next',
+		        prevButton: '.swiper-button-prev'
+		        });
+   			 </script>
+			</div>
 		<!-- payment end -->
 
 	<!-- 내 정보 클릭 시 띄워지는 모달 창 -->

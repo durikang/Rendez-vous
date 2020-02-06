@@ -140,7 +140,7 @@ line-height: 50px;
 								<td>${ m.uAge }</td>
 								</c:if>
 								<c:if test="${ Condition eq 'vip' }">
-								<td>${ m.total_pay }</td>
+								<td><fmt:formatNumber value="${ m.total_pay }" pattern="#,###" />원</td>
 								</c:if>
 								<td>${ m.enrollDate }</td>
 								<c:if test="${ Condition eq 'join' }">

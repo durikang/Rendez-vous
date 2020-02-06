@@ -98,7 +98,7 @@
 				<table class="table listArea ft-clear">
 					<thead class="thead-white">
 						<tr>
-							<th scope="col">문의 번호</th>
+							<th scope="col">No.</th>
 							<th scope="col">제목</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일</th>

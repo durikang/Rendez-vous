@@ -792,7 +792,7 @@
 
 
             if(uRStatus=='unable'){
-               alert('수강을 받으신 회원분만 리뷰를 남기실 수 있습니다.');
+               alert('수강을 완료하신 회원분만 리뷰를 남기실 수 있습니다.');
             }else if(uRStatus=='able'){
                $("#myBtn").click();
             }

@@ -577,7 +577,7 @@ div ul {
                <c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>                  
                <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
             </div>
-            <div id="text-area" style="margin-left:6%;">
+            <div id="text-area" style="margin-left:4%;">
                <h3>${ l.lTitle }</h3>
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
@@ -680,7 +680,7 @@ div ul {
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
                <img src="https://img.icons8.com/wired/20/F15F5F/nui2.png" style="float:left;">
-               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 남음</p>   
+               <p style="color:#F15F5F; float:left;">&nbsp;${ l.total }명 중 ${ l.remain }명 참여</p>   
          </div>            
          </div>
          </c:if>
@@ -704,7 +704,7 @@ div ul {
                <c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>                  
                <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
             </div>
-            <div id="text-area" style="margin-left:6%;">
+            <div id="text-area" style="margin-left:4%;">
                <h3>${ l.lTitle }</h3>
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
@@ -728,7 +728,7 @@ div ul {
                <c:url var="goLesson" value="lessonDetail.do?lNo=${ l.lNo }"/>                  
                <a href="${ goLesson }"><img id="slide-img" src="resources/lessonImg/${ l.cName }"></a>
             </div>
-            <div id="text-area" style="margin-left:6%;">
+            <div id="text-area" style="margin-left:4%;">
                <h3>${ l.lTitle }</h3>
                <p>${l.lDay} 시작 : ${ l.lRegion }</p>
                <p>${ l.price }원</p>
@@ -845,7 +845,7 @@ div ul {
          slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
       
          // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-         // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+         // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듦
          loopFillGroupWithBlank : true,
       
          loop : true, // 무한 반복
@@ -856,15 +856,13 @@ div ul {
       
       new Swiper('.swiper3', {
          
-            slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
-            spaceBetween : 30, // 슬라이드간 간격
-            slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+            slidesPerView : 3, 
+            spaceBetween : 30, 
+            slidesPerGroup : 3, 
          
-            // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-            // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
             loopFillGroupWithBlank : true,
          
-            loop : true, // 무한 반복
+            loop : true,
             autoplay: true,
             autoplaySpeed: 2000,
          
@@ -872,15 +870,13 @@ div ul {
       
       new Swiper('.swiper4', {
          
-            slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
-            spaceBetween : 30, // 슬라이드간 간격
-            slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-         
-            // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-            // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+            slidesPerView : 3, 
+            spaceBetween : 30, 
+            slidesPerGroup : 3, 
+
             loopFillGroupWithBlank : true,
          
-            loop : true, // 무한 반복
+            loop : true, 
             autoplay: true,
             autoplaySpeed: 2000,
          
@@ -888,12 +884,9 @@ div ul {
       
       new Swiper('.swiper2', {
          
-         slidesPerView : 2, // 동시에 보여줄 슬라이드 갯수
-         spaceBetween : 30, // 슬라이드간 간격
-         slidesPerGroup : 2, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-      
-         // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-         // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+         slidesPerView : 2, 
+         spaceBetween : 30, 
+         slidesPerGroup : 2, 
       
          loop : true, // 무한 반복
          autoplay: true,

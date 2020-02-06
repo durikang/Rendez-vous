@@ -130,7 +130,7 @@ public class ManagerController {
 		
 		int currentPage = page != null ? page : 1;
 
-		String pageName = request.getParameter("pageName");
+		String pageName = "memNTut";
 
 		ArrayList<AdminMember> list = mnService.selectList(currentPage);
 

@@ -225,8 +225,7 @@
    #text-area {
    margin-top:2%;
    margin-left:15%;
-   width:100%;
-   height:50%;
+  
    text-align:left;
 }
 
@@ -436,9 +435,9 @@
 						</div>
 					</c:forEach>
 					</c:if>
-					<c:if test="${ empty list }">
+					<%-- <c:if test="${ empty list }">
 								<h1 style="color:green; font-size: 15px">작성하신 리뷰가 없습니다.</h1>
-							</c:if>	
+							</c:if> --%>	
 				</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
@@ -488,7 +487,7 @@
 					<c:if test="${ !empty loginUser }">
 							<c:forEach var="p" items="${ plist }">
 						<div class="swiper-slide">
-							<div id="text-area" style="margin-left:6%;">
+							<div id="text-area" style="margin-left:6%;  width:100%; height:50%;">
 								<c:url var="myReview" value="ReviewDetail.do">
 									<c:param name="lNo" value="${ p.lNo }"/>
 								</c:url>								
@@ -508,9 +507,9 @@
 						</div>
 					</c:forEach>
 					</c:if>
-					<c:if test="${ empty list }">
+					<%-- <c:if test="${ empty list }">
 								<h1 style="color:green; font-size: 15px">결제 내역이 없습니다.</h1>
-							</c:if>	
+							</c:if> --%>	
 				</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
@@ -526,7 +525,7 @@
 		    	slidesPerView: 3,
 		        slidesPerColumn: 2,
 		        slidesPerGroup : 6,
-		        spaceBetween: 30,
+		        spaceBetween: 100,
 		        paginationClickable: true,
 		        loopFillGroupWithBlank : true,
 		        pagination: '.swiper-pagination',
@@ -541,7 +540,7 @@
 
 	<div class="modal3">
 		<div class="modal-content3">
-			<span class="close-button5">&times;</span>
+			<span class="close-button5" onclick="location.href=mypage.do?userPropic=${userPropic}">&times;</span>
 			<c:if test="${ !empty msg4 }">
 				<script>
 											alert("비밀번호가 일치하지 않습니다.");
